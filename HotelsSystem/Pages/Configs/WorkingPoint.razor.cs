@@ -1,6 +1,4 @@
-﻿using MudBlazor;
-
-namespace HotelsSystem.Pages.Configs
+﻿namespace HotelsSystem.Pages.Configs
 {
     public partial class WorkingPoint
     {
@@ -22,47 +20,42 @@ namespace HotelsSystem.Pages.Configs
         ClS_UserManagement mgmt = default!;
 
         private PagedResult<WorkingPointInfo> PaginatedWorkPoint = PagedResult<WorkingPointInfo>.EmptyPagedResult();
-        private string SelectedColumnToSort = "wp_ID";
-        private SortDirections sort = SortDirections.ASC;
         public WorkingPointInfo SelectedWorkPoint = new WorkingPointInfo();
         public WorkingPointInfo Filter = new WorkingPointInfo();
 
         private WorkPointCombo combo = new WorkPointCombo();
         private ClS_Config config = default!;
-        private MudTable<WorkingPointInfo>? tableRef =new MudTable<WorkingPointInfo>();
+        private MudTable<WorkingPointInfo>? tableRef;
+        MudForm? AddForm;
+
+
         protected override async Task OnInitializedAsync()
         {
 
             var session = await Protection.GetDecryptedSession(JSRuntime, DB);
             mgmt = new ClS_UserManagement(DB, session);
             config = new ClS_Config(DB, session);
-
-
-            await GetPaginatedWorkPoint();
             await GetCombo();
 
         }
 
         private async Task GetWorkPointByID(int id)
         {
-            SelectedWorkPoint = (await config.GetAllInfo<WorkingPointInfo>(
-                        SelectPro: 4,
-                        ValID: id)).First();
-
+            SelectedWorkPoint = (await config.GetAllInfo<WorkingPointInfo>(SelectPro: 4, ValID: id)).First();
         }
 
         private async Task GetCombo()
         {
             combo = await mgmt.WorkPointComboBox(SelectPro: 7);
-           // combo.UserCombo = await config.GetCMB<UserAutoCombo>(SelectPro: 6);
+            // combo.UserCombo = await config.GetCMB<UserAutoCombo>(SelectPro: 6);
         }
 
-        private async Task<IEnumerable<UserAutoCombo>> SearchUser(string val)
+        private async Task<IEnumerable<UserInfo>> SearchUser(string val)
         {
             return await Task.FromResult(combo.UserCombo.Where(x => x.peo_UserName.ToEmptyOnNull().Contains(val.ToEmptyOnNull())));
         }
 
-        private void OnUserChanged(UserAutoCombo e)
+        private void OnUserChanged(UserInfo e)
         {
             if (e == null)
             {
@@ -95,80 +88,57 @@ namespace HotelsSystem.Pages.Configs
             }
         }
 
-        private async Task GetPaginatedWorkPoint(int page = 1, string ColumnName = "", SortDirection sort = SortDirection.None)
+        public async Task InsertUpdateWorkPoint()
         {
-            if (!string.IsNullOrWhiteSpace(ColumnName))
-            {
-                // if (sort == SortDirections.ASC)
-                //     sort = SortDirections.DESC;
-                // else
-                //     sort = SortDirections.ASC;
+            await AddForm!.Validate();
+            if (!AddForm.IsValid)
+                return;
 
-                SelectedColumnToSort = ColumnName;
+            SPResult result = await config.InsertUpdateConfig<SPResult>(
+            SelectPro: 2,
+            ValName: SelectedWorkPoint.wp_workpointName.ToEmptyOnNull(),
+            ValueIDTwo: SelectedWorkPoint.wp_DirectorateID,
+            ValueID: SelectedWorkPoint.wp_AdminID,
+            ValueName: SelectedWorkPoint.location.ToEmptyOnNull(),
+            ValID: SelectedWorkPoint.wp_ID);
+
+            if (result.Result == 1)
+            {
+                await tableRef!.ReloadServerData();
+                SelectedWorkPoint = new WorkingPointInfo();
+                Toaster.Success(".", result.MSG);
+
+                return;
             }
+            Toaster.Error(".", result.MSG);
+        }
+        private async Task<TableData<WorkingPointInfo>> GetPaginatedItems(TableState state)
+        {
+            config.RowNumber = state.PageSize;
 
             PaginatedWorkPoint = await config.GetGridPaging<WorkingPointInfo>(
                     SelectPro: 3,
-                    PageNumber: page,
-                    SortColumn: SelectedColumnToSort,
+                    PageNumber: state.Page + 1,
+                    PageSize: state.PageSize,
+                    SortColumn: state.SortLabel.IsStringNullOrWhiteSpace() ? "wp_ID" : state.SortLabel,
                     Search: Filter.peo_DirectorateName.ToEmptyOnNull(),
-                    SortDirection: Util.ResolveSort(sort)
-                    );
-        }
+                    SortDirection: Util.ResolveSort(state.SortDirection));
 
-        public async Task InsertUpdateWorkPoint()
-        {
-            if (config.IsSaveClicked1)
-                return;
-            try
-            {
-
-                config.IsSaveClicked1 = true;
-
-                if (EnableDisableButton())
-                {
-                    config.IsInValidated1 = true;
-                    return;
-                }
-                config.IsInValidated1 = false;
-
-                SPResult result = await config.InsertUpdateConfig<SPResult>(
-                SelectPro: 2,
-                ValName: SelectedWorkPoint.wp_workpointName.ToEmptyOnNull(),
-                ValueIDTwo: SelectedWorkPoint.wp_DirectorateID,
-                ValueID: SelectedWorkPoint.wp_AdminID,
-                ValueName:SelectedWorkPoint.location.ToEmptyOnNull(),
-                ValID:SelectedWorkPoint.wp_ID);
-
-                if (result.Result == 1)
-                {
-                    await GetPaginatedWorkPoint();
-                    Toaster.Success(".", result.MSG);
-                    SelectedWorkPoint = new WorkingPointInfo();
-                    if(tableRef!=null)
-                        await tableRef.ReloadServerData();
-
-                    return;
-                }
-                Toaster.Error(".", result.MSG);
-            }
-            finally
-            {
-                config.IsSaveClicked1 = false;
-            }
-        }
-        private async Task<TableData<WorkingPointInfo>> ServerReload(TableState state)
-        {
-            config.RowNumber = state.PageSize;
-            await GetPaginatedWorkPoint(page: state.Page + 1, ColumnName: state.SortLabel, sort: state.SortDirection);
             return new TableData<WorkingPointInfo>() { TotalItems = PaginatedWorkPoint.TotalItems, Items = PaginatedWorkPoint.Items };
         }
 
-        private bool EnableDisableButton()
+        private string ValidateUser(UserInfo val)
         {
-            return string.IsNullOrWhiteSpace(SelectedWorkPoint.wp_workpointName)
-            || SelectedWorkPoint.wp_AdminID <= 0
-            || SelectedWorkPoint.wp_DirectorateID <= 0;
+            if (val.peo_UserID <= 0)
+                return L["required"];
+            return null!;
+        }
+        
+        private string ValidateDirectorate(DirectorateInfo val)
+        {
+            if (val.peo_DirectorateID <= 0)
+                return L["required"];
+            return null!;
         }
     }
 }

@@ -48,7 +48,7 @@ public class ClS_UserManagement
     }
     public async Task<WorkPointCombo> WorkPointComboBox(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
     {
-        var result = await _db.GetMultiple< DirectorateInfo, UserAutoCombo>(
+        var result = await _db.GetMultiple< DirectorateInfo, UserInfo>(
                 "Pro_GetCMB",
                 new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
         return new WorkPointCombo()

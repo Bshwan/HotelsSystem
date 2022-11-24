@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudSelect ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
-                            Value="@(new LanguageInfo{lang_ID=SelectedUser.peo_Language,lang_Name=Util.SelectByID<LanguageInfo>(SelectedUser.peo_Language,"lang_ID","lang_Name",combos.Languages).lang_Name})" 
+                            Value="@(new LanguageInfo{lang_ID=SelectedUser.peo_Language,lang_Name=combos.Languages.SelectByID<LanguageInfo>(SelectedUser.peo_Language,"lang_ID").lang_Name})" 
                                 Margin="@Margin.Dense" T="LanguageInfo" Label="Language *" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.Languages)
                             {

@@ -49,9 +49,9 @@
             return await _db.GetDataTable<T, dynamic>("Pro_GetGrid", new { Select = SelectPro, ID = ValID, Search = Search, EntryBy = SessionValue });
         }
 
-        public async Task<PagedResult<T>> GetGridPaging<T>(int SelectPro = 0, int ValID = 0, string Search = "", int PageNumber = 1, string SortColumn = "", string SortDirection = "Asc", int MaxNavigationPage = 5)
+        public async Task<PagedResult<T>> GetGridPaging<T>(int SelectPro = 0, int ValID = 0, string Search = "", int PageNumber = 1, string SortColumn = "", string SortDirection = "Asc", int MaxNavigationPage = 5,int PageSize=10)
         {
-            return await _db.GetGridResult<T, dynamic>("Pro_GridPaging", new { Select = SelectPro, ID = ValID, Search = Search, PageNumber = PageNumber, PageSize = RowNumber, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue }, PageNumber: PageNumber, PageSize: RowNumber, MaxNavigationPages: MaxNavigationPage);
+            return await _db.GetGridResult<T, dynamic>("Pro_GridPaging", new { Select = SelectPro, ID = ValID, Search = Search, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue }, PageNumber: PageNumber, PageSize: PageSize, MaxNavigationPages: MaxNavigationPage);
         }
 
         public async Task<T> InsertUpdateConfig<T>(int SelectPro = 0, int ValID = 0, string ValName = "", string ValueName = "", int ValueID = 0, int ValueIDTwo = 0)

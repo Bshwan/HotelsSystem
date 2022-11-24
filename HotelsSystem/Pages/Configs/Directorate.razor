@@ -1,16 +1,19 @@
-﻿@if(config!=null){
+﻿@inject IStringLocalizer<App> L;
+
+@if(config!=null){
     <div class="row g-3 m-0 w-100">
+        <MudForm @ref="AddForm">
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-            <MudTextField Required Margin="@Margin.Dense" Class="@(config.ValidateField(config.IsInValidated1,SelectedDirectorate.peo_DirectorateName))" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label="Name" Variant="Variant.Outlined"></MudTextField>
+            <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label="Name" Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
 
-            <MudAutocomplete T="UserAutoCombo" DebounceInterval="ClS_Config.debounce"
+            <MudAutocomplete T="UserInfo" DebounceInterval="ClS_Config.debounce"
                          SearchFunc="@SearchIncomes"
                          Clearable="true"
                          Required
                          ResetValueOnEmptyText="true"
-                         Value="@(new UserAutoCombo(){peo_UserName=SelectedDirectorate.peo_UserName,peo_UserID=SelectedDirectorate.peo_dirAdminUserID})"
+                         Value="@(new UserInfo(){peo_UserName=SelectedDirectorate.peo_UserName,peo_UserID=SelectedDirectorate.peo_dirAdminUserID})"
                          Text="@SelectedDirectorate.peo_UserName"
                          ValueChanged="@((e)=>OnIncomeChanged(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
@@ -24,10 +27,11 @@
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
             <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@(async()=>await InsertUpdateDirectorate())" Variant="Variant.Filled" Color="Color.Primary" />
         </div>
+        </MudForm>
         <div class="col-12">
 
             <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
-                  ServerData="@(new Func<TableState,Task<TableData<DirectorateInfo>>>(ServerReload))"
+                  ServerData="@(new Func<TableState,Task<TableData<DirectorateInfo>>>(GetPaginatedItems))"
                   TotalItems="PaginatedDirectorate.TotalItems" Items="@PaginatedDirectorate.Items" T="DirectorateInfo" Dense="true"
                 >
                @* <ToolBarContent>

@@ -95,7 +95,7 @@ namespace HotelsSystem.Data
             var SearchedData = data.Where(x => x!.GetType()!.GetProperty(ColumnName)!.GetValue(x)!.ToString().ToEmptyOnNull().ContainsIgnoreCase(value.ToEmptyOnNull()));
             return await Task.FromResult(SearchedData);
         }
-        public static T SelectByID<T>(int id, string FindByColumn, string SelectColumnValue, IEnumerable<T> data)
+        public static T SelectByID<T>(int id, string FindByColumn, IEnumerable<T> data)
         {
             var SearchedData = data.Where(x => x!.GetType()!.GetProperty(FindByColumn)!.GetValue(x)!.ToString().ToEmptyOnNull().Equals(id.ToString()));
             if (SearchedData.Any())

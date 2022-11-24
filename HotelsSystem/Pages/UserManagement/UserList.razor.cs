@@ -18,7 +18,7 @@ public partial class UserList
     ClS_UserManagement mgmt = default!;
     ClS_Config config = default!;
     UserInfo FilterUser = new UserInfo();
-    UserInfo SelectedUser = new UserInfo();
+    // UserInfo SelectedUser = new UserInfo();
     private MudTable<UserInfo>? table;
 
     protected override async Task OnInitializedAsync()

@@ -1,6 +1,4 @@
-﻿using Microsoft.JSInterop;
-
-namespace HotelsSystem.Pages.Configs
+﻿namespace HotelsSystem.Pages.Configs
 {
     public partial class Directorate
     {
@@ -27,40 +25,35 @@ namespace HotelsSystem.Pages.Configs
 
         private MudTable<DirectorateInfo>? tableRef = new MudTable<DirectorateInfo>();
 
-        private IEnumerable<UserAutoCombo> combo = Enumerable.Empty<UserAutoCombo>();
+        private IEnumerable<UserInfo> combo = Enumerable.Empty<UserInfo>();
         private ClS_Config config = default!;
+        MudForm? AddForm;
+
 
         protected override async Task OnInitializedAsync()
         {
-
             var session = await Protection.GetDecryptedSession(JSRuntime, DB);
             config = new ClS_Config(DB, session);
 
-
-            await GetPaginatedDirectorate();
             await GetCombo();
-       
         }
 
         private async Task GetDirectorateByID(int id)
         {
-            SelectedDirectorate = (await config.GetAllInfo<DirectorateInfo>(
-                        SelectPro: 3,
-                        ValID: id)).First();
-            
+            SelectedDirectorate = await config.GetOneInfo<DirectorateInfo>(SelectPro: 3, ValID: id);
         }
 
         private async Task GetCombo()
         {
-            combo = await config.GetCMB<UserAutoCombo>(SelectPro: 6);
+            combo = await config.GetCMB<UserInfo>(SelectPro: 6);
         }
 
-        private async Task<IEnumerable<UserAutoCombo>> SearchIncomes(string val)
+        private async Task<IEnumerable<UserInfo>> SearchIncomes(string val)
         {
             return await Task.FromResult(combo.Where(x => x.peo_UserName.ToEmptyOnNull().Contains(val.ToEmptyOnNull())));
         }
 
-        private void OnIncomeChanged(UserAutoCombo e)
+        private void OnIncomeChanged(UserInfo e)
         {
             if (e == null)
             {
@@ -74,76 +67,39 @@ namespace HotelsSystem.Pages.Configs
             }
         }
 
-        private async Task GetPaginatedDirectorate(int page = 1, string ColumnName = "", SortDirection sort = SortDirection.None)
-        {
-            if (!string.IsNullOrWhiteSpace(ColumnName))
-            {
-                // if (sort == SortDirections.ASC)
-                //     sort = SortDirections.DESC;
-                // else
-                //     sort = SortDirections.ASC;
-
-                SelectedColumnToSort = ColumnName;
-            }
-
-            PaginatedDirectorate = await config.GetGridPaging<DirectorateInfo>(
-                    SelectPro: 2,
-                    PageNumber: page,
-                    SortColumn: SelectedColumnToSort,
-                    Search:Filter.peo_DirectorateName.ToEmptyOnNull(),
-                    SortDirection: Util.ResolveSort(sort)
-                    );
-        }
-
         public async Task InsertUpdateDirectorate()
         {
-            if (config.IsSaveClicked1)
+            await AddForm!.Validate();
+            if (!AddForm.IsValid)
                 return;
-            try
+
+            SPResult result = await config.InsertUpdateConfig<SPResult>(
+            SelectPro: 1,
+            ValName: SelectedDirectorate.peo_DirectorateName.ToEmptyOnNull(),
+            ValID: SelectedDirectorate.peo_DirectorateID,
+            ValueID: SelectedDirectorate.peo_dirAdminUserID);
+
+            if (result.Result == 1)
             {
-
-                config.IsSaveClicked1 = true;
-
-                if (EnableDisableButton())
-                {
-                    config.IsInValidated1 = true;
-                    return;
-                }
-                config.IsInValidated1 = false;
-
-                SPResult result = await config.InsertUpdateConfig<SPResult>(
-                SelectPro: 1,
-                ValName: SelectedDirectorate.peo_DirectorateName.ToEmptyOnNull(),
-                ValID: SelectedDirectorate.peo_DirectorateID,
-                ValueID: SelectedDirectorate.peo_dirAdminUserID);
-                
-                if (result.Result == 1)
-                {
-                    await GetPaginatedDirectorate();
-                    Toaster.Success(".", result.MSG);
-                    SelectedDirectorate = new DirectorateInfo();
-                    if (tableRef != null)
-                        await tableRef.ReloadServerData();
-                    return;
-                }
-                Toaster.Error(".", result.MSG);
+                SelectedDirectorate = new DirectorateInfo();
+                if (tableRef != null)
+                    await tableRef.ReloadServerData();
+                Toaster.Success(".", result.MSG);
+                return;
             }
-            finally
-            {
-                config.IsSaveClicked1 = false;
-            }
+            Toaster.Error(".", result.MSG);
         }
-        private async Task<TableData<DirectorateInfo>> ServerReload(TableState state)
+        private async Task<TableData<DirectorateInfo>> GetPaginatedItems(TableState state)
         {
-            config.RowNumber = state.PageSize;
-            await GetPaginatedDirectorate(page: state.Page + 1, ColumnName: state.SortLabel,sort:state.SortDirection);
+            PaginatedDirectorate = await config.GetGridPaging<DirectorateInfo>(
+                    SelectPro: 2,
+                    PageNumber: state.Page + 1,
+                    PageSize: state.PageSize,
+                    SortColumn: state.SortLabel.IsStringNullOrWhiteSpace() ? "peo_DirectorateID" : state.SortLabel,
+                    Search: Filter.peo_DirectorateName.ToEmptyOnNull(),
+                    SortDirection: Util.ResolveSort(state.SortDirection));
+
             return new TableData<DirectorateInfo>() { TotalItems = PaginatedDirectorate.TotalItems, Items = PaginatedDirectorate.Items };
-        }
-
-        private bool EnableDisableButton()
-        {
-            return string.IsNullOrWhiteSpace(SelectedDirectorate.peo_DirectorateName)
-            || SelectedDirectorate.peo_dirAdminUserID <= 0;
         }
     }
 }
