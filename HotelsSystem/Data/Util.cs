@@ -95,5 +95,8 @@ namespace HotelsSystem.Data
             var SearchedData = data.Where(x => x!.GetType()!.GetProperty(ColumnName)!.GetValue(x)!.ToString().ToEmptyOnNull().ContainsIgnoreCase(value.ToEmptyOnNull()));
             return await Task.FromResult(SearchedData);
         }
+        public static string ResolveSort(SortDirection sort){
+          return sort==SortDirection.Descending || sort==SortDirection.None? "ASC":"DESC";
+        }
     }
 }
