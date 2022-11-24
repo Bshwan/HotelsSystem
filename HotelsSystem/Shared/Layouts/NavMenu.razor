@@ -13,25 +13,26 @@
         @* <MudNavLink Href="/home" Match="NavLinkMatch.Prefix" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>
         <MudNavLink Href="/counter" Icon="@Icons.Filled.Storage">Servers</MudNavLink> *@
         <MudNavLink Href="/" Icon="@Icons.Filled.Domain">Hotels</MudNavLink>
-        <MudNavGroup Title="System Admins" Icon="@Icons.Filled.AdminPanelSettings">
+        <MudNavLink Href="/search" Icon="@Icons.Filled.Search">Search</MudNavLink>
+        <MudNavLink Href="/config" Icon="@Icons.Filled.Settings">Configrations</MudNavLink>
+        <MudNavGroup @bind-Expanded="_isNavExpanded" Title="System Admins" Icon="@Icons.Filled.AdminPanelSettings">
             <MudNavLink Href="/admins" Icon="@Icons.Filled.People">Admins</MudNavLink>
             <MudNavLink Href="/addAdmin" Icon="@Icons.Filled.AddModerator">Add Admin</MudNavLink>
             <MudNavLink Href="/adminRoles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
         </MudNavGroup>
-        <MudNavGroup Title="User Management" Icon="@Icons.Filled.ManageAccounts">
+        @* <MudNavGroup Title="User Management" Icon="@Icons.Filled.ManageAccounts">
             <MudNavLink Href="/users" Icon="@Icons.Filled.People">Users</MudNavLink>
             <MudNavLink Href="/addUser" Icon="@Icons.Filled.PersonAdd">Add User</MudNavLink>
             <MudNavLink Href="/roles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
-        </MudNavGroup>
-        <MudNavGroup Title="Configrations" Icon="@Icons.Filled.Settings">
+        </MudNavGroup> *@
+        @* <MudNavGroup Title="Configrations" Icon="@Icons.Filled.Settings">
             <MudNavLink Href="/users" Icon="@Icons.Filled.LocationOn">Workplaces</MudNavLink>
-            <MudNavLink Href="/addUser" Icon="@Icons.Filled.PersonAdd">Add Admin</MudNavLink>
-            <MudNavLink Href="/roles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
-        </MudNavGroup>
+        </MudNavGroup> *@
     </MudNavMenu>
 </div>
 
 @code {
+    bool _isNavExpanded = true;
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;

@@ -1,34 +1,45 @@
-@using HotelsSystem.Models
-@page "/addUser"
+@inject IDialogService DialogService
+@page "/addAdmin"
 
 <div class="row gy-3 gx-2">
     <div class="col-12">
-        <h4>Add User</h4>
+        <h4>Add Admin</h4>
     </div>
     <div class="col-12">
-        <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
+        <MudTabs Class="border rounded-3" Outlined="true" PanelClass="px-3 pb-4 bg-white rounded-3" Rounded="true" Color="@Color.Primary">
             <MudTabPanel Text="General Informations">
                 <div class="row gy-3 gx-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Required Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Mobile *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Username" Required Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Password *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Mobile" Required Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Security Key" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Password" Required Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="false" @bind-Value="TextValue" Label="Pincode" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudSelect Margin="@Margin.Dense" T="int" Label="Language *" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelect Margin="@Margin.Dense" T="int" Label="Language" Required Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             <MudSelectItem T="int" Value="0">Kurdish</MudSelectItem>
                             <MudSelectItem T="int" Value="1">Arabic</MudSelectItem>
                             <MudSelectItem T="int" Value="2">English</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudSelect Margin="@Margin.Dense" T="int" Label="User Type" Required Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            <MudSelectItem T="int" Value="0">Direct Admin</MudSelectItem>
+                            <MudSelectItem T="int" Value="1">Workplace Admin</MudSelectItem>
+                            <MudSelectItem T="int" Value="2">Regular Editor</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudSelect Margin="@Margin.Dense" T="int" Label="Directory" Required Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            <MudSelectItem T="int" Value="0">Erbil</MudSelectItem>
+                            <MudSelectItem T="int" Value="1">Sulaymaniyah</MudSelectItem>
+                            <MudSelectItem T="int" Value="2">Duhok</MudSelectItem>
                         </MudSelect>
                     </div>
                     <div class="col-12">
@@ -65,17 +76,17 @@
                                 <MudTd DataLabel="Position">@context.Position</MudTd>
                                 <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
                                 <MudTd Class="text-end">
-                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
+                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" Size="Size.Small"/>
                                 </MudTd>
                             </RowTemplate>
                         </MudTable>
                     </div>
                 </div>
             </MudTabPanel>
-            <MudTabPanel Text="Privileges">
+            <MudTabPanel Text="Workpoints">
                 <div class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Clearable T="string" Label="Privileges" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                        <MudAutocomplete Clearable T="string" Label="Workpoint" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
                         <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
@@ -97,7 +108,39 @@
                                 <MudTd DataLabel="Position">@context.Position</MudTd>
                                 <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
                                 <MudTd Class="text-end">
-                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
+                                    <MudIconButton @onclick="DeleteUser" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" Size="Size.Small"/>
+                                </MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                    </div>
+                </div>
+            </MudTabPanel>
+            <MudTabPanel Text="Privileges">
+                <div class="row g-3 m-0 w-100">
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete Clearable T="string" Label="Privilege" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
+                        <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
+                    </div>
+                    <div class="col-12">
+                        <MudTable Dense="true" Elevation="0" Items="@Elements.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm">
+                            <HeaderContent>
+                                <MudTh>Nr</MudTh>
+                                <MudTh>Sign</MudTh>
+                                <MudTh>Name</MudTh>
+                                <MudTh>Position</MudTh>
+                                <MudTh>Molar mass</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Nr">@context.Number</MudTd>
+                                <MudTd DataLabel="Sign">@context.Sign</MudTd>
+                                <MudTd DataLabel="Name">@context.Name</MudTd>
+                                <MudTd DataLabel="Position">@context.Position</MudTd>
+                                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+                                <MudTd Class="text-end">
+                                    <MudIconButton @onclick="DeleteUser" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" Size="Size.Small"/>
                                 </MudTd>
                             </RowTemplate>
                         </MudTable>
@@ -152,5 +195,18 @@
         if (string.IsNullOrEmpty(value))
             return states;
         return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+    private void DeleteUser() {
+        var parameters = new DialogParameters();
+        parameters.Add("ContentText", "Do you really want to delete these records? This process cannot be undone.");
+        parameters.Add("ButtonText", "Delete");
+        parameters.Add("Color", Color.Error);
+
+        var options = new DialogOptions() {
+            CloseButton = true,
+            MaxWidth = MaxWidth.ExtraSmall
+        };
+
+        DialogService.Show<DeleteConfirmation>("Delete", parameters, options);
     }
 }

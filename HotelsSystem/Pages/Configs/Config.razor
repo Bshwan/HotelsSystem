@@ -1,49 +1,22 @@
+@inject IDialogService DialogService
+@using HotelsSystem.Shared.Modals
 @using HotelsSystem.Models
-@page "/adduser"
+@page "/config"
 
 <div class="row gy-3 gx-2">
     <div class="col-12">
-        <h4>Add User</h4>
+        <h4>Configrations</h4>
     </div>
+    <MudDivider/>
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
-            <MudTabPanel Text="General Informations">
-                <div class="row gy-3 gx-3 m-0 w-100">
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name *" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Mobile *" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Password *" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Security Key" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="false" @bind-Value="TextValue" Label="Pincode" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudSelect Margin="@Margin.Dense" T="int" Label="Language *" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
-                            <MudSelectItem T="int" Value="0">Kurdish</MudSelectItem>
-                            <MudSelectItem T="int" Value="1">Arabic</MudSelectItem>
-                            <MudSelectItem T="int" Value="2">English</MudSelectItem>
-                        </MudSelect>
-                    </div>
-                    <div class="col-12">
-                        <MudDivider/>
-                    </div>
-                    <div class="col-12 d-flex justify-content-end">
-                        <MudButton Class="me-2" StartIcon="@Icons.Material.Filled.Cancel" IconColor="Color.Error" Variant="Variant.Filled">Cancel</MudButton>
-                        <MudButton StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Primary">Save</MudButton>
-                    </div>
-                </div>
-            </MudTabPanel>
-            <MudTabPanel Text="Roles">
+            <MudTabPanel Text="Directories">
                 <div class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Clearable T="string" Label="Roles" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                        <MudTextField Required Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete Required Clearable T="string" Label="User" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
                         <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
@@ -72,10 +45,16 @@
                     </div>
                 </div>
             </MudTabPanel>
-            <MudTabPanel Text="Privileges">
+            <MudTabPanel Text="Workpoints">
                 <div class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Clearable T="string" Label="Privileges" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                        <MudTextField Required Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete Required Clearable T="string" Label="Directory" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete Required Clearable T="string" Label="User" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
                         <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
