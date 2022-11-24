@@ -42,7 +42,8 @@
                 var session = Decrypt<SPResult>(Cookie);
 
                 if (session == null || session == null || session.Result <= 0)
-                    throw new Exception();
+                return new SPResult{Result=1};
+                    // throw new Exception();
 
                 ClS_Config config = new ClS_Config(db, session);
 

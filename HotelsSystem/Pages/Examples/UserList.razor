@@ -1,0 +1,152 @@
+@page "/usersExample"
+
+<div class="row gx-2 gy-3">
+    <div class="col-12">
+        <h4>Users</h4>
+    </div>
+    <MudDivider />
+    <div class="col-12 d-flex">
+        <MudButton OnClick="@(()=>nav.NavigateTo("addUser"))" StartIcon="@Icons.Material.Filled.PersonAdd"
+            Variant="Variant.Filled" Color="Color.Primary">Add User</MudButton>
+    </div>
+    <div class="col-12">
+        <MudTable Outlined="true" Elevation="0"
+            ServerData="@(new Func<TableState,Task<TableData<UserInfo>>>(ServerReload))"
+            TotalItems="PaginatedUsers.TotalItems" Items="@PaginatedUsers.Items" T="UserInfo" Dense="@dense"
+            Hover="true" ReadOnly="@ronly" CanCancelEdit="true" @bind-SelectedItem="SelectedUser" SortLabel="Sort By"
+            CommitEditTooltip="Commit Edit" OnCommitEditClick="@(() => {})" RowEditPreview="BackupItem"
+            RowEditCancel="ResetItemToOriginalValues" RowEditCommit="ItemHasBeenCommitted"
+            IsEditRowSwitchingBlocked="@blockSwitch" ApplyButtonPosition="@applyButtonPosition"
+            EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Periodic Elements</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start"
+                    AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <ColGroup>
+                @if (applyButtonPosition.DisplayApplyButtonAtStart() || (editButtonPosition.DisplayEditButtonAtStart()
+                && editTrigger == TableEditTrigger.EditButton))
+                {
+                    <col style="width:50px;" />
+                }
+                <col style="width:50px;" />
+                <col style="width:80px;" />
+                <col style="width:50%;" />
+                <col />
+                <col />
+                @if (applyButtonPosition.DisplayApplyButtonAtEnd() || (editButtonPosition.DisplayEditButtonAtEnd() &&
+                editTrigger == TableEditTrigger.EditButton))
+                {
+                    <col style="width:50px;" />
+                }
+            </ColGroup>
+            <HeaderContent>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<UserInfo, object>(x=>x.peo_UserName.ToEmptyOnNull())">Username
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<UserInfo, object>(x=>x.peo_userFullName.ToEmptyOnNull())">Full
+                        Name</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel InitialDirection="SortDirection.None"
+                        SortBy="new Func<UserInfo, object>(x=>x.peo_UserMobile.ToEmptyOnNull())">Mobile
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<UserInfo, object>(x=>x.usT_userType.ToEmptyOnNull())">User Type
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<UserInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
+                        Directorate Name</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<UserInfo, object>(x=>x.wp_workpointName.ToEmptyOnNull())">
+                        Workpoint Name</MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<UserInfo, object>(x=>x.peo_createdDate)">Created Date
+                    </MudTableSortLabel>
+                </MudTh>
+                <MudTh>
+                    <MudTableSortLabel SortBy="new Func<UserInfo, object>(x=>x.peo_UserActive)">Active
+                    </MudTableSortLabel>
+                </MudTh>
+            </HeaderContent>
+
+            <RowTemplate>
+                <MudTd DataLabel="">
+                    <MudLink Underline="Underline.Always" Href="addUser">@context.peo_UserName</MudLink>
+                </MudTd>
+                <MudTd DataLabel="">@context.peo_userFullName</MudTd>
+                <MudTd DataLabel="">@context.peo_UserMobile</MudTd>
+                <MudTd DataLabel="">@context.usT_userType</MudTd>
+                <MudTd DataLabel="">@context.peo_DirectorateName</MudTd>
+                <MudTd DataLabel="">@context.wp_workpointName</MudTd>
+                <MudTd DataLabel="">@context.peo_createdDate</MudTd>
+                <MudTd DataLabel="">@context.peo_UserActive</MudTd>
+            </RowTemplate>
+
+            <RowEditingTemplate>
+                <MudTd>@context.peo_UserName</MudTd>
+                <MudTd>@context.peo_userFullName</MudTd>
+                <MudTd>@context.peo_UserMobile</MudTd>
+                <MudTd>@context.usT_userType</MudTd>
+                <MudTd>@context.peo_DirectorateName</MudTd>
+                <MudTd>@context.wp_workpointName</MudTd>
+                <MudTd>@context.peo_createdDate</MudTd>
+                <MudTd>@context.peo_UserActive</MudTd>
+            </RowEditingTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+            <EditButtonContent Context="button">
+                <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0"
+                    OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+            </EditButtonContent>
+        </MudTable>
+    </div>
+</div>
+
+@code {
+    private bool dense = false;
+    private bool hover = true;
+    private bool ronly = false;
+    private bool canCancelEdit = false;
+    private bool blockSwitch = false;
+    private string searchString = "";
+    private UserInfo SelectedUserBeforeEdit;
+    private TableApplyButtonPosition applyButtonPosition = TableApplyButtonPosition.End;
+    private TableEditButtonPosition editButtonPosition = TableEditButtonPosition.End;
+    private TableEditTrigger editTrigger = TableEditTrigger.RowClick;
+
+
+    private void BackupItem(object element)
+    {
+        System.Console.WriteLine("is:"+(element is UserInfo).ToString());
+
+        if (element is UserInfo user)
+        {
+            SelectedUserBeforeEdit = user;
+        }
+    }
+    private void ItemHasBeenCommitted(object element){
+        
+    }
+
+    private void ResetItemToOriginalValues(object element)
+    {
+        System.Console.WriteLine("is:"+(element is UserInfo).ToString());
+        if(element is UserInfo user)
+        element=SelectedUserBeforeEdit;
+    }
+
+    private void OpenDialog()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<Dialog>("Simple Dialog", options);
+    }
+}

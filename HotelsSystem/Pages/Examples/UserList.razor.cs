@@ -1,5 +1,5 @@
 
-namespace HotelsSystem.Pages.UserManagement;
+namespace HotelsSystem.Pages.Examples;
 public partial class UserList
 {
     [Inject]
@@ -14,7 +14,7 @@ public partial class UserList
     protected IDialogService DialogService{get;set;}=default!;
 
     PagedResult<UserInfo> PaginatedUsers = PagedResult<UserInfo>.EmptyPagedResult();
-    // SortDirection sort = SortDirection.Descending;
+    SortDirection sort = SortDirection.Descending;
     string SelectedColumnToSort = "peo_createdDate";
     ClS_UserManagement mgmt = default!;
     ClS_Config config = default!;
@@ -29,7 +29,7 @@ public partial class UserList
         // await GetPaginatedUsers();
     }
 
-    async Task GetPaginatedUsers(int page = 1, string ColumnName = "",SortDirection sort=SortDirection.None)
+    async Task GetPaginatedUsers(int page = 1, string ColumnName = "")
     {
         if (!string.IsNullOrWhiteSpace(ColumnName))
         {
@@ -50,12 +50,12 @@ public partial class UserList
             DirectorateID: FilterUser.peo_DirectorateID,
             WorkPlaceID: FilterUser.peo_UserID,
             SortColumn: SelectedColumnToSort,
-            SortDirection: Util.ResolveSort(sort));
+            SortDirection: sort==SortDirection.Descending || sort==SortDirection.None? "ASC":"DESC");
     }
     private async Task<TableData<UserInfo>> ServerReload(TableState state)
     {
-        config.RowNumber=state.PageSize;
-        await GetPaginatedUsers(page:state.Page+1,ColumnName:state.SortLabel,sort:state.SortDirection);
+        System.Console.WriteLine(state.SortLabel+" "+state.SortDirection);
+        await GetPaginatedUsers(page:state.Page+1);
         return new TableData<UserInfo>() {TotalItems = PaginatedUsers.TotalItems, Items = PaginatedUsers.Items};
     }
 }

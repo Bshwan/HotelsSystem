@@ -2,6 +2,9 @@
     <DialogContent>
         <div class="row gy-3 gx-2">
             <div class="col-12 d-flex align-items-center">
+                <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Required Variant="Variant.Outlined"></MudTextField>
+            </div>
+            <div class="col-12 d-flex align-items-center">
                 <MudAutocomplete Clearable T="string" Label="Privilege Name" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
                 <MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
             </div>
