@@ -85,6 +85,6 @@ app.UseEndpoints(endpoints =>
 }
 );
 
-app.UseMiddleware<CookieMiddleware>();
+// app.UseMiddleware<CookieMiddleware>();
 app.Run();
 
