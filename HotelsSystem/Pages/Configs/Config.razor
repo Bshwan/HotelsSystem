@@ -7,129 +7,15 @@
     <div class="col-12">
         <h4>Configrations</h4>
     </div>
-    <MudDivider/>
+    <MudDivider />
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
             <MudTabPanel Text="Directories">
-                <div class="row g-3 m-0 w-100">
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Required Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Required Clearable T="string" Label="User" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
-                        <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
-                    </div>
-                    <div class="col-12">
-                        <MudTable Dense="true" Elevation="0" Items="@Elements.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm">
-                            <HeaderContent>
-                                <MudTh>Nr</MudTh>
-                                <MudTh>Sign</MudTh>
-                                <MudTh>Name</MudTh>
-                                <MudTh>Position</MudTh>
-                                <MudTh>Molar mass</MudTh>
-                                <MudTh></MudTh>
-                            </HeaderContent>
-                            <RowTemplate>
-                                <MudTd DataLabel="Nr">@context.Number</MudTd>
-                                <MudTd DataLabel="Sign">@context.Sign</MudTd>
-                                <MudTd DataLabel="Name">@context.Name</MudTd>
-                                <MudTd DataLabel="Position">@context.Position</MudTd>
-                                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
-                                <MudTd Class="text-end">
-                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
-                                </MudTd>
-                            </RowTemplate>
-                        </MudTable>
-                    </div>
-                </div>
+               <Directorate DB="DB" JSRuntime="JSRuntime" nav="nav" session="session" Toaster="Toaster"></Directorate>
             </MudTabPanel>
             <MudTabPanel Text="Workpoints">
-                <div class="row g-3 m-0 w-100">
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Required Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Variant="Variant.Outlined"></MudTextField>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Required Clearable T="string" Label="Directory" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Required Clearable T="string" Label="User" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
-                        <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
-                    </div>
-                    <div class="col-12">
-                        <MudTable Dense="true" Elevation="0" Items="@Elements.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm">
-                            <HeaderContent>
-                                <MudTh>Nr</MudTh>
-                                <MudTh>Sign</MudTh>
-                                <MudTh>Name</MudTh>
-                                <MudTh>Position</MudTh>
-                                <MudTh>Molar mass</MudTh>
-                                <MudTh></MudTh>
-                            </HeaderContent>
-                            <RowTemplate>
-                                <MudTd DataLabel="Nr">@context.Number</MudTd>
-                                <MudTd DataLabel="Sign">@context.Sign</MudTd>
-                                <MudTd DataLabel="Name">@context.Name</MudTd>
-                                <MudTd DataLabel="Position">@context.Position</MudTd>
-                                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
-                                <MudTd Class="text-end">
-                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
-                                </MudTd>
-                            </RowTemplate>
-                        </MudTable>
-                    </div>
-                </div>
+             <WorkingPoint></WorkingPoint>
             </MudTabPanel>
         </MudTabs>
     </div>
 </div>
-
-@code {
-    public string TextValue { get; set; }
-    private List<Element> Elements = new List<Element>();
-
-    protected override async Task OnInitializedAsync(){
-        for (int i = 0; i < 10; i++){
-            Elements.Add(new Element{
-                Name="name"+i.ToString(),
-                Sign="$",
-                Molar=100*i,
-                Number=i,
-                Position=100
-            });
-        }
-        @* Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable"); *@
-    }
-    private string value1;
-    private string[] states = {
-        "Alabama", "Alaska", "American Samoa", "Arizona",
-        "Arkansas", "California", "Colorado", "Connecticut",
-        "Delaware", "District of Columbia", "Federated States of Micronesia",
-        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
-        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-        "Louisiana", "Maine", "Marshall Islands", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
-        "Missouri", "Montana", "Nebraska", "Nevada",
-        "New Hampshire", "New Jersey", "New Mexico", "New York",
-        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
-        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
-        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
-        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
-        "Washington", "West Virginia", "Wisconsin", "Wyoming",
-    };
-    private string[] langs = {
-        "Kurdish", "Arabic","English",
-    };
-    private async Task<IEnumerable<string>> Search1(string value) {
-        // In real life use an asynchronous function for fetching data from an api.
-        await Task.Delay(5);
-
-        // if text is null or empty, show complete list
-        if (string.IsNullOrEmpty(value))
-            return states;
-        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
-    }
-}

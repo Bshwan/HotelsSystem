@@ -105,6 +105,61 @@
         //    else
         //        return false;
         //}
+
+        public string ValidateField(bool bool1, string? val)
+        {
+            if (bool1 && string.IsNullOrWhiteSpace(val))
+                return "custom-validation";
+            else
+                return "";
+        }
+        public string ValidateField(bool bool1, byte[]? val)
+        {
+            if (bool1 && (val == null || val.Length <= 0))
+                return "custom-validation";
+            else
+                return "";
+        }
+        public string ValidateField(bool bool1, bool val)
+        {
+            if (bool1 && val)
+                return "custom-validation";
+            else
+                return "";
+        }
+        public string ValidateField(bool bool1, DateTime? val)
+        {
+            if (bool1 && !val.HasValue)
+                return "custom-validation";
+            else
+                return "";
+        }
+        public string ValidateField(bool bool1, int val)
+        {
+            if (bool1 && val <= 0)
+                return "custom-validation";
+            else
+                return "";
+        }
+        public string ValidateFieldAccCode(bool bool1, int val)
+        {
+            if (bool1 && val <= -1)
+                return "custom-validation";
+            else
+                return "";
+        }
+        public string ValidateField(bool bool1, decimal val)
+        {
+            if (bool1 && val <= decimal.Zero)
+                return "custom-validation";
+            else
+                return "";
+        }
+
+        public string ChangeAddEditIcon(int id)
+        {
+            return id > 0 ? "Edit" : "Add";
+        }
         public async Task<IEnumerable<int>> GetAllRoles()
         {
             var Roles = await GetAllInfo<int>(SelectPro: 0, ValID: SessionValue);

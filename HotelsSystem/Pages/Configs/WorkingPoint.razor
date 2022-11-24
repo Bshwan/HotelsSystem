@@ -1,0 +1,36 @@
+﻿@*<div class="row g-3 m-0 w-100">
+    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+        <MudTextField Required Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Variant="Variant.Outlined"></MudTextField>
+    </div>
+    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+        <MudAutocomplete Required Clearable T="string" Label="Directory" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined" />
+    </div>
+    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+        <MudAutocomplete Required Clearable T="string" Label="User" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined" />
+    </div>
+    <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
+        <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" />
+    </div>
+    <div class="col-12">
+        <MudTable Dense="true" Elevation="0" Items="@Elements.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm">
+            <HeaderContent>
+                <MudTh>Nr</MudTh>
+                <MudTh>Sign</MudTh>
+                <MudTh>Name</MudTh>
+                <MudTh>Position</MudTh>
+                <MudTh>Molar mass</MudTh>
+                <MudTh></MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd DataLabel="Nr">@context.Number</MudTd>
+                <MudTd DataLabel="Sign">@context.Sign</MudTd>
+                <MudTd DataLabel="Name">@context.Name</MudTd>
+                <MudTd DataLabel="Position">@context.Position</MudTd>
+                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+                <MudTd Class="text-end">
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />
+                </MudTd>
+            </RowTemplate>
+        </MudTable>
+    </div>
+</div>*@
