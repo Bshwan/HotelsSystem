@@ -25,6 +25,8 @@ namespace HotelsSystem.Pages.Configs
         public DirectorateInfo SelectedDirectorate = new DirectorateInfo();
         public DirectorateInfo Filter = new DirectorateInfo();
 
+        private MudTable<DirectorateInfo>? tableRef = new MudTable<DirectorateInfo>();
+
         private IEnumerable<UserAutoCombo> combo = Enumerable.Empty<UserAutoCombo>();
         private ClS_Config config = default!;
 
@@ -42,9 +44,10 @@ namespace HotelsSystem.Pages.Configs
 
         private async Task GetDirectorateByID(int id)
         {
-            SelectedDirectorate = await config.GetOneInfo<DirectorateInfo>
-                        (SelectPro: 3,
-                        ValID: id);
+            SelectedDirectorate = (await config.GetAllInfo<DirectorateInfo>(
+                        SelectPro: 3,
+                        ValID: id)).First();
+            
         }
 
         private async Task GetCombo()
@@ -119,7 +122,8 @@ namespace HotelsSystem.Pages.Configs
                     await GetPaginatedDirectorate();
                     Toaster.Success(".", result.MSG);
                     SelectedDirectorate = new DirectorateInfo();
-                    StateHasChanged();
+                    if (tableRef != null)
+                        await tableRef.ReloadServerData();
                     return;
                 }
                 Toaster.Error(".", result.MSG);

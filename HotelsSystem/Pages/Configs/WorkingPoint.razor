@@ -1,4 +1,120 @@
-﻿@*<div class="row g-3 m-0 w-100">
+﻿@if (config != null)
+{
+    <div class="row g-3 m-0 w-100">
+        <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+            <MudTextField Required Margin="@Margin.Dense" Class="@(config.ValidateField(config.IsInValidated1,SelectedWorkPoint.wp_workpointName))" Dense="true" @bind-Value="SelectedWorkPoint.wp_workpointName" Label="Name" Variant="Variant.Outlined"></MudTextField>
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+
+            <MudAutocomplete T="UserAutoCombo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchUser"
+                         Clearable="true"
+                         Required
+                         ResetValueOnEmptyText="true"
+                         Value="@(new UserAutoCombo(){peo_UserName=SelectedWorkPoint.peo_UserName,peo_UserID=SelectedWorkPoint.wp_AdminID})"
+                         Text="@SelectedWorkPoint.peo_UserName"
+                         ValueChanged="@((e)=>OnUserChanged(e))"
+                         ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
+                         CoerceText="@true"
+                         Label="User"
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
+                         Placeholder="User" Class="@(config.ValidateField(config.IsInValidated1,SelectedWorkPoint.wp_AdminID))" />
+
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+
+            <MudAutocomplete T="DirectorateInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchDirectorate"
+                         Clearable="true"
+                         Required
+                         ResetValueOnEmptyText="true"
+                         Value="@(new DirectorateInfo(){peo_DirectorateName=SelectedWorkPoint.peo_DirectorateName,peo_DirectorateID=SelectedWorkPoint.wp_DirectorateID})"
+                         Text="@SelectedWorkPoint.peo_DirectorateName"
+                         ValueChanged="@((e)=>OnDirectorateChanged(e))"
+                         ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
+                         CoerceText="@true"
+                         Label="Directorate"
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
+                         Placeholder="User" Class="@(config.ValidateField(config.IsInValidated1,SelectedWorkPoint.wp_DirectorateID))" />
+
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+            <MudTextField Margin="@Margin.Dense" Class="@(config.ValidateField(config.IsInValidated1,SelectedWorkPoint.location))" Dense="true" @bind-Value="SelectedWorkPoint.location" Label="Location" Variant="Variant.Outlined"></MudTextField>
+        </div>
+        <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
+            <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@(async()=>await InsertUpdateWorkPoint())" Variant="Variant.Filled" Color="Color.Primary" />
+        </div>
+        <div class="col-12">
+
+            <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
+                  ServerData="@(new Func<TableState,Task<TableData<WorkingPointInfo>>>(ServerReload))"
+                  TotalItems="PaginatedWorkPoint.TotalItems" Items="@PaginatedWorkPoint.Items" T="WorkingPointInfo" Dense="true">
+                @* <ToolBarContent>
+            <MudText Typo="Typo.h6">Directorate</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="Filter.peo_DirectorateName" Placeholder="Search" Adornment="Adornment.Start"
+            AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>*@
+                <HeaderContent>
+                    <MudTh>
+                        <MudTableSortLabel SortLabel="wp_workpointName" SortBy="new Func<WorkingPointInfo, object>(x=>x.wp_workpointName.ToEmptyOnNull())">
+                            Name
+                        </MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<WorkingPointInfo, object>(x=>x.peo_UserName.ToEmptyOnNull())">
+                            User
+                        </MudTableSortLabel>
+                    </MudTh>
+                    <MudTh>
+                        <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<WorkingPointInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
+                            Directorate
+                        </MudTableSortLabel>
+                    </MudTh>
+                    <MudTh></MudTh>
+
+                </HeaderContent>
+
+                <RowTemplate>
+                    <MudTd DataLabel="">
+                        @context.wp_workpointName
+                    </MudTd>
+                    <MudTd DataLabel="">
+                        @context.peo_UserName
+                    </MudTd>
+                    <MudTd DataLabel="">
+                        @context.peo_DirectorateName
+                    </MudTd>
+                   
+                    <MudTd Class="text-end">
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" OnClick="@(async()=> await GetWorkPointByID(context.wp_ID))" Color="Color.Error" />
+                    </MudTd>
+                </RowTemplate>
+
+                @*    <RowEditingTemplate>
+            <MudTd>@context.peo_DirectorateName</MudTd>
+            <MudTd>@context.peo_UserName</MudTd>
+
+            </RowEditingTemplate>*@
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+                @*  <EditButtonContent Context="button">
+            <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0"
+            OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+            </EditButtonContent>*@
+            </MudTable>
+
+        </div>
+    </div>
+}
+
+
+
+
+@*<div class="row g-3 m-0 w-100">
     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
         <MudTextField Required Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Variant="Variant.Outlined"></MudTextField>
     </div>

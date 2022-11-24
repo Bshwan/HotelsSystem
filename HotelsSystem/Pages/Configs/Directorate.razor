@@ -26,16 +26,16 @@
         </div>
         <div class="col-12">
 
-            <MudTable Outlined="true" Elevation="0"
+            <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
                   ServerData="@(new Func<TableState,Task<TableData<DirectorateInfo>>>(ServerReload))"
                   TotalItems="PaginatedDirectorate.TotalItems" Items="@PaginatedDirectorate.Items" T="DirectorateInfo" Dense="true"
-                  Hover="true" CanCancelEdit="true" @bind-SelectedItem="SelectedDirectorate" SortLabel="Sort By">
-                <ToolBarContent>
+                >
+               @* <ToolBarContent>
                     <MudText Typo="Typo.h6">Directorate</MudText>
                     <MudSpacer />
                     <MudTextField @bind-Value="Filter.peo_DirectorateName" Placeholder="Search" Adornment="Adornment.Start"
                               AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
-                </ToolBarContent>
+                </ToolBarContent>*@
                 <HeaderContent>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<DirectorateInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
@@ -57,7 +57,7 @@
                     </MudTd>
                     <MudTd DataLabel="">@context.peo_UserName</MudTd>
                     <MudTd Class="text-end">
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" OnClick="@(async()=> await GetDirectorateByID(context.peo_DirectorateID))"  Color="Color.Error" />
                     </MudTd>
                 </RowTemplate>
 
@@ -69,10 +69,10 @@
                 <PagerContent>
                     <MudTablePager />
                 </PagerContent>
-                <EditButtonContent Context="button">
+              @*  <EditButtonContent Context="button">
                     <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0"
                                OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
-                </EditButtonContent>
+                </EditButtonContent>*@
             </MudTable>
          
         </div>
