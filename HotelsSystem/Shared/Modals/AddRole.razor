@@ -1,0 +1,57 @@
+<MudDialog ClassActions="px-5 pb-4">
+    <DialogContent>
+        <div class="row gy-3 gx-2">
+            <div class="col-12 d-flex align-items-center">
+                <MudAutocomplete Clearable T="string" Label="Privilege Name" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                <MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
+            </div>
+            <div class="col-12">
+                <MudField Label="Privileges" Margin="@Margin.Dense" Variant="Variant.Outlined">
+                    <MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Text" Color="Color.Primary"/>
+                    <MudChip Disabled="true" Variant="Variant.Text" Color="Color.Primary">Primary</MudChip>
+                </MudField>
+            </div>
+            <div class="col-12">
+                <MudDivider/>
+            </div>
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@code{
+    public string TextValue { get; set; }
+    private string value1;
+    private string[] states = {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming",
+    };
+    private async Task<IEnumerable<string>> Search1(string value) {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+            return states;
+        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    void Submit() => MudDialog.Close(DialogResult.Ok(true));
+    void Cancel() => MudDialog.Cancel();
+}

@@ -1,0 +1,43 @@
+﻿<div class="top-row ps-3 navbar">
+    <div class="container-fluid">
+        <a class="navbar-brand text-white" href="">Hotelery</a>
+        <button title="Navigation menu" class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        @* <MudIconButton Class="text-white" Icon="@Icons.Material.Filled.Menu" Variant="Variant.Text"/> *@
+    </div>
+</div>
+
+<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+    <MudNavMenu Color="Color.Primary" Class="mud-width-full py-3">
+        @* <MudNavLink Href="/home" Match="NavLinkMatch.Prefix" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>
+        <MudNavLink Href="/counter" Icon="@Icons.Filled.Storage">Servers</MudNavLink> *@
+        <MudNavLink Href="/" Icon="@Icons.Filled.Domain">Hotels</MudNavLink>
+        <MudNavGroup Title="System Admins" Icon="@Icons.Filled.AdminPanelSettings">
+            <MudNavLink Href="/admins" Icon="@Icons.Filled.People">Admins</MudNavLink>
+            <MudNavLink Href="/addAdmin" Icon="@Icons.Filled.AddModerator">Add Admin</MudNavLink>
+            <MudNavLink Href="/adminRoles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
+        </MudNavGroup>
+        <MudNavGroup Title="User Management" Icon="@Icons.Filled.ManageAccounts">
+            <MudNavLink Href="/users" Icon="@Icons.Filled.People">Users</MudNavLink>
+            <MudNavLink Href="/addUser" Icon="@Icons.Filled.PersonAdd">Add User</MudNavLink>
+            <MudNavLink Href="/roles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
+        </MudNavGroup>
+        <MudNavGroup Title="Configrations" Icon="@Icons.Filled.Settings">
+            <MudNavLink Href="/users" Icon="@Icons.Filled.LocationOn">Workplaces</MudNavLink>
+            <MudNavLink Href="/addUser" Icon="@Icons.Filled.PersonAdd">Add Admin</MudNavLink>
+            <MudNavLink Href="/roles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
+        </MudNavGroup>
+    </MudNavMenu>
+</div>
+
+@code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+}

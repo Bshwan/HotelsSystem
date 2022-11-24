@@ -19,7 +19,6 @@ builder.Services.AddBlazoredModal();
 builder.Services.AddMudServices();
 
 
-
 builder.Services.AddToaster(config =>
 {
     //example customizations

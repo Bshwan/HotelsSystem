@@ -1,20 +1,47 @@
 ﻿@inherits LayoutComponentBase
 
-<PageTitle>HotelsSystem</PageTitle>
-<Sotsera.Blazor.Toaster.ToastContainer></Sotsera.Blazor.Toaster.ToastContainer>
-<MudThemeProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<MudRTLProvider RightToLeft="@rtl">
+    <Sotsera.Blazor.Toaster.ToastContainer></Sotsera.Blazor.Toaster.ToastContainer>
+    <MudThemeProvider IsDarkMode="!true"/>
+    <MudDialogProvider/>
+    <MudSnackbarProvider/>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+    <div class="page">
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+
+        <main>
+            <div class="top-row px-4">
+                @if (!@rtl){
+                    <MudIconButton @onclick="rtlToggle" Class="white-text" Icon="@Icons.Filled.FormatTextdirectionRToL"></MudIconButton>
+                }
+                else{
+                    <MudIconButton @onclick="rtlToggle" Class="white-text" Icon="@Icons.Filled.FormatTextdirectionLToR"></MudIconButton>
+                }
+            </div>
+            <MudPaper Outlined="true" Elevation="0" Class="px-2 m-3">
+                <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
+            </MudPaper>
+            <article class="content px-2 pt-2 pb-4">
+                <div class="container-fluid">
+                    @Body
+                </div>
+            </article>
+        </main>
     </div>
 
-    <main>
+</MudRTLProvider>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+@code{
+    bool rtl = false;
+    public void rtlToggle(){
+        rtl = !rtl;
+    }
+    private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
+    {
+        new BreadcrumbItem("Home", href: "#"),
+        new BreadcrumbItem("Link 1", href: "#"),
+        new BreadcrumbItem("Link 2", href: null, disabled: true)
+    };
+}

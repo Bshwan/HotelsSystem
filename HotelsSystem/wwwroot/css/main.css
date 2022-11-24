@@ -1,0 +1,22 @@
+:root{
+    --mud-palette-primary: #262626 !important;
+    --mud-palette-primary-darken:  #161616 !important;
+    --mud-palette-primary-lighten:  #ffffff20 !important;
+    --mud-palette-primary-hover: #63636310 !important;
+}
+
+.mud-button-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: initial;
+}
+
+.mud-input.mud-input-outlined:focus-within .mud-input-outlined-border{
+    border-color: var(--mud-palette-primary-lighten) !important;
+}
+
+.square-btn{
+    height: 2.5rem;
+    width: 2.5rem;
+}

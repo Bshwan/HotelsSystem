@@ -1,0 +1,176 @@
+@using HotelsSystem.Models
+@page "/addVisitor"
+
+<div class="row gy-3 gx-2">
+    <div class="col-12">
+        <h4>Add Visit</h4>
+    </div>
+    <div class="col-12">
+        <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
+            <MudTabPanel Text="Informations">
+                <div class="row gy-3 gx-3 m-0 w-100">
+                    <div class="col-12">
+                        <h4>Personal Informations</h4>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Mobile" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="ID Number" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Passport Number" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Mother's Name" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete Required Clearable T="string" Label="Nationality" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Variant="Variant.Outlined"/>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Note" Variant="Variant.Outlined" Lines="3"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudSelect Required Margin="@Margin.Dense" T="int" Label="Gender" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            <MudSelectItem T="int" Value="0">Male</MudSelectItem>
+                            <MudSelectItem T="int" Value="1">Female</MudSelectItem>
+                            <MudSelectItem T="int" Value="2">Other</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div class="col-12">
+                        <h4>Reservation Informations</h4>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudNumericField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Room Number" Variant="Variant.Outlined"></MudNumericField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudSelect Required Margin="@Margin.Dense" T="int" Label="Room Type" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            <MudSelectItem T="int" Value="0">Male</MudSelectItem>
+                            <MudSelectItem T="int" Value="1">Female</MudSelectItem>
+                            <MudSelectItem T="int" Value="2">Other</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div class="col-12">
+                        <MudDivider/>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end">
+                        @if (@checkIn){
+                            <MudButton @onclick="checkToggle" Variant="Variant.Filled">Check out</MudButton>
+                        }
+                        else{
+                            <MudButton @onclick="checkToggle" Variant="Variant.Filled" Color="Color.Primary">Check In</MudButton>
+                        }
+                    </div>
+                </div>
+            </MudTabPanel>
+            <MudTabPanel Text="Attached Files">
+                <div class="row g-3 m-0 w-100">
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2 d-flex">
+                        <MudFileUpload Class="mt-1 w-100" T="IBrowserFile">
+                            <ButtonTemplate>
+                                <MudButton
+                                    Class="w-100"
+                                    Size="Size.Large"
+                                    HtmlTag="label"
+                                    Variant="Variant.Filled"
+                                    Color="Color.Primary"
+                                    StartIcon="@Icons.Filled.FileUpload"
+                                    for="@context">
+                                    Upload Files
+                                </MudButton>
+                            </ButtonTemplate>
+                        </MudFileUpload>
+                        <MudImage Src="https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=" Alt="Mony the dog" Elevation="0" Class="rounded-lg ms-2 mt-1" Width="40" Height="40" ObjectFit="ObjectFit.Cover"/>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudSelect Required Margin="@Margin.Dense" T="int" Label="Attachment Type" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            <MudSelectItem T="int" Value="0">Male</MudSelectItem>
+                            <MudSelectItem T="int" Value="1">Female</MudSelectItem>
+                            <MudSelectItem T="int" Value="2">Other</MudSelectItem>
+                        </MudSelect>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
+                        <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
+                    </div>
+                    <div class="col-12">
+                        <MudTable Elevation="0" Items="@Elements.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm">
+                            <HeaderContent>
+                                <MudTh>Nr</MudTh>
+                                <MudTh>Sign</MudTh>
+                                <MudTh>Name</MudTh>
+                                <MudTh>Position</MudTh>
+                                <MudTh>Molar mass</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Nr"><MudLink Href="#">@context.Number</MudLink></MudTd>
+                                <MudTd DataLabel="Sign">@context.Sign</MudTd>
+                                <MudTd DataLabel="Name">@context.Name</MudTd>
+                                <MudTd DataLabel="Position">@context.Position</MudTd>
+                                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+                                <MudTd Class="text-end">
+                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
+                                </MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                    </div>
+                </div>
+            </MudTabPanel>
+        </MudTabs>
+    </div>
+</div>
+
+@code {
+    public string TextValue { get; set; }
+    private List<Element> Elements = new List<Element>();
+
+    protected override async Task OnInitializedAsync(){
+        for (int i = 0; i < 10; i++){
+            Elements.Add(new Element{
+                Name="name"+i.ToString(),
+                Sign="$",
+                Molar=100*i,
+                Number=i,
+                Position=100
+            });
+        }
+        @* Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable"); *@
+    }
+    private string value1;
+    private string[] states = {
+        "Alabama", "Alaska", "American Samoa", "Arizona",
+        "Arkansas", "California", "Colorado", "Connecticut",
+        "Delaware", "District of Columbia", "Federated States of Micronesia",
+        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
+        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
+        "Louisiana", "Maine", "Marshall Islands", "Maryland",
+        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
+        "Missouri", "Montana", "Nebraska", "Nevada",
+        "New Hampshire", "New Jersey", "New Mexico", "New York",
+        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
+        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
+        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
+        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
+        "Washington", "West Virginia", "Wisconsin", "Wyoming",
+    };
+    private string[] langs = {
+        "Kurdish", "Arabic","English",
+    };
+    private async Task<IEnumerable<string>> Search1(string value) {
+        // In real life use an asynchronous function for fetching data from an api.
+        await Task.Delay(5);
+
+        // if text is null or empty, show complete list
+        if (string.IsNullOrEmpty(value))
+            return states;
+        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
+    }
+
+    bool checkIn = false;
+    public void checkToggle(){
+        checkIn = !checkIn;
+    }
+}
