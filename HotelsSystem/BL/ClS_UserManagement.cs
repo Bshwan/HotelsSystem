@@ -28,7 +28,7 @@ public class ClS_UserManagement
     }
     public async Task<PagedResult<T>> UserList<T>(int SelectPro = 1, int PageNumber = 1, int PageSize = 10,int UserTypeID=0, string FullName = "", int DirectorateID = 0, int WorkPlaceID = 0, string SortColumn = "", string SortDirection = "Asc")
     {
-        return await _db.GetGridResult<T, dynamic>("Pro_GridUserList", SessionResult.CNSTR.ToEmptyOnNull(), new { Select = SelectPro, UserTypeID= UserTypeID, FullName = FullName, DirectorateID = DirectorateID, WorkPlaceID = WorkPlaceID, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionResult.Result }, PageNumber: PageNumber, PageSize: PageSize);
+        return await _db.GetGridResult<T, dynamic>("Pro_GridUserList", new { Select = SelectPro, UserTypeID= UserTypeID, FullName = FullName, DirectorateID = DirectorateID, WorkPlaceID = WorkPlaceID, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionResult.Result }, PageNumber: PageNumber, PageSize: PageSize);
     }
 
     // public async Task<LoginSystemOptions> Login(int SelectPro = 0, string UserName = "", string UserPass = "")

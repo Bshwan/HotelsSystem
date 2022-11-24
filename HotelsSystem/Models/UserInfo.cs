@@ -4,7 +4,7 @@ public class UserInfo
 {
     public int peo_UserID { get; set; }
     public int peo_UserTypeID { get; set; }
-    public string usT_userType { get; set; }
+    public string? usT_userType { get; set; }
     public string? peo_UserName { get; set; }
     public string? peo_userFullName { get; set; }
     public string? peo_UserMobile { get; set; }
