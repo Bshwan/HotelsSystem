@@ -1,4 +1,6 @@
-﻿namespace HotelsSystem.Pages.Configs
+﻿using Microsoft.JSInterop;
+
+namespace HotelsSystem.Pages.Configs
 {
     public partial class Directorate
     {
@@ -14,32 +16,28 @@
         [Parameter, EditorRequired]
         public IToaster Toaster { get; set; } = default!;
 
-        [Parameter, EditorRequired]
-        public SPResult session { get; set; } = default!;
+        [Inject]
+        protected IDialogService DialogService { get; set; } = default!;
 
         private PagedResult<DirectorateInfo> PaginatedDirectorate = PagedResult<DirectorateInfo>.EmptyPagedResult();
         private string SelectedColumnToSort = "peo_DirectorateID";
         private SortDirections sort = SortDirections.ASC;
         public DirectorateInfo SelectedDirectorate = new DirectorateInfo();
+        public DirectorateInfo Filter = new DirectorateInfo();
 
         private IEnumerable<UserAutoCombo> combo = Enumerable.Empty<UserAutoCombo>();
         private ClS_Config config = default!;
 
         protected override async Task OnInitializedAsync()
         {
-            // try
-            // {
-            //     SelectedIncomeSubType = new IncomeSubTypeInfo();
+
+            var session = await Protection.GetDecryptedSession(JSRuntime, DB);
             config = new ClS_Config(DB, session);
 
 
             await GetPaginatedDirectorate();
             await GetCombo();
-            // }
-            // catch
-            // {
-            //     nav.NavigateTo("");
-            // }
+       
         }
 
         private async Task GetDirectorateByID(int id)
@@ -73,22 +71,24 @@
             }
         }
 
-        private async Task GetPaginatedDirectorate(int page = 1, string ColumnName = "")
+        private async Task GetPaginatedDirectorate(int page = 1, string ColumnName = "", SortDirection sort = SortDirection.None)
         {
-            if (!string.IsNullOrEmpty(ColumnName))
+            if (!string.IsNullOrWhiteSpace(ColumnName))
             {
+                // if (sort == SortDirections.ASC)
+                //     sort = SortDirections.DESC;
+                // else
+                //     sort = SortDirections.ASC;
+
                 SelectedColumnToSort = ColumnName;
-                if (sort == SortDirections.DESC)
-                    sort = SortDirections.ASC;
-                else
-                    sort = SortDirections.DESC;
             }
 
             PaginatedDirectorate = await config.GetGridPaging<DirectorateInfo>(
                     SelectPro: 2,
                     PageNumber: page,
                     SortColumn: SelectedColumnToSort,
-                    SortDirection: sort.ToString()
+                    Search:Filter.peo_DirectorateName.ToEmptyOnNull(),
+                    SortDirection: Util.ResolveSort(sort)
                     );
         }
 
@@ -111,14 +111,15 @@
                 SPResult result = await config.InsertUpdateConfig<SPResult>(
                 SelectPro: 1,
                 ValName: SelectedDirectorate.peo_DirectorateName.ToEmptyOnNull(),
-                ValID: SelectedDirectorate.peo_dirAdminUserID,
-                ValueID: SelectedDirectorate.peo_DirectorateID);
-
+                ValID: SelectedDirectorate.peo_DirectorateID,
+                ValueID: SelectedDirectorate.peo_dirAdminUserID);
+                
                 if (result.Result == 1)
                 {
                     await GetPaginatedDirectorate();
                     Toaster.Success(".", result.MSG);
                     SelectedDirectorate = new DirectorateInfo();
+                    StateHasChanged();
                     return;
                 }
                 Toaster.Error(".", result.MSG);
@@ -127,6 +128,12 @@
             {
                 config.IsSaveClicked1 = false;
             }
+        }
+        private async Task<TableData<DirectorateInfo>> ServerReload(TableState state)
+        {
+            config.RowNumber = state.PageSize;
+            await GetPaginatedDirectorate(page: state.Page + 1, ColumnName: state.SortLabel,sort:state.SortDirection);
+            return new TableData<DirectorateInfo>() { TotalItems = PaginatedDirectorate.TotalItems, Items = PaginatedDirectorate.Items };
         }
 
         private bool EnableDisableButton()

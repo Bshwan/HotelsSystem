@@ -1,45 +1,26 @@
-﻿namespace HotelsSystem.Pages.Configs
+﻿
+namespace HotelsSystem.Pages.Configs
 {
     public partial class Config
     {
         [Inject]
-        public ISqlDataAccess DB { get; set; } = default!;
-
+        protected ISqlDataAccess DB { get; set; } = default!;
         [Inject]
-        public NavigationManager nav { get; set; } = default!;
-
+        protected IJSRuntime jSRuntime { get; set; } = default!;
         [Inject]
-        public IJSRuntime JSRuntime { get; set; } = default!;
-
+        protected IToaster Toaster { get; set; } = default!;
         [Inject]
-        public IToaster Toaster { get; set; } = default!;
+        protected NavigationManager nav { get; set; } = default!;
+        [Inject]
+        protected IDialogService DialogService { get; set; } = default!;
+
 
         private ClS_Config config = default!;
-        private SPResult? session;
 
         protected override async Task OnInitializedAsync()
         {
-            // try
-            // {
-            session = await Protection.GetDecryptedSession(JSRuntime, DB);
-
-            //if (Protection.isSessionInvalid(session))
-            //{
-            //    nav.NavigateTo("");
-            //    return;
-            //}
+            var session = await Protection.GetDecryptedSession(jSRuntime, DB);
             config = new ClS_Config(DB, session);
-
-            //if(!await config.GetPermissionInstance().AdminPer())
-            //{
-            //    nav.NavigateTo(Routing.defaultpage);
-            //    return;
-            //}
-            // }
-            // catch
-            // {
-            //     nav.NavigateTo("");
-            // }
         }
     }
 }
