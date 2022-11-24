@@ -12,9 +12,9 @@ public class ClS_UserManagement
         _db = db;
     }
 
-    public async Task<T> InsertUpdateUser<T>(int SelectPro = 0, int Code = 0, string Name = "", string FullName = "", string Password = "", bool Active = true, string Phone = "", string Note = "", int Language = 0, int WorkingPlace = 0, int PinCode = 0, string SecKey = "", int Delegate = 0, decimal SellDiscountRatio = 0, int WPWarehouse = 0, string CompanyName = "", string CompanyJob = "", string CompanyAddress = "", string CompanyEmail = "", string CompanyWebsite = "", string CompanyPhoneOne = "", string CompanyPhoneTwo = "", string CompanyPhoneThree = "", string CompanyPhoneFour = "", byte[]? RightLogo = null, byte[]? LeftLogo = null, byte[]? CenterLogo = null, byte[]? TitleLogo = null)
+    public async Task<T> InsertUpdateUser<T>(int SelectPro = 0, int ValID = 0, string UserName = "", string userFullName = "", string UserMobile="", int UserTypeID=0,int UserDirectorateID=0,int UserWorkPointID=0, string UserPassword = "", bool UserActive = true,  string Note = "", int Language = 0)
     {
-        return await _db.SaveData<T, dynamic>("pro_InsertAndUpdateUsers", new { select = SelectPro, Code = Code, Name = Name, FullName = FullName, Password = Password, Active = Active, Phone = Phone, Note = Note, Language = Language, WorkingPlace = WorkingPlace, PinCode = PinCode, SecKey = SecKey, WPWarehouse = WPWarehouse, CompanyName = CompanyName, CompanyJob = CompanyJob, CompanyAddress = CompanyAddress, CompanyEmail = CompanyEmail, CompanyWebsite = CompanyWebsite, CompanyPhoneOne = CompanyPhoneOne, CompanyPhoneTwo = CompanyPhoneTwo, CompanyPhoneThree = CompanyPhoneThree, CompanyPhoneFour = CompanyPhoneFour, Delegate = Delegate, SellDiscountRatio = SellDiscountRatio, RightLogo = RightLogo, LeftLogo = LeftLogo, CenterLogo = CenterLogo, TitleLogo = TitleLogo, CreateBy = SessionResult.Result });
+        return await _db.SaveData<T, dynamic>("pro_InsertAndUpdateUsers", new { select = SelectPro, ID = ValID, UserName = UserName, userFullName = userFullName, UserMobile= UserMobile, UserTypeID= UserTypeID, UserDirectorateID= UserDirectorateID, UserWorkPointID= UserWorkPointID, UserPassword = UserPassword, UserActive = UserActive,  Note = Note, Language = Language, CreateBy = SessionResult.Result });
     }
 
     public async Task<T> InsertDeletePermissions<T>(int SelectPro = 0, string PermissionID = "", int UsersID = 0, string GroupName = "")
@@ -25,6 +25,10 @@ public class ClS_UserManagement
     public async Task<T> Login<T>(int SelectPro = 0, string UserName = "", string UserPass = "")
     {
         return await _db.GetOneInfo<T, dynamic>("pro_Login", new { username = UserName, password = UserPass, Select = SelectPro, UserID = SessionResult.Result });
+    }
+    public async Task<PagedResult<T>> UserList<T>(int SelectPro = 1, int PageNumber = 1, int PageSize = 10,int UserTypeID=0, string FullName = "", int DirectorateID = 0, int WorkPlaceID = 0, string SortColumn = "", string SortDirection = "Asc")
+    {
+        return await _db.GetGridResult<T, dynamic>("Pro_GridUserList", SessionResult.CNSTR.ToEmptyOnNull(), new { Select = SelectPro, UserTypeID= UserTypeID, FullName = FullName, DirectorateID = DirectorateID, WorkPlaceID = WorkPlaceID, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionResult.Result }, PageNumber: PageNumber, PageSize: PageSize);
     }
 
     // public async Task<LoginSystemOptions> Login(int SelectPro = 0, string UserName = "", string UserPass = "")

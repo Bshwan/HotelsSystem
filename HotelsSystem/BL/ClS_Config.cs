@@ -28,14 +28,14 @@
             _db = db;
         }
 
-        public async Task<IEnumerable<T>> GetCMB<T>(int SelectPro = 0, int ValID = 0, int IDTwo = 0, string ValueName = "", int StoreID = 0)
+        public async Task<IEnumerable<T>> GetCMB<T>(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
         {
-            return await _db.GetDataTable<T, dynamic>("Pro_GetCMB", new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, ValueName = ValueName, StoreID = StoreID, EntryBy = SessionValue });
+            return await _db.GetDataTable<T, dynamic>("Pro_GetCMB", new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
         }
 
-        public async Task<IEnumerable<T>> GetAllInfo<T>(int SelectPro = 0, int ValID = 0, int ValueTwoID = 0, string ValueName = "", string ExpireDate = "", string ValueNameTwo = "")
+        public async Task<IEnumerable<T>> GetAllInfo<T>(int SelectPro = 0, int ValID = 0)
         {
-            return await _db.GetDataTable<T, dynamic>("Pro_GetAllInfo", new { Select = SelectPro, ID = ValID, ValueTwoID = ValueTwoID, ValueName = ValueName, ExpireDate = ExpireDate, ValueNameTwo = ValueNameTwo, EntryBy = SessionValue });
+            return await _db.GetDataTable<T, dynamic>("Pro_GetAllInfo", new { Select = SelectPro, ID = ValID,  EntryBy = SessionValue });
         }
 
         public async Task<T> GetOneInfo<T>(int SelectPro = 0, int ValID = 0, int ValueTwoID = 0, string ValueName = "", string ValueNameTwo = "", string ExpireDate = "")
@@ -53,15 +53,12 @@
             return await _db.GetGridResult<T, dynamic>("Pro_GridPaging", new { Select = SelectPro, ID = ValID, Search = Search, PageNumber = PageNumber, PageSize = RowNumber, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue }, PageNumber: PageNumber, PageSize: RowNumber, MaxNavigationPages: MaxNavigationPage);
         }
 
-        public async Task<T> InsertUpdateConfig<T>(int SelectPro = 0, int ValID = 0, string ValName = "", string ValueName = "", int ValueID = 0, decimal ValueRatio = 0, decimal Price = 0)
+        public async Task<T> InsertUpdateConfig<T>(int SelectPro = 0, int ValID = 0, string ValName = "", string ValueName = "", int ValueID = 0, int ValueIDTwo = 0)
         {
-            return await _db.SaveData<T, dynamic>("Pro_InsertUpdateConfig", new { Select = SelectPro, ID = ValID, Name = ValName, ValueName = ValueName, ValueID = ValueID, ValueRatio = ValueRatio, Price = Price, EntryBy = 1 });
+            return await _db.SaveData<T, dynamic>("Pro_InsertUpdateConfig", new { Select = SelectPro, ID = ValID, Name = ValName, ValueName = ValueName, ValueID = ValueID, ValueIDTwo = ValueIDTwo,  EntryBy = 1 });
         }
 
-        public async Task<T> HRInsertUpdateConfig<T>(int SelectPro = 0, int ValID = 0, string ValName = "", string ValueName = "", int ValueID = 0, decimal ValueRatio = 0, decimal Price = 0)
-        {
-            return await _db.SaveData<T, dynamic>("HRPro_InsertUpdateConfig", new { Select = SelectPro, ID = ValID, Name = ValName, ValueName = ValueName, ValueID = ValueID, ValueRatio = ValueRatio, Price = Price, EntryBy = 1 });
-        }
+
         // public async Task<IncomingOrderComboBox> IncomeOrderCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0, string ValueName = "", int StoreID = 0)
         // {
         //     var result = await _db.GetMultiple<AccountNamesInfo, SellFollowUPComboBox>(
