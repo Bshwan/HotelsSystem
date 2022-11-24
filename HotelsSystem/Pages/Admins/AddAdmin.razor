@@ -42,6 +42,11 @@
                             <MudSelectItem T="int" Value="2">Duhok</MudSelectItem>
                         </MudSelect>
                     </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudField Class="dense-true" Margin="Margin.Dense" Variant="Variant.Outlined">
+                            <MudCheckBox Size="Size.Small" Label="Active" @bind-Checked="@Basic_CheckBox" Color="Color.Primary"></MudCheckBox>
+                        </MudField>
+                    </div>
                     <div class="col-12">
                         <MudDivider/>
                     </div>
@@ -209,4 +214,6 @@
 
         DialogService.Show<DeleteConfirmation>("Delete", parameters, options);
     }
+    public bool Basic_CheckBox { get; set; } = false;
+
 }

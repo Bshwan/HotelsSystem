@@ -1,4 +1,6 @@
+@inject IStringLocalizer<App> L;
 <MudDialog ClassActions="px-5 pb-4">
+    
     <DialogContent>
         <MudTabs Elevation="0" Color="Color.Primary" Rounded="true" ApplyEffectsToContainer="true" PanelClass="py-3">
             <MudTabPanel Text="Hotel Informations">
@@ -22,7 +24,7 @@
                         <MudTextField Margin="@Margin.Dense" @bind-Value="TextValue" Label="Number" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
-                        <MudField  Label="Stars" Margin="@Margin.Dense" Variant="Variant.Outlined">
+                        <MudField Label="Stars" Margin="@Margin.Dense" Variant="Variant.Outlined">
                             <MudRating SelectedValue="0" />
                         </MudField>
                     </div>
@@ -56,7 +58,7 @@
         </MudTabs>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton OnClick="Cancel">@L["cancel"]</MudButton>
         <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
     </DialogActions>
 </MudDialog>

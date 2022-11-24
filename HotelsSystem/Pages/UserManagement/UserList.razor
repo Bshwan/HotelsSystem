@@ -1,5 +1,3 @@
-@inject IDialogService DialogService
-@inject NavigationManager navigate
 @page "/users"
 
 <div class="row gx-2 gy-3">
@@ -8,7 +6,7 @@
     </div>
     <MudDivider/>
     <div class="col-12 d-flex">
-        <MudButton OnClick="@(()=>navigate.NavigateTo("addUser"))" StartIcon="@Icons.Material.Filled.PersonAdd" Variant="Variant.Filled" Color="Color.Primary">Add User</MudButton>
+        <MudButton OnClick="@(()=>nav.NavigateTo("addUser"))" StartIcon="@Icons.Material.Filled.PersonAdd" Variant="Variant.Filled" Color="Color.Primary">Add User</MudButton>
     </div>
     <div class="col-12">
         <MudTable Outlined="true" Elevation="0" Items="@Elements" Dense="@dense" Hover="true" ReadOnly="@ronly" CanCancelEdit="true" Filter="new Func<Element,bool>(FilterFunc)"
@@ -90,18 +88,7 @@
     private TableEditTrigger editTrigger = TableEditTrigger.RowClick;
     private List<Element> Elements = new List<Element>();
 
-    protected override async Task OnInitializedAsync(){
-        for (int i = 0; i < 10; i++){
-            Elements.Add(new Element{
-                Name="name"+i.ToString(),
-                Sign="$",
-                Molar=100*i,
-                Number=i,
-                Position=100
-            });
-        }
-        @* Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable"); *@
-    }
+   
 
     private void ClearEventLog(){
         editEvents.Clear();

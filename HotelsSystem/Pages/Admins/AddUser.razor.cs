@@ -9,4 +9,6 @@ public partial class AddUser
     protected IToaster Toaster { get; set; } = default!;
     [Inject]
     protected NavigationManager nav { get; set; } = default!;
+    [Inject]
+    protected IDialogService DialogService{get;set;}=default!;
 }

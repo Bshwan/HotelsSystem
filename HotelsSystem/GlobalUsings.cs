@@ -22,3 +22,5 @@ global using System.Data;
 global using System.IO.Compression;
 global using System.Linq;
 global using System.Text;
+global using HotelsSystem.BL;
+global using MudBlazor;
