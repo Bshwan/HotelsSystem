@@ -1,0 +1,13 @@
+@inject IConfiguration Configuration;
+@inject IStringLocalizer<App> L;
+@if(cultures != null)
+
+{
+    <MudMenu Icon="@Icons.Material.Filled.Language" IconColor="Color.Inherit" Class="white-text" ActivationEvent="@MouseEvent.MouseOver">
+        <ChildContent>
+            <MudMenuItem><a @onclick="@(()=> RequestCultureChange("en-US",1))">English</a></MudMenuItem>
+            <MudMenuItem><a @onclick="@(()=> RequestCultureChange("ku-Arab",2))">کوردی</a></MudMenuItem>
+            <MudMenuItem><a @onclick="@(()=> RequestCultureChange("ar-IQ",3))">عربي</a></MudMenuItem>
+        </ChildContent>
+    </MudMenu>
+}

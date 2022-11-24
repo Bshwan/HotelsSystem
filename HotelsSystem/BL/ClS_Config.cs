@@ -38,9 +38,9 @@
             return await _db.GetDataTable<T, dynamic>("Pro_GetAllInfo", new { Select = SelectPro, ID = ValID,  EntryBy = SessionValue });
         }
 
-        public async Task<T> GetOneInfo<T>(int SelectPro = 0, int ValID = 0, int ValueTwoID = 0, string ValueName = "", string ValueNameTwo = "", string ExpireDate = "")
+        public async Task<T> GetOneInfo<T>(int SelectPro = 0, int ValID = 0)
         {
-            return await _db.GetOneInfo<T, dynamic>("Pro_GetAllInfo", new { Select = SelectPro, ID = ValID, ValueTwoID = ValueTwoID, ValueName = ValueName, ValueNameTwo = ValueNameTwo, ExpireDate = ExpireDate, EntryBy = SessionValue });
+            return await _db.GetOneInfo<T, dynamic>("Pro_GetAllInfo", new { Select = SelectPro, ID = ValID,  EntryBy = SessionValue });
         }
 
         public async Task<IEnumerable<T>> GetGrid<T>(int SelectPro = 0, int ValID = 0, string Search = "")
