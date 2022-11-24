@@ -1,0 +1,20 @@
+﻿@inherits LayoutComponentBase
+
+<PageTitle>HotelsSystem</PageTitle>
+<Sotsera.Blazor.Toaster.ToastContainer></Sotsera.Blazor.Toaster.ToastContainer>
+<MudThemeProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>

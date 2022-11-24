@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@namespace HotelsSystem.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+    <link href="_content/Blazored.Modal/blazored-modal.css" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <link href="_content/Sotsera.Blazor.Toaster/toastr.min.css" rel="stylesheet" />
+    
+    <component type="typeof(HeadOutlet)" render-mode="Server" />
+</head>
+<body>
+    <fluent-design-system-provider use-defaluts>
+        @RenderBody()
+    </fluent-design-system-provider>
+    <script src="_content/Blazored.Modal/blazored.modal.js"></script>
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
+    <script src="~/js/Jquery.js"></script>
+    <script src="~/js/Util.js"></script>
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>

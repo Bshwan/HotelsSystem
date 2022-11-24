@@ -1,0 +1,26 @@
+﻿@layout EmptyLayout
+@page "/"
+@inject IStringLocalizer<App> L
+
+<PageTitle>@L["login"]</PageTitle>
+
+<div class="row py-5 gx-0">
+    <div class="col-sm-12 col-lg-6 col-xl-4 my-5">
+        <form class="p-3">
+            <h4>@L["login"]</h4>
+
+            <EditForm Model=Credentials OnValidSubmit=@(async()=>await login())>
+                <DataAnnotationsValidator></DataAnnotationsValidator>
+
+                <input class="w-100 mb-3" @bind=Credentials.UserName @bind:event="oninput"/>
+                <ValidationMessage For=@(()=>Credentials.UserName)></ValidationMessage>
+
+                <input class="w-100" type="password" @bind=Credentials.Password @bind:event="oninput" />
+                <ValidationMessage For=@(()=>Credentials.Password)></ValidationMessage>
+
+                <input appearance="accent" class="w-100" type="submit" />
+                
+            </EditForm>
+        </form>
+    </div>
+</div>

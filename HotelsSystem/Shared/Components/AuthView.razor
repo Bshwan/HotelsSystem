@@ -1,0 +1,96 @@
+﻿@if (HasPermission)
+@*@if (ints.All((x)=>SplittedInts.Any((y)=>y==x)))*@
+@*@if (ints.Any((x)=>ids.Any((y)=>y==x)))*@
+{
+    @ChildContent
+}
+@code {
+
+
+    [Inject]
+    public NavigationManager nav { get; set; }=default!;
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }=default!;
+
+    [Parameter, EditorRequired]
+    public SPResult Roles { get; set; }=default!;
+
+    [Parameter]
+    public string PermissionName { get; set; }="";
+
+    [Parameter]
+    public bool ShouldRedirectOnFalse { get; set; } = true;
+
+    [Parameter]
+    public List<bool> AdditionalPermissions { get; set; } = new List<bool>();
+
+    [Parameter]
+    public bool ShouldHaveAllPermissions { get; set; } = false;
+
+    [Parameter]
+    public PermissionPriorities PermissionPriority { get; set; } = PermissionPriorities.Both;
+
+    public enum PermissionPriorities { Both, Either };
+
+    bool rendered;
+    bool HasPermission;
+
+    protected override void OnInitialized()
+    {
+        Uri uri = new Uri(nav.Uri);
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (rendered == true)
+            return;
+
+        string uri = new Uri(nav.Uri).AbsolutePath.Replace("/", "");
+
+        if (string.IsNullOrWhiteSpace(PermissionName))
+            PermissionName = uri;
+
+        var FindPermission = Permissions.AllPermissions.Where(x =>
+        x.PermissionName.ToEmptyOnNull().Equals(PermissionName, StringComparison.OrdinalIgnoreCase));
+
+        if (FindPermission!=null && FindPermission.Any())
+        {
+            if (!ShouldHaveAllPermissions)
+            {
+                HasPermission = FindPermission.First().PermissionsID.Any(x => Roles.Roles.Any(y => y == x));
+            }
+            else
+            {
+                HasPermission = FindPermission.First().PermissionsID.All(x => Roles.Roles.Any(y => y == x));
+            }
+            if (AdditionalPermissions.Any())
+            {
+                if (PermissionPriority == PermissionPriorities.Both)
+                {
+                    HasPermission = HasPermission &&  AdditionalPermissions.All(x => x == true);
+                }
+                else if (PermissionPriority == PermissionPriorities.Either)
+                {
+                    HasPermission = HasPermission || AdditionalPermissions.All(x => x == true);
+                }
+            }
+            if (!HasPermission && ShouldRedirectOnFalse)
+            {
+
+                Log.Error("User {userID} Tried to Access {uri}. Redirecting", Roles.Result.ToString(), uri);
+                nav.NavigateTo(Routing.defaultpage);
+            }
+        }
+        else
+        {
+            HasPermission = false;
+                Log.Error("No Permission Found: {name}", PermissionName);
+
+            nav.NavigateTo(Routing.defaultpage);
+        }
+
+        rendered = true;
+    }
+
+}
