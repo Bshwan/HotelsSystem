@@ -127,18 +127,18 @@
             return new TableData<WorkingPointInfo>() { TotalItems = PaginatedWorkPoint.TotalItems, Items = PaginatedWorkPoint.Items };
         }
 
-        private string ValidateUser(UserInfo val)
-        {
-            if (val.peo_UserID <= 0)
-                return L["required"];
-            return null!;
-        }
+        // private string ValidateUser(UserInfo val)
+        // {
+        //     if (val.peo_UserID <= 0)
+        //         return L["required"];
+        //     return null!;
+        // }
         
-        private string ValidateDirectorate(DirectorateInfo val)
-        {
-            if (val.peo_DirectorateID <= 0)
-                return L["required"];
-            return null!;
-        }
+        // private string ValidateDirectorate(DirectorateInfo val)
+        // {
+        //     if (val.peo_DirectorateID <= 0)
+        //         return L["required"];
+        //     return null!;
+        // }
     }
 }

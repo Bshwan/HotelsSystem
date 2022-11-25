@@ -1,5 +1,5 @@
 @page "/addUser/{HashID}"
-
+@inject IStringLocalizer<App> L;
 <div class="row gy-3 gx-2">
     <div class="col-12">
         <h4>Add User</h4>
@@ -7,18 +7,19 @@
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
             <MudTabPanel Text="General Informations">
+                <MudForm @ref="AddUserForm">
                 <div class="row gy-3 gx-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label="Name *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label="Name" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_userFullName" Label="Name *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_userFullName" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserMobile" Label="Mobile *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserMobile" Label="Mobile" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Margin="@Margin.Dense" Dense="true" InputType="InputType.Password" @bind-Value="SelectedUser.peo_UserPassword" Label="Password *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" InputType="InputType.Password" @bind-Value="SelectedUser.peo_UserPassword" Label="Password *" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudSelect ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
@@ -30,41 +31,90 @@
                             }
                         </MudSelect>
                     </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete T="DirectorateInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchDirectorate"
+                         Clearable="true"
+                         Required="true"
+                         OnlyValidateIfDirty="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new DirectorateInfo(){peo_DirectorateName=SelectedUser.peo_DirectorateName,peo_DirectorateID=SelectedUser.peo_DirectorateID})"
+                         Text="@SelectedUser.peo_DirectorateName"
+                         Validation="@(new Func<DirectorateInfo, string>((e)=>e.ValidateField<DirectorateInfo>("peo_DirectorateID")))"
+                         ValueChanged="@(async(e)=>await OnDirectorateChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
+                         CoerceText="@true"
+                         CoerceValue="true"
+                         Label="Directorate"
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
+                         Placeholder="Directorate" />
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete T="WorkingPointInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchWorkpoint"
+                         Clearable="true"
+                         Required="true"
+                         OnlyValidateIfDirty="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new WorkingPointInfo(){wp_workpointName=SelectedUser.wp_workpointName,wp_ID=SelectedUser.peo_UserWorkPoint})"
+                         Text="@SelectedUser.wp_workpointName"
+                         Validation="@(new Func<WorkingPointInfo, string>((e)=>e.ValidateField<WorkingPointInfo>("wp_ID")))"
+                         ValueChanged="OnWorkpointChange"
+                         ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
+                         CoerceText="@true"
+                         CoerceValue="true"
+                         Label="Workpoint"
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
+                         Placeholder="Workpoint" />
+                    </div>
                     <div class="col-12">
                         <MudDivider/>
                     </div>
                     <div class="col-12 d-flex justify-content-end">
-                        <MudButton Class="me-2" StartIcon="@Icons.Material.Filled.Cancel" IconColor="Color.Error" Variant="Variant.Filled">Cancel</MudButton>
-                        <MudButton StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Primary">Save</MudButton>
+                        <MudButton Class="me-2" Href="@Routing.userlist" StartIcon="@Icons.Material.Filled.Cancel" IconColor="Color.Error" Variant="Variant.Filled">Cancel</MudButton>
+                        <MudButton OnClick="@InsertUpdateUser" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Primary">Save</MudButton>
                     </div>
                 </div>
+                </MudForm>
             </MudTabPanel>
             <MudTabPanel Text="Roles">
                 <div class="row g-3 m-0 w-100">
+                    <MudForm @ref="AddGroupForm">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Clearable T="string" Label="Roles" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                        <MudAutocomplete DebounceInterval="ClS_Config.debounce"
+                        ResetValueOnEmptyText="true"
+                        CoerceText="@true"
+                        CoerceValue="true"
+                        Clearable="true"
+                        Text="@SelectedGroup.group_Name"
+                        Value="@(new GroupInfo{group_ID=SelectedGroup.group_ID,group_Name=SelectedGroup.group_Name})"
+                        ValueChanged="OnGroupChange"
+                        Validation="@(new Func<GroupInfo, string>((e)=>e.ValidateField<GroupInfo>("group_ID")))"
+                        ToStringFunc="@(e=>e==null?"":e.group_Name)"
+                        T="GroupInfo"
+                        Label="Roles" 
+                        Required="true" 
+                        SearchFunc="SearchGroups"
+                        Margin="@Margin.Dense" 
+                        Dense="true" 
+                        Variant="Variant.Outlined"/>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
-                        <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
+                        <MudIconButton OnClick="InsertUpdateGroup" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
                     </div>
+                    </MudForm>
                     <div class="col-12">
-                        <MudTable Dense="true" Elevation="0" Items="@Elements.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm">
+                        <MudTable Dense="true" T="GroupInfo" Elevation="0" Items="@(combos.Groups.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
-                                <MudTh>Nr</MudTh>
-                                <MudTh>Sign</MudTh>
                                 <MudTh>Name</MudTh>
-                                <MudTh>Position</MudTh>
-                                <MudTh>Molar mass</MudTh>
                                 <MudTh></MudTh>
                             </HeaderContent>
                             <RowTemplate>
-                                <MudTd DataLabel="Nr">@context.Number</MudTd>
-                                <MudTd DataLabel="Sign">@context.Sign</MudTd>
-                                <MudTd DataLabel="Name">@context.Name</MudTd>
-                                <MudTd DataLabel="Position">@context.Position</MudTd>
-                                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+                                <MudTd DataLabel="Nr">@context.group_Name</MudTd>
                                 <MudTd Class="text-end">
-                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
+                                    <MudIconButton OnClick="@(async()=>await DeleteGroup(context.per_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
                                 </MudTd>
                             </RowTemplate>
                         </MudTable>
@@ -73,30 +123,40 @@
             </MudTabPanel>
             <MudTabPanel Text="Privileges">
                 <div class="row g-3 m-0 w-100">
+                    <MudForm @ref="AddPrivilageForm">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudAutocomplete Clearable T="string" Label="Privileges" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                    </div>
+                    <MudAutocomplete DebounceInterval="ClS_Config.debounce"
+                        ResetValueOnEmptyText="true"
+                        CoerceText="true"
+                        CoerceValue="true"
+                        Clearable="true"
+                        Text="@SelectedPrivilage.dap_Name"
+                        Value="@(new DataAccessPermissions{dap_ID=SelectedPrivilage.dap_ID,dap_Name=SelectedPrivilage.dap_Name})"
+                        ValueChanged="OnPrivilageChange"
+                        Validation="@(new Func<DataAccessPermissions, string>((e)=>e.ValidateField<DataAccessPermissions>("dap_ID")))"
+                        ToStringFunc="@(e=>e==null?"":e.dap_Name)"
+                        T="DataAccessPermissions"
+                        Label="Privilage" 
+                        Required="true" 
+                        SearchFunc="SearchPrivilages"
+                        Margin="@Margin.Dense" 
+                        Dense="true" 
+                        Variant="Variant.Outlined"/>                    
+                        </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
-                        <MudIconButton Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
+                        <MudIconButton OnClick="InsertUpdatePrivilage" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
                     </div>
+                    </MudForm>
                     <div class="col-12">
-                        <MudTable Dense="true" Elevation="0" Items="@Elements.Take(4)" Hover="true" Breakpoint="Breakpoint.Sm">
+                        <MudTable Dense="true" T="DataAccessPermissions" Elevation="0" Items="@(combos.Permissions.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
-                                <MudTh>Nr</MudTh>
-                                <MudTh>Sign</MudTh>
                                 <MudTh>Name</MudTh>
-                                <MudTh>Position</MudTh>
-                                <MudTh>Molar mass</MudTh>
                                 <MudTh></MudTh>
                             </HeaderContent>
                             <RowTemplate>
-                                <MudTd DataLabel="Nr">@context.Number</MudTd>
-                                <MudTd DataLabel="Sign">@context.Sign</MudTd>
-                                <MudTd DataLabel="Name">@context.Name</MudTd>
-                                <MudTd DataLabel="Position">@context.Position</MudTd>
-                                <MudTd DataLabel="Molar mass">@context.Molar</MudTd>
+                                <MudTd DataLabel="Nr">@context.dap_Name</MudTd>
                                 <MudTd Class="text-end">
-                                    <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
+                                    <MudIconButton OnClick="@(async()=>await DeletePrivilage(context.dap_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
                                 </MudTd>
                             </RowTemplate>
                         </MudTable>
@@ -106,50 +166,3 @@
         </MudTabs>
     </div>
 </div>
-
-@code {
-    public string TextValue { get; set; }
-    private List<Element> Elements = new List<Element>();
-
-    protected override async Task OnInitializedAsync(){
-        for (int i = 0; i < 10; i++){
-            Elements.Add(new Element{
-                Name="name"+i.ToString(),
-                Sign="$",
-                Molar=100*i,
-                Number=i,
-                Position=100
-            });
-        }
-        @* Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable"); *@
-    }
-    private string value1;
-    private string[] states = {
-        "Alabama", "Alaska", "American Samoa", "Arizona",
-        "Arkansas", "California", "Colorado", "Connecticut",
-        "Delaware", "District of Columbia", "Federated States of Micronesia",
-        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
-        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-        "Louisiana", "Maine", "Marshall Islands", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
-        "Missouri", "Montana", "Nebraska", "Nevada",
-        "New Hampshire", "New Jersey", "New Mexico", "New York",
-        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
-        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
-        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
-        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
-        "Washington", "West Virginia", "Wisconsin", "Wyoming",
-    };
-    private string[] langs = {
-        "Kurdish", "Arabic","English",
-    };
-    private async Task<IEnumerable<string>> Search1(string value) {
-        // In real life use an asynchronous function for fetching data from an api.
-        await Task.Delay(5);
-
-        // if text is null or empty, show complete list
-        if (string.IsNullOrEmpty(value))
-            return states;
-        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
-    }
-}

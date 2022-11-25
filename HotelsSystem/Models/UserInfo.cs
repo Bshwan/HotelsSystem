@@ -12,6 +12,7 @@ public class UserInfo
     public string? peo_DirectorateName { get; set; } 
     public string? peo_UserPassword { get; set; }
     public string? wp_workpointName { get; set; }
+    public int peo_UserWorkPoint { get; set; }
 
     public string? Us_password { get; set; }
     public bool peo_UserActive { get; set; } = true;

@@ -16,10 +16,15 @@ public partial class AddUser
 
     int UserID;
     UserInfo SelectedUser = new UserInfo();
+    GroupInfo SelectedGroup = new GroupInfo();
+    DataAccessPermissions SelectedPrivilage=new DataAccessPermissions();
     ClS_UserManagement mgmt = default!;
     ClS_Config config = default!;
     MyFunctions.myLogin.MyFunctions func = new MyFunctions.myLogin.MyFunctions();
-    UserCombos combos=new UserCombos();
+    UserCombos combos = new UserCombos();
+    MudForm? AddGroupForm;
+    MudForm? AddPrivilageForm;
+    MudForm? AddUserForm;
 
     protected override async Task OnParametersSetAsync()
     {
@@ -44,11 +49,176 @@ public partial class AddUser
             SelectedUser.peo_UserPassword = func.decr_pass(SelectedUser.peo_UserPassword);
         }
     }
-    async Task GetCombos(){
-        combos=await mgmt.UserCombos(SelectPro:1,ValID:SelectedUser.peo_UserID);
-        // System.Console.WriteLine(Util.SelectByID<LanguageInfo>(SelectedUser.peo_Language,"lang_ID","lang_Name",combos.Languages).lang_Name);
-        // var c=Util.SelectByID<LanguageInfo>(1,"lang_ID","lang_Name",combos.Languages);
-        // System.Console.WriteLine(c.Count());
-        // System.Console.WriteLine(c.First().lang_Name);
+    async Task GetCombos()
+    {
+        combos = await mgmt.UserCombos(SelectPro: 1, ValID: SelectedUser.peo_UserID);
+    }
+    async Task GetGroups()
+    {
+        combos.Groups = await config.GetCMB<GroupInfo>(SelectPro: 2, ValID: SelectedUser.peo_UserID);
+    }
+    async Task GetPrivilages()
+    {
+        combos.Permissions = await config.GetCMB<DataAccessPermissions>(SelectPro: 3, ValID: SelectedUser.peo_UserID);
+    }
+    async Task<IEnumerable<GroupInfo>> SearchGroups(string e)
+    {
+        return await Task.FromResult(combos.Groups.SearchAll<GroupInfo>(e, "group_Name").Where(x => x.HasRole == 0));
+    }
+    async Task<IEnumerable<DataAccessPermissions>> SearchPrivilages(string e)
+    {
+        return await Task.FromResult(combos.Permissions.SearchAll<DataAccessPermissions>(e, "dap_Name").Where(x => x.HasRole == 0));
+    }
+    async Task<IEnumerable<DirectorateInfo>> SearchDirectorate(string e)
+    {
+        return await Task.FromResult(combos.Directorates.SearchAll<DirectorateInfo>(e, "peo_DirectorateName"));
+    }
+    async Task<IEnumerable<WorkingPointInfo>> SearchWorkpoint(string e)
+    {
+        return await Task.FromResult(combos.WorkingPoints.SearchAll<WorkingPointInfo>(e, "wp_workpointName"));
+    }
+    async Task OnDirectorateChange(DirectorateInfo e)
+    {
+        SelectedUser.wp_workpointName = string.Empty;
+        SelectedUser.peo_UserWorkPoint = 0;
+        combos.WorkingPoints = Enumerable.Empty<WorkingPointInfo>();
+
+        if (e == null)
+        {
+            SelectedUser.peo_DirectorateName = string.Empty;
+            SelectedUser.peo_DirectorateID = 0;
+            return;
+        }
+
+        SelectedUser.peo_DirectorateName = e.peo_DirectorateName;
+        SelectedUser.peo_DirectorateID = e.peo_DirectorateID;
+
+        combos.WorkingPoints = await config.GetCMB<WorkingPointInfo>(SelectPro: 5, ValID: e.peo_DirectorateID);
+    }
+    void OnWorkpointChange(WorkingPointInfo e)
+    {
+        if (e == null)
+        {
+            SelectedUser.wp_workpointName = string.Empty;
+            SelectedUser.peo_UserWorkPoint = 0;
+            return;
+        }
+        SelectedUser.wp_workpointName = e.wp_workpointName;
+        SelectedUser.peo_UserWorkPoint = e.wp_ID;
+    }
+    void OnGroupChange(GroupInfo e)
+    {
+        if (e == null)
+            SelectedGroup = new GroupInfo();
+        else
+            SelectedGroup = e;
+    }
+    void OnPrivilageChange(DataAccessPermissions e)
+    {
+        if (e == null)
+            SelectedPrivilage=new DataAccessPermissions();
+        else
+            SelectedPrivilage = e;
+    }
+    async Task InsertUpdateUser()
+    {
+        await AddUserForm!.Validate();
+        if (!AddUserForm.IsValid)
+            return;
+
+        SPResult result = await mgmt.InsertUpdateUser<SPResult>(
+            SelectPro: 1,
+            ValID: SelectedUser.peo_UserID,
+            UserTypeID: SelectedUser.peo_UserTypeID,
+            UserName: SelectedUser.peo_UserName.ToEmptyOnNull(),
+            userFullName: SelectedUser.peo_userFullName.ToEmptyOnNull(),
+            UserMobile: SelectedUser.peo_UserMobile.ToEmptyOnNull(),
+            UserDirectorateID: SelectedUser.peo_DirectorateID,
+            UserWorkPointID: SelectedUser.peo_UserWorkPoint,
+            UserPassword: func.encr_pass(SelectedUser.peo_UserPassword),
+            UserActive: SelectedUser.peo_UserActive,
+            Language: SelectedUser.peo_Language);
+
+        if (result.Result == 1)
+        {
+            if (int.TryParse(result.LastValue, out int val) && val > 0)
+                nav.NavigateTo(Go.To(Routing.adduser, val));
+            else
+                await GetUserByID();
+
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
+
+    }
+
+    async Task InsertUpdateGroup()
+    {
+        await AddGroupForm!.Validate();
+        if (!AddGroupForm.IsValid)
+            return;
+
+        SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
+            SelectPro: 6,
+            PermissionID: SelectedGroup.group_ID.ToString(),
+            UsersID: SelectedGroup.group_ID);
+
+        if (result.Result == 1)
+        {
+            await GetGroups();
+            SelectedGroup=new GroupInfo();
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
+    }
+    async Task DeleteGroup(int id)
+    {
+        SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
+            SelectPro: 7,
+            PermissionID: id.ToString());
+
+        if (result.Result == 1)
+        {
+            await GetGroups();
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
+    }
+    async Task InsertUpdatePrivilage()
+    {
+        await AddPrivilageForm!.Validate();
+        if (!AddPrivilageForm.IsValid)
+            return;
+
+        SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
+            SelectPro: 2,
+            PermissionID: SelectedPrivilage.dap_ID.ToString(),
+            UsersID: SelectedUser.peo_UserID);
+
+        if (result.Result == 1)
+        {
+            await GetPrivilages();
+            SelectedPrivilage=new DataAccessPermissions();
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
+    }
+    async Task DeletePrivilage(int id)
+    {
+        SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
+            SelectPro: 3,
+            PermissionID: id.ToString());
+
+        if (result.Result == 1)
+        {
+            await GetPrivilages();
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
     }
 }

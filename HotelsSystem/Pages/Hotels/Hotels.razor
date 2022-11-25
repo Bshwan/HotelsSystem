@@ -1,33 +1,29 @@
-@inject IDialogService DialogService
-@using HotelsSystem.Models
-@using HotelsSystem.Shared.Modals
-@inject NavigationManager navigate
-@page "/"
+@inject IStringLocalizer<App> L;
+@page "/Hotels"
 
 <div class="row gx-2 gy-3">
     <div class="col-12">
-        <h4>Hotels List</h4>
+        <h4>@L["hotel-list"]</h4>
     </div>
     <MudDivider/>
     <div class="col-12 d-flex">
-        <MudButton @onclick="OpenDialog" StartIcon="@Icons.Material.Filled.DomainAdd" Variant="Variant.Filled" Color="Color.Primary">Add Hotel</MudButton>
+        <MudButton @onclick="OpenDialog" StartIcon="@Icons.Material.Filled.DomainAdd" Variant="Variant.Filled" Color="Color.Primary">@L["hotel-list"]</MudButton>
     </div>
     <div class="col-12">
-        <MudTable Outlined="true" Elevation="0" Items="@Elements" Dense="true" Hover="true" ReadOnly="true" Filter="new Func<Element,bool>(FilterFunc)"
-          @bind-SelectedItem="selectedItem1" SortLabel="Sort By">
+        <MudTable Outlined="true" Elevation="0" Dense="true" Hover="true" ReadOnly="true" SortLabel="Sort By">
             <ToolBarContent>
-                <MudText Typo="Typo.h6">Hotels List</MudText>
+                <MudText Typo="Typo.h6">@L["hotel-list"]</MudText>
                 <MudSpacer />
                 <MudSpacer />
                 <MudSpacer />
                 <MudSpacer />
-                <MudTextField @bind-Value="searchString" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                <MudTextField @bind-Value="searchString" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="@L["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             </ToolBarContent>
             <HeaderContent>
-                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">Name</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Number)">Starts</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Sign)">Rooms</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Position)">Location</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">@L["name"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Number)">@L["stars"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Sign)">@L["rooms"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Position)">@L["location"]</MudTableSortLabel></MudTh>
                 @* <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Molar)">Mass</MudTableSortLabel></MudTh> *@
             </HeaderContent>
             <RowTemplate>
@@ -46,44 +42,3 @@
         </MudTable>
     </div>
 </div>
-
-@code {
-    private bool blockSwitch = false;
-    private string searchString = "";
-    private Element selectedItem1 = null;
-    private HashSet<Element> selectedItems1 = new HashSet<Element>();
-    private List<Element> Elements = new List<Element>();
-
-    protected override async Task OnInitializedAsync() {
-        for (int i = 1; i <= 10; i++){
-            Elements.Add(new Element{
-                Name=i.ToString()+" rooms",
-                Sign="$",
-                Molar=100*i,
-                Number=i,
-                Position=100
-            });
-        }
-        @* Elements = await httpClient.GetFromJsonAsync<List<Element>>("webapi/periodictable"); *@
-    }
-
-    private bool FilterFunc(Element element){
-        if (string.IsNullOrWhiteSpace(searchString))
-            return true;
-        if (element.Sign.Contains(searchString, StringComparison.OrdinalIgnoreCase))
-            return true;
-        if (element.Name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
-            return true;
-        if ($"{element.Number} {element.Position} {element.Molar}".Contains(searchString))
-            return true;
-        return false;
-    }
-    private void OpenDialog(){
-		var options = new DialogOptions {
-            CloseOnEscapeKey = true,
-            CloseButton = true,
-            Position = DialogPosition.TopCenter,
-        };
-        DialogService.Show<AddHotel>("Simple Dialog", options);
-    }
-}

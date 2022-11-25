@@ -1,10 +1,10 @@
 namespace HotelsSystem.Data;
 public static class EnumExtentions
 {
-    public static async Task<IEnumerable<T>> SearchAll<T>(this IEnumerable<T> data, string value, string ColumnName)
+    public static IEnumerable<T> SearchAll<T>(this IEnumerable<T> data, string value, string ColumnName)
     {
         var SearchedData = data.Where(x => x!.GetType()!.GetProperty(ColumnName)!.GetValue(x)!.ToString().ToEmptyOnNull().ContainsIgnoreCase(value.ToEmptyOnNull()));
-        return await Task.FromResult(SearchedData);
+        return SearchedData;
     }
     public static T SelectByID<T>(this IEnumerable<T> data, int id, string FindByColumn)
     {

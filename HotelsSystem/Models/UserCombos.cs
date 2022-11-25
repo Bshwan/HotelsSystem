@@ -6,4 +6,5 @@ public class UserCombos{
     public IEnumerable<LanguageInfo> Languages=Enumerable.Empty<LanguageInfo>();
     public IEnumerable<DirectorateInfo> Directorates=Enumerable.Empty<DirectorateInfo>();
     public IEnumerable<UserTypesInfo> UserTypes=Enumerable.Empty<UserTypesInfo>();
+    public IEnumerable<WorkingPointInfo> WorkingPoints=Enumerable.Empty<WorkingPointInfo>();
 }
