@@ -32,12 +32,28 @@
     <Reference Include="Extentions">
       <HintPath>DLLs\Extentions.dll</HintPath>
     </Reference>
+    <Reference Include="MyFunctions">
+      <HintPath>DLLs\MyFunctions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="wwwroot\css\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\App.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>App.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
 	<ItemGroup>
+    <Compile Update="Resources\App.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>App.resx</DependentUpon>
+    </Compile>
   
     <EmbeddedResource Update="Resources\App.ar.resx">
     </EmbeddedResource>
