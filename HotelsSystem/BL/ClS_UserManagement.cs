@@ -17,7 +17,7 @@ public class ClS_UserManagement
         return await _db.SaveData<T, dynamic>("Pro_InsertUpdateUser", new { select = SelectPro, ID = ValID, UserName = UserName, userFullName = userFullName, UserMobile= UserMobile, UserTypeID= UserTypeID, UserDirectorateID= UserDirectorateID, UserWorkPointID= UserWorkPointID, UserPassword = UserPassword, UserActive = UserActive,  Note = Note, Language = Language, EntryBy = SessionValue });
     }
 
-    public async Task<T> InsertDeletePermissions<T>(int SelectPro = 0, string PermissionID = "", int UsersID = 0, string GroupName = "")
+    public async Task<T> InsertDeletePermissions<T>(int SelectPro = 0, int PermissionID = 0, int UsersID = 0, string GroupName = "")
     {
         return await _db.SaveData<T, dynamic>("Pro_InsertDeletePermissions", new { Type = SelectPro, PermissionID = PermissionID, UserID = UsersID, GroupName = GroupName, EntryBy = SessionValue });
     }

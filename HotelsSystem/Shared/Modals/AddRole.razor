@@ -1,60 +1,56 @@
 <MudDialog ClassActions="px-5 pb-4">
     <DialogContent>
+        @if(config!=null){
+
         <div class="row gy-3 gx-2">
-            <div class="col-12 d-flex align-items-center">
-                <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Required Variant="Variant.Outlined"></MudTextField>
-            </div>
-            <div class="col-12 d-flex align-items-center">
-                <MudAutocomplete Clearable T="string" Label="Privilege Name" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                <MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
-            </div>
+            @*  <div class="col-12 d-flex align-items-center">
+            <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="TextValue" Label="Name" Required Variant="Variant.Outlined"></MudTextField>
+            </div>*@
+            <MudForm @ref="AddForm">
+
+                <div class="col-12 d-flex align-items-center">
+                    <MudAutocomplete T="PermissionsPerGroups" DebounceInterval="ClS_Config.debounce"
+                                     SearchFunc="@SearchPermission"
+                                     Clearable="true"
+                                     Required="true"
+                                     ResetValueOnEmptyText="true"
+                                     Value="@(new PermissionsPerGroups(){peo_DataRole=SelectedPermission.peo_DataRole,peo_DataRoleID=SelectedPermission.peo_DataRoleID})"
+                                     Text="@SelectedPermission.peo_DataRole"
+                                     Validation="@(new Func<PermissionsPerGroups, string>((e)=>e.ValidateField<PermissionsPerGroups>("peo_DataRoleID")))"
+                                     ValueChanged="@((e)=>OnPermissionChanged(e))"
+                                     ToStringFunc="@(e=>e==null?"":e.peo_DataRole)"
+                                     CoerceText="@true"
+                                     Label="Permission"
+                                     Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                                     AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
+                                     Placeholder="Permission" />
+
+                    <MudIconButton Class="ms-2 square-btn" @onclick="@(async()=> await InsertPermission())" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" />
+                </div>
+            </MudForm>
             <div class="col-12">
                 <MudField Label="Privileges" Margin="@Margin.Dense" Variant="Variant.Outlined">
-                    <MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Text" Color="Color.Primary"/>
-                    <MudChip Disabled="true" Variant="Variant.Text" Color="Color.Primary">Primary</MudChip>
+                    @*<MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Text" Color="Color.Primary"/>*@
+                    @foreach (var per in combo)
+                    {
+                        @if(per.HasRole==1){
+                                <MudChip  Icon="@Icons.Filled.Close" @onclick="@(async()=> await DeletePermission(per.per_ID))" Variant="Variant.Text" Color="Color.Primary">@per.peo_DataRole</MudChip>
+
+                        }
+                    }
+
                 </MudField>
             </div>
             <div class="col-12">
-                <MudDivider/>
+                <MudDivider />
+
             </div>
         </div>
+        }
+
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Cancel</MudButton>
-        <MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>
+        <MudButton OnClick="Cancel">Close</MudButton>
+        @*<MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>*@
     </DialogActions>
 </MudDialog>
-
-@code{
-    public string TextValue { get; set; }
-    private string value1;
-    private string[] states = {
-        "Alabama", "Alaska", "American Samoa", "Arizona",
-        "Arkansas", "California", "Colorado", "Connecticut",
-        "Delaware", "District of Columbia", "Federated States of Micronesia",
-        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
-        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-        "Louisiana", "Maine", "Marshall Islands", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
-        "Missouri", "Montana", "Nebraska", "Nevada",
-        "New Hampshire", "New Jersey", "New Mexico", "New York",
-        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
-        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
-        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
-        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
-        "Washington", "West Virginia", "Wisconsin", "Wyoming",
-    };
-    private async Task<IEnumerable<string>> Search1(string value) {
-        // In real life use an asynchronous function for fetching data from an api.
-        await Task.Delay(5);
-
-        // if text is null or empty, show complete list
-        if (string.IsNullOrEmpty(value))
-            return states;
-        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
-    }
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
-    void Submit() => MudDialog.Close(DialogResult.Ok(true));
-    void Cancel() => MudDialog.Cancel();
-}

@@ -48,12 +48,12 @@
             combo = await config.GetCMB<UserInfo>(SelectPro: 6);
         }
 
-        private async Task<IEnumerable<UserInfo>> SearchIncomes(string val)
+        private async Task<IEnumerable<UserInfo>> SearchUser(string val)
         {
             return await Task.FromResult(combo.Where(x => x.peo_UserName.ToEmptyOnNull().Contains(val.ToEmptyOnNull())));
         }
 
-        private void OnIncomeChanged(UserInfo e)
+        private void OnUserChanged(UserInfo e)
         {
             if (e == null)
             {
