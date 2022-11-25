@@ -20,4 +20,9 @@ public class ClS_Hotels
     {
         return await _db.SaveData<T, dynamic>("Pro_InsertUpdateHotels", new { select = SelectPro, ID = ValID, HotelTypeID = HotelTypeID, HotelName = HotelName, HotelAddress = HotelAddress, StarNumber = StarNumber, NumberOfRooms= NumberOfRooms, DirectorateID = DirectorateID, WorkPointID = WorkPointID, Note = Note, EntryBy = SessionResult.Result });
     }
+
+    public async Task<T> HotelInsertUpdateHotels<T>(int SelectPro = 0, int ValID = 0,  string RoomName = "", int RoomType = 0, int FloorID = 0, string FloorName = "", int NumberOfBed = 0,string Note = "")
+    {
+        return await _db.SaveData<T, dynamic>("HTPro_InsertUpdateHotels", new { select = SelectPro, ID = ValID, RoomName = RoomName, RoomType = RoomType, FloorID = FloorID, FloorName = FloorName, NumberOfBed = NumberOfBed, Note = Note, EntryBy = SessionResult.Result });
+    }
 }

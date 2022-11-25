@@ -60,6 +60,21 @@
         }
 
 
+        public async Task<PagedResult<T>> HotelGetGridPaging<T>(int SelectPro = 0, int ValID = 0, string Search = "", int PageNumber = 1, string SortColumn = "", string SortDirection = "Asc", int MaxNavigationPage = 5, int PageSize = 10)
+        {
+            return await _db.GetGridResult<T, dynamic>("HTPro_GridPaging", new { Select = SelectPro, ID = ValID, Search = Search, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue }, PageNumber: PageNumber, PageSize: PageSize, MaxNavigationPages: MaxNavigationPage);
+        }
+
+        public async Task<IEnumerable<T>> HotelGetCMB<T>(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
+        {
+            return await _db.GetDataTable<T, dynamic>("HTPro_GetCMB", new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
+        }
+
+        public async Task<IEnumerable<T>> HotelGetAllInfo<T>(int SelectPro = 0, int ValID = 0)
+        {
+            return await _db.GetDataTable<T, dynamic>("HTPro_GetAllInfo", new { Select = SelectPro, ID = ValID, EntryBy = SessionValue });
+        }
+
         // public async Task<IncomingOrderComboBox> IncomeOrderCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0, string ValueName = "", int StoreID = 0)
         // {
         //     var result = await _db.GetMultiple<AccountNamesInfo, SellFollowUPComboBox>(
