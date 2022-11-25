@@ -13,7 +13,7 @@ public partial class UserList
     [Inject]
     protected IDialogService DialogService { get; set; } = default!;
 
-    PagedResult<UserInfo> PaginatedUsers = PagedResult<UserInfo>.EmptyPagedResult();
+    PagedResult<UserInfo> PaginatedItems = PagedResult<UserInfo>.EmptyPagedResult();
     // SortDirection sort = SortDirection.Descending;
     ClS_UserManagement mgmt = default!;
     ClS_Config config = default!;
@@ -28,9 +28,9 @@ public partial class UserList
         config = new ClS_Config(DB, session);
         // await GetPaginatedUsers();
     }
-    private async Task<TableData<UserInfo>> GetPaginatedUsers(TableState state)
+    private async Task<TableData<UserInfo>> GetPaginatedItems(TableState state)
     {
-        PaginatedUsers = await mgmt.UserList<UserInfo>(
+        PaginatedItems = await mgmt.UserList<UserInfo>(
             SelectPro: 1,
             PageNumber: state.Page + 1,
             PageSize: state.PageSize,
@@ -41,7 +41,7 @@ public partial class UserList
             SortColumn: state.SortLabel.IsStringNullOrWhiteSpace() ? "peo_createdDate" : state.SortLabel,
             SortDirection: Util.ResolveSort(state.SortDirection));
 
-        return new TableData<UserInfo>() { TotalItems = PaginatedUsers.TotalItems, Items = PaginatedUsers.Items };
+        return new TableData<UserInfo>() { TotalItems = PaginatedItems.TotalItems, Items = PaginatedItems.Items };
     }
     async Task OnSearch(string e)
     {

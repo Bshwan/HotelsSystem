@@ -13,6 +13,40 @@ public partial class Hotels
     [Inject]
     protected IDialogService DialogService{get;set;}=default!;
 
+    PagedResult<HotelsInfo> PaginatedItems=PagedResult<HotelsInfo>.EmptyPagedResult();
+
+    ClS_Hotels hotel = default!;
+    ClS_Config config = default!;
+    HotelsInfo Filter = new HotelsInfo();
+    private MudTable<HotelsInfo>? table;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        hotel = new ClS_Hotels(DB, session);
+        config = new ClS_Config(DB, session);
+    }
+
+
+    private async Task<TableData<HotelsInfo>> GetPaginatedItems(TableState state)
+    {
+        PaginatedItems = await hotel.HotelList<HotelsInfo>(
+            SelectPro: 1,
+            PageNumber: state.Page + 1,
+            PageSize: state.PageSize,
+            SortColumn: state.SortLabel.IsStringNullOrWhiteSpace() ? "htl_EntryDate" : state.SortLabel,
+            SortDirection: Util.ResolveSort(state.SortDirection),
+            DirectorateID: Filter.htl_DirectorateID,
+            WorkPlaceID: Filter.htl_WorkPointID,
+            FullName:Filter.htl_Name.ToEmptyOnNull());
+
+        return new TableData<HotelsInfo>() { TotalItems = PaginatedItems.TotalItems, Items = PaginatedItems.Items };
+    }
+    async Task OnSearch(string e)
+    {
+        Filter.htl_Name = e;
+        await table!.ReloadServerData();
+    }
 
     private void OpenDialog(){
 		var options = new DialogOptions {

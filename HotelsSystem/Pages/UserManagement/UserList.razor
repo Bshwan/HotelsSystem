@@ -11,9 +11,7 @@
     </div>
     <div class="col-12">
         <MudTable @ref="table" Outlined="true" Elevation="0"
-            ServerData="@(new Func<TableState,Task<TableData<UserInfo>>>(GetPaginatedUsers))"
-            TotalItems="PaginatedUsers.TotalItems" Items="@PaginatedUsers.Items" T="UserInfo" Dense="true"
-            Hover="true"SortLabel="Sort By">
+            ServerData="@(new Func<TableState,Task<TableData<UserInfo>>>(GetPaginatedItems))" T="UserInfo" Dense="true" Hover="true">
             <ToolBarContent>
                 <MudText Typo="Typo.h6">Users</MudText>
                 <MudSpacer />
@@ -60,13 +58,13 @@
                 <MudTd DataLabel="">
                     <MudLink Underline="Underline.Always" Href="@(Go.To(Routing.adduser,context.peo_UserID))">@context.peo_UserName</MudLink>
                 </MudTd>
-                <MudTd DataLabel="">@context.peo_userFullName</MudTd>
-                <MudTd DataLabel="">@context.peo_UserMobile</MudTd>
-                <MudTd DataLabel="">@context.usT_userType</MudTd>
-                <MudTd DataLabel="">@context.peo_DirectorateName</MudTd>
-                <MudTd DataLabel="">@context.wp_workpointName</MudTd>
-                <MudTd DataLabel="">@context.peo_createdDate</MudTd>
-                <MudTd DataLabel="">@context.peo_UserActive</MudTd>
+                <MudTd>@context.peo_userFullName</MudTd>
+                <MudTd>@context.peo_UserMobile</MudTd>
+                <MudTd>@context.usT_userType</MudTd>
+                <MudTd>@context.peo_DirectorateName</MudTd>
+                <MudTd>@context.wp_workpointName</MudTd>
+                <MudTd>@context.peo_createdDate</MudTd>
+                <MudTd>@context.peo_UserActive</MudTd>
             </RowTemplate>
 
             @* <RowEditingTemplate>

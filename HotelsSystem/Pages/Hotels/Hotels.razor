@@ -10,28 +10,32 @@
         <MudButton @onclick="OpenDialog" StartIcon="@Icons.Material.Filled.DomainAdd" Variant="Variant.Filled" Color="Color.Primary">@L["hotel-list"]</MudButton>
     </div>
     <div class="col-12">
-        <MudTable Outlined="true" Elevation="0" Dense="true" Hover="true" ReadOnly="true" SortLabel="Sort By">
+        <MudTable @ref="table" ServerData="@(new Func<TableState,Task<TableData<HotelsInfo>>>(GetPaginatedItems))" T="HotelsInfo" 
+            Outlined="true" Elevation="0" Dense="true" Hover="true">
             <ToolBarContent>
                 <MudText Typo="Typo.h6">@L["hotel-list"]</MudText>
                 <MudSpacer />
                 <MudSpacer />
                 <MudSpacer />
                 <MudSpacer />
-                <MudTextField @bind-Value="searchString" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="@L["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                <MudTextField DebounceInterval="ClS_Config.debounce" OnDebounceIntervalElapsed="OnSearch"
+                     @bind-Value="Filter.htl_Name" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="@L["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             </ToolBarContent>
             <HeaderContent>
-                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">@L["name"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Number)">@L["stars"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Sign)">@L["rooms"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Position)">@L["location"]</MudTableSortLabel></MudTh>
-                @* <MudTh><MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Molar)">Mass</MudTableSortLabel></MudTh> *@
+                <MudTh><MudTableSortLabel  SortLabel="peo_userFullName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="usT_userType" SortBy="new Func<HotelsInfo, object>(x=>x.HTT_Type.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="htl_Address" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["address"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="htl_Star" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Star)">@L["stars"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="htl_EntryByName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_EntryByName.ToEmptyOnNull())">@L["entry-by"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="htl_EntryDate" SortBy="new Func<HotelsInfo, object>(x=>x.htl_EntryDate.ToyyyyMMddElseEmpty())">@L["entry-date"]</MudTableSortLabel></MudTh>
             </HeaderContent>
             <RowTemplate>
-                <MudTd DataLabel="Nr"><MudLink Underline="Underline.Always" @onclick="OpenDialog">Hotels @context.Number</MudLink></MudTd>
-                <MudTd DataLabel="Sign"><MudRating ReadOnly="true" SelectedValue="2" /></MudTd>
-                <MudTd DataLabel="Name">@context.Name</MudTd>
-                <MudTd DataLabel="Position">Location @context.Position</MudTd>
-                @* <MudTd DataLabel="Molar mass">@context.Molar</MudTd> *@
+                <MudTd><MudLink Underline="Underline.Always" @onclick="OpenDialog">@context.htl_Name</MudLink></MudTd>
+                <MudTd>@context.HTT_Type</MudTd>
+                <MudTd>@context.htl_Address</MudTd>
+                <MudTd DataLabel="Sign"><MudRating ReadOnly="true" SelectedValue="@context.htl_Star" /></MudTd>
+                <MudTd>@context.htl_EntryByName</MudTd>
+                <MudTd>@context.htl_EntryDate.ToddMMyyyyhhmmsstt()</MudTd>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />
