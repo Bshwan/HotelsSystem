@@ -6,6 +6,7 @@ public class HotelsInfo
     public int htl_TypeID { get; set; }
     public string? HTT_Type { get; set; }
     public string? htl_Name { get; set; }
+    public string? htl_Note { get; set; }
     public string? htl_Address { get; set; }
     public int htl_Star { get; set; }
     public int htl_NumberOfRooms { get; set; }

@@ -22,8 +22,22 @@
                         <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" InputType="InputType.Password" @bind-Value="SelectedUser.peo_UserPassword" Label="Password *" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudSelect ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
+                        <MudSelect Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.usT_userType)" 
+                            Validation="@(new Func<UserTypesInfo, string>((e)=>e.ValidateField<UserTypesInfo>("usT_ID")))"
+                            Value="@(new UserTypesInfo{usT_ID=SelectedUser.peo_UserTypeID,usT_userType=combos.UserTypes.SelectByID<UserTypesInfo>(SelectedUser.peo_UserTypeID,"usT_ID").usT_userType})" 
+                                ValueChanged="OnSelectedUserTypeChange"
+                                Margin="@Margin.Dense" T="UserTypesInfo" Label="User Type *" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in combos.UserTypes)
+                            {
+                            <MudSelectItem T="UserTypesInfo" Value="@item">@item.usT_userType</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudSelect Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
                             Value="@(new LanguageInfo{lang_ID=SelectedUser.peo_Language,lang_Name=combos.Languages.SelectByID<LanguageInfo>(SelectedUser.peo_Language,"lang_ID").lang_Name})" 
+                                Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
+                                ValueChanged="OnSelectedLanguageChange"
                                 Margin="@Margin.Dense" T="LanguageInfo" Label="Language *" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.Languages)
                             {

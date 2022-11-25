@@ -11,9 +11,9 @@ public partial class Hotels
     [Inject]
     protected NavigationManager nav { get; set; } = default!;
     [Inject]
-    protected IDialogService DialogService{get;set;}=default!;
+    protected IDialogService DialogService { get; set; } = default!;
 
-    PagedResult<HotelsInfo> PaginatedItems=PagedResult<HotelsInfo>.EmptyPagedResult();
+    PagedResult<HotelsInfo> PaginatedItems = PagedResult<HotelsInfo>.EmptyPagedResult();
 
     ClS_Hotels hotel = default!;
     ClS_Config config = default!;
@@ -38,7 +38,7 @@ public partial class Hotels
             SortDirection: Util.ResolveSort(state.SortDirection),
             DirectorateID: Filter.htl_DirectorateID,
             WorkPlaceID: Filter.htl_WorkPointID,
-            FullName:Filter.htl_Name.ToEmptyOnNull());
+            FullName: Filter.htl_Name.ToEmptyOnNull());
 
         return new TableData<HotelsInfo>() { TotalItems = PaginatedItems.TotalItems, Items = PaginatedItems.Items };
     }
@@ -48,12 +48,26 @@ public partial class Hotels
         await table!.ReloadServerData();
     }
 
-    private void OpenDialog(){
-		var options = new DialogOptions {
+    private async Task OpenDialog(int id)
+    {
+        var options = new DialogOptions
+        {
             CloseOnEscapeKey = true,
             CloseButton = true,
             Position = DialogPosition.TopCenter,
         };
-        DialogService.Show<AddHotel>("Simple Dialog", options);
+        
+        var parameters = new DialogParameters();
+        parameters.Add("config", config);
+        parameters.Add("hotel", hotel);
+        parameters.Add("HotelID", id);
+        
+        var modal = DialogService.Show<AddHotel>("Simple Dialog", parameters, options);
+        var ModalResult = await modal.Result;
+        
+        System.Console.WriteLine(ModalResult.Cancelled);
+        
+        if (!ModalResult.Cancelled)
+            await table!.ReloadServerData();
     }
 }

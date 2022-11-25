@@ -17,7 +17,7 @@ public partial class AddUser
     int UserID;
     UserInfo SelectedUser = new UserInfo();
     GroupInfo SelectedGroup = new GroupInfo();
-    DataAccessPermissions SelectedPrivilage=new DataAccessPermissions();
+    DataAccessPermissions SelectedPrivilage = new DataAccessPermissions();
     ClS_UserManagement mgmt = default!;
     ClS_Config config = default!;
     MyFunctions.myLogin.MyFunctions func = new MyFunctions.myLogin.MyFunctions();
@@ -77,6 +77,26 @@ public partial class AddUser
     {
         return await Task.FromResult(combos.WorkingPoints.SearchAll<WorkingPointInfo>(e, "wp_workpointName"));
     }
+    void OnSelectedLanguageChange(LanguageInfo e)
+    {
+        if (e == null)
+        {
+            SelectedUser.peo_Language = 0;
+            return;
+        }
+        SelectedUser.peo_Language = e.lang_ID;
+    }
+    void OnSelectedUserTypeChange(UserTypesInfo e)
+    {
+        if (e == null)
+        {
+            SelectedUser.peo_UserTypeID = 0;
+            SelectedUser.usT_userType = string.Empty;
+            return;
+        }
+            SelectedUser.peo_UserTypeID = e.usT_ID;
+            SelectedUser.usT_userType = e.usT_userType;   
+    }
     async Task OnDirectorateChange(DirectorateInfo e)
     {
         SelectedUser.wp_workpointName = string.Empty;
@@ -116,7 +136,7 @@ public partial class AddUser
     void OnPrivilageChange(DataAccessPermissions e)
     {
         if (e == null)
-            SelectedPrivilage=new DataAccessPermissions();
+            SelectedPrivilage = new DataAccessPermissions();
         else
             SelectedPrivilage = e;
     }
@@ -167,7 +187,7 @@ public partial class AddUser
         if (result.Result == 1)
         {
             await GetGroups();
-            SelectedGroup=new GroupInfo();
+            SelectedGroup = new GroupInfo();
             Toaster.Success(".", result.MSG);
             return;
         }
@@ -201,7 +221,7 @@ public partial class AddUser
         if (result.Result == 1)
         {
             await GetPrivilages();
-            SelectedPrivilage=new DataAccessPermissions();
+            SelectedPrivilage = new DataAccessPermissions();
             Toaster.Success(".", result.MSG);
             return;
         }

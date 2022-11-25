@@ -49,11 +49,10 @@ public class ClS_UserManagement
             Directorates=result.Item4,
             UserTypes=result.Item5
         };
-        // return await _db.Login<dynamic>("pro_Login", SessionResult.CNSTR.ToEmptyOnNull(), new { username = UserName, password = UserPass, Select = SelectPro, UserID = SessionResult.Result });
     }
     public async Task<WorkPointCombo> WorkPointComboBox(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
     {
-        var result = await _db.GetMultiple< DirectorateInfo, UserInfo>(
+        var result = await _db.GetMultiple<DirectorateInfo, UserInfo>(
                 "Pro_GetCMB",
                 new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
         return new WorkPointCombo()

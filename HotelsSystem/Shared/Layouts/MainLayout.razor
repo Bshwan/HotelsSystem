@@ -13,12 +13,7 @@
 
         <main>
             <div class="top-row px-4">
-                @if (!@rtl){
-                    <MudIconButton @onclick="rtlToggle" Class="white-text" Icon="@Icons.Filled.FormatTextdirectionRToL"></MudIconButton>
-                }
-                else{
-                    <MudIconButton @onclick="rtlToggle" Class="white-text" Icon="@Icons.Filled.FormatTextdirectionLToR"></MudIconButton>
-                }
+                <ChangeLanguage></ChangeLanguage>
             </div>
             @* <MudPaper Outlined="true" Elevation="0" Class="px-2 m-3">
                 <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
