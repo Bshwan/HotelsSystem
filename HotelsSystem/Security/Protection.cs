@@ -37,7 +37,7 @@
         {
             try
             {
-                string Cookie = await JSRuntime.InvokeAsync<string>("blazorExtensions.getCookie");
+                string Cookie = await JSRuntime.InvokeAsync<string>("blazorExtensions.getCookie",Util.CookieName);
 
                 var session = Decrypt<SPResult>(Cookie);
 
@@ -61,7 +61,7 @@
         public static async Task SetEncryptedSession(SPResult obj, IJSRuntime jSRuntime)
         {
             var session = Encrypt(obj);
-            await jSRuntime.InvokeVoidAsync("blazorExtensions.WriteCookie", session);
+            await jSRuntime.InvokeVoidAsync("blazorExtensions.WriteCookie", session,Util.CookieName);
         }
     }
 }

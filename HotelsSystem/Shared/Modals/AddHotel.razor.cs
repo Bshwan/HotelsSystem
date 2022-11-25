@@ -83,7 +83,7 @@ public partial class AddHotel
     async Task InsertUpdateHotel()
     {
 
-        await AddHotelForm.Validate();
+        await AddHotelForm!.Validate();
         if (!AddHotelForm.IsValid)
             return;
 

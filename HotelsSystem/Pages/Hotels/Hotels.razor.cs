@@ -30,6 +30,7 @@ public partial class Hotels
 
     private async Task<TableData<HotelsInfo>> GetPaginatedItems(TableState state)
     {
+        System.Console.WriteLine(hotel==null);
         PaginatedItems = await hotel.HotelList<HotelsInfo>(
             SelectPro: 1,
             PageNumber: state.Page + 1,
@@ -62,7 +63,7 @@ public partial class Hotels
         parameters.Add("hotel", hotel);
         parameters.Add("HotelID", id);
         
-        var modal = DialogService.Show<AddHotel>("Simple Dialog", parameters, options);
+        var modal = DialogService.Show<AddHotel>("Add Hotel", parameters, options);
         var ModalResult = await modal.Result;
         
         System.Console.WriteLine(ModalResult.Cancelled);

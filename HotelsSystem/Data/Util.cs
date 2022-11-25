@@ -11,7 +11,7 @@ namespace HotelsSystem.Data
         public const string JSShowOffcanvas = "ShowOffcanvas";
         public const string JSCloseModal = "HideModal";
         public const string JSShowModal = "ShowModal";
-        public const string CookieName = "cookieName";
+        public const string CookieName = "htlcookie";
         public const string SecurityGuid = "ad5be26a-01ec-4bb7-b4a6-be575d4818e5";
 
         public static bool IsEnterPressed(KeyboardEventArgs e)
