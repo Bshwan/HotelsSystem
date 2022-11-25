@@ -15,7 +15,7 @@ window.blazorExtensions = {
         const parts = value.split(`; ${name}=`);
         if (parts.length === 2) {
             const cookie = parts.pop().split(';').shift();
-            blazorExtensions.WriteCookie(cookie)
+            blazorExtensions.WriteCookie(cookie,name)
 
             return cookie;
         }

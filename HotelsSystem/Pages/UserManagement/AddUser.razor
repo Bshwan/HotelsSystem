@@ -45,7 +45,7 @@
                             }
                         </MudSelect>
                     </div>
-                    @if(SelectedUser.peo_UserTypeID==1 || SelectedUser.peo_UserTypeID==2){
+                    @* @if(SelectedUser.peo_UserTypeID==1 || SelectedUser.peo_UserTypeID==2){ *@
                          @* Required="true" *@
                          @* Validation="@(new Func<DirectorateInfo, string>((e)=>e.ValidateField<DirectorateInfo>("peo_DirectorateID")))" *@
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -65,8 +65,8 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
                          Placeholder="Directorate" />
                     </div>
-                    }
-                    @if(SelectedUser.peo_UserTypeID==2){
+                    @* } *@
+                    @* @if(SelectedUser.peo_UserTypeID==2){ *@
                          @* Required="true" *@
                          @* Validation="@(new Func<WorkingPointInfo, string>((e)=>e.ValidateField<WorkingPointInfo>("wp_ID")))" *@
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -86,7 +86,7 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
                          Placeholder="Workpoint" />
                     </div>
-                    }
+                    @* } *@
                     <div class="col-12">
                         <MudCheckBox @bind-Checked="SelectedUser.peo_UserActive" Label="Active"></MudCheckBox>
                     </div>

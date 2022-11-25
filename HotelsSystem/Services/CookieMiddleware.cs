@@ -20,7 +20,7 @@
                     if (session == null)
                         context.Response.Redirect(Routing.defaultpage);
                     else
-                        context.Response.Redirect(Routing.defaultpage);
+                        context.Response.Redirect(Routing.userlist);
                 }
             }
             catch

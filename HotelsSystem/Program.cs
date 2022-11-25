@@ -1,3 +1,4 @@
+using HotelsSystem.Services;
 using Microsoft.AspNetCore.SignalR;
 using MudBlazor.Services;
 
@@ -49,11 +50,11 @@ RequestLocalizationOptions GetLocalizationOptions()
     return localizationOptions;
 }
 
-builder.Host.UseSerilog((ctx, lc) =>
-{
-    lc.WriteTo.File("log.txt", Serilog.Events.LogEventLevel.Error, rollingInterval: RollingInterval.Month, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}");
-    lc.WriteTo.Console(Serilog.Events.LogEventLevel.Verbose, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}");
-});
+// builder.Host.UseSerilog((ctx, lc) =>
+// {
+//     lc.WriteTo.File("log.txt", Serilog.Events.LogEventLevel.Error, rollingInterval: RollingInterval.Month, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}");
+//     lc.WriteTo.Console(Serilog.Events.LogEventLevel.Verbose, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u3}] {Message:lj}{NewLine}{Exception}");
+// });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -73,6 +74,7 @@ app.UseStaticFiles();
 app.UseRequestLocalization(GetLocalizationOptions());
 app.UseRouting();
 
+app.UseMiddleware<CookieMiddleware>();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();
@@ -85,6 +87,5 @@ app.UseEndpoints(endpoints =>
 }
 );
 
-// app.UseMiddleware<CookieMiddleware>();
 app.Run();
 
