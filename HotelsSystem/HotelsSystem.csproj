@@ -32,6 +32,9 @@
     <Reference Include="Extentions">
       <HintPath>DLLs\Extentions.dll</HintPath>
     </Reference>
+    <Reference Include="MyFunctions">
+      <HintPath>DLLs\MyFunctions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

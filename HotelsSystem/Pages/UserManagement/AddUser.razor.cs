@@ -161,7 +161,7 @@ public partial class AddUser
 
         SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
             SelectPro: 6,
-            PermissionID: SelectedGroup.group_ID.ToString(),
+            PermissionID: SelectedGroup.group_ID,
             UsersID: SelectedGroup.group_ID);
 
         if (result.Result == 1)
@@ -177,7 +177,7 @@ public partial class AddUser
     {
         SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
             SelectPro: 7,
-            PermissionID: id.ToString());
+            PermissionID: id);
 
         if (result.Result == 1)
         {
@@ -195,7 +195,7 @@ public partial class AddUser
 
         SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
             SelectPro: 2,
-            PermissionID: SelectedPrivilage.dap_ID.ToString(),
+            PermissionID: SelectedPrivilage.dap_ID,
             UsersID: SelectedUser.peo_UserID);
 
         if (result.Result == 1)
@@ -211,7 +211,7 @@ public partial class AddUser
     {
         SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
             SelectPro: 3,
-            PermissionID: id.ToString());
+            PermissionID: id);
 
         if (result.Result == 1)
         {
