@@ -1,5 +1,5 @@
 @inject IStringLocalizer<App> L;
-@page "/adminRoles"
+@page "/roles"
 
 @if (config != null)
 {
@@ -45,7 +45,7 @@
                      
                         <MudTd DataLabel="">@context.group_Name</MudTd>
                         <MudTd Class="text-end">
-                            <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" OnClick="@(async()=> await GetGroupByID(context.group_ID))" Color="Color.Error" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetGroupByID(context.group_ID))" Color="Color.Primary" />
                         </MudTd>
                         <MudTd Class="text-end">
                             <MudButton @onclick="@(()=>AddRoleModal(context.group_ID))" StartIcon="@Icons.Filled.HealthAndSafety" Variant="Variant.Filled" Color="Color.Primary">Add Role</MudButton>

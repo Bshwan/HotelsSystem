@@ -12,13 +12,13 @@
     <MudNavMenu Color="Color.Primary" Class="mud-width-full py-3">
         @* <MudNavLink Href="/home" Match="NavLinkMatch.Prefix" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>
         <MudNavLink Href="/counter" Icon="@Icons.Filled.Storage">Servers</MudNavLink> *@
-        <MudNavLink Href="/Hotels" Icon="@Icons.Filled.Domain">Hotels</MudNavLink>
+        <MudNavLink Href="@Routing.hotels" Icon="@Icons.Filled.Domain">Hotels</MudNavLink>
         <MudNavLink Href="@Routing.userlist" Icon="@Icons.Filled.Search">User List</MudNavLink>
-        <MudNavLink Href="/config" Icon="@Icons.Filled.Settings">Configrations</MudNavLink>
+        <MudNavLink Href="@Routing.config" Icon="@Icons.Filled.Settings">Configrations</MudNavLink>
         <MudNavGroup @bind-Expanded="_isNavExpanded" Title="System Admins" Icon="@Icons.Filled.AdminPanelSettings">
-            <MudNavLink Href="/admins" Icon="@Icons.Filled.People">Admins</MudNavLink>
-            <MudNavLink Href="/addAdmin" Icon="@Icons.Filled.AddModerator">Add Admin</MudNavLink>
-            <MudNavLink Href="/adminRoles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
+            @* <MudNavLink Href="/admins" Icon="@Icons.Filled.People">Admins</MudNavLink>
+            <MudNavLink Href="/addAdmin" Icon="@Icons.Filled.AddModerator">Add Admin</MudNavLink> *@
+            <MudNavLink Href="@Routing.roles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
         </MudNavGroup>
         @* <MudNavGroup Title="User Management" Icon="@Icons.Filled.ManageAccounts">
             <MudNavLink Href="/users" Icon="@Icons.Filled.People">Users</MudNavLink>
