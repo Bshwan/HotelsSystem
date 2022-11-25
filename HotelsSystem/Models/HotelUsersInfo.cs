@@ -10,6 +10,8 @@ public class HotelUsersInfo
     public string htl_Name { get; set; }
     public int htlus_TypeID { get; set; }
     public string htlustype_Name { get; set; }
+    public string htlus_Mobile { get; set; }
+    public string htlus_Note { get; set; }
     public int htlus_LanguageID { get; set; }
     public bool htlus_Active { get; set; }
     public string htlus_EntryByName { get; set; }

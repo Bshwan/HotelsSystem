@@ -31,6 +31,11 @@ public class ClS_UserManagement
         return await _db.GetGridResult<T, dynamic>("Pro_GridUserList", new { Select = SelectPro, UserTypeID= UserTypeID, FullName = FullName, DirectorateID = DirectorateID, WorkPlaceID = WorkPlaceID, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue }, PageNumber: PageNumber, PageSize: PageSize);
     }
 
+    public async Task<T> HotelInsertUpdateUser<T>(int SelectPro = 0, int ValID = 0, string UserName = "", string userFullName = "", string UserMobile = "", int UserTypeID = 0,  string UserPassword = "", bool UserActive = true, string Note = "", int Language = 0)
+    {
+        return await _db.SaveData<T, dynamic>("HTPro_InsertUpdateUser", new { select = SelectPro, ID = ValID, UserName = UserName, userFullName = userFullName, UserMobile = UserMobile, UserTypeID = UserTypeID, UserPassword = UserPassword, UserActive = UserActive, Note = Note, Language = Language, CreateBy = SessionValue });
+    }
+
     public async Task<UserCombos> UserCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
     {
         var result = await _db.GetMultiple<GroupInfo, DataAccessPermissions, LanguageInfo,DirectorateInfo,UserTypesInfo>(
