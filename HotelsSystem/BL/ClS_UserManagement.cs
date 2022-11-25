@@ -24,7 +24,7 @@ public class ClS_UserManagement
 
     public async Task<T> Login<T>(int SelectPro = 0, string UserName = "", string UserPass = "")
     {
-        return await _db.GetOneInfo<T, dynamic>("pro_Login", new { username = UserName, password = UserPass, Select = SelectPro, UserID = SessionValue });
+        return await _db.GetOneInfo<T, dynamic>("pro_Login", new { username = UserName, password = UserPass, Select = SelectPro });
     }
     public async Task<PagedResult<T>> UserList<T>(int SelectPro = 1, int PageNumber = 1, int PageSize = 10,int UserTypeID=0, string FullName = "", int DirectorateID = 0, int WorkPlaceID = 0, string SortColumn = "", string SortDirection = "Asc")
     {
