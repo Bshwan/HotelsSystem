@@ -12,7 +12,7 @@ namespace HotelsSystem.Data
         public const string JSCloseModal = "HideModal";
         public const string JSShowModal = "ShowModal";
         public const string CookieName = "cookieName";
-        public const string SecurityGuid = "b65d5f8d-be2a-41d4-a9c6-aa08e9154ba5";
+        public const string SecurityGuid = "ad5be26a-01ec-4bb7-b4a6-be575d4818e5";
 
         public static bool IsEnterPressed(KeyboardEventArgs e)
         {
@@ -90,13 +90,22 @@ namespace HotelsSystem.Data
             else
                 return "";
         }
-        public async Task<IEnumerable<T>> SearchAll<T>(string value, string ColumnName, IEnumerable<T> data)
+        public static async Task<IEnumerable<T>> SearchAll<T>(string value, string ColumnName, IEnumerable<T> data)
         {
             var SearchedData = data.Where(x => x!.GetType()!.GetProperty(ColumnName)!.GetValue(x)!.ToString().ToEmptyOnNull().ContainsIgnoreCase(value.ToEmptyOnNull()));
             return await Task.FromResult(SearchedData);
         }
-        public static string ResolveSort(SortDirection sort){
-          return sort==SortDirection.Descending || sort==SortDirection.None? "ASC":"DESC";
+        public static T SelectByID<T>(int id, string FindByColumn, IEnumerable<T> data)
+        {
+            var SearchedData = data.Where(x => x!.GetType()!.GetProperty(FindByColumn)!.GetValue(x)!.ToString().ToEmptyOnNull().Equals(id.ToString()));
+            if (SearchedData.Any())
+                return SearchedData.First();
+            else
+                return Activator.CreateInstance<T>();
+        }
+        public static string ResolveSort(SortDirection sort)
+        {
+            return sort == SortDirection.Descending || sort == SortDirection.None ? "ASC" : "DESC";
         }
     }
 }

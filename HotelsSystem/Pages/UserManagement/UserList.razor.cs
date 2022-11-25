@@ -11,15 +11,15 @@ public partial class UserList
     [Inject]
     protected NavigationManager nav { get; set; } = default!;
     [Inject]
-    protected IDialogService DialogService{get;set;}=default!;
+    protected IDialogService DialogService { get; set; } = default!;
 
     PagedResult<UserInfo> PaginatedUsers = PagedResult<UserInfo>.EmptyPagedResult();
     // SortDirection sort = SortDirection.Descending;
-    string SelectedColumnToSort = "peo_createdDate";
     ClS_UserManagement mgmt = default!;
     ClS_Config config = default!;
     UserInfo FilterUser = new UserInfo();
-    UserInfo SelectedUser=new UserInfo();
+    // UserInfo SelectedUser = new UserInfo();
+    private MudTable<UserInfo>? table;
 
     protected override async Task OnInitializedAsync()
     {
@@ -28,34 +28,24 @@ public partial class UserList
         config = new ClS_Config(DB, session);
         // await GetPaginatedUsers();
     }
-
-    async Task GetPaginatedUsers(int page = 1, string ColumnName = "",SortDirection sort=SortDirection.None)
+    private async Task<TableData<UserInfo>> GetPaginatedUsers(TableState state)
     {
-        if (!string.IsNullOrWhiteSpace(ColumnName))
-        {
-            // if (sort == SortDirections.ASC)
-            //     sort = SortDirections.DESC;
-            // else
-            //     sort = SortDirections.ASC;
-
-            SelectedColumnToSort = ColumnName;
-        }
-
         PaginatedUsers = await mgmt.UserList<UserInfo>(
             SelectPro: 1,
-            PageNumber: page,
-            PageSize: config.RowNumber,
+            PageNumber: state.Page + 1,
+            PageSize: state.PageSize,
             UserTypeID: FilterUser.peo_UserTypeID,
             FullName: FilterUser.peo_UserName.ToEmptyOnNull(),
             DirectorateID: FilterUser.peo_DirectorateID,
             WorkPlaceID: FilterUser.peo_UserID,
-            SortColumn: SelectedColumnToSort,
-            SortDirection: Util.ResolveSort(sort));
+            SortColumn: state.SortLabel.IsStringNullOrWhiteSpace() ? "peo_createdDate" : state.SortLabel,
+            SortDirection: Util.ResolveSort(state.SortDirection));
+
+        return new TableData<UserInfo>() { TotalItems = PaginatedUsers.TotalItems, Items = PaginatedUsers.Items };
     }
-    private async Task<TableData<UserInfo>> ServerReload(TableState state)
+    async Task OnSearch(string e)
     {
-        config.RowNumber=state.PageSize;
-        await GetPaginatedUsers(page:state.Page+1,ColumnName:state.SortLabel,sort:state.SortDirection);
-        return new TableData<UserInfo>() {TotalItems = PaginatedUsers.TotalItems, Items = PaginatedUsers.Items};
+        FilterUser.peo_UserName = e;
+        await table!.ReloadServerData();
     }
 }
