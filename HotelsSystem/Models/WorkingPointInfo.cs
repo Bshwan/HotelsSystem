@@ -8,6 +8,6 @@ public class WorkingPointInfo
     public string? wp_workpointName { get; set; }
     public int wp_AdminID { get; set; }
     public string? peo_UserName { get; set; }
-    public string? location { get; set; }
+    public string? wp_locationText { get; set; }
 
 }

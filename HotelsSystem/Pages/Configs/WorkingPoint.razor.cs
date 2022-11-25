@@ -99,7 +99,7 @@
             ValName: SelectedWorkPoint.wp_workpointName.ToEmptyOnNull(),
             ValueIDTwo: SelectedWorkPoint.wp_DirectorateID,
             ValueID: SelectedWorkPoint.wp_AdminID,
-            ValueName: SelectedWorkPoint.location.ToEmptyOnNull(),
+            ValueName: SelectedWorkPoint.wp_locationText.ToEmptyOnNull(),
             ValID: SelectedWorkPoint.wp_ID);
 
             if (result.Result == 1)

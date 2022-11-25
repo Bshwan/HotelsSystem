@@ -7,15 +7,15 @@
             <MudTextField Required="true" RequiredError="@L["required"]" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_workpointName" Label="Name" Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                         @* Required="true" *@
+                         @* Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))" *@
 
             <MudAutocomplete T="UserInfo" DebounceInterval="ClS_Config.debounce"
                          SearchFunc="@SearchUser"
                          Clearable="true"
-                         Required="true"
                          ResetValueOnEmptyText="true"
                          Value="@(new UserInfo(){peo_UserName=SelectedWorkPoint.peo_UserName,peo_UserID=SelectedWorkPoint.wp_AdminID})"
                          Text="@SelectedWorkPoint.peo_UserName"
-                         Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))"
                          ValueChanged="@((e)=>OnUserChanged(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
                          CoerceText="@true"
@@ -27,12 +27,12 @@
 
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                         @* Required="true" *@
+                         @* Validation="@(new Func<DirectorateInfo, string>((e)=>e.ValidateField<DirectorateInfo>("peo_DirectorateID")))" *@
 
             <MudAutocomplete T="DirectorateInfo" DebounceInterval="ClS_Config.debounce"
                          SearchFunc="@SearchDirectorate"
                          Clearable="true"
-                         Required="true"
-                         Validation="@(new Func<DirectorateInfo, string>((e)=>e.ValidateField<DirectorateInfo>("peo_DirectorateID")))"
                          ResetValueOnEmptyText="true"
                          Value="@(new DirectorateInfo(){peo_DirectorateName=SelectedWorkPoint.peo_DirectorateName,peo_DirectorateID=SelectedWorkPoint.wp_DirectorateID})"
                          Text="@SelectedWorkPoint.peo_DirectorateName"
@@ -46,7 +46,7 @@
 
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-            <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.location" Label="Location" Variant="Variant.Outlined"></MudTextField>
+            <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_locationText" Label="Location" Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
             <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@(async()=>await InsertUpdateWorkPoint())" Variant="Variant.Filled" Color="Color.Primary" />

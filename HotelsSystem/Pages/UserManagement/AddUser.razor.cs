@@ -36,8 +36,8 @@ public partial class AddUser
         if (UserID > 0)
         {
             await GetUserByID();
-            await GetCombos();
         }
+        await GetCombos();
 
     }
     async Task GetUserByID()
@@ -94,8 +94,8 @@ public partial class AddUser
             SelectedUser.usT_userType = string.Empty;
             return;
         }
-            SelectedUser.peo_UserTypeID = e.usT_ID;
-            SelectedUser.usT_userType = e.usT_userType;   
+        SelectedUser.peo_UserTypeID = e.usT_ID;
+        SelectedUser.usT_userType = e.usT_userType;
     }
     async Task OnDirectorateChange(DirectorateInfo e)
     {
@@ -182,7 +182,7 @@ public partial class AddUser
         SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
             SelectPro: 6,
             PermissionID: SelectedGroup.group_ID.ToString(),
-            UsersID: SelectedGroup.group_ID);
+            UsersID: SelectedUser.peo_UserID);
 
         if (result.Result == 1)
         {

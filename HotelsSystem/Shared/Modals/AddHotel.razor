@@ -7,10 +7,10 @@
                 <MudForm @ref="AddHotelForm">
                 <div class="row gy-3 gx-2">
                     <div class="col-12">
-                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Name" Label="@L["name"]" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Name" Label="@L["name"]" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
-                        <MudSelect Required="true" RequiredError="@L["required"]"
+                        <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]"
                         Validation="@(new Func<HotelTypesComboBox, string>((e)=>e.ValidateField<HotelTypesComboBox>("HTT_ID")))"
                              ToStringFunc="@(e=>e==null?"":e.HTT_Type)" 
                             Value="@(new HotelTypesComboBox{HTT_ID=SelectedHotel.htl_TypeID,HTT_Type=combos.HotelTypes.SelectByID<HotelTypesComboBox>(SelectedHotel.htl_TypeID,"HTT_ID").HTT_Type})"
@@ -23,7 +23,7 @@
                         </MudSelect>                    
                     </div>
                     <div class="col-12">
-                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Address" Label="@L["full-address"]" Variant="Variant.Outlined" Lines="4"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Address" Label="@L["full-address"]" Variant="Variant.Outlined" Lines="4"></MudTextField>
                     </div>
                     
                     <div class="col-12 col-lg-6">

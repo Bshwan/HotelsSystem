@@ -2,7 +2,7 @@
 @inject IStringLocalizer<App> L;
 <div class="row gy-3 gx-2">
     <div class="col-12">
-        <h4>Add User</h4>
+        <h4>@(SelectedUser.peo_UserID>0?SelectedUser.peo_UserName:L["add-user"])</h4>
     </div>
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
@@ -10,23 +10,23 @@
                 <MudForm @ref="AddUserForm">
                 <div class="row gy-3 gx-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label="Name" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_userFullName" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_userFullName" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserMobile" Label="Mobile" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserMobile" Label="Mobile" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField Required="true" Margin="@Margin.Dense" Dense="true" InputType="InputType.Password" @bind-Value="SelectedUser.peo_UserPassword" Label="Password *" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" autocomplete="new-password" Margin="@Margin.Dense" Dense="true" InputType="InputType.Password" @bind-Value="SelectedUser.peo_UserPassword" Label="Password" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudSelect Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.usT_userType)" 
+                        <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.usT_userType)" 
                             Validation="@(new Func<UserTypesInfo, string>((e)=>e.ValidateField<UserTypesInfo>("usT_ID")))"
                             Value="@(new UserTypesInfo{usT_ID=SelectedUser.peo_UserTypeID,usT_userType=combos.UserTypes.SelectByID<UserTypesInfo>(SelectedUser.peo_UserTypeID,"usT_ID").usT_userType})" 
                                 ValueChanged="OnSelectedUserTypeChange"
-                                Margin="@Margin.Dense" T="UserTypesInfo" Label="User Type *" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="UserTypesInfo" Label="User Type" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.UserTypes)
                             {
                             <MudSelectItem T="UserTypesInfo" Value="@item">@item.usT_userType</MudSelectItem>
@@ -34,27 +34,28 @@
                         </MudSelect>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudSelect Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
+                        <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
                             Value="@(new LanguageInfo{lang_ID=SelectedUser.peo_Language,lang_Name=combos.Languages.SelectByID<LanguageInfo>(SelectedUser.peo_Language,"lang_ID").lang_Name})" 
                                 Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
                                 ValueChanged="OnSelectedLanguageChange"
-                                Margin="@Margin.Dense" T="LanguageInfo" Label="Language *" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="LanguageInfo" Label="Language" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.Languages)
                             {
                             <MudSelectItem T="LanguageInfo" Value="@item">@item.lang_Name</MudSelectItem>
                             }
                         </MudSelect>
                     </div>
+                    @if(SelectedUser.peo_UserTypeID==1 || SelectedUser.peo_UserTypeID==2){
+                         @* Required="true" *@
+                         @* Validation="@(new Func<DirectorateInfo, string>((e)=>e.ValidateField<DirectorateInfo>("peo_DirectorateID")))" *@
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudAutocomplete T="DirectorateInfo" DebounceInterval="ClS_Config.debounce"
                          SearchFunc="@SearchDirectorate"
                          Clearable="true"
-                         Required="true"
                          OnlyValidateIfDirty="true"
                          ResetValueOnEmptyText="true"
                          Value="@(new DirectorateInfo(){peo_DirectorateName=SelectedUser.peo_DirectorateName,peo_DirectorateID=SelectedUser.peo_DirectorateID})"
                          Text="@SelectedUser.peo_DirectorateName"
-                         Validation="@(new Func<DirectorateInfo, string>((e)=>e.ValidateField<DirectorateInfo>("peo_DirectorateID")))"
                          ValueChanged="@(async(e)=>await OnDirectorateChange(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
                          CoerceText="@true"
@@ -64,16 +65,18 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
                          Placeholder="Directorate" />
                     </div>
+                    }
+                    @if(SelectedUser.peo_UserTypeID==2){
+                         @* Required="true" *@
+                         @* Validation="@(new Func<WorkingPointInfo, string>((e)=>e.ValidateField<WorkingPointInfo>("wp_ID")))" *@
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudAutocomplete T="WorkingPointInfo" DebounceInterval="ClS_Config.debounce"
                          SearchFunc="@SearchWorkpoint"
                          Clearable="true"
-                         Required="true"
                          OnlyValidateIfDirty="true"
                          ResetValueOnEmptyText="true"
                          Value="@(new WorkingPointInfo(){wp_workpointName=SelectedUser.wp_workpointName,wp_ID=SelectedUser.peo_UserWorkPoint})"
                          Text="@SelectedUser.wp_workpointName"
-                         Validation="@(new Func<WorkingPointInfo, string>((e)=>e.ValidateField<WorkingPointInfo>("wp_ID")))"
                          ValueChanged="OnWorkpointChange"
                          ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
                          CoerceText="@true"
@@ -83,6 +86,7 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
                          Placeholder="Workpoint" />
                     </div>
+                    }
                     <div class="col-12">
                         <MudDivider/>
                     </div>
@@ -93,6 +97,7 @@
                 </div>
                 </MudForm>
             </MudTabPanel>
+            @if(SelectedUser.peo_UserID>0){
             <MudTabPanel Text="Roles">
                 <div class="row g-3 m-0 w-100">
                     <MudForm @ref="AddGroupForm">
@@ -110,6 +115,7 @@
                         T="GroupInfo"
                         Label="Roles" 
                         Required="true" 
+                        OnlyValidateIfDirty="true"
                         SearchFunc="SearchGroups"
                         Margin="@Margin.Dense" 
                         Dense="true" 
@@ -152,6 +158,7 @@
                         T="DataAccessPermissions"
                         Label="Privilage" 
                         Required="true" 
+                        OnlyValidateIfDirty="true"
                         SearchFunc="SearchPrivilages"
                         Margin="@Margin.Dense" 
                         Dense="true" 
@@ -177,6 +184,7 @@
                     </div>
                 </div>
             </MudTabPanel>
+            }
         </MudTabs>
     </div>
 </div>

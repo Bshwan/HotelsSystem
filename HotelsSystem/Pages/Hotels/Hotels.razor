@@ -7,7 +7,7 @@
     </div>
     <MudDivider/>
     <div class="col-12 d-flex">
-        <MudButton OnClick="@(async()=>await OpenDialog(0))" StartIcon="@Icons.Material.Filled.DomainAdd" Variant="Variant.Filled" Color="Color.Primary">@L["hotel-list"]</MudButton>
+        <MudButton OnClick="@(async()=>await OpenDialog(0))" StartIcon="@Icons.Material.Filled.DomainAdd" Variant="Variant.Filled" Color="Color.Primary">@L["add-hotel"]</MudButton>
     </div>
     <div class="col-12">
         <MudTable @ref="table" ServerData="@(new Func<TableState,Task<TableData<HotelsInfo>>>(GetPaginatedItems))" T="HotelsInfo" 
