@@ -22,12 +22,13 @@
                      @bind-Value="Filter.htl_Name" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="@L["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             </ToolBarContent>
             <HeaderContent>
-                <MudTh><MudTableSortLabel  SortLabel="peo_userFullName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="peo_userFullName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="usT_userType" SortBy="new Func<HotelsInfo, object>(x=>x.HTT_Type.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_Address" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["address"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_Star" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Star)">@L["stars"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_EntryByName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_EntryByName.ToEmptyOnNull())">@L["entry-by"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="htl_EntryDate" SortBy="new Func<HotelsInfo, object>(x=>x.htl_EntryDate.ToyyyyMMddElseEmpty())">@L["entry-date"]</MudTableSortLabel></MudTh>
+                <MudTh></MudTh>
             </HeaderContent>
             <RowTemplate>
                 <MudTd><MudLink Underline="Underline.Always" @onclick="@(async()=>await OpenDialog(context.htl_ID))">@context.htl_Name</MudLink></MudTd>
@@ -36,6 +37,8 @@
                 <MudTd DataLabel="Sign"><MudRating ReadOnly="true" SelectedValue="@context.htl_Star" /></MudTd>
                 <MudTd>@context.htl_EntryByName</MudTd>
                 <MudTd>@context.htl_EntryDate.ToddMMyyyyhhmmsstt()</MudTd>
+                <MudTd Class="text-end"><MudIconButton @onclick="@(()=>OpenUsersModal(context.htl_ID))" Icon="@Icons.Filled.SupervisedUserCircle" Color="Color.Primary"></MudIconButton></MudTd>
+
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />

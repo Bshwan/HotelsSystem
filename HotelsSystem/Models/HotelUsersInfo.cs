@@ -13,7 +13,7 @@ public class HotelUsersInfo
     public string? htlus_Mobile { get; set; }
     public string? htlus_Note { get; set; }
     public int htlus_LanguageID { get; set; }
-    public bool htlus_Active { get; set; }
+    public bool htlus_Active { get; set; }=true;
     public string? htlus_EntryByName { get; set; }
     public string? htlus_EntryDate { get; set; }
 

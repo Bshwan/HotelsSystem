@@ -24,11 +24,11 @@ public class GuestDetailsInfo
     public string? htl_Name { get; set; }
     public string? htl_Address { get; set; }
     public int GM_Room { get; set; }
-    public string htr_Detail { get; set; }
+    public string? htr_Detail { get; set; }
     public int htr_Type { get; set; }
-    public string cfg_HTR_Type { get; set; }
+    public string? cfg_HTR_Type { get; set; }
     public int htr_FloorID { get; set; }
-    public string htf_FloorName { get; set; }
+    public string? htf_FloorName { get; set; }
     public int htr_NumberOfBed { get; set; }
     //public DateTime GM_CheckIn { get; set; }
     //public DateTime GM_CheckOut { get; set; }

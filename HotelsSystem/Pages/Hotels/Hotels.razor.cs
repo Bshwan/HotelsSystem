@@ -65,9 +65,22 @@ public partial class Hotels
         var modal = DialogService.Show<AddHotel>("Add Hotel", parameters, options);
         var ModalResult = await modal.Result;
         
-        System.Console.WriteLine(ModalResult.Cancelled);
-        
         if (!ModalResult.Cancelled)
             await table!.ReloadServerData();
+    }
+    private void OpenUsersModal(int id){
+		var options = new DialogOptions {
+            CloseOnEscapeKey = true,
+            CloseButton = true,
+            Position = DialogPosition.TopCenter,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true,
+        };
+        var parameters = new DialogParameters();
+        parameters.Add("config", config);
+        parameters.Add("hotel", hotel);
+        parameters.Add("HotelID", id);
+
+        DialogService.Show<HotelUsers>("Users",parameters, options);
     }
 }

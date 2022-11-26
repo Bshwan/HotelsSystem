@@ -11,5 +11,4 @@ public class WorkingPointInfo
     public int per_ID { get; set; }
     public string? peo_UserName { get; set; }
     public string? wp_locationText { get; set; }
-
 }
