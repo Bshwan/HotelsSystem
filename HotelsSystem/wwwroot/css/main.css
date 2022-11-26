@@ -12,10 +12,6 @@
     line-height: initial;
 }
 
-.mud-input.mud-input-outlined:focus-within .mud-input-outlined-border{
-    border-color: var(--mud-palette-primary-lighten) !important;
-}
-
 .square-btn{
     height: 2.5rem;
     width: 2.5rem;

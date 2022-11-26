@@ -44,12 +44,6 @@
     border-radius: .3rem !important;
 }
 
-.mud-icon-button {
-    transition: 0s !important;
-    height: 100% !important;
-    border-radius: 0 !important;
-}
-
 .z-plus-10 {
     z-index: +10;
 }
