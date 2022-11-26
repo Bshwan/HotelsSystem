@@ -38,4 +38,16 @@ public class ClS_Hotels
         
         };
     }
+    public async Task<AddHotelAddUserCombos> AddHotelAddUserCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
+    {
+        var result = await _db.GetMultiple<HotelUserTypeComboBox, LanguageInfo>(
+                "Pro_GetCMB",
+                new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
+        return new AddHotelAddUserCombos()
+        {
+           HotelUserTypes  = result.Item1,
+            Languages = result.Item2,
+        
+        };
+    }
 }

@@ -2,7 +2,7 @@
 
 @if(config!=null){
     <div class="row g-3 m-0 w-100">
-        <MudForm @ref="AddForm">
+        <MudForm @ref="AddForm" Class="row g-3 m-0 w-100 p-0">
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
             <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label="Name" Variant="Variant.Outlined"></MudTextField>
         </div>
@@ -15,14 +15,13 @@
                          ResetValueOnEmptyText="true"
                          Value="@(new UserInfo(){peo_UserName=SelectedDirectorate.peo_UserName,peo_UserID=SelectedDirectorate.peo_dirAdminUserID})"
                          Text="@SelectedDirectorate.peo_UserName"
-                         Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_dirAdminUserID")))"
+                         Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))"
                          ValueChanged="@((e)=>OnUserChanged(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
                          CoerceText="@true"
                          Label="User"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
-                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder=@L["user"]  />
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
 
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
@@ -62,7 +61,7 @@
                     </MudTd>
                     <MudTd DataLabel="">@context.peo_UserName</MudTd>
                     <MudTd Class="text-end">
-                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" OnClick="@(async()=> await GetDirectorateByID(context.peo_DirectorateID))"  Color="Color.Error" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetDirectorateByID(context.peo_DirectorateID))"  Color="Color.Primary" />
                     </MudTd>
                 </RowTemplate>
 

@@ -30,8 +30,7 @@ public partial class Hotels
 
     private async Task<TableData<HotelsInfo>> GetPaginatedItems(TableState state)
     {
-        System.Console.WriteLine(hotel==null);
-        PaginatedItems = await hotel.HotelList<HotelsInfo>(
+        PaginatedItems = await hotel!.HotelList<HotelsInfo>(
             SelectPro: 1,
             PageNumber: state.Page + 1,
             PageSize: state.PageSize,
@@ -66,9 +65,22 @@ public partial class Hotels
         var modal = DialogService.Show<AddHotel>("Add Hotel", parameters, options);
         var ModalResult = await modal.Result;
         
-        System.Console.WriteLine(ModalResult.Cancelled);
-        
         if (!ModalResult.Cancelled)
             await table!.ReloadServerData();
+    }
+    private void OpenUsersModal(int id){
+		var options = new DialogOptions {
+            CloseOnEscapeKey = true,
+            CloseButton = true,
+            Position = DialogPosition.TopCenter,
+            MaxWidth = MaxWidth.Large,
+            FullWidth = true,
+        };
+        var parameters = new DialogParameters();
+        parameters.Add("config", config);
+        parameters.Add("hotel", hotel);
+        parameters.Add("HotelID", id);
+
+        DialogService.Show<HotelUsers>("Users",parameters, options);
     }
 }

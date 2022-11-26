@@ -38,7 +38,7 @@ public class ClS_UserManagement
 
     public async Task<UserCombos> UserCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
     {
-        var result = await _db.GetMultiple<GroupInfo, DataAccessPermissions, LanguageInfo,DirectorateInfo,UserTypesInfo>(
+        var result = await _db.GetMultiple<GroupInfo, DataAccessPermissions, LanguageInfo,DirectorateInfo,UserTypesInfo,WorkingPointInfo>(
                 "Pro_GetCMB",
                 new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
         return new UserCombos()
@@ -47,7 +47,8 @@ public class ClS_UserManagement
             Permissions = result.Item2,
             Languages = result.Item3,
             Directorates=result.Item4,
-            UserTypes=result.Item5
+            UserTypes=result.Item5,
+            WorkingPointsPerUser=result.Item6
         };
     }
     public async Task<WorkPointCombo> WorkPointComboBox(int SelectPro = 0, int ValID = 0, int IDTwo = 0)

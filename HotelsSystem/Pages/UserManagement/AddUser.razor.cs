@@ -25,6 +25,8 @@ public partial class AddUser
     MudForm? AddGroupForm;
     MudForm? AddPrivilageForm;
     MudForm? AddUserForm;
+    MudForm? AddWorkpointForm;
+    WorkingPointInfo SelectedUserWorkpoint = new WorkingPointInfo();
 
     protected override async Task OnParametersSetAsync()
     {
@@ -57,6 +59,10 @@ public partial class AddUser
     {
         combos.Groups = await config.GetCMB<GroupInfo>(SelectPro: 2, ValID: SelectedUser.peo_UserID);
     }
+    async Task GetWorkpoints()
+    {
+        combos.WorkingPoints = await config.GetCMB<WorkingPointInfo>(SelectPro: 10, ValID: SelectedUser.peo_UserID);
+    }
     async Task GetPrivilages()
     {
         combos.Permissions = await config.GetCMB<DataAccessPermissions>(SelectPro: 3, ValID: SelectedUser.peo_UserID);
@@ -76,6 +82,10 @@ public partial class AddUser
     async Task<IEnumerable<WorkingPointInfo>> SearchWorkpoint(string e)
     {
         return await Task.FromResult(combos.WorkingPoints.SearchAll<WorkingPointInfo>(e, "wp_workpointName"));
+    }
+    async Task<IEnumerable<WorkingPointInfo>> SearchWorkpointPerUser(string e)
+    {
+        return await Task.FromResult(combos.WorkingPointsPerUser.SearchAll<WorkingPointInfo>(e, "wp_workpointName"));
     }
     void OnSelectedLanguageChange(LanguageInfo e)
     {
@@ -125,6 +135,17 @@ public partial class AddUser
         }
         SelectedUser.wp_workpointName = e.wp_workpointName;
         SelectedUser.peo_UserWorkPoint = e.wp_ID;
+    }
+    void OnUserWorkpointChange(WorkingPointInfo e)
+    {
+        if (e == null)
+        {
+            SelectedUserWorkpoint.wp_ID = 0;
+            SelectedUserWorkpoint.wp_workpointName = string.Empty;
+            return;
+        }
+        SelectedUserWorkpoint.wp_ID = e.wp_ID;
+        SelectedUserWorkpoint.wp_workpointName = e.wp_workpointName;
     }
     void OnGroupChange(GroupInfo e)
     {
@@ -188,6 +209,40 @@ public partial class AddUser
         {
             await GetGroups();
             SelectedGroup = new GroupInfo();
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
+    }
+    async Task InsertUpdateUserWorkpoint()
+    {
+        await AddGroupForm!.Validate();
+        if (!AddGroupForm.IsValid)
+            return;
+
+        SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
+            SelectPro: 8,
+            PermissionID: SelectedUserWorkpoint.wp_ID,
+            UsersID: SelectedUser.peo_UserID);
+
+        if (result.Result == 1)
+        {
+            await GetWorkpoints();
+            SelectedUserWorkpoint=new WorkingPointInfo();
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
+    }
+    async Task DeleteUserWorkpoint(int id)
+    {
+        SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
+            SelectPro: 9,
+            PermissionID: id);
+
+        if (result.Result == 1)
+        {
+            await GetWorkpoints();
             Toaster.Success(".", result.MSG);
             return;
         }
