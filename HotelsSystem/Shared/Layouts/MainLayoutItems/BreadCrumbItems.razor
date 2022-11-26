@@ -1,0 +1,10 @@
+﻿@implements IDisposable
+@using System.Text.RegularExpressions
+
+<MudPaper Outlined="true" Elevation="0" Class="px-2 m-3">
+
+    <BreadCrumbFun ParentID=@FindPage() FindPageResult=@FindPage() NotFirstTime=false></BreadCrumbFun>
+    
+    <MudBreadcrumbs Items="BreadCrumbResult.items"></MudBreadcrumbs>
+
+</MudPaper>

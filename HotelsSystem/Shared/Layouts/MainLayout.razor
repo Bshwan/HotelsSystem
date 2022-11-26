@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-
+@using HotelsSystem.Shared.Layouts.MainLayoutItems;
 <MudRTLProvider RightToLeft="@(!System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.Equals("en"))">
 
     <Sotsera.Blazor.Toaster.ToastContainer></Sotsera.Blazor.Toaster.ToastContainer>
@@ -16,9 +16,11 @@
             <div class="top-row px-4">
                 <ChangeLanguage></ChangeLanguage>
             </div>
-            @* <MudPaper Outlined="true" Elevation="0" Class="px-2 m-3">
-                <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-            </MudPaper> *@
+            @*<MudPaper Outlined="true" Elevation="0" Class="px-2 m-3">
+                <MudBreadcrumbs  Items="_items"></MudBreadcrumbs>
+            </MudPaper>*@
+                    <BreadCrumbItems></BreadCrumbItems>
+            
             <article class="content px-2 pt-2 pb-4">
                 <div class="container-fluid">
                     @Body
@@ -34,6 +36,7 @@
     public void rtlToggle(){
         rtl = !rtl;
     }
+
     private List<BreadcrumbItem> _items = new List<BreadcrumbItem>
     {
         new BreadcrumbItem("Home", href: "#"),
