@@ -11,16 +11,30 @@
 
 <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
     <MudNavMenu Color="Color.Primary" Class="mud-width-full py-3">
+        @foreach (var item in Nav)
+        {
+            @if(item.nav_parentId<=0 && !item.nav_isParent){
+        <MudNavLink Href="@item.nav_controller" Icon="@GetIconByText(item.nav_Icon.ToEmptyOnNull())">@L[item.nav_NameOption.ToEmptyOnNull()]</MudNavLink>
+            }else if(item.nav_isParent && item.nav_parentId==0)
+            {
+        <MudNavGroup Title="@L[item.nav_NameOption.ToEmptyOnNull()]" Icon="@GetIconByText(item.nav_Icon.ToEmptyOnNull())">
+            @foreach (var item in Nav.Where(x=>x.nav_parentId==item.nav_Id && !x.nav_isParent))
+            {
+        <MudNavLink Href="@item.nav_controller" Icon="@GetIconByText(item.nav_Icon.ToEmptyOnNull())">@L[item.nav_NameOption.ToEmptyOnNull()]</MudNavLink>
+            }
+        </MudNavGroup>
+            }
+            
+        }
         @* <MudNavLink Href="/home" Match="NavLinkMatch.Prefix" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>
         <MudNavLink Href="/counter" Icon="@Icons.Filled.Storage">Servers</MudNavLink> *@
-        <MudNavLink Href="@Routing.hotels" Icon="@Icons.Filled.Domain">@L["hotels"]</MudNavLink>
-        <MudNavLink Href="@Routing.config" Icon="@Icons.Filled.Settings">@L["configurations"]</MudNavLink>
+        @* <MudNavLink Href="@Routing.config" Icon="@Icons.Filled.Settings">@L["configurations"]</MudNavLink>
         <MudNavGroup @bind-Expanded="_isNavExpanded" Title="User Managment" Icon="@Icons.Filled.AdminPanelSettings">
-        <MudNavLink Href="@Routing.userlist" Icon="@Icons.Filled.People">@L["user-list"]</MudNavLink>
+        <MudNavLink Href="@Routing.userlist" Icon="@Icons.Filled.People">@L["user-list"]</MudNavLink> *@
             @* <MudNavLink Href="/admins" Icon="@Icons.Filled.People">Admins</MudNavLink>
             <MudNavLink Href="/addAdmin" Icon="@Icons.Filled.AddModerator">Add Admin</MudNavLink> *@
-            <MudNavLink Href="@Routing.roles" Icon="@Icons.Filled.Security">@L["roles"]</MudNavLink>
-        </MudNavGroup>
+            @* <MudNavLink Href="@Routing.roles" Icon="@Icons.Filled.Security">@L["roles"]</MudNavLink>
+        </MudNavGroup> *@
         @* <MudNavGroup Title="User Management" Icon="@Icons.Filled.ManageAccounts">
             <MudNavLink Href="/users" Icon="@Icons.Filled.People">Users</MudNavLink>
             <MudNavLink Href="/addUser" Icon="@Icons.Filled.PersonAdd">Add User</MudNavLink>
@@ -33,13 +47,5 @@
 </div>
 
 @code {
-    bool _isNavExpanded = true;
-    private bool collapseNavMenu = true;
-
-    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
-
-    private void ToggleNavMenu()
-    {
-        collapseNavMenu = !collapseNavMenu;
-    }
+    
 }

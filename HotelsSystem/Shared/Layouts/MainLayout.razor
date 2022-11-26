@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
-
+@inject IJSRuntime jSRuntime;
+@inject NavigationManager nav;
 <MudRTLProvider RightToLeft="@(!System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.Equals("en"))">
 
     <Sotsera.Blazor.Toaster.ToastContainer></Sotsera.Blazor.Toaster.ToastContainer>
@@ -15,6 +16,7 @@
         <main>
             <div class="top-row px-4">
                 <ChangeLanguage></ChangeLanguage>
+                <MudIconButton OnClick="Logout" DisableElevation Icon="@Icons.Filled.Logout" Variant="Variant.Filled" Color="Color.Primary"></MudIconButton>
             </div>
             @* <MudPaper Outlined="true" Elevation="0" Class="px-2 m-3">
                 <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
@@ -28,3 +30,9 @@
     </div>
 
 </MudRTLProvider>
+@code{
+async Task Logout(){
+    await jSRuntime.InvokeVoidAsync("blazorExtensions.delete_cookie",Util.CookieName);
+    nav.NavigateTo(Routing.defaultpage);
+}
+}
