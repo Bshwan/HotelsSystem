@@ -1,4 +1,8 @@
-﻿namespace HotelsSystem.Shared.Modals
+﻿using Blazored.Modal.Services;
+using HotelsSystem.Data;
+using Microsoft.Identity.Client;
+
+namespace HotelsSystem.Shared.Modals
 {
     public partial class AddRole
     {
@@ -6,7 +10,7 @@
         MudDialogInstance MudDialog { get; set; } = default!;
 
         [Parameter]
-        public int ID { get; set; }= 0;
+        public int ID { get; set; } = 0;
 
         [Inject]
         protected ISqlDataAccess DB { get; set; } = default!;
@@ -19,30 +23,64 @@
 
         private ClS_Config config = default!;
         ClS_UserManagement mgmt = default!;
+        public GroupInfo SelectedGroup = new GroupInfo();
 
         private PermissionsPerGroups SelectedPermission = new PermissionsPerGroups();
         private IEnumerable<PermissionsPerGroups> combo = Enumerable.Empty<PermissionsPerGroups>();
-        MudForm? AddForm;
+        MudForm? NameForm;
+        MudForm? PermissionForm;
 
-        void Submit() => MudDialog.Close(DialogResult.Ok(true));
+
         void Cancel() => MudDialog.Cancel();
 
-        private int UserID = 0;
         protected override async Task OnInitializedAsync()
         {
             var session = await Protection.GetDecryptedSession(jSRuntime, DB);
             config = new ClS_Config(DB, session);
             mgmt = new ClS_UserManagement(DB, session);
+            await GetGroupByID(ID);
+
             await GetCombo();
+
         }
         private async Task GetCombo()
         {
-            combo = await config.GetCMB<PermissionsPerGroups>(SelectPro: 4,ValID:ID);
+            combo = await config.GetCMB<PermissionsPerGroups>(SelectPro: 4, ValID: ID);
         }
-        
+
+        private async Task GetGroupByID(int id)
+        {
+            SelectedGroup = await config.GetOneInfo<GroupInfo>(SelectPro: 1, ValID: id);
+        }
+
+
+
+        public async Task InsertUpdateGroup()
+        {
+            await NameForm!.Validate();
+            if (!NameForm.IsValid)
+                return;
+
+            SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
+            SelectPro: 1,
+            PermissionID: SelectedGroup.group_ID,
+            GroupName: SelectedGroup.group_Name.ToEmptyOnNull()
+            );
+
+            if (result.Result == 1)
+            {
+                //SelectedGroup = new GroupInfo();
+                //MudDialog.Close(DialogResult.Ok(true));
+                //await GetGroupByID();
+                Toaster.Success(".", result.MSG);
+                return;
+            }
+            Toaster.Error(".", result.MSG);
+        }
+
         private async Task<IEnumerable<PermissionsPerGroups>> SearchPermission(string val)
         {
-            return await Task.FromResult(combo.Where(x => x.peo_DataRole.ToEmptyOnNull().Contains(val.ToEmptyOnNull()) && x.HasRole==0));
+            return await Task.FromResult(combo.Where(x => x.peo_DataRole.ToEmptyOnNull().Contains(val.ToEmptyOnNull()) && x.HasRole == 0));
         }
 
         private void OnPermissionChanged(PermissionsPerGroups e)
@@ -61,13 +99,13 @@
 
         public async Task InsertPermission()
         {
-            await AddForm!.Validate();
-            if (!AddForm.IsValid)
+            await PermissionForm!.Validate();
+            if (!PermissionForm.IsValid)
                 return;
 
             SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
             SelectPro: 4,
-            PermissionID:ID,
+            PermissionID: ID,
             UsersID: SelectedPermission.peo_DataRoleID);
 
             if (result.Result == 1)
@@ -82,7 +120,7 @@
 
         public async Task DeletePermission(int perID)
         {
-           
+
 
             SPResult result = await mgmt.InsertDeletePermissions<SPResult>(
             SelectPro: 5,
