@@ -13,6 +13,7 @@ public class HotelRoomsInfo
     public int htr_Type { get; set; }
     public string? cfg_HTR_Type { get; set; }
     public int htr_NumberOfBed { get; set; }
+    public int htr_Status { get; set; }
     public string? htr_EntryByName { get; set; }
     public DateTime htr_EntryDate { get; set; }
 
