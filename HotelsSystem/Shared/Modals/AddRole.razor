@@ -37,12 +37,9 @@
                     <div class="col-12">
                         <MudField Label="Privileges" Margin="@Margin.Dense" Variant="Variant.Outlined">
                             @*<MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Text" Color="Color.Primary"/>*@
-                        @foreach (var per in combo)
+                        @foreach (var per in combo.Where(x=>x.HasRole==1))
                         {
-                            @if (per.HasRole == 1)
-                            {
                                 <MudChip Icon="@Icons.Filled.Close" @onclick="@(async()=> await DeletePermission(per.per_ID))" Variant="Variant.Text" Color="Color.Primary">@per.peo_DataRole</MudChip>
-                            }
                         }
                             </MudField>
                             @*<MudIconButton Class="ms-2 square-btn" @onclick="@(async()=> await InsertPermission())" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary" />*@
