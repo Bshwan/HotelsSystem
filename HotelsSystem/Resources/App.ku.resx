@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -119,198 +119,225 @@
   </resheader>
   <data name="hotel" xml:space="preserve">
     <value>هۆتێل</value>
-    <comment/>
+    <comment />
   </data>
   <data name="hotels" xml:space="preserve">
     <value>هۆتێلەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="hotel-list" xml:space="preserve">
     <value>لیستی هۆتێلەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="name" xml:space="preserve">
     <value>ناو</value>
-    <comment/>
+    <comment />
   </data>
   <data name="star" xml:space="preserve">
     <value>ئەستێرە</value>
-    <comment/>
+    <comment />
   </data>
   <data name="stars" xml:space="preserve">
     <value>ئەستێرە</value>
-    <comment/>
+    <comment />
   </data>
   <data name="room" xml:space="preserve">
     <value>ژوور</value>
-    <comment/>
+    <comment />
   </data>
   <data name="rooms" xml:space="preserve">
     <value>ژوور</value>
-    <comment/>
+    <comment />
   </data>
   <data name="location" xml:space="preserve">
     <value>شوێن</value>
-    <comment/>
+    <comment />
   </data>
   <data name="address" xml:space="preserve">
-    <value>ناونیشان</value>
-    <comment/>
+    <value>ناونیشان بەڕێوبەر</value>
+    <comment />
   </data>
   <data name="full-address" xml:space="preserve">
     <value>ناونیشانی تەواو</value>
-    <comment/>
+    <comment />
   </data>
   <data name="area" xml:space="preserve">
     <value>ناوچە</value>
-    <comment/>
+    <comment />
   </data>
   <data name="street" xml:space="preserve">
     <value>شەقام</value>
-    <comment/>
+    <comment />
   </data>
   <data name="number" xml:space="preserve">
     <value>ژمارە</value>
-    <comment/>
+    <comment />
   </data>
   <data name="full-name" xml:space="preserve">
     <value>ناوی چواری</value>
-    <comment/>
+    <comment />
   </data>
   <data name="username" xml:space="preserve">
     <value>ناوی بەکارهێنەر</value>
-    <comment/>
+    <comment />
   </data>
   <data name="password" xml:space="preserve">
     <value>وشەی نهێنی</value>
-    <comment/>
+    <comment />
   </data>
   <data name="phone" xml:space="preserve">
     <value>مۆبایل</value>
-    <comment/>
+    <comment />
   </data>
   <data name="phone-number" xml:space="preserve">
     <value>ژمارەی مۆبایل</value>
-    <comment/>
+    <comment />
   </data>
   <data name="email" xml:space="preserve">
     <value>ئیمەیڵ</value>
-    <comment/>
+    <comment />
   </data>
   <data name="save" xml:space="preserve">
     <value>پاشەکەوت کردن</value>
-    <comment/>
+    <comment />
   </data>
   <data name="cancel" xml:space="preserve">
     <value>پاشگەزبوونەوە</value>
-    <comment/>
+    <comment />
   </data>
   <data name="add" xml:space="preserve">
     <value>زیادکردن</value>
-    <comment/>
+    <comment />
   </data>
   <data name="add-hotel" xml:space="preserve">
     <value>زیادکردنی هۆتێل</value>
-    <comment/>
+    <comment />
   </data>
   <data name="search" xml:space="preserve">
     <value>گەڕان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="guest" xml:space="preserve">
     <value>میوان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="guest-list" xml:space="preserve">
     <value>لیستی میوانەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="hotel-name" xml:space="preserve">
     <value>ناوی هۆتێل</value>
-    <comment/>
+    <comment />
   </data>
   <data name="room-number" xml:space="preserve">
     <value>ژمارەی ژوورەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="check-in" xml:space="preserve">
     <value>تۆماری هاتن</value>
-    <comment/>
+    <comment />
   </data>
   <data name="check-out" xml:space="preserve">
     <value>تۆماری دەرچوون</value>
-    <comment/>
+    <comment />
   </data>
   <data name="rows-per-page" xml:space="preserve">
     <value>ژمارەی ڕیز</value>
-    <comment/>
+    <comment />
   </data>
   <data name="configrations" xml:space="preserve">
     <value>ڕێکخستنەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="directories" xml:space="preserve">
     <value>بەڕێوبەرایەتیەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="directory" xml:space="preserve">
     <value>بەڕێوبەرایەتی</value>
-    <comment/>
+    <comment />
   </data>
   <data name="user" xml:space="preserve">
     <value>بەکارهێنەر</value>
-    <comment/>
+    <comment />
   </data>
   <data name="workplace" xml:space="preserve">
     <value>شوێنی کار</value>
-    <comment/>
+    <comment />
   </data>
   <data name="workplaces" xml:space="preserve">
     <value>شوێن کارەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="admin" xml:space="preserve">
-    <value>بەڕێەبەر</value>
-    <comment/>
+    <value>بەڕێوبەر</value>
+    <comment />
   </data>
   <data name="admins" xml:space="preserve">
     <value>بەڕێەبەرەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="type" xml:space="preserve">
     <value>جۆر</value>
-    <comment/>
+    <comment />
   </data>
   <data name="mobile" xml:space="preserve">
     <value>ژمارەی مۆبایل</value>
-    <comment/>
+    <comment />
   </data>
   <data name="language" xml:space="preserve">
     <value>زمان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="user-type" xml:space="preserve">
     <value>جۆری بەکارهێنەر</value>
-    <comment/>
+    <comment />
   </data>
   <data name="role" xml:space="preserve">
     <value>گروپی مافەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="roles" xml:space="preserve">
     <value>گروپی مافەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="privilege" xml:space="preserve">
     <value>ماف</value>
-    <comment/>
+    <comment />
   </data>
   <data name="privileges" xml:space="preserve">
     <value>مافەکان</value>
-    <comment/>
+    <comment />
   </data>
   <data name="add-role" xml:space="preserve">
     <value>زیادکردنی گروپی مافەکان</value>
-    <comment/>
+    <comment />
+  </data>
+  <data name="add-admin" xml:space="preserve">
+    <value>زیادکردنی</value>
+  </data>
+  <data name="entry-date" xml:space="preserve">
+    <value>بەرواری داخڵکردن</value>
+  </data>
+  <data name="entry-by" xml:space="preserve">
+    <value>داخڵکردن لەلایەن</value>
+  </data>
+  <data name="add-user" xml:space="preserve">
+    <value>زیادکردنی بەکارهێنەر </value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>بەکارهێنەران</value>
+  </data>
+  <data name="directorate-name" xml:space="preserve">
+    <value>ناوی بەڕێوەبەرایەتی</value>
+  </data>
+  <data name="workpoint-name" xml:space="preserve">
+    <value>ناوی خاڵی کارکردن</value>
+  </data>
+  <data name="created-date" xml:space="preserve">
+    <value>بەرواری دروستکراو</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>چالاک</value>
   </data>
 </root>
