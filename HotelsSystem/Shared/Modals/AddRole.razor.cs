@@ -72,7 +72,6 @@ namespace HotelsSystem.Shared.Modals
                 if(int.TryParse(result.LastValue , out int val )&& val > 0)
                 {
                     await GetGroupByID(val);
-
                 }
                 else
                 {
