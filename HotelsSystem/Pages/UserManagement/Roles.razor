@@ -26,7 +26,7 @@
             </MudForm>*@
 
              <div class="col-12 d-flex">
-            <MudButton @onclick="@(()=>AddRoleModal(0))" StartIcon="@Icons.Filled.HealthAndSafety" Variant="Variant.Filled" Color="Color.Primary">Add Role</MudButton>
+            <MudButton @onclick="@(async()=> await AddRoleModal(0))" StartIcon="@Icons.Filled.HealthAndSafety" Variant="Variant.Filled" Color="Color.Primary">Add Role</MudButton>
             </div>
             <div class="col-12">
                 <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
@@ -49,7 +49,7 @@
                         <MudTd DataLabel="">@context.group_Name</MudTd>
                        
                         <MudTd Class="text-end">
-                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(()=>AddRoleModal(context.group_ID))" Color="Color.Primary" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await AddRoleModal(context.group_ID))" Color="Color.Primary" />
                         </MudTd>
                       
                     </RowTemplate>

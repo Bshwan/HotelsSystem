@@ -1,8 +1,4 @@
-﻿using Blazored.Modal.Services;
-using HotelsSystem.Data;
-using Microsoft.Identity.Client;
-
-namespace HotelsSystem.Shared.Modals
+﻿namespace HotelsSystem.Shared.Modals
 {
     public partial class AddRole
     {

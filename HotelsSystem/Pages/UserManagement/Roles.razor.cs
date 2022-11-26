@@ -1,8 +1,5 @@
 namespace HotelsSystem.Pages.UserManagement;
-using HotelsSystem.Data;
-using System.Reflection;
 
-namespace HotelsSystem.Pages.Admins;
 public partial class Roles
 {
     [Inject]
@@ -52,7 +49,7 @@ public partial class Roles
         return new TableData<GroupInfo>() { TotalItems = PaginatedGroups.TotalItems, Items = PaginatedGroups.Items };
     }
 
-    private async void AddRoleModal(int ID)
+    private async Task AddRoleModal(int ID)
     {
         var options = new DialogOptions
         {
