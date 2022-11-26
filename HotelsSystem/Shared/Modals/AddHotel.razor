@@ -81,9 +81,9 @@
                 </div>
                 </MudForm>
             </MudTabPanel>
-            @* <MudTabPanel Text="Admin Informations">
-                <div class="row gy-3 gx-2">
-                    <div class="col-12">
+            <MudTabPanel Text="Admin Informations">
+                <MudForm class="row gy-3 gx-2">
+                    @* <div class="col-12">
                         <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
@@ -100,9 +100,9 @@
                     </div>
                     <div class="col-12">
                         <MudDivider/>
-                    </div>
-                </div>
-            </MudTabPanel> *@
+                    </div> *@
+                </MudForm>
+            </MudTabPanel>
         </MudTabs>
     </DialogContent>
     <DialogActions>
