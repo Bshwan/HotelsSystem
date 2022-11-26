@@ -1,4 +1,4 @@
-namespace HotelsSystem.Pages.Admins;
+namespace HotelsSystem.Pages.UserManagement;
 public partial class Roles
 {
     [Inject]
