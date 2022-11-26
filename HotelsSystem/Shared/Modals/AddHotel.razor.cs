@@ -129,6 +129,9 @@ public partial class AddHotel
     async Task GetHotelUser()
     {
         SelectedHotelUser = await config.GetOneInfo<HotelUsersInfo>(SelectPro: 8, ValID: SelectedHotel.htl_ID);
+
+        if(!SelectedHotelUser.htlus_Password.IsStringNullOrWhiteSpace())
+        SelectedHotelUser.htlus_Password=func.decr_pass(SelectedHotelUser.htlus_Password);
     }
     void OnSelectedLanguageChange(LanguageInfo e)
     {
@@ -156,6 +159,7 @@ public partial class AddHotel
 
         SPResult result = await hotel.InsertUpdateHotels<SPResult>(
             SelectPro: 2,
+            ValID:SelectedHotelUser.htlus_ID,
             HotelName: SelectedHotelUser.htlus_Name.ToEmptyOnNull(),
             HotelAddress: SelectedHotelUser.htlus_FullName.ToEmptyOnNull(),
             Note: func.encr_pass(SelectedHotelUser.htlus_Password.ToEmptyOnNull()),

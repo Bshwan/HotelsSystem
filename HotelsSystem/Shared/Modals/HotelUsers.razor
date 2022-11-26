@@ -1,0 +1,36 @@
+@inject IStringLocalizer<App> L
+<MudDialog ClassActions="px-5 pb-4">
+    <DialogContent>
+        <MudContainer Style="max-height: 78vh; overflow-y: scroll">
+            <div class="row gy-3 gx-2">
+                <div class="col-12">
+                    <MudTable @ref="table" ServerData="@(new Func<TableState,Task<TableData<HotelUsersInfo>>>(GetPaginatedItems))" T="HotelUsersInfo"
+                         Outlined="false" Elevation="0" Dense="true" Hover="true" ReadOnly="true" SortLabel="Sort By">
+                <ToolBarContent>
+                    <MudTextField DebounceInterval="ClS_Config.debounce" OnDebounceIntervalElapsed="OnSearch"
+                     @bind-Value="Search" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="@L["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+                </ToolBarContent>
+                <HeaderContent>
+                    <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="htlus_Name" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Name.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="htlus_FullName" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_FullName.ToEmptyOnNull())">@L["full-name"]</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="htlustype_Name" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlustype_Name.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="htlus_Active" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Active)">@L["active"]</MudTableSortLabel></MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                <MudTd>@context.htlus_Name</MudTd>
+                <MudTd>@context.htlus_FullName</MudTd>
+                <MudTd>@context.htlustype_Name</MudTd>
+                <MudTd>@context.htlus_Active</MudTd>
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+                </div>
+            </div>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="@(()=>MudDialog.Cancel())">@L["cancel"]</MudButton>
+    </DialogActions>
+</MudDialog>
