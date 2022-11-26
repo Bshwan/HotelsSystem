@@ -343,4 +343,10 @@
   <data name="english" xml:space="preserve">
     <value>ئینگلیزی</value>
   </data>
+  <data name="user-list" xml:space="preserve">
+    <value>لیستی بەکارهێنەران</value>
+  </data>
+  <data name="configurations" xml:space="preserve">
+    <value>ڕێکخستنەکان</value>
+  </data>
 </root>

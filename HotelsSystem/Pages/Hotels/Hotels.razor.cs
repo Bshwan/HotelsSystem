@@ -62,7 +62,7 @@ public partial class Hotels
         parameters.Add("hotel", hotel);
         parameters.Add("HotelID", id);
         
-        var modal = DialogService.Show<AddHotel>("Add Hotel", parameters, options);
+        var modal = DialogService.Show<AddHotel>(L["add-hotel"], parameters, options);
         var ModalResult = await modal.Result;
         
         if (!ModalResult.Cancelled)
