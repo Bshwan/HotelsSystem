@@ -18,8 +18,8 @@
         protected IDialogService DialogService { get; set; } = default!;
 
         private PagedResult<DirectorateInfo> PaginatedDirectorate = PagedResult<DirectorateInfo>.EmptyPagedResult();
-        private string SelectedColumnToSort = "peo_DirectorateID";
-        private SortDirections sort = SortDirections.ASC;
+        //private string SelectedColumnToSort = "peo_DirectorateID";
+        //private SortDirections sort = SortDirections.ASC;
         public DirectorateInfo SelectedDirectorate = new DirectorateInfo();
         public DirectorateInfo Filter = new DirectorateInfo();
 

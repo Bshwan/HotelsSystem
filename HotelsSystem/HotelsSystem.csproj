@@ -33,7 +33,7 @@
       <HintPath>DLLs\Extentions.dll</HintPath>
     </Reference>
     <Reference Include="MyFunctions">
-      <HintPath>DLLs\MyFunctions.dll</HintPath>
+      <HintPath>..\..\CRM_System\MyFunctions.dll</HintPath>
     </Reference>
   </ItemGroup>
 

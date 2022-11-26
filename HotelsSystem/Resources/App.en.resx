@@ -60,45 +60,45 @@
             : and then encoded with base64 encoding.
     -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -119,198 +119,225 @@
   </resheader>
   <data name="hotel" xml:space="preserve">
     <value>Hotel</value>
-    <comment/>
+    <comment />
   </data>
   <data name="hotels" xml:space="preserve">
     <value>Hotels</value>
-    <comment/>
+    <comment />
   </data>
   <data name="hotel-list" xml:space="preserve">
     <value>Hotel List</value>
-    <comment/>
+    <comment />
   </data>
   <data name="name" xml:space="preserve">
     <value>Name</value>
-    <comment/>
+    <comment />
   </data>
   <data name="star" xml:space="preserve">
     <value>Star</value>
-    <comment/>
+    <comment />
   </data>
   <data name="stars" xml:space="preserve">
     <value>Stars</value>
-    <comment/>
+    <comment />
   </data>
   <data name="room" xml:space="preserve">
     <value>Room</value>
-    <comment/>
+    <comment />
   </data>
   <data name="rooms" xml:space="preserve">
     <value>Rooms</value>
-    <comment/>
+    <comment />
   </data>
   <data name="location" xml:space="preserve">
     <value>Location</value>
-    <comment/>
+    <comment />
   </data>
   <data name="address" xml:space="preserve">
     <value>Address</value>
-    <comment/>
+    <comment />
   </data>
   <data name="full-address" xml:space="preserve">
     <value>Full Address</value>
-    <comment/>
+    <comment />
   </data>
   <data name="area" xml:space="preserve">
     <value>Area</value>
-    <comment/>
+    <comment />
   </data>
   <data name="street" xml:space="preserve">
     <value>Street</value>
-    <comment/>
+    <comment />
   </data>
   <data name="number" xml:space="preserve">
     <value>Number</value>
-    <comment/>
+    <comment />
   </data>
   <data name="full-name" xml:space="preserve">
     <value>Full Name</value>
-    <comment/>
+    <comment />
   </data>
   <data name="username" xml:space="preserve">
     <value>Username</value>
-    <comment/>
+    <comment />
   </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
-    <comment/>
+    <comment />
   </data>
   <data name="phone" xml:space="preserve">
     <value>Phone</value>
-    <comment/>
+    <comment />
   </data>
   <data name="phone-number" xml:space="preserve">
     <value>Phone Number</value>
-    <comment/>
+    <comment />
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
-    <comment/>
+    <comment />
   </data>
   <data name="save" xml:space="preserve">
     <value>Save</value>
-    <comment/>
+    <comment />
   </data>
   <data name="cancel" xml:space="preserve">
     <value>Cancel</value>
-    <comment/>
+    <comment />
   </data>
   <data name="add" xml:space="preserve">
     <value>Add</value>
-    <comment/>
+    <comment />
   </data>
   <data name="add-hotel" xml:space="preserve">
     <value>Add Hotel</value>
-    <comment/>
+    <comment />
   </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>
-    <comment/>
+    <comment />
   </data>
   <data name="guest" xml:space="preserve">
     <value>Guest</value>
-    <comment/>
+    <comment />
   </data>
   <data name="guest-list" xml:space="preserve">
     <value>Guest List</value>
-    <comment/>
+    <comment />
   </data>
   <data name="hotel-name" xml:space="preserve">
     <value>Hotel Name</value>
-    <comment/>
+    <comment />
   </data>
   <data name="room-number" xml:space="preserve">
     <value>Room Number</value>
-    <comment/>
+    <comment />
   </data>
   <data name="check-in" xml:space="preserve">
     <value>Check In</value>
-    <comment/>
+    <comment />
   </data>
   <data name="check-out" xml:space="preserve">
     <value>Check Out</value>
-    <comment/>
+    <comment />
   </data>
   <data name="rows-per-page" xml:space="preserve">
     <value>Rows per page</value>
-    <comment/>
+    <comment />
   </data>
   <data name="configrations" xml:space="preserve">
     <value>Configrations</value>
-    <comment/>
+    <comment />
   </data>
   <data name="directories" xml:space="preserve">
     <value>Directories</value>
-    <comment/>
+    <comment />
   </data>
   <data name="directory" xml:space="preserve">
     <value>Directory</value>
-    <comment/>
+    <comment />
   </data>
   <data name="user" xml:space="preserve">
     <value>User</value>
-    <comment/>
+    <comment />
   </data>
   <data name="workplace" xml:space="preserve">
-    <value>Workplaces</value>
-    <comment/>
+    <value>Workplace</value>
+    <comment />
   </data>
   <data name="admin" xml:space="preserve">
     <value>Admin</value>
-    <comment/>
+    <comment />
   </data>
   <data name="admins" xml:space="preserve">
     <value>Admins</value>
-    <comment/>
+    <comment />
   </data>
   <data name="type" xml:space="preserve">
     <value>Type</value>
-    <comment/>
+    <comment />
   </data>
   <data name="mobile" xml:space="preserve">
     <value>Mobile</value>
-    <comment/>
+    <comment />
   </data>
   <data name="language" xml:space="preserve">
     <value>Language</value>
-    <comment/>
+    <comment />
   </data>
   <data name="user-type" xml:space="preserve">
     <value>User Type</value>
-    <comment/>
+    <comment />
   </data>
   <data name="role" xml:space="preserve">
     <value>Role</value>
-    <comment/>
+    <comment />
   </data>
   <data name="roles" xml:space="preserve">
     <value>Roles</value>
-    <comment/>
+    <comment />
   </data>
   <data name="privilege" xml:space="preserve">
     <value>Privilege</value>
-    <comment/>
+    <comment />
   </data>
   <data name="privileges" xml:space="preserve">
     <value>Privileges</value>
-    <comment/>
+    <comment />
   </data>
   <data name="add-role" xml:space="preserve">
     <value>Add Role</value>
-    <comment/>
+    <comment />
   </data>
   <data name="add-admin" xml:space="preserve">
     <value>Add Admin</value>
-    <comment/>
+    <comment />
+  </data>
+  <data name="entry-date" xml:space="preserve">
+    <value>Entry Date</value>
+  </data>
+  <data name="entry-by" xml:space="preserve">
+    <value>Entry By</value>
+  </data>
+  <data name="add-user" xml:space="preserve">
+    <value>Add User</value>
+  </data>
+  <data name="users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="directorate-name" xml:space="preserve">
+    <value>Directorate Name</value>
+  </data>
+  <data name="workpoint-name" xml:space="preserve">
+    <value>Work Point Name</value>
+  </data>
+  <data name="workplaces" xml:space="preserve">
+    <value>Workplaces</value>
+  </data>
+  <data name="created-date" xml:space="preserve">
+    <value>Created Date</value>
+  </data>
+  <data name="active" xml:space="preserve">
+    <value>Active</value>
   </data>
 </root>

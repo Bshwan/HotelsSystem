@@ -1,6 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
-<MudRTLProvider RightToLeft="@rtl">
+<MudRTLProvider RightToLeft="@(!System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.Equals("en"))">
+
     <Sotsera.Blazor.Toaster.ToastContainer></Sotsera.Blazor.Toaster.ToastContainer>
     <MudThemeProvider IsDarkMode="!true"/>
     <MudDialogProvider/>

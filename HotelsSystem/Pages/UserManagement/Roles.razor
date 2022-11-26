@@ -11,7 +11,7 @@
         <MudDivider />
         <MudPaper Class="p-3 w-100 mt-4 m-0 row g-3">
 
-            <MudForm @ref="AddForm">
+           @* <MudForm @ref="AddForm">
                 <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                     <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedGroup.group_Name" Label="Name" Variant="Variant.Outlined"></MudTextField>
                 </div>
@@ -23,7 +23,11 @@
                 <div class="col-12 d-flex">
                 </div>
 
-            </MudForm>
+            </MudForm>*@
+
+             <div class="col-12 d-flex">
+            <MudButton @onclick="@(async()=> await AddRoleModal(0))" StartIcon="@Icons.Filled.HealthAndSafety" Variant="Variant.Filled" Color="Color.Primary">Add Role</MudButton>
+            </div>
             <div class="col-12">
                 <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
                       ServerData="@(new Func<TableState,Task<TableData<GroupInfo>>>(GetPaginatedGroups))"
@@ -37,20 +41,17 @@
                             </MudTableSortLabel>
                         </MudTh>
                         <MudTh></MudTh>
-                        <MudTh></MudTh>
 
                     </HeaderContent>
 
                     <RowTemplate>
                      
                         <MudTd DataLabel="">@context.group_Name</MudTd>
+                       
                         <MudTd Class="text-end">
-                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetGroupByID(context.group_ID))" Color="Color.Primary" />
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await AddRoleModal(context.group_ID))" Color="Color.Primary" />
                         </MudTd>
-                        <MudTd Class="text-end">
-                            <MudButton @onclick="@(()=>AddRoleModal(context.group_ID))" StartIcon="@Icons.Filled.HealthAndSafety" Variant="Variant.Filled" Color="Color.Primary">Add Role</MudButton>
-
-                        </MudTd>
+                      
                     </RowTemplate>
 
 
@@ -63,3 +64,4 @@
         </MudPaper>
     </div>
 }
+
