@@ -7,22 +7,20 @@
             <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label="Name" Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-
-            <MudAutocomplete T="UserInfo" DebounceInterval="ClS_Config.debounce"
+                         @* Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))" *@
+                         @* Required="true" *@
+                        <MudAutocomplete T="UserInfo" DebounceInterval="ClS_Config.debounce"
                          SearchFunc="@SearchUser"
                          Clearable="true"
-                         Required="true"
                          ResetValueOnEmptyText="true"
                          Value="@(new UserInfo(){peo_UserName=SelectedDirectorate.peo_UserName,peo_UserID=SelectedDirectorate.peo_dirAdminUserID})"
                          Text="@SelectedDirectorate.peo_UserName"
-                         Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))"
                          ValueChanged="@((e)=>OnUserChanged(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
                          CoerceText="@true"
                          Label="User"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
-
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
             <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@(async()=>await InsertUpdateDirectorate())" Variant="Variant.Filled" Color="Color.Primary" />
@@ -32,8 +30,7 @@
 
             <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
                   ServerData="@(new Func<TableState,Task<TableData<DirectorateInfo>>>(GetPaginatedItems))"
-                  TotalItems="PaginatedDirectorate.TotalItems" Items="@PaginatedDirectorate.Items" T="DirectorateInfo" Dense="true"
-                >
+                  TotalItems="PaginatedDirectorate.TotalItems" Items="@PaginatedDirectorate.Items" T="DirectorateInfo" Dense="true">
                @* <ToolBarContent>
                     <MudText Typo="Typo.h6">Directorate</MudText>
                     <MudSpacer />
@@ -43,12 +40,12 @@
                 <HeaderContent>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<DirectorateInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
-                            Directorate
+                            @L["directorate"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<DirectorateInfo, object>(x=>x.peo_UserName.ToEmptyOnNull())">
-                          Name
+                            @L["name"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh></MudTh>

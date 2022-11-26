@@ -340,4 +340,7 @@
   <data name="active" xml:space="preserve">
     <value>نشيط</value>
   </data>
+  <data name="english" xml:space="preserve">
+    <value>الإنجليزية</value>
+  </data>
 </root>
