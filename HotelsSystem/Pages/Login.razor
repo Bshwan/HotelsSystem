@@ -4,27 +4,27 @@
 
 <PageTitle>@L["login"]</PageTitle>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 col-lg-4 offset-lg-4 my-lg-5">
+            <MudPaper>
+                <EditForm class="d-flex flex-column p-3 my-lg-5 py-5" Model="Credentials" OnValidSubmit=@(async()=>await login())>
+                    <MudText Typo="Typo.body1">
+                        @L["login"]
+                    </MudText>
+                    <MudTextField Class="mt-3" Required Margin="@Margin.Dense" @bind-Value="Credentials.UserName" Label="@L["name"]" Variant="Variant.Outlined"></MudTextField>
+                    <ValidationMessage For=@(()=>Credentials.UserName)></ValidationMessage>
 
-<div class="row">
-    <div class="col-12 col-lg-4 offset-lg-4 my-lg-5">
-        <MudPaper>
-            <EditForm class="d-flex flex-column p-3 my-lg-5 py-5" Model="Credentials" OnValidSubmit=@(async()=>await login())>
-                <MudText Typo="Typo.body1">
-                    @L["login"]
-                </MudText>
-                <MudTextField Class="mt-3" Required Margin="@Margin.Dense" @bind-Value="Credentials.UserName" Label="@L["name"]" Variant="Variant.Outlined"></MudTextField>
-                <ValidationMessage For=@(()=>Credentials.UserName)></ValidationMessage>
+                    <MudTextField Class="mt-3" Required Margin="@Margin.Dense" @bind-Value="Credentials.Password" InputType="InputType.Password" Label="@L["password"]" Variant="Variant.Outlined"></MudTextField>
+                    <ValidationMessage For=@(()=>Credentials.Password)></ValidationMessage>
 
-                <MudTextField Class="mt-3" Required Margin="@Margin.Dense" @bind-Value="Credentials.Password" InputType="InputType.Password" Label="@L["password"]" Variant="Variant.Outlined"></MudTextField>
-                <ValidationMessage For=@(()=>Credentials.Password)></ValidationMessage>
+                    <MudButton Class="mt-3" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">@L["login"]</MudButton>
+                </EditForm>
 
-                <MudButton Class="mt-3" ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Large">@L["login"]</MudButton>
-            </EditForm>
-
-        </MudPaper>
+            </MudPaper>
+        </div>
     </div>
 </div>
-
 @*<div class="row py-5 gx-0">
     <div class="col-sm-12 col-lg-6 col-xl-4 my-5">
         <form class="p-3">
