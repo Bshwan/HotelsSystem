@@ -180,7 +180,7 @@
                             <RowTemplate>
                                 <MudTd DataLabel="Nr">@context.dap_Name</MudTd>
                                 <MudTd Class="text-end">
-                                    <MudIconButton OnClick="@(async()=>await DeletePrivilage(context.dap_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
+                                        <MudIconButton OnClick="@(async()=>await DeletePrivilage(context.per_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />
                                 </MudTd>
                             </RowTemplate>
                         </MudTable>
