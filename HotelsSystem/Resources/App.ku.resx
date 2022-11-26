@@ -340,4 +340,7 @@
   <data name="active" xml:space="preserve">
     <value>چالاک</value>
   </data>
+  <data name="english" xml:space="preserve">
+    <value>ئینگلیزی</value>
+  </data>
 </root>
