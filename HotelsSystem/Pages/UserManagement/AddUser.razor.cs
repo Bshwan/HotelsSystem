@@ -27,11 +27,12 @@ public partial class AddUser
     MudForm? AddUserForm;
     MudForm? AddWorkpointForm;
     WorkingPointInfo SelectedUserWorkpoint = new WorkingPointInfo();
+    SPResult? session;
 
     protected override async Task OnParametersSetAsync()
     {
         UserID = Hasher.UnHash(HashID.ToEmptyOnNull());
-        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+         session = await Protection.GetDecryptedSession(jSRuntime, DB);
         mgmt = new ClS_UserManagement(DB, session);
         config = new ClS_Config(DB, session);
 

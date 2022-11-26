@@ -1,6 +1,8 @@
 @page "/UserList"
 @inject IStringLocalizer<App> L;
     @if(config!=null){
+    <AuthView Roles="session" PermissionName="@Routing.userlist">
+
 <div class="row gx-2 gy-3">
     <div class="col-12">
         <h4>User List</h4>
@@ -90,4 +92,5 @@
         </MudTable>
     </div>
 </div>
+    </AuthView>
     }

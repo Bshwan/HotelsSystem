@@ -27,7 +27,7 @@
 
         private async Task login()
         {
-            SPResult result = await mgmt.Login<SPResult>(
+            var result = await mgmt.Login(
                 SelectPro: 1,
                 UserName: Credentials.UserName.ToEmptyOnNull(),
                 UserPass: func.encr_pass(Credentials.Password.ToEmptyOnNull()));
@@ -35,7 +35,7 @@
             if (result.Result > 0)
             {
                 await Protection.SetEncryptedSession(result, JSRuntime);
-                nav.NavigateTo(Routing.userlist);
+                nav.NavigateTo(Routing.hotels);
                 return;
             }
             Toaster.Error(".", result.MSG);

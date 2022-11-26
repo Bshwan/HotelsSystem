@@ -176,9 +176,9 @@
         {
             return id > 0 ? "Edit" : "Add";
         }
-        public async Task<IEnumerable<int>> GetAllRoles()
+        public async Task<IEnumerable<CheckRoles>> GetAllRoles()
         {
-            var Roles = await GetAllInfo<int>(SelectPro: 0, ValID: SessionValue);
+            var Roles = await GetAllInfo<CheckRoles>(SelectPro: 10, ValID: SessionValue);
             return Roles;
         }
     }

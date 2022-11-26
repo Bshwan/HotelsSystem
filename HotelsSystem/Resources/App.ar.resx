@@ -343,4 +343,10 @@
   <data name="english" xml:space="preserve">
     <value>الإنجليزية</value>
   </data>
+  <data name="user-list" xml:space="preserve">
+    <value>قائمة المستخدم</value>
+  </data>
+  <data name="configurations" xml:space="preserve">
+    <value>التكوينات</value>
+  </data>
 </root>

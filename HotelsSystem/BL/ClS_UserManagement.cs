@@ -22,9 +22,17 @@ public class ClS_UserManagement
         return await _db.SaveData<T, dynamic>("Pro_InsertDeletePermissions", new { Type = SelectPro, PermissionID = PermissionID, UserID = UsersID, GroupName = GroupName, EntryBy = SessionValue });
     }
 
-    public async Task<T> Login<T>(int SelectPro = 0, string UserName = "", string UserPass = "")
+    // public async Task<T> Login<T>(int SelectPro = 0, string UserName = "", string UserPass = "")
+    // {
+    //     return await _db.GetOneInfo<T, dynamic>("pro_Login", new { username = UserName, password = UserPass, Select = SelectPro });
+    // }
+     public async Task<SPResult> Login(int SelectPro = 0, string UserName = "", string UserPass = "")
     {
-        return await _db.GetOneInfo<T, dynamic>("pro_Login", new { username = UserName, password = UserPass, Select = SelectPro });
+        var result = await _db.GetMultiple<SPResult, CheckRoles>(
+                "pro_Login", new { username = UserName, password = UserPass, Select = SelectPro });
+        SPResult session=result.Item1.Any()?result.Item1.First():new SPResult{};
+        session.Roles=result.Item2.ToList();
+        return session;
     }
     public async Task<PagedResult<T>> UserList<T>(int SelectPro = 1, int PageNumber = 1, int PageSize = 10,int UserTypeID=0, string FullName = "", int DirectorateID = 0, int WorkPlaceID = 0, string SortColumn = "", string SortDirection = "Asc")
     {

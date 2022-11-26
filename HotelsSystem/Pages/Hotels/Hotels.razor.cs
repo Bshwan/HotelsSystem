@@ -19,10 +19,11 @@ public partial class Hotels
     ClS_Config config = default!;
     HotelsInfo Filter = new HotelsInfo();
     private MudTable<HotelsInfo>? table;
+    SPResult? session;
 
     protected override async Task OnInitializedAsync()
     {
-        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB);
         hotel = new ClS_Hotels(DB, session);
         config = new ClS_Config(DB, session);
     }
@@ -62,7 +63,7 @@ public partial class Hotels
         parameters.Add("hotel", hotel);
         parameters.Add("HotelID", id);
         
-        var modal = DialogService.Show<AddHotel>("Add Hotel", parameters, options);
+        var modal = DialogService.Show<AddHotel>(L["add-hotel"], parameters, options);
         var ModalResult = await modal.Result;
         
         if (!ModalResult.Cancelled)
