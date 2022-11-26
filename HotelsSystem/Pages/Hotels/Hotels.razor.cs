@@ -81,6 +81,6 @@ public partial class Hotels
         parameters.Add("hotel", hotel);
         parameters.Add("HotelID", id);
 
-        DialogService.Show<HotelUsers>("Users",parameters, options);
+        DialogService.Show<HotelUsers>(L["users"],parameters, options);
     }
 }

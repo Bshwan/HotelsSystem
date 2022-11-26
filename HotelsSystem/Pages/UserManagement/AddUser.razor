@@ -6,7 +6,7 @@
     </div>
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
-            <MudTabPanel Text="General Informations">
+            <MudTabPanel Text="@L["general-informations"]">
                 <MudForm @ref="AddUserForm">
                 <div class="row gy-3 gx-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -38,7 +38,7 @@
                             Value="@(new LanguageInfo{lang_ID=SelectedUser.peo_Language,lang_Name=combos.Languages.SelectByID<LanguageInfo>(SelectedUser.peo_Language,"lang_ID").lang_Name})" 
                                 Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
                                 ValueChanged="OnSelectedLanguageChange"
-                                Margin="@Margin.Dense" T="LanguageInfo" Label="Language" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="LanguageInfo" Label=@L["language"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.Languages)
                             {
                             <MudSelectItem T="LanguageInfo" Value="@item">@item.lang_Name</MudSelectItem>
@@ -60,7 +60,7 @@
                          ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="Directorate"
+                                             Label=@L["directorate-name"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -80,7 +80,7 @@
                          ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="Workpoint"
+                                             Label=@L["workpoint-name"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -94,8 +94,8 @@
                         <MudDivider/>
                     </div>
                     <div class="col-12 d-flex justify-content-end">
-                        <MudButton Class="me-2" Href="@Routing.userlist" StartIcon="@Icons.Material.Filled.Cancel" IconColor="Color.Error" Variant="Variant.Filled">Cancel</MudButton>
-                        <MudButton OnClick="@InsertUpdateUser" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Primary">Save</MudButton>
+                        <MudButton Class="me-2" Href="@Routing.userlist" StartIcon="@Icons.Material.Filled.Cancel" IconColor="Color.Error" Variant="Variant.Filled">@L["cancel"]</MudButton>
+                        <MudButton OnClick="@InsertUpdateUser" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Primary">@L["save"]</MudButton>
                     </div>
                 </div>
                 </MudForm>

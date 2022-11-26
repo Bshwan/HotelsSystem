@@ -4,7 +4,7 @@
     <div class="row g-3 m-0 w-100">
         <MudForm @ref="AddForm" Class="row g-3 m-0 w-100 p-0">
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-            <MudTextField Required="true" RequiredError="@L["required"]" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_workpointName" Label="Name" Variant="Variant.Outlined"></MudTextField>
+            <MudTextField Required="true" RequiredError="@L["required"]" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_workpointName" Label=@L["name"] Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                          @* Required="true" *@
@@ -20,7 +20,7 @@
                          ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="User"
+                         Label=@L["user"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"/>
 
@@ -38,13 +38,13 @@
                          ValueChanged="@((e)=>OnDirectorateChanged(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
                          CoerceText="@true"
-                         Label="Directorate"
+                         Label=@L["directories"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"/>
 
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-            <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_locationText" Label="Location" Variant="Variant.Outlined"></MudTextField>
+            <MudTextField Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_locationText" Label=@L["location"] Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
             <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@(async()=>await InsertUpdateWorkPoint())" Variant="Variant.Filled" Color="Color.Primary" />
@@ -64,7 +64,7 @@
                 <HeaderContent>
                     <MudTh>
                         <MudTableSortLabel SortLabel="wp_workpointName" SortBy="new Func<WorkingPointInfo, object>(x=>x.wp_workpointName.ToEmptyOnNull())">
-                            @L["workpoint"]
+                            @L["workpoint-name"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh>
@@ -74,7 +74,7 @@
                     </MudTh>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<WorkingPointInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
-                            @L["directorate"]
+                            @L["directories"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh></MudTh>

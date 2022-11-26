@@ -15,7 +15,7 @@
         <MudNavLink Href="/counter" Icon="@Icons.Filled.Storage">Servers</MudNavLink> *@
         <MudNavLink Href="@Routing.hotels" Icon="@Icons.Filled.Domain">@L["hotels"]</MudNavLink>
         <MudNavLink Href="@Routing.config" Icon="@Icons.Filled.Settings">@L["configurations"]</MudNavLink>
-        <MudNavGroup @bind-Expanded="_isNavExpanded" Title="User Managment" Icon="@Icons.Filled.AdminPanelSettings">
+        <MudNavGroup @bind-Expanded="_isNavExpanded" Title=@L["user-managment"] Icon="@Icons.Filled.AdminPanelSettings">
         <MudNavLink Href="@Routing.userlist" Icon="@Icons.Filled.People">@L["user-list"]</MudNavLink>
             @* <MudNavLink Href="/admins" Icon="@Icons.Filled.People">Admins</MudNavLink>
             <MudNavLink Href="/addAdmin" Icon="@Icons.Filled.AddModerator">Add Admin</MudNavLink> *@

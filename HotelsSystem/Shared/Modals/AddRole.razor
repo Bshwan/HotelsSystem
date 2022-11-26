@@ -1,3 +1,4 @@
+@inject IStringLocalizer<App> L;
 <MudDialog ClassActions="px-5 pb-4">
     <DialogContent>
         @if(config!=null){
@@ -20,7 +21,7 @@
                                      ValueChanged="@((e)=>OnPermissionChanged(e))"
                                      ToStringFunc="@(e=>e==null?"":e.peo_DataRole)"
                                      CoerceText="@true"
-                                     Label="Permission"
+                                     Label=@L["permission"]
                                      Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                                      AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
 
@@ -28,7 +29,7 @@
                 </div>
             </MudForm>
             <div class="col-12">
-                <MudField Label="Privileges" Margin="@Margin.Dense" Variant="Variant.Outlined">
+                    <MudField Label=@L["privilege"] Margin="@Margin.Dense" Variant="Variant.Outlined">
                     @*<MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Text" Color="Color.Primary"/>*@
                     @foreach (var per in combo.Where(x=>x.HasRole==1))
                     {
@@ -46,7 +47,7 @@
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Close</MudButton>
+        <MudButton OnClick="Cancel">@L["close"]</MudButton>
         @*<MudButton Color="Color.Primary" OnClick="Submit">Save</MudButton>*@
     </DialogActions>
 </MudDialog>

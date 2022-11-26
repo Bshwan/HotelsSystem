@@ -3,7 +3,7 @@
     
     <DialogContent>
         <MudTabs @bind-ActivePanelIndex="SelectedTab" Elevation="0" Color="Color.Primary" Rounded="true" ApplyEffectsToContainer="true" PanelClass="py-3">
-            <MudTabPanel Text="Hotel Informations">
+            <MudTabPanel Text=@L["hotel-information"]>
                 <MudForm @ref="AddHotelForm">
                 <div class="row gy-3 gx-2">
                     <div class="col-12">
@@ -15,7 +15,7 @@
                              ToStringFunc="@(e=>e==null?"":e.HTT_Type)" 
                             Value="@(new HotelTypesComboBox{HTT_ID=SelectedHotel.htl_TypeID,HTT_Type=combos.HotelTypes.SelectByID<HotelTypesComboBox>(SelectedHotel.htl_TypeID,"HTT_ID").HTT_Type})"
                             ValueChanged="OnHotelTypeChange" 
-                                Margin="@Margin.Dense" T="HotelTypesComboBox" Label="Hotel Type" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="HotelTypesComboBox" Label=@L["hotel-type"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.HotelTypes)
                             {
                             <MudSelectItem T="HotelTypesComboBox" Value="@item">@item.HTT_Type</MudSelectItem>
@@ -40,7 +40,7 @@
                          ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="Directorate"
+                         Label=@L["directories"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -58,7 +58,7 @@
                          ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="Workpoint"
+                                             Label=@L["workpoint-name"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -66,7 +66,7 @@
                         <MudNumericField Required Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_NumberOfRooms" Label="@L["room-number"]" Variant="Variant.Outlined"></MudNumericField >
                     </div>
                     <div class="col-12">
-                        <MudField Label="Stars" Margin="@Margin.Dense" Variant="Variant.Outlined">
+                        <MudField Label=@L["stars"] Margin="@Margin.Dense" Variant="Variant.Outlined">
                             <MudRating @bind-SelectedValue="SelectedHotel.htl_Star" />
                         </MudField>
                     </div>

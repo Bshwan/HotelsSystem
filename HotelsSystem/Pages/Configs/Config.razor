@@ -1,16 +1,17 @@
+@inject IStringLocalizer<App> L;
 @page "/config"
 
 <div class="row gy-3 gx-2">
     <div class="col-12">
-        <h4>Configurations</h4>
+        <h4>@L["configurations"]</h4>
     </div>
     <MudDivider />
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
-            <MudTabPanel Text="Directories">
+            <MudTabPanel Text=@L["directories"]>
                <Directorate DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></Directorate>
             </MudTabPanel>
-            <MudTabPanel Text="Workpoints">
+            <MudTabPanel Text=@L["workpoint-name"]>
                 <WorkingPoint DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></WorkingPoint>
             </MudTabPanel>
         </MudTabs>

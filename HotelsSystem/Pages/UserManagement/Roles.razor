@@ -6,14 +6,14 @@
 
     <div class="row gy-3 gx-2">
         <div class="col-12">
-            <h4>Roles</h4>
+            <h4>@L["roles"]</h4>
         </div>
         <MudDivider />
         <MudPaper Class="p-3 w-100 mt-4 m-0 row g-3">
 
             <MudForm @ref="AddForm">
                 <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                    <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedGroup.group_Name" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                    <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedGroup.group_Name" Label=@L["name"] Variant="Variant.Outlined"></MudTextField>
                 </div>
 
                   
@@ -33,7 +33,7 @@
                        
                         <MudTh>
                             <MudTableSortLabel SortLabel="group_Name" SortBy="new Func<GroupInfo, object>(x=>x.group_Name.ToEmptyOnNull())">
-                                Name
+                                @L["name"]
                             </MudTableSortLabel>
                         </MudTh>
                         <MudTh></MudTh>
@@ -48,7 +48,7 @@
                             <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetGroupByID(context.group_ID))" Color="Color.Primary" />
                         </MudTd>
                         <MudTd Class="text-end">
-                            <MudButton @onclick="@(()=>AddRoleModal(context.group_ID))" StartIcon="@Icons.Filled.HealthAndSafety" Variant="Variant.Filled" Color="Color.Primary">Add Role</MudButton>
+                            <MudButton @onclick="@(()=>AddRoleModal(context.group_ID))" StartIcon="@Icons.Filled.HealthAndSafety" Variant="Variant.Filled" Color="Color.Primary">@L["add-role"]</MudButton>
 
                         </MudTd>
                     </RowTemplate>

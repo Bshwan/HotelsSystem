@@ -90,6 +90,6 @@ public partial class Roles
         };
         var parms = new DialogParameters();
         parms.Add("ID", ID);
-        DialogService.Show<AddRole>("Add Role",parms, options);
+        DialogService.Show<AddRole>(L["add-role"],parms, options);
     }
 }
