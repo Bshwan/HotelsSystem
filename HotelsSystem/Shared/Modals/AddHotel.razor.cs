@@ -13,6 +13,7 @@ public partial class AddHotel
     protected IToaster Toaster { get; set; } = default!;
 
     MudForm? AddHotelForm;
+    MudForm? AddHotelUser;
     HotelsInfo SelectedHotel = new HotelsInfo();
     AddHotelCombos combos = new AddHotelCombos();
 

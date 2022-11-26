@@ -13,9 +13,9 @@
         @* <MudNavLink Href="/home" Match="NavLinkMatch.Prefix" Icon="@Icons.Filled.Dashboard">Dashboard</MudNavLink>
         <MudNavLink Href="/counter" Icon="@Icons.Filled.Storage">Servers</MudNavLink> *@
         <MudNavLink Href="@Routing.hotels" Icon="@Icons.Filled.Domain">Hotels</MudNavLink>
-        <MudNavLink Href="@Routing.userlist" Icon="@Icons.Filled.Search">User List</MudNavLink>
         <MudNavLink Href="@Routing.config" Icon="@Icons.Filled.Settings">Configrations</MudNavLink>
-        <MudNavGroup @bind-Expanded="_isNavExpanded" Title="System Admins" Icon="@Icons.Filled.AdminPanelSettings">
+        <MudNavGroup @bind-Expanded="_isNavExpanded" Title="User Managment" Icon="@Icons.Filled.AdminPanelSettings">
+        <MudNavLink Href="@Routing.userlist" Icon="@Icons.Filled.People">User List</MudNavLink>
             @* <MudNavLink Href="/admins" Icon="@Icons.Filled.People">Admins</MudNavLink>
             <MudNavLink Href="/addAdmin" Icon="@Icons.Filled.AddModerator">Add Admin</MudNavLink> *@
             <MudNavLink Href="@Routing.roles" Icon="@Icons.Filled.Security">Roles</MudNavLink>
