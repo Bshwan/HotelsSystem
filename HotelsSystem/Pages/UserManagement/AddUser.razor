@@ -10,23 +10,23 @@
                 <MudForm @ref="AddUserForm">
                 <div class="row gy-3 gx-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label=@L["name"] Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_userFullName" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_userFullName" Label=@L["full-name"] Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserMobile" Label="Mobile" Variant="Variant.Outlined"></MudTextField>
+                            <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserMobile" Label=@L["mobile"] Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField OnlyValidateIfDirty="true" Required="true" autocomplete="new-password" Margin="@Margin.Dense" Dense="true" InputType="InputType.Password" @bind-Value="SelectedUser.peo_UserPassword" Label="Password" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" autocomplete="new-password" Margin="@Margin.Dense" Dense="true" InputType="InputType.Password" @bind-Value="SelectedUser.peo_UserPassword" Label=@L["password"] Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.usT_userType)" 
                             Validation="@(new Func<UserTypesInfo, string>((e)=>e.ValidateField<UserTypesInfo>("usT_ID")))"
                             Value="@(new UserTypesInfo{usT_ID=SelectedUser.peo_UserTypeID,usT_userType=combos.UserTypes.SelectByID<UserTypesInfo>(SelectedUser.peo_UserTypeID,"usT_ID").usT_userType})" 
                                 ValueChanged="OnSelectedUserTypeChange"
-                                Margin="@Margin.Dense" T="UserTypesInfo" Label="User Type" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="UserTypesInfo" Label=@L["user-type"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.UserTypes)
                             {
                             <MudSelectItem T="UserTypesInfo" Value="@item">@item.usT_userType</MudSelectItem>
@@ -63,7 +63,7 @@
                          Label="Directorate"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="Directorate" />
+                         Placeholder=@L["directorate"] />
                     </div>
                     @* } *@
                     @* @if(SelectedUser.peo_UserTypeID==2){ *@
@@ -88,7 +88,7 @@
                     </div>
                     @* } *@
                     <div class="col-12">
-                        <MudCheckBox @bind-Checked="SelectedUser.peo_UserActive" Label="Active"></MudCheckBox>
+                        <MudCheckBox @bind-Checked="SelectedUser.peo_UserActive" Label=@L["active"]></MudCheckBox>
                     </div>
                     <div class="col-12">
                         <MudDivider/>
@@ -116,8 +116,8 @@
                         Validation="@(new Func<GroupInfo, string>((e)=>e.ValidateField<GroupInfo>("group_ID")))"
                         ToStringFunc="@(e=>e==null?"":e.group_Name)"
                         T="GroupInfo"
-                        Label="Roles" 
-                        Required="true" 
+                                             Label=@L["roles"]
+                                             Required="true" 
                         OnlyValidateIfDirty="true"
                         SearchFunc="SearchGroups"
                         Margin="@Margin.Dense" 
@@ -131,7 +131,7 @@
                     <div class="col-12">
                         <MudTable Dense="true" T="GroupInfo" Elevation="0" Items="@(combos.Groups.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
-                                <MudTh>Name</MudTh>
+                                    <MudTh>@L["name"]</MudTh>
                                 <MudTh></MudTh>
                             </HeaderContent>
                             <RowTemplate>
@@ -159,7 +159,7 @@
                         Validation="@(new Func<DataAccessPermissions, string>((e)=>e.ValidateField<DataAccessPermissions>("dap_ID")))"
                         ToStringFunc="@(e=>e==null?"":e.dap_Name)"
                         T="DataAccessPermissions"
-                        Label="Privilage" 
+                        Label=@L["privillage"] 
                         Required="true" 
                         OnlyValidateIfDirty="true"
                         SearchFunc="SearchPrivilages"
@@ -174,7 +174,7 @@
                     <div class="col-12">
                         <MudTable Dense="true" T="DataAccessPermissions" Elevation="0" Items="@(combos.Permissions.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
-                                <MudTh>Name</MudTh>
+                                    <MudTh>@L["name"]</MudTh>
                                 <MudTh></MudTh>
                             </HeaderContent>
                             <RowTemplate>

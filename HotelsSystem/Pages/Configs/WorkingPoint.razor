@@ -23,7 +23,7 @@
                          Label="User"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="User" />
+                             Placeholder=@L["user"] />
 
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -42,7 +42,7 @@
                          Label="Directorate"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="Directorate" />
+                             Placeholder=@L["directorate"] />
 
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -66,17 +66,17 @@
                 <HeaderContent>
                     <MudTh>
                         <MudTableSortLabel SortLabel="wp_workpointName" SortBy="new Func<WorkingPointInfo, object>(x=>x.wp_workpointName.ToEmptyOnNull())">
-                            Workpoint
+                            @L["workpoint"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<WorkingPointInfo, object>(x=>x.peo_UserName.ToEmptyOnNull())">
-                            User
+                            @L["user"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<WorkingPointInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
-                            Directorate
+                            @L["directorate"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh></MudTh>
