@@ -3,6 +3,7 @@
 
 @if (config != null)
 {
+    <AuthView Roles="session" PermissionName="@Routing.roles">
 
     <div class="row gy-3 gx-2">
         <div class="col-12">
@@ -63,5 +64,6 @@
             </div>
         </MudPaper>
     </div>
+    </AuthView>
 }
 

@@ -16,10 +16,11 @@ namespace HotelsSystem.Pages.Configs
 
 
         private ClS_Config config = default!;
+        SPResult? session;
 
         protected override async Task OnInitializedAsync()
         {
-            var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+            session = await Protection.GetDecryptedSession(jSRuntime, DB);
             config = new ClS_Config(DB, session);
         }
     }

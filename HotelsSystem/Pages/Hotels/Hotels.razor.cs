@@ -19,10 +19,11 @@ public partial class Hotels
     ClS_Config config = default!;
     HotelsInfo Filter = new HotelsInfo();
     private MudTable<HotelsInfo>? table;
+    SPResult? session;
 
     protected override async Task OnInitializedAsync()
     {
-        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB);
         hotel = new ClS_Hotels(DB, session);
         config = new ClS_Config(DB, session);
     }

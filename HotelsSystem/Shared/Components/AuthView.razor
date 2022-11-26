@@ -58,11 +58,11 @@
         {
             if (!ShouldHaveAllPermissions)
             {
-                HasPermission = FindPermission.First().PermissionsID.Any(x => Roles.Roles.Any(y => y == x));
+                HasPermission = FindPermission.First().PermissionsID.Any(x => Roles.Roles.Any(y => y.pergroup_PerID == x));
             }
             else
             {
-                HasPermission = FindPermission.First().PermissionsID.All(x => Roles.Roles.Any(y => y == x));
+                HasPermission = FindPermission.First().PermissionsID.All(x => Roles.Roles.Any(y => y.pergroup_PerID == x));
             }
             if (AdditionalPermissions.Any())
             {
@@ -79,7 +79,7 @@
             {
 
                 Log.Error("User {userID} Tried to Access {uri}. Redirecting", Roles.Result.ToString(), uri);
-                nav.NavigateTo(Routing.defaultpage);
+                nav.NavigateTo(Routing.hotels);
             }
         }
         else
@@ -87,7 +87,7 @@
             HasPermission = false;
                 Log.Error("No Permission Found: {name}", PermissionName);
 
-            nav.NavigateTo(Routing.defaultpage);
+            nav.NavigateTo(Routing.hotels);
         }
 
         rendered = true;

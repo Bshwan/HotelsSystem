@@ -25,11 +25,12 @@ public partial class Roles
 
     private ClS_Config config = default!;
     MudForm? AddForm;
+    SPResult? session;
 
 
     protected override async Task OnInitializedAsync()
     {
-        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB);
         config = new ClS_Config(DB, session);
         mgmt = new ClS_UserManagement(DB, session);
 

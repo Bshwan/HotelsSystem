@@ -1,6 +1,8 @@
 @inject IStringLocalizer<App> L;
 @page "/Hotels"
-@if(config!=null){
+@if(config!=null && session!=null){
+    <AuthView Roles="session" PermissionName="@Routing.hotels">
+
 <div class="row gx-2 gy-3">
     <div class="col-12">
         <h4>@L["hotel-list"]</h4>
@@ -49,4 +51,6 @@
         </MudTable>
     </div>
 </div>
+    </AuthView>
+
 }
