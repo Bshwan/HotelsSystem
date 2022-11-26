@@ -13,19 +13,33 @@ public partial class AddHotel
     protected IToaster Toaster { get; set; } = default!;
 
     MudForm? AddHotelForm;
-    MudForm? AddHotelUser;
+    MudForm? AddHotelUserForm;
     HotelsInfo SelectedHotel = new HotelsInfo();
     AddHotelCombos combos = new AddHotelCombos();
+    AddHotelAddUserCombos AddUserCombos = new AddHotelAddUserCombos();
+    HotelUsersInfo SelectedHotelUser = new HotelUsersInfo();
+    MyFunctions.myLogin.MyFunctions func = new MyFunctions.myLogin.MyFunctions();
+    int SelectedTab = 0;
 
     protected override async Task OnParametersSetAsync()
     {
         await GetCombos();
         if (HotelID > 0)
             await GetHotelByID();
+
+        if (SelectedHotel.htl_ID > 0)
+        {
+            await GetHotelUser();
+            await AddUserGetCombos();
+        }
     }
     async Task GetCombos()
     {
         combos = await hotel.AddHotelCombos(SelectPro: 8);
+    }
+    async Task AddUserGetCombos()
+    {
+        AddUserCombos = await hotel.AddHotelAddUserCombos(SelectPro: 9);
     }
 
     async Task GetHotelByID()
@@ -101,7 +115,57 @@ public partial class AddHotel
 
         if (result.Result == 1)
         {
-            MudDialog.Close(DialogResult.Ok(true));
+            if (int.TryParse(result.LastValue, out int val) && val > 0)
+            {
+                HotelID = val;
+                await GetHotelByID();
+            }
+            // MudDialog.Close(DialogResult.Ok(true));
+            Toaster.Success(".", result.MSG);
+            return;
+        }
+        Toaster.Error(".", result.MSG);
+    }
+    async Task GetHotelUser()
+    {
+        SelectedHotelUser = await config.GetOneInfo<HotelUsersInfo>(SelectPro: 8, ValID: SelectedHotel.htl_ID);
+    }
+    void OnSelectedLanguageChange(LanguageInfo e)
+    {
+        if (e == null)
+        {
+            SelectedHotelUser.htlus_LanguageID = 0;
+            return;
+        }
+        SelectedHotelUser.htlus_LanguageID = e.lang_ID;
+    }
+    void OnSelectedHotelTypeChangeChange(HotelUserTypeComboBox e)
+    {
+        if (e == null)
+        {
+            SelectedHotelUser.htlus_TypeID = 0;
+            return;
+        }
+        SelectedHotelUser.htlus_TypeID = e.htlustype_ID;
+    }
+    async Task InsertUpdateHotelUser()
+    {
+        await AddHotelUserForm!.Validate();
+        if (!AddHotelUserForm.IsValid)
+            return;
+
+        SPResult result = await hotel.InsertUpdateHotels<SPResult>(
+            SelectPro: 2,
+            HotelName: SelectedHotelUser.htlus_Name.ToEmptyOnNull(),
+            HotelAddress: SelectedHotelUser.htlus_FullName.ToEmptyOnNull(),
+            Note: func.encr_pass(SelectedHotelUser.htlus_Password.ToEmptyOnNull()),
+            HotelTypeID: SelectedHotel.htl_ID,
+            StarNumber: SelectedHotelUser.htlus_LanguageID,
+            DirectorateID: SelectedHotelUser.htlus_Active ? 1 : 0);
+
+        if (result.Result == 1)
+        {
+            await GetHotelUser();
             Toaster.Success(".", result.MSG);
             return;
         }

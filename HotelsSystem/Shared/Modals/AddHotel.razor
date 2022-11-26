@@ -2,7 +2,7 @@
 <MudDialog ClassActions="px-5 pb-4">
     
     <DialogContent>
-        <MudTabs Elevation="0" Color="Color.Primary" Rounded="true" ApplyEffectsToContainer="true" PanelClass="py-3">
+        <MudTabs @bind-ActivePanelIndex="SelectedTab" Elevation="0" Color="Color.Primary" Rounded="true" ApplyEffectsToContainer="true" PanelClass="py-3">
             <MudTabPanel Text="Hotel Informations">
                 <MudForm @ref="AddHotelForm">
                 <div class="row gy-3 gx-2">
@@ -42,8 +42,7 @@
                          CoerceValue="true"
                          Label="Directorate"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
-                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="Directorate" />
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     <div class="col-12 col-lg-6">
                         <MudAutocomplete T="WorkingPointInfo" DebounceInterval="ClS_Config.debounce"
@@ -61,8 +60,7 @@
                          CoerceValue="true"
                          Label="Workpoint"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
-                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="Workpoint" />
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     <div class="col-12 col-lg-6">
                         <MudNumericField Required Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_NumberOfRooms" Label="@L["room-number"]" Variant="Variant.Outlined"></MudNumericField >
@@ -81,32 +79,61 @@
                 </div>
                 </MudForm>
             </MudTabPanel>
+            @if(SelectedHotel.htl_ID>0){
             <MudTabPanel Text="Admin Informations">
-                <MudForm class="row gy-3 gx-2">
-                    @* <div class="col-12">
-                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
+                <MudForm @ref="AddHotelUserForm" class="row gy-3 gx-2">
+                    <div class="col-12">
+                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_FullName" Label="Userame" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
-                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Userame" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Name" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
-                        <MudTextField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Password" InputType="InputType.Password" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" autocomplete="new-password" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Password" Label="Password" InputType="InputType.Password" Variant="Variant.Outlined"></MudTextField>
                     </div>
-                    <div class="col-12 col-lg-6">
-                        <MudTextField Margin="@Margin.Dense" @bind-Value="TextValue" Label="Phone Number" Variant="Variant.Outlined"></MudTextField>
+                    <div class="col-12">
+                       <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.htlustype_Name)" 
+                            Value="@(new HotelUserTypeComboBox{htlustype_ID=SelectedHotelUser.htlus_TypeID,htlustype_Name=AddUserCombos.HotelUserTypes.SelectByID<HotelUserTypeComboBox>(SelectedHotelUser.htlus_TypeID,"htlustype_ID").htlustype_Name})" 
+                                Validation="@(new Func<HotelUserTypeComboBox, string>((e)=>e.ValidateField<HotelUserTypeComboBox>("htlustype_ID")))"
+                                ValueChanged="OnSelectedHotelTypeChangeChange"
+                                Margin="@Margin.Dense" T="HotelUserTypeComboBox" Label="Hotel User" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in AddUserCombos.HotelUserTypes)
+                            {
+                            <MudSelectItem T="HotelUserTypeComboBox" Value="@item">@item.htlustype_Name</MudSelectItem>
+                            }
+                        </MudSelect>
                     </div>
-                    <div class="col-12 col-lg-6">
-                        <MudTextField Margin="@Margin.Dense" @bind-Value="TextValue" Label="Email" Variant="Variant.Outlined"></MudTextField>
+                    <div class="col-12">
+                       <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
+                            Value="@(new LanguageInfo{lang_ID=SelectedHotelUser.htlus_LanguageID,lang_Name=AddUserCombos.Languages.SelectByID<LanguageInfo>(SelectedHotelUser.htlus_LanguageID,"lang_ID").lang_Name})" 
+                                Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
+                                ValueChanged="OnSelectedLanguageChange"
+                                Margin="@Margin.Dense" T="LanguageInfo" Label="Language" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in AddUserCombos.Languages)
+                            {
+                            <MudSelectItem T="LanguageInfo" Value="@item">@item.lang_Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-12">
+                        <MudField Class="dense-true" Margin="Margin.Dense" Variant="Variant.Outlined">
+                            <MudCheckBox Size="Size.Small" Label="@L["active"]" @bind-Checked="SelectedHotelUser.htlus_Active" Color="Color.Primary"></MudCheckBox>
+                        </MudField>
                     </div>
                     <div class="col-12">
                         <MudDivider/>
-                    </div> *@
+                    </div>
                 </MudForm>
             </MudTabPanel>
+            }
         </MudTabs>
     </DialogContent>
     <DialogActions>
         <MudButton OnClick="@(()=>MudDialog.Cancel())">@L["cancel"]</MudButton>
+        @if(SelectedTab==0){
         <MudButton Color="Color.Primary" OnClick="@(async()=>await InsertUpdateHotel())">@L["save"]</MudButton>
+        }else if(SelectedTab==1){
+        <MudButton Color="Color.Primary" OnClick="@(async()=>await InsertUpdateHotelUser())">@L["save"]</MudButton>
+        }
     </DialogActions>
 </MudDialog>

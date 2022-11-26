@@ -2,7 +2,7 @@
 @if (config != null)
 {
     <div class="row g-3 m-0 w-100">
-        <MudForm @ref="AddForm" class="mud-form row g-3 m-0 w-100 p-0">
+        <MudForm @ref="AddForm" Class="row g-3 m-0 w-100 p-0">
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
             <MudTextField Required="true" RequiredError="@L["required"]" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_workpointName" Label="Name" Variant="Variant.Outlined"></MudTextField>
         </div>
@@ -22,8 +22,7 @@
                          CoerceValue="true"
                          Label="User"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
-                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="User" />
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"/>
 
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -41,8 +40,7 @@
                          CoerceText="@true"
                          Label="Directorate"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
-                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="Directorate" />
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"/>
 
         </div>
 

@@ -1,3 +1,4 @@
+namespace HotelsSystem.Pages.UserManagement;
 using HotelsSystem.Data;
 using System.Reflection;
 
