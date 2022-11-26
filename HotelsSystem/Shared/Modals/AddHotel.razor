@@ -23,7 +23,8 @@
                         </MudSelect>                    
                     </div>
                     <div class="col-12">
-                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Address" Label="@L["full-address"]" Variant="Variant.Outlined" Lines="4"></MudTextField>
+                        @* OnlyValidateIfDirty="true" Required="true" *@
+                        <MudTextField Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Address" Label="@L["full-address"]" Variant="Variant.Outlined" Lines="4"></MudTextField>
                     </div>
                     
                     <div class="col-12 col-lg-6">

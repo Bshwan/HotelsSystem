@@ -23,7 +23,6 @@ public partial class AddHotel
 
     protected override async Task OnParametersSetAsync()
     {
-        await GetCombos();
         if (HotelID > 0)
             await GetHotelByID();
 
@@ -31,6 +30,24 @@ public partial class AddHotel
         {
             await GetHotelUser();
             await AddUserGetCombos();
+        }
+        await GetCombos();
+
+        if (SelectedHotel.htl_ID <= 0)
+        {
+            if (combos.Directorates.Any())
+            {
+                var first = combos.Directorates.First();
+                SelectedHotel.htl_DirectorateID = first.peo_DirectorateID;
+                SelectedHotel.peo_DirectorateName = first.peo_DirectorateName;
+                await GetWorkpointByDirectorate();
+            }
+            if (combos.WorkingPoints.Any())
+            {
+                var first = combos.WorkingPoints.First();
+                SelectedHotel.wp_workpointName = first.wp_workpointName;
+                SelectedHotel.htl_WorkPointID = first.wp_ID;
+            }
         }
     }
     async Task GetCombos()
@@ -62,7 +79,11 @@ public partial class AddHotel
         SelectedHotel.peo_DirectorateName = e.peo_DirectorateName;
         SelectedHotel.htl_DirectorateID = e.peo_DirectorateID;
 
-        combos.WorkingPoints = await config.GetCMB<WorkingPointInfo>(SelectPro: 5, ValID: e.peo_DirectorateID);
+        await GetWorkpointByDirectorate();
+    }
+    async Task GetWorkpointByDirectorate()
+    {
+        combos.WorkingPoints = await config.GetCMB<WorkingPointInfo>(SelectPro: 5, ValID: SelectedHotel.htl_DirectorateID);
     }
     void OnWorkpointChange(WorkingPointInfo e)
     {
@@ -119,6 +140,7 @@ public partial class AddHotel
             {
                 HotelID = val;
                 await GetHotelByID();
+                await AddUserGetCombos();
             }
             // MudDialog.Close(DialogResult.Ok(true));
             Toaster.Success(".", result.MSG);
@@ -130,8 +152,8 @@ public partial class AddHotel
     {
         SelectedHotelUser = await config.GetOneInfo<HotelUsersInfo>(SelectPro: 8, ValID: SelectedHotel.htl_ID);
 
-        if(!SelectedHotelUser.htlus_Password.IsStringNullOrWhiteSpace())
-        SelectedHotelUser.htlus_Password=func.decr_pass(SelectedHotelUser.htlus_Password);
+        if (!SelectedHotelUser.htlus_Password.IsStringNullOrWhiteSpace())
+            SelectedHotelUser.htlus_Password = func.decr_pass(SelectedHotelUser.htlus_Password);
     }
     void OnSelectedLanguageChange(LanguageInfo e)
     {
@@ -159,7 +181,7 @@ public partial class AddHotel
 
         SPResult result = await hotel.InsertUpdateHotels<SPResult>(
             SelectPro: 2,
-            ValID:SelectedHotelUser.htlus_ID,
+            ValID: SelectedHotelUser.htlus_ID,
             HotelName: SelectedHotelUser.htlus_Name.ToEmptyOnNull(),
             HotelAddress: SelectedHotelUser.htlus_FullName.ToEmptyOnNull(),
             Note: func.encr_pass(SelectedHotelUser.htlus_Password.ToEmptyOnNull()),

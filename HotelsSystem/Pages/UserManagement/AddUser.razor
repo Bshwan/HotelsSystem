@@ -116,8 +116,8 @@
                         Validation="@(new Func<GroupInfo, string>((e)=>e.ValidateField<GroupInfo>("group_ID")))"
                         ToStringFunc="@(e=>e==null?"":e.group_Name)"
                         T="GroupInfo"
-                                             Label=@L["roles"]
-                                             Required="true" 
+                        Label=@L["roles"]
+                        Required="true" 
                         OnlyValidateIfDirty="true"
                         SearchFunc="SearchGroups"
                         Margin="@Margin.Dense" 
