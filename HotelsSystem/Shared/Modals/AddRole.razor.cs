@@ -68,10 +68,18 @@ namespace HotelsSystem.Shared.Modals
             );
 
             if (result.Result == 1)
-            {
+            { 
+                if(int.TryParse(result.LastValue , out int val )&& val > 0)
+                {
+                    await GetGroupByID(val);
+
+                }
+                else
+                {
+                    await GetGroupByID(SelectedGroup.group_ID);
+                }
                 //SelectedGroup = new GroupInfo();
                 //MudDialog.Close(DialogResult.Ok(true));
-                //await GetGroupByID();
                 Toaster.Success(".", result.MSG);
                 return;
             }
