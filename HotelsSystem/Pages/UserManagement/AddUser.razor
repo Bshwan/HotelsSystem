@@ -62,8 +62,7 @@
                          CoerceValue="true"
                          Label="Directorate"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
-                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="Directorate" />
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     @* } *@
                     @* @if(SelectedUser.peo_UserTypeID==2){ *@
@@ -83,12 +82,13 @@
                          CoerceValue="true"
                          Label="Workpoint"
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
-                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small"
-                         Placeholder="Workpoint" />
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     @* } *@
                     <div class="col-12">
-                        <MudCheckBox @bind-Checked="SelectedUser.peo_UserActive" Label="Active"></MudCheckBox>
+                        <MudField Class="dense-true" Margin="Margin.Dense" Variant="Variant.Outlined">
+                            <MudCheckBox Size="Size.Small" Label="@L["active"]" @bind-Checked="SelectedUser.peo_UserActive" Color="Color.Primary"></MudCheckBox>
+                        </MudField>
                     </div>
                     <div class="col-12">
                         <MudDivider/>
@@ -103,7 +103,7 @@
             @if(SelectedUser.peo_UserID>0){
             <MudTabPanel Text="Roles">
                 <div class="row g-3 m-0 w-100">
-                    <MudForm @ref="AddGroupForm">
+                    <MudForm @ref="AddGroupForm" Class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudAutocomplete DebounceInterval="ClS_Config.debounce"
                         ResetValueOnEmptyText="true"
@@ -146,7 +146,7 @@
             </MudTabPanel>
             <MudTabPanel Text="Privileges">
                 <div class="row g-3 m-0 w-100">
-                    <MudForm @ref="AddPrivilageForm">
+                    <MudForm @ref="AddPrivilageForm" Class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                     <MudAutocomplete DebounceInterval="ClS_Config.debounce"
                         ResetValueOnEmptyText="true"
@@ -186,6 +186,47 @@
                         </MudTable>
                     </div>
                 </div>
+            </MudTabPanel>
+            <MudTabPanel Text="Workpoints">
+                 <div class="row g-3 m-0 w-100">
+                    <MudForm @ref="AddWorkpointForm" Class="row g-3 m-0 w-100">
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                        <MudAutocomplete T="WorkingPointInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchWorkpointPerUser"
+                         Clearable="true"
+                         OnlyValidateIfDirty="true"
+                         ResetValueOnEmptyText="true"
+                         Required="true"
+                         Validation="@(new Func<WorkingPointInfo, string>((e)=>e.ValidateField<WorkingPointInfo>("wp_ID")))"
+                         Value="@(new WorkingPointInfo(){wp_workpointName=SelectedUserWorkpoint.peo_DirectorateName,wp_ID=SelectedUserWorkpoint.wp_ID})"
+                         Text="@SelectedUserWorkpoint.wp_workpointName"
+                         ValueChanged="OnUserWorkpointChange"
+                         ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
+                         CoerceText="@true"
+                         CoerceValue="true"
+                         Label="Workpoint"
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
+                        <MudIconButton OnClick="InsertUpdateUserWorkpoint" Icon="@Icons.Material.Filled.Add" Variant="Variant.Filled" Color="Color.Primary"/>
+                    </div>
+                    </MudForm>
+                    <div class="col-12">
+                        <MudTable Dense="true" T="WorkingPointInfo" Elevation="0" Items="@(combos.WorkingPoints.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
+                            <HeaderContent>
+                                <MudTh>Name</MudTh>
+                                <MudTh></MudTh>
+                            </HeaderContent>
+                            <RowTemplate>
+                                <MudTd DataLabel="Nr">@context.wp_workpointName</MudTd>
+                                <MudTd Class="text-end">
+                                        <MudIconButton OnClick="@(async()=>await DeleteUserWorkpoint(context.wp_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />
+                                </MudTd>
+                            </RowTemplate>
+                        </MudTable>
+                    </div>
+                 </div>
             </MudTabPanel>
             }
         </MudTabs>
