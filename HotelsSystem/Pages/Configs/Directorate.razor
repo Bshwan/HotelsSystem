@@ -15,7 +15,7 @@
                          ResetValueOnEmptyText="true"
                          Value="@(new UserInfo(){peo_UserName=SelectedDirectorate.peo_UserName,peo_UserID=SelectedDirectorate.peo_dirAdminUserID})"
                          Text="@SelectedDirectorate.peo_UserName"
-                         Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_dirAdminUserID")))"
+                         Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))"
                          ValueChanged="@((e)=>OnUserChanged(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
                          CoerceText="@true"
