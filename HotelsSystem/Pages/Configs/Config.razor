@@ -1,4 +1,5 @@
 @page "/config"
+@inject IStringLocalizer<App> L;
 @if(session!=null){
 <AuthView Roles="session" PermissionName="@Routing.config">
 
@@ -9,10 +10,10 @@
     <MudDivider />
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
-            <MudTabPanel Text="Directories">
+                    <MudTabPanel Text="@L["directory"]">
                <Directorate DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></Directorate>
             </MudTabPanel>
-            <MudTabPanel Text="Workpoints">
+                    <MudTabPanel Text="@L["workplaces"]">
                 <WorkingPoint DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></WorkingPoint>
             </MudTabPanel>
         </MudTabs>

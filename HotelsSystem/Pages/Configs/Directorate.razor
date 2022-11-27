@@ -4,7 +4,7 @@
     <div class="row g-3 m-0 w-100">
         <MudForm @ref="AddForm" Class="row g-3 m-0 w-100 p-0">
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-            <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label=@L["directory"] Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                          @* Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))" *@
@@ -18,7 +18,7 @@
                          ValueChanged="@((e)=>OnUserChanged(e))"
                          ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
                          CoerceText="@true"
-                         Label="User"
+                         Label=@L["admin"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
         </div>
@@ -40,12 +40,12 @@
                 <HeaderContent>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<DirectorateInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
-                            @L["directorate"]
+                            @L["directory"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<DirectorateInfo, object>(x=>x.peo_UserName.ToEmptyOnNull())">
-                            @L["name"]
+                            @L["admin"]
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh></MudTh>

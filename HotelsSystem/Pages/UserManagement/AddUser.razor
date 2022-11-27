@@ -9,7 +9,7 @@
     </div>
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
-            <MudTabPanel Text="General Informations">
+            <MudTabPanel Text="@L["general-info"]">
                 <MudForm @ref="AddUserForm">
                 <div class="row gy-3 gx-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -41,7 +41,7 @@
                             Value="@(new LanguageInfo{lang_ID=SelectedUser.peo_Language,lang_Name=combos.Languages.SelectByID<LanguageInfo>(SelectedUser.peo_Language,"lang_ID").lang_Name})" 
                                 Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
                                 ValueChanged="OnSelectedLanguageChange"
-                                Margin="@Margin.Dense" T="LanguageInfo" Label="Language" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="LanguageInfo" Label="@L["language"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.Languages)
                             {
                             <MudSelectItem T="LanguageInfo" Value="@item">@item.lang_Name</MudSelectItem>
@@ -63,7 +63,7 @@
                          ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="Directorate"
+                         Label=@L["directory"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -83,7 +83,7 @@
                          ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="Workpoint"
+                         Label=@L["workplace"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -104,7 +104,7 @@
                 </MudForm>
             </MudTabPanel>
             @if(SelectedUser.peo_UserID>0){
-            <MudTabPanel Text="Roles">
+            <MudTabPanel Text="@L["roles"]">
                 <div class="row g-3 m-0 w-100">
                     <MudForm @ref="AddGroupForm" Class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -147,7 +147,7 @@
                     </div>
                 </div>
             </MudTabPanel>
-            <MudTabPanel Text="Privileges">
+            <MudTabPanel Text="@L["privileges"]">
                 <div class="row g-3 m-0 w-100">
                     <MudForm @ref="AddPrivilageForm" Class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -162,7 +162,7 @@
                         Validation="@(new Func<DataAccessPermissions, string>((e)=>e.ValidateField<DataAccessPermissions>("dap_ID")))"
                         ToStringFunc="@(e=>e==null?"":e.dap_Name)"
                         T="DataAccessPermissions"
-                        Label=@L["privillage"] 
+                        Label=@L["privilege"]
                         Required="true" 
                         OnlyValidateIfDirty="true"
                         SearchFunc="SearchPrivilages"
@@ -190,7 +190,7 @@
                     </div>
                 </div>
             </MudTabPanel>
-            <MudTabPanel Text="Workpoints">
+            <MudTabPanel Text="@L["workplaces"]">
                  <div class="row g-3 m-0 w-100">
                     <MudForm @ref="AddWorkpointForm" Class="row g-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
@@ -207,7 +207,7 @@
                          ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label="Workpoint"
+                         Label=@L["workplace"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -218,7 +218,7 @@
                     <div class="col-12">
                         <MudTable Dense="true" T="WorkingPointInfo" Elevation="0" Items="@(combos.WorkingPoints.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
-                                <MudTh>Name</MudTh>
+                                            <MudTh>@L["name"]</MudTh>
                                 <MudTh></MudTh>
                             </HeaderContent>
                             <RowTemplate>
