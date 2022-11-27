@@ -46,6 +46,7 @@ RequestLocalizationOptions GetLocalizationOptions()
     var localizationOptions = new RequestLocalizationOptions()
         .AddSupportedCultures(supportedCultures)
         .AddSupportedUICultures(supportedCultures);
+    
 
     return localizationOptions;
 }

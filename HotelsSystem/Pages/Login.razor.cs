@@ -34,13 +34,13 @@
 
             if (result.Result > 0)
             {
-                string Language = "en-US";
+                string Language = "en";
                 if (result.Userlanguage == 1)
-                    Language = "en-US";
+                    Language = "ku";
                 else if (result.Userlanguage == 2)
-                    Language = "ku-Arab";
+                    Language = "en";
                 else if (result.Userlanguage == 3)
-                    Language = "ar-IQ";
+                    Language = "ar";
 
                 await Protection.SetEncryptedSession(result, JSRuntime);
                 RequestCultureChange(Language, Routing.hotels);
