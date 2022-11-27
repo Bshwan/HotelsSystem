@@ -14,7 +14,7 @@
                     <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="htlus_Name" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Name.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
                     <MudTh><MudTableSortLabel SortLabel="htlus_FullName" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_FullName.ToEmptyOnNull())">@L["full-name"]</MudTableSortLabel></MudTh>
                     <MudTh><MudTableSortLabel SortLabel="htlustype_Name" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlustype_Name.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortLabel="htlus_Active" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Active)">@L["active"]</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="htlus_Active" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Active)">@L["status"]</MudTableSortLabel></MudTh>
                 </HeaderContent>
                 <RowTemplate>
                 <MudTd>@context.htlus_Name</MudTd>

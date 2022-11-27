@@ -256,7 +256,16 @@
     <value>الأدوار</value>
   </data>
   <data name="privilege" xml:space="preserve">
-    <value>شرف</value>
+    <value>امتياز</value>
+  </data>
+  <data name="user-managment" xml:space="preserve">
+    <value>إدارة المستخدم</value>
+  </data>
+  <data name="admin-info" xml:space="preserve">
+    <value>معلومات المسؤول</value>
+  </data>
+  <data name="hotel-info" xml:space="preserve">
+    <value>معلومات الفندق</value>
   </data>
   <data name="privileges" xml:space="preserve">
     <value>الامتيازات</value>
@@ -308,5 +317,17 @@
   </data>
   <data name="note" xml:space="preserve">
     <value>ملاحضە</value>
+  </data>
+  <data name="inactive" xml:space="preserve">
+    <value>غير نشط</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>مطلوب</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>الحالة</value>
   </data>
 </root>

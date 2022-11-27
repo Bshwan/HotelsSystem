@@ -214,13 +214,13 @@
     <value>ژمارەی ڕیز</value>
   </data>
   <data name="configrations" xml:space="preserve">
-    <value>ڕێکخستنەکان</value>
+    <value>ڕێکخستنە گشتییەکان</value>
   </data>
   <data name="directories" xml:space="preserve">
-    <value>بەڕێوبەرایەتیەکان</value>
+    <value>بەڕێوەبەرایەتیەکان</value>
   </data>
   <data name="directory" xml:space="preserve">
-    <value>بەڕێوبەرایەتی</value>
+    <value>بەڕێوەبەرایەتی</value>
   </data>
   <data name="user" xml:space="preserve">
     <value>بەکارهێنەر</value>
@@ -232,7 +232,7 @@
     <value>شوێنکارەکان</value>
   </data>
   <data name="admin" xml:space="preserve">
-    <value>بەڕێوبەر</value>
+    <value>بەڕێوەبەر</value>
   </data>
   <data name="admins" xml:space="preserve">
     <value>بەڕێوەبەرەکان</value>
@@ -250,10 +250,10 @@
     <value>جۆری بەکارهێنەر</value>
   </data>
   <data name="role" xml:space="preserve">
-    <value>گروپی مافەکان</value>
+    <value>گروپ</value>
   </data>
   <data name="roles" xml:space="preserve">
-    <value>گروپی مافەکان</value>
+    <value>گروپەکان</value>
   </data>
   <data name="privilege" xml:space="preserve">
     <value>ماف</value>
@@ -267,11 +267,20 @@
   <data name="add-admin" xml:space="preserve">
     <value>زیادکردنی</value>
   </data>
+  <data name="admin-info" xml:space="preserve">
+    <value>زانیاری بەڕێوەبەر</value>
+  </data>
+  <data name="hotel-info" xml:space="preserve">
+    <value>زانیاری هۆتێل</value>
+  </data>
+  <data name="user-managment" xml:space="preserve">
+    <value>ڕێکخستنی بەکارهێنەر</value>
+  </data>
   <data name="entry-date" xml:space="preserve">
     <value>بەرواری داخڵکردن</value>
   </data>
   <data name="entry-by" xml:space="preserve">
-    <value>داخڵکردن لەلایەن</value>
+    <value>داخڵکراوە لەلایەن</value>
   </data>
   <data name="add-user" xml:space="preserve">
     <value>زیادکردنی بەکارهێنەر </value>
@@ -298,7 +307,7 @@
     <value>لیستی بەکارهێنەران</value>
   </data>
   <data name="configurations" xml:space="preserve">
-    <value>ڕێکخستنەکان</value>
+    <value>ڕێکخستنە گشتییەکان</value>
   </data>
   <data name="general-info" xml:space="preserve">
     <value>زانیاری بەکارهێنەر</value>
@@ -308,5 +317,17 @@
   </data>
   <data name="note" xml:space="preserve">
     <value>تێبینی</value>
+  </data>
+  <data name="inactive" xml:space="preserve">
+    <value>نا چالاک</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>چوونەژوورەوە</value>
+  </data>
+  <data name="required" xml:space="preserve">
+    <value>ئەم زانیاریە گرنگە</value>
+  </data>
+  <data name="status" xml:space="preserve">
+    <value>حاڵەت</value>
   </data>
 </root>

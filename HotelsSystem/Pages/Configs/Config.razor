@@ -1,11 +1,13 @@
 @page "/config"
 @inject IStringLocalizer<App> L;
 @if(session!=null){
+    <PageTitle>@L["configurations"]</PageTitle>
+
 <AuthView Roles="session" PermissionName="@Routing.config">
 
 <div class="row gy-3 gx-2">
     <div class="col-12">
-        <h4>Configurations</h4>
+                <h4>@L["configurations"]</h4>
     </div>
     <MudDivider />
     <div class="col-12">

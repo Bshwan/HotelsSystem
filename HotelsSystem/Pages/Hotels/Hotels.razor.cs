@@ -62,7 +62,8 @@ public partial class Hotels
         parameters.Add("config", config);
         parameters.Add("hotel", hotel);
         parameters.Add("HotelID", id);
-        
+        parameters.Add("OnAdd", EventCallback.Factory.Create(this, (async()=>await table.ReloadServerData())));
+
         var modal = DialogService.Show<AddHotel>(L["add-hotel"], parameters, options);
         var ModalResult = await modal.Result;
         
@@ -82,6 +83,6 @@ public partial class Hotels
         parameters.Add("hotel", hotel);
         parameters.Add("HotelID", id);
 
-        DialogService.Show<HotelUsers>("Users",parameters, options);
+        DialogService.Show<HotelUsers>(L["users"],parameters, options);
     }
 }

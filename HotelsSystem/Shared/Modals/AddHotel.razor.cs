@@ -6,6 +6,8 @@ public partial class AddHotel
     [Parameter]
     public ClS_Config config { get; set; } = default!;
     [Parameter]
+    public EventCallback OnAdd { get; set; } = default!;
+    [Parameter]
     public ClS_Hotels hotel { get; set; } = default!;
     [Parameter]
     public int HotelID { get; set; }
@@ -142,6 +144,7 @@ public partial class AddHotel
                 await GetHotelByID();
                 await AddUserGetCombos();
             }
+            await OnAdd.InvokeAsync();
             // MudDialog.Close(DialogResult.Ok(true));
             Toaster.Success(".", result.MSG);
             return;

@@ -2,10 +2,10 @@
 @inject IStringLocalizer<App> L;
     @if(config!=null){
     <AuthView Roles="session" PermissionName="@Routing.userlist">
-
+        <PageTitle>@L["user-list"]</PageTitle>
 <div class="row gx-2 gy-3">
     <div class="col-12">
-        <h4>User List</h4>
+        <h4>@L["user-list"]</h4>
     </div>
     <MudDivider />
     <div class="col-12 d-flex">
@@ -54,7 +54,7 @@
                     </MudTableSortLabel>
                 </MudTh>
                 <MudTh>
-                    <MudTableSortLabel SortLabel="peo_UserActive" SortBy="new Func<UserInfo, object>(x=>x.peo_UserActive)">@L["active"]
+                    <MudTableSortLabel SortLabel="peo_UserActive" SortBy="new Func<UserInfo, object>(x=>x.peo_UserActive)">@L["status"]
                     </MudTableSortLabel>
                 </MudTh>
             </HeaderContent>
@@ -69,7 +69,15 @@
                 <MudTd>@context.peo_DirectorateName</MudTd>
                 <MudTd>@context.wp_workpointName</MudTd>
                 <MudTd>@context.peo_createdDate</MudTd>
-                <MudTd>@context.peo_UserActive</MudTd>
+                <MudTd>
+                            @if (context.peo_UserActive)
+                            {
+                                <MudChip Color="Color.Success">@L["active"]</MudChip>
+                            }else{
+                                <MudChip Color="Color.Error">@L["inactive"]</MudChip>
+
+                            }
+                            </MudTd>
             </RowTemplate>
 
             @* <RowEditingTemplate>

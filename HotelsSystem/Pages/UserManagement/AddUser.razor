@@ -1,5 +1,6 @@
 @page "/addUser/{HashID}"
 @inject IStringLocalizer<App> L;
+<PageTitle>@L["add-user"]</PageTitle>
 
 @if(session!=null){
     <AuthView Roles="session" PermissionName="@Routing.adduser">
@@ -88,7 +89,7 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     @* } *@
-                    <div class="col-12">
+                                <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudField Class="dense-true" Margin="Margin.Dense" Variant="Variant.Outlined">
                             <MudCheckBox Size="Size.Small" Label="@L["active"]" @bind-Checked="SelectedUser.peo_UserActive" Color="Color.Primary"></MudCheckBox>
                         </MudField>
@@ -97,8 +98,8 @@
                         <MudDivider/>
                     </div>
                     <div class="col-12 d-flex justify-content-end">
-                        <MudButton Class="me-2" Href="@Routing.userlist" StartIcon="@Icons.Material.Filled.Cancel" IconColor="Color.Error" Variant="Variant.Filled">Cancel</MudButton>
-                        <MudButton OnClick="@InsertUpdateUser" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Primary">Save</MudButton>
+                        <MudButton Class="me-2" Href="@Routing.userlist" StartIcon="@Icons.Material.Filled.Cancel" IconColor="Color.Error" Variant="Variant.Filled">@L["cancel"]</MudButton>
+                        <MudButton OnClick="@InsertUpdateUser" StartIcon="@Icons.Material.Filled.Save" Variant="Variant.Filled" Color="Color.Primary">@L["save"]</MudButton>
                     </div>
                 </div>
                 </MudForm>

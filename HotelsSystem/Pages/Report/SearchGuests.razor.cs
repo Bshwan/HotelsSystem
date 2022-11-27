@@ -1,4 +1,6 @@
 
+using Microsoft.Extensions.Localization;
+
 namespace HotelsSystem.Pages.Report;
 public partial class SearchGuests
 {
@@ -10,6 +12,8 @@ public partial class SearchGuests
     protected IToaster Toaster { get; set; } = default!;
     [Inject]
     protected NavigationManager nav { get; set; } = default!;
+    [Inject]
+    protected IStringLocalizer<App> L { get; set; } = default!;
     [Inject]
     protected IDialogService DialogService { get; set; } = default!;
 
@@ -64,6 +68,6 @@ public partial class SearchGuests
             MaxWidth = MaxWidth.Large,
             FullWidth = true,
         };
-        DialogService.Show<SearchFilter>("Users", options);
+        DialogService.Show<SearchFilter>(L["users"], options);
     }
 }
