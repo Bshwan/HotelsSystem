@@ -1,6 +1,6 @@
-@* @page "/search"
-@inject IStringLocalizer<App> L;
-
+ @page "/search"
+@if(report!=null && session!=null){
+    <AuthView Roles="session" PermissionName="@Routing.search"></AuthView>
 <div class="row gx-2 gy-3">
     <div class="col-12">
         <h4>@L["search"]</h4>
@@ -9,64 +9,138 @@
     <MudPaper Outlined="true">
         <MudGrid Spacing="1" Class="w-100 m-0 p-2">
             <MudItem sm="3">
-                <MudText Typo="Typo.h6">@L["guest-list"]</MudText>
+                <MudText Typo="Typo.h6">@L["search"]</MudText>
             </MudItem>
             <MudItem sm="3"></MudItem>
-            <MudItem sm="3" Class="d-flex align-items-center justify-content-end">
-                <MudButton OnClick="OpenFilterModal" StartIcon="@Icons.Filled.FilterAlt" Variant="Variant.Filled" Color="Color.Primary" DisableElevation>Filter</MudButton>
-            </MudItem>
+            @* <MudItem sm="3" Class="d-flex align-items-center justify-content-end">
+                <MudButton OnClick="OpenFilterModal" StartIcon="@Icons.Filled.FilterAlt" Variant="Variant.Filled" Color="Color.Primary" DisableElevation>@L["filter"]</MudButton>
+            </MudItem> *@
             
         </MudGrid>
         <MudTable Outlined="false" Elevation="0" T="GuestDetailsInfo" Dense="true" Hover="true" @ref="table" ServerData="@(new Func<TableState,Task<TableData<GuestDetailsInfo>>>(GetPaginatedItems))" T="HotelsInfo" >
             <HeaderContent>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
-                        <MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">Name</MudTableSortLabel>
-                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                            <div class="p-3">
+                        <MudTableSortLabel SortLabel="GD_Fullname" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_Fullname.ToEmptyOnNull())">@L["full-name"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> *@
+                           @* <div class="p-3">
                                 <MudAutocomplete Clearable T="string" Label="@L["name"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                            </div>
-                        </MudMenu>
+                            </div>*@
+                        @* </MudMenu> *@
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
-                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Sign)">Hotel Name</MudTableSortLabel>
-                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                            <div class="p-3">
+                        <MudTableSortLabel SortLabel="GD_Surname" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_Surname.ToEmptyOnNull())">@L["surname"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> *@
+                            @* <div class="p-3">
                                 <MudAutocomplete Clearable T="string" Label="@L["hotel-name"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                            </div>
-                        </MudMenu>
+                            </div> *@
+                        @* </MudMenu> *@
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
-                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Number)">Room Number</MudTableSortLabel>
-                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                            <div class="p-3">
+                        <MudTableSortLabel SortLabel="GD_MotherName" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_MotherName.ToEmptyOnNull())">@L["mother-name"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> *@
+                            @* <div class="p-3">
                                 <MudAutocomplete Clearable T="string" Label="@L["room-number"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                            </div>
-                        </MudMenu>
+                            </div> *@
+                        @* </MudMenu> *@
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
-                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Position)">Check In</MudTableSortLabel>
-                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                            <div class="p-3">
+                        <MudTableSortLabel SortLabel="GD_Mobile" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_Mobile.ToEmptyOnNull())">@L["mobile-no"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> *@
+                            @* <div class="p-3">
                                 <MudDatePicker Margin="Margin.Dense" Label="@L["check-in-date"]" @bind-Date="date" Variant="Variant.Outlined"/>
-                            </div>
-                        </MudMenu>
+                            </div> *@
+                        @* </MudMenu> *@
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
-                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Molar)">Check Out</MudTableSortLabel>
-                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                            <div class="p-3">
-                                <MudDatePicker Margin="Margin.Dense" Label="@L["check-out-date"]" @bind-Date="date" Variant="Variant.Outlined"/>
-                            </div>
-                        </MudMenu>
+                        <MudTableSortLabel SortLabel="GD_IdNumber" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_IdNumber.ToEmptyOnNull())">@L["id-no"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="gen_Name" SortBy="new Func<GuestDetailsInfo, object>(x=>x.gen_Name.ToEmptyOnNull())">@L["gender"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="nat_Name" SortBy="new Func<GuestDetailsInfo, object>(x=>x.nat_Name.ToEmptyOnNull())">@L["nationality"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="GD_DOB" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_DOB.ToyyyyMMddElseEmpty())">@L["birth-date"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="htl_Name" SortBy="new Func<GuestDetailsInfo, object>(x=>x.htl_Name.ToEmptyOnNull())">@L["hotel"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="htl_Address" SortBy="new Func<GuestDetailsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["address"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="htf_FloorName" SortBy="new Func<GuestDetailsInfo, object>(x=>x.htf_FloorName.ToEmptyOnNull())">@L["floor"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="htr_Detail" SortBy="new Func<GuestDetailsInfo, object>(x=>x.htr_Detail.ToEmptyOnNull())">@L["room"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="GD_CheckIn" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_CheckIn.ToyyyyMMddElseEmpty())">@L["check-in"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="GD_ChechOut" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_ChechOut.ToyyyyMMddElseEmpty())">@L["check-out"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<GuestDetailsInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">@L["directory"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortLabel="wp_workpointName" SortBy="new Func<GuestDetailsInfo, object>(x=>x.wp_workpointName.ToEmptyOnNull())">@L["workpoint"]</MudTableSortLabel>
+                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                        </MudMenu> *@
                     </div>
                 </MudTh>
             </HeaderContent>
@@ -86,17 +160,12 @@
                 <MudTd>@context.GD_CheckIn.ToddMMyyyyhhmmsstt()</MudTd>
                 <MudTd>@context.GD_ChechOut.ToddMMyyyyhhmmsstt()</MudTd>
                 <MudTd>@context.peo_DirectorateName</MudTd>
-                <MudTd>@context.wp</MudTd>
-
-                <MudTd>@context.htl_Address</MudTd>
-                <MudTd DataLabel="Sign"><MudRating ReadOnly="true" SelectedValue="@context.htl_Star" /></MudTd>
-                <MudTd>@context.htl_EntryByName</MudTd>
-                <MudTd>@context.htl_EntryDate.ToddMMyyyyhhmmsstt()</MudTd>
-                <MudTd Class="text-end"><MudIconButton @onclick="@(()=>OpenUsersModal(context.htl_ID))" Icon="@Icons.Filled.SupervisedUserCircle" Color="Color.Primary"></MudIconButton></MudTd>
+                <MudTd>@context.wp_workpointName</MudTd>
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />
             </PagerContent>
         </MudTable>
     </MudPaper>
-</div> *@
+</div> 
+}

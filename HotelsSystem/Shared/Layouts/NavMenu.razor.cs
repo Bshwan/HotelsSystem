@@ -33,6 +33,7 @@ public partial class NavMenu
         {"AdminPanelSettings",Icons.Filled.AdminPanelSettings},
         {"People",Icons.Filled.People},
         {"Security",Icons.Filled.Security},
+        {"search",Icons.Filled.Search},
     };
     string GetIconByText(string text)
     {

@@ -11,11 +11,11 @@ public class GuestDetailsInfo
     public string? GD_IdNumber { get; set; }
     public int GD_Gender { get; set; }
     public string? gen_Name { get; set; }
-    public DateTime GD_DOB { get; set; }
+    public DateTime? GD_DOB { get; set; }
     public int GD_Nationality { get; set; }
     public string? nat_Name { get; set; }
-    public DateTime GD_CheckIn { get; set; }
-    public DateTime GD_ChechOut { get; set; }
+    public DateTime? GD_CheckIn { get; set; }
+    public DateTime? GD_ChechOut { get; set; }
     public string? GD_Note { get; set; }
     public string? GD_EntryByName { get; set; }
     public DateTime GD_EntryDate { get; set; } 

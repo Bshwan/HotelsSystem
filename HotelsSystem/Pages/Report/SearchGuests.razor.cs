@@ -21,12 +21,13 @@ public partial class SearchGuests
     private MudTable<GuestDetailsInfo>? table;
     ClS_Reports? report;
     GuestDetailsInfo Filter = new GuestDetailsInfo();
+    SPResult? session;
 
 
 
     protected override async Task OnInitializedAsync()
     {
-        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+         session = await Protection.GetDecryptedSession(jSRuntime, DB);
         report = new ClS_Reports(DB, session);
     }
     private async Task<TableData<GuestDetailsInfo>> GetPaginatedItems(TableState state)

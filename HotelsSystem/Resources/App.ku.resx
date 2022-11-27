@@ -330,4 +330,52 @@
   <data name="status" xml:space="preserve">
     <value>حاڵەت</value>
   </data>
+  <data name="gender" xml:space="preserve">
+    <value>ڕەگەز</value>
+  </data>
+  <data name="id-no" xml:space="preserve">
+    <value>ژ. ناسنامە</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>نازناو</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>فیلتەر</value>
+  </data>
+  <data name="female" xml:space="preserve">
+    <value>مێ</value>
+  </data>
+    <data name="male" xml:space="preserve">
+    <value>نێر</value>
+  </data>
+  <data name="mobile-no" xml:space="preserve">
+    <value>ژمارەی مۆبایل</value>
+  </data>
+  <data name="mother-name" xml:space="preserve">
+    <value>ناوی دایک</value>
+  </data>
+  <data name="nationality" xml:space="preserve">
+    <value>نەتەوە</value>
+  </data>
+   <data name="address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="birth-date" xml:space="preserve">
+    <value>بەرواری لە دایکبوون</value>
+  </data>
+  <data name="check-in" xml:space="preserve">
+    <value>تۆماری هاتن</value>
+  </data>
+  <data name="check-out" xml:space="preserve">
+    <value>تۆماری دەرچوون</value>
+  </data>
+<data name="room" xml:space="preserve">
+    <value>ژ. ژوور</value>
+  </data>
+  <data name="floor" xml:space="preserve">
+    <value>قات</value>
+  </data>
+  <data name="workpoint" xml:space="preserve">
+    <value>شوێنکار</value>
+  </data>
 </root>

@@ -252,6 +252,54 @@
   <data name="user-managment" xml:space="preserve">
     <value>User Managment</value>
   </data>
+   <data name="gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="id-no" xml:space="preserve">
+    <value>Identity No.</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>Sur Name</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+    <data name="male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="mobile-no" xml:space="preserve">
+    <value>Mobile No.</value>
+  </data>
+  <data name="mother-name" xml:space="preserve">
+    <value>Mother Name</value>
+  </data>
+  <data name="nationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+   <data name="address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="birth-date" xml:space="preserve">
+    <value>Birth Date</value>
+  </data>
+  <data name="check-in" xml:space="preserve">
+    <value>Check In</value>
+  </data>
+  <data name="check-out" xml:space="preserve">
+    <value>Check Out</value>
+  </data>
+<data name="room" xml:space="preserve">
+    <value>Room</value>
+  </data>
+  <data name="floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="workpoint" xml:space="preserve">
+    <value>Workpoint</value>
+  </data>
   <data name="user-type" xml:space="preserve">
     <value>User Type</value>
   </data>

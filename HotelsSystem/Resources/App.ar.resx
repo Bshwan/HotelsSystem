@@ -258,6 +258,56 @@
   <data name="privilege" xml:space="preserve">
     <value>امتياز</value>
   </data>
+
+  <data name="gender" xml:space="preserve">
+    <value>جنس</value>
+  </data>
+  <data name="id-no" xml:space="preserve">
+    <value>رقم الهوية</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>إسم العائلة</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>فلتر</value>
+  </data>
+  <data name="female" xml:space="preserve">
+    <value>أنثى</value>
+  </data>
+    <data name="male" xml:space="preserve">
+    <value>ذكر</value>
+  </data>
+  <data name="mobile-no" xml:space="preserve">
+    <value>رقم الهوية</value>
+  </data>
+  <data name="mother-name" xml:space="preserve">
+    <value>اسم الأم</value>
+  </data>
+  <data name="nationality" xml:space="preserve">
+    <value>جنسية</value>
+  </data>
+   <data name="address" xml:space="preserve">
+    <value>العنوان</value>
+  </data>
+  <data name="birth-date" xml:space="preserve">
+    <value>تاريخ الميلاد</value>
+  </data>
+  <data name="check-in" xml:space="preserve">
+    <value>تسجيل الوصول</value>
+  </data>
+  <data name="check-out" xml:space="preserve">
+    <value>تسجيل خروج</value>
+  </data>
+<data name="room" xml:space="preserve">
+    <value>غرفة</value>
+  </data>
+  <data name="floor" xml:space="preserve">
+    <value>طابق</value>
+  </data>
+  <data name="workpoint" xml:space="preserve">
+    <value>نقطة العمل</value>
+  </data>
+
   <data name="user-managment" xml:space="preserve">
     <value>إدارة المستخدم</value>
   </data>
@@ -294,6 +344,7 @@
   <data name="workpoint-name" xml:space="preserve">
     <value>اسم نقطة العمل</value>
   </data>
+  
   <data name="created-date" xml:space="preserve">
     <value>تاريخ الإنشاء</value>
   </data>
