@@ -40,7 +40,6 @@
                 <MudTd>@context.htl_EntryByName</MudTd>
                 <MudTd>@context.htl_EntryDate.ToddMMyyyyhhmmsstt()</MudTd>
                 <MudTd Class="text-end"><MudIconButton @onclick="@(()=>OpenUsersModal(context.htl_ID))" Icon="@Icons.Filled.SupervisedUserCircle" Color="Color.Primary"></MudIconButton></MudTd>
-
             </RowTemplate>
             <PagerContent>
                 <MudTablePager />

@@ -29,7 +29,19 @@ public class GuestDetailsInfo
     public string? cfg_HTR_Type { get; set; }
     public int htr_FloorID { get; set; }
     public string? htf_FloorName { get; set; }
+    public string? peo_DirectorateName { get; set; }
+    public string? wp_workpointName { get; set; }
     public int htr_NumberOfBed { get; set; }
+    public int DirectorateID { get; set; }
+    public int WorkplaceID { get; set; }
+    public int HotelID { get; set; }
+    public int RoomID { get; set; }
+    public int GenderID { get; set; }
+    public int NationalityID { get; set; }
+    public DateTime? FromCheckInDate { get; set; }
+    public DateTime? ToCheckInDate { get; set; }
+    public DateTime? FromCheckOutDate { get; set; }
+    public DateTime? ToCheckOutDate { get; set; }
     //public DateTime GM_CheckIn { get; set; }
     //public DateTime GM_CheckOut { get; set; }
 

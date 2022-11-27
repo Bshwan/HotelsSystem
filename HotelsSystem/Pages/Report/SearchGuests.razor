@@ -1,0 +1,102 @@
+@* @page "/search"
+@inject IStringLocalizer<App> L;
+
+<div class="row gx-2 gy-3">
+    <div class="col-12">
+        <h4>@L["search"]</h4>
+    </div>
+    <MudDivider/>
+    <MudPaper Outlined="true">
+        <MudGrid Spacing="1" Class="w-100 m-0 p-2">
+            <MudItem sm="3">
+                <MudText Typo="Typo.h6">@L["guest-list"]</MudText>
+            </MudItem>
+            <MudItem sm="3"></MudItem>
+            <MudItem sm="3" Class="d-flex align-items-center justify-content-end">
+                <MudButton OnClick="OpenFilterModal" StartIcon="@Icons.Filled.FilterAlt" Variant="Variant.Filled" Color="Color.Primary" DisableElevation>Filter</MudButton>
+            </MudItem>
+            
+        </MudGrid>
+        <MudTable Outlined="false" Elevation="0" T="GuestDetailsInfo" Dense="true" Hover="true" @ref="table" ServerData="@(new Func<TableState,Task<TableData<GuestDetailsInfo>>>(GetPaginatedItems))" T="HotelsInfo" >
+            <HeaderContent>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel InitialDirection="SortDirection.Ascending" SortBy="new Func<Element, object>(x=>x.Name)">Name</MudTableSortLabel>
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                                <MudAutocomplete Clearable T="string" Label="@L["name"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                            </div>
+                        </MudMenu>
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Sign)">Hotel Name</MudTableSortLabel>
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                                <MudAutocomplete Clearable T="string" Label="@L["hotel-name"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                            </div>
+                        </MudMenu>
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Number)">Room Number</MudTableSortLabel>
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                                <MudAutocomplete Clearable T="string" Label="@L["room-number"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                            </div>
+                        </MudMenu>
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Position)">Check In</MudTableSortLabel>
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                                <MudDatePicker Margin="Margin.Dense" Label="@L["check-in-date"]" @bind-Date="date" Variant="Variant.Outlined"/>
+                            </div>
+                        </MudMenu>
+                    </div>
+                </MudTh>
+                <MudTh>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <MudTableSortLabel SortBy="new Func<Element, object>(x=>x.Molar)">Check Out</MudTableSortLabel>
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                                <MudDatePicker Margin="Margin.Dense" Label="@L["check-out-date"]" @bind-Date="date" Variant="Variant.Outlined"/>
+                            </div>
+                        </MudMenu>
+                    </div>
+                </MudTh>
+            </HeaderContent>
+            <RowTemplate>
+                <MudTd>@context.GD_Fullname</MudTd>
+                <MudTd>@context.GD_Surname</MudTd>
+                <MudTd>@context.GD_MotherName</MudTd>
+                <MudTd>@context.GD_Mobile</MudTd>
+                <MudTd>@context.GD_IdNumber</MudTd>
+                <MudTd>@context.gen_Name</MudTd>
+                <MudTd>@context.nat_Name</MudTd>
+                <MudTd>@context.GD_DOB.ToddMMyyyyhhmmsstt()</MudTd>
+                <MudTd>@context.htl_Name</MudTd>
+                <MudTd>@context.htl_Address</MudTd>
+                <MudTd>@context.htf_FloorName</MudTd>
+                <MudTd>@context.htr_Detail</MudTd>
+                <MudTd>@context.GD_CheckIn.ToddMMyyyyhhmmsstt()</MudTd>
+                <MudTd>@context.GD_ChechOut.ToddMMyyyyhhmmsstt()</MudTd>
+                <MudTd>@context.peo_DirectorateName</MudTd>
+                <MudTd>@context.wp</MudTd>
+
+                <MudTd>@context.htl_Address</MudTd>
+                <MudTd DataLabel="Sign"><MudRating ReadOnly="true" SelectedValue="@context.htl_Star" /></MudTd>
+                <MudTd>@context.htl_EntryByName</MudTd>
+                <MudTd>@context.htl_EntryDate.ToddMMyyyyhhmmsstt()</MudTd>
+                <MudTd Class="text-end"><MudIconButton @onclick="@(()=>OpenUsersModal(context.htl_ID))" Icon="@Icons.Filled.SupervisedUserCircle" Color="Color.Primary"></MudIconButton></MudTd>
+            </RowTemplate>
+            <PagerContent>
+                <MudTablePager />
+            </PagerContent>
+        </MudTable>
+    </MudPaper>
+</div> *@
