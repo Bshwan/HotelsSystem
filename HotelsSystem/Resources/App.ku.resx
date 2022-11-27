@@ -136,7 +136,7 @@
     <value>ئەستێرە</value>
   </data>
   <data name="room" xml:space="preserve">
-    <value>ژوور</value>
+    <value>ژ. ژوور</value>
   </data>
   <data name="rooms" xml:space="preserve">
     <value>ژوور</value>
@@ -145,7 +145,7 @@
     <value>شوێن</value>
   </data>
   <data name="address" xml:space="preserve">
-    <value>ناونیشان </value>
+    <value>Address</value>
   </data>
   <data name="full-address" xml:space="preserve">
     <value>ناونیشانی تەواو</value>
@@ -268,7 +268,7 @@
     <value>زیادکردنی</value>
   </data>
   <data name="admin-info" xml:space="preserve">
-    <value>زانیاری بەڕێوەبەر</value>
+    <value>زانیاری بەکارهێنەر</value>
   </data>
   <data name="hotel-info" xml:space="preserve">
     <value>زانیاری هۆتێل</value>
@@ -345,7 +345,7 @@
   <data name="female" xml:space="preserve">
     <value>مێ</value>
   </data>
-    <data name="male" xml:space="preserve">
+  <data name="male" xml:space="preserve">
     <value>نێر</value>
   </data>
   <data name="mobile-no" xml:space="preserve">
@@ -357,20 +357,8 @@
   <data name="nationality" xml:space="preserve">
     <value>نەتەوە</value>
   </data>
-   <data name="address" xml:space="preserve">
-    <value>Address</value>
-  </data>
   <data name="birth-date" xml:space="preserve">
     <value>بەرواری لە دایکبوون</value>
-  </data>
-  <data name="check-in" xml:space="preserve">
-    <value>تۆماری هاتن</value>
-  </data>
-  <data name="check-out" xml:space="preserve">
-    <value>تۆماری دەرچوون</value>
-  </data>
-<data name="room" xml:space="preserve">
-    <value>ژ. ژوور</value>
   </data>
   <data name="floor" xml:space="preserve">
     <value>قات</value>

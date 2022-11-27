@@ -244,7 +244,7 @@
     <value>Language</value>
   </data>
   <data name="admin-info" xml:space="preserve">
-    <value>Admin Information</value>
+    <value>User Information</value>
   </data>
   <data name="hotel-info" xml:space="preserve">
     <value>Hotel Information</value>
@@ -252,7 +252,7 @@
   <data name="user-managment" xml:space="preserve">
     <value>User Managment</value>
   </data>
-   <data name="gender" xml:space="preserve">
+  <data name="gender" xml:space="preserve">
     <value>Gender</value>
   </data>
   <data name="id-no" xml:space="preserve">
@@ -267,7 +267,7 @@
   <data name="female" xml:space="preserve">
     <value>Female</value>
   </data>
-    <data name="male" xml:space="preserve">
+  <data name="male" xml:space="preserve">
     <value>Male</value>
   </data>
   <data name="mobile-no" xml:space="preserve">
@@ -279,20 +279,8 @@
   <data name="nationality" xml:space="preserve">
     <value>Nationality</value>
   </data>
-   <data name="address" xml:space="preserve">
-    <value>Address</value>
-  </data>
   <data name="birth-date" xml:space="preserve">
     <value>Birth Date</value>
-  </data>
-  <data name="check-in" xml:space="preserve">
-    <value>Check In</value>
-  </data>
-  <data name="check-out" xml:space="preserve">
-    <value>Check Out</value>
-  </data>
-<data name="room" xml:space="preserve">
-    <value>Room</value>
   </data>
   <data name="floor" xml:space="preserve">
     <value>Floor</value>

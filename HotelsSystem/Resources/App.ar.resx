@@ -136,7 +136,7 @@
     <value>النجوم</value>
   </data>
   <data name="room" xml:space="preserve">
-    <value>مجال</value>
+    <value>غرفة</value>
   </data>
   <data name="rooms" xml:space="preserve">
     <value>غرف</value>
@@ -145,7 +145,7 @@
     <value>موقعك</value>
   </data>
   <data name="address" xml:space="preserve">
-    <value>تبوك</value>
+    <value>العنوان</value>
   </data>
   <data name="full-address" xml:space="preserve">
     <value>العنوان الكامل</value>
@@ -205,10 +205,10 @@
     <value>رقم الغرفة</value>
   </data>
   <data name="check-in" xml:space="preserve">
-    <value>تحقق في</value>
+    <value>تسجيل الوصول</value>
   </data>
   <data name="check-out" xml:space="preserve">
-    <value>الدفع</value>
+    <value>تسجيل خروج</value>
   </data>
   <data name="rows-per-page" xml:space="preserve">
     <value>عدد الصفوف في الصفحة</value>
@@ -258,7 +258,6 @@
   <data name="privilege" xml:space="preserve">
     <value>امتياز</value>
   </data>
-
   <data name="gender" xml:space="preserve">
     <value>جنس</value>
   </data>
@@ -274,7 +273,7 @@
   <data name="female" xml:space="preserve">
     <value>أنثى</value>
   </data>
-    <data name="male" xml:space="preserve">
+  <data name="male" xml:space="preserve">
     <value>ذكر</value>
   </data>
   <data name="mobile-no" xml:space="preserve">
@@ -286,20 +285,8 @@
   <data name="nationality" xml:space="preserve">
     <value>جنسية</value>
   </data>
-   <data name="address" xml:space="preserve">
-    <value>العنوان</value>
-  </data>
   <data name="birth-date" xml:space="preserve">
     <value>تاريخ الميلاد</value>
-  </data>
-  <data name="check-in" xml:space="preserve">
-    <value>تسجيل الوصول</value>
-  </data>
-  <data name="check-out" xml:space="preserve">
-    <value>تسجيل خروج</value>
-  </data>
-<data name="room" xml:space="preserve">
-    <value>غرفة</value>
   </data>
   <data name="floor" xml:space="preserve">
     <value>طابق</value>
@@ -307,12 +294,11 @@
   <data name="workpoint" xml:space="preserve">
     <value>نقطة العمل</value>
   </data>
-
   <data name="user-managment" xml:space="preserve">
     <value>إدارة المستخدم</value>
   </data>
   <data name="admin-info" xml:space="preserve">
-    <value>معلومات المسؤول</value>
+    <value>معلومات المستخدم</value>
   </data>
   <data name="hotel-info" xml:space="preserve">
     <value>معلومات الفندق</value>
@@ -344,7 +330,6 @@
   <data name="workpoint-name" xml:space="preserve">
     <value>اسم نقطة العمل</value>
   </data>
-  
   <data name="created-date" xml:space="preserve">
     <value>تاريخ الإنشاء</value>
   </data>
