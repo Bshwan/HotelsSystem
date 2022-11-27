@@ -245,10 +245,6 @@
     <value>عدد الصفوف في الصفحة</value>
     <comment />
   </data>
-  <data name="configrations" xml:space="preserve">
-    <value>التكوينات</value>
-    <comment />
-  </data>
   <data name="directories" xml:space="preserve">
     <value>الدلائل</value>
     <comment />
@@ -302,7 +298,7 @@
     <comment />
   </data>
   <data name="privilege" xml:space="preserve">
-    <value>شرف</value>
+    <value>امتياز</value>
     <comment />
   </data>
   <data name="privileges" xml:space="preserve">
@@ -317,7 +313,7 @@
     <value>إضافة مشرف</value>
   </data>
   <data name="entry-date" xml:space="preserve">
-    <value>موعد الدخول</value>
+    <value>تاريخ الدخول</value>
   </data>
   <data name="entry-by" xml:space="preserve">
     <value>الدخول عن طريق</value>
@@ -332,10 +328,7 @@
     <value>اسم المديرية</value>
   </data>
   <data name="workpoint-name" xml:space="preserve">
-    <value>اسم نقطة العمل</value>
-  </data>
-  <data name="created-date" xml:space="preserve">
-    <value>تاريخ الإنشاء</value>
+    <value> نقطة العمل</value>
   </data>
   <data name="active" xml:space="preserve">
     <value>نشيط</value>
@@ -358,7 +351,7 @@
   <data name="close" xml:space="preserve">
     <value>أغلق</value>
   </data>
-  <data name="general-information" xml:space="preserve">
+  <data name="general-informations" xml:space="preserve">
     <value>المعلومات العامة</value>
   </data>
   <data name="hotel-type" xml:space="preserve">

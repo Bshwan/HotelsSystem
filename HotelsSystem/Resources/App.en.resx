@@ -245,10 +245,6 @@
     <value>Rows per page</value>
     <comment />
   </data>
-  <data name="configrations" xml:space="preserve">
-    <value>Configrations</value>
-    <comment />
-  </data>
   <data name="directories" xml:space="preserve">
     <value>Directories</value>
     <comment />
@@ -329,13 +325,10 @@
     <value>Directorate Name</value>
   </data>
   <data name="workpoint-name" xml:space="preserve">
-    <value>Work Point Name</value>
+    <value>Work Point </value>
   </data>
   <data name="workplaces" xml:space="preserve">
     <value>Workplaces</value>
-  </data>
-  <data name="created-date" xml:space="preserve">
-    <value>Created Date</value>
   </data>
   <data name="active" xml:space="preserve">
     <value>Active</value>
@@ -358,7 +351,7 @@
   <data name="close" xml:space="preserve">
     <value>Close</value>
   </data>
-  <data name="general-information" xml:space="preserve">
+  <data name="general-informations" xml:space="preserve">
     <value>General Information</value>
   </data>
   <data name="hotel-type" xml:space="preserve">

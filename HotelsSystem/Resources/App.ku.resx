@@ -245,10 +245,6 @@
     <value>ژمارەی ڕیز</value>
     <comment />
   </data>
-  <data name="configrations" xml:space="preserve">
-    <value>ڕێکخستنەکان</value>
-    <comment />
-  </data>
   <data name="directories" xml:space="preserve">
     <value>بەڕێوبەرایەتیەکان</value>
     <comment />
@@ -326,16 +322,13 @@
     <value>زیادکردنی بەکارهێنەر </value>
   </data>
   <data name="users" xml:space="preserve">
-    <value>بەکارهێنەران</value>
+    <value>بەکارهێنەرەکان</value>
   </data>
   <data name="directorate-name" xml:space="preserve">
     <value>ناوی بەڕێوەبەرایەتی</value>
   </data>
   <data name="workpoint-name" xml:space="preserve">
-    <value>ناوی خاڵی کارکردن</value>
-  </data>
-  <data name="created-date" xml:space="preserve">
-    <value>بەرواری دروستکراو</value>
+    <value> خاڵی کارکردن</value>
   </data>
   <data name="active" xml:space="preserve">
     <value>چالاک</value>
@@ -347,7 +340,7 @@
     <value>لیستی بەکارهێنەران</value>
   </data>
   <data name="configurations" xml:space="preserve">
-    <value>ڕێکخستنەکان</value>
+    <value>ڕێکخستنەکان گشتیەکان</value>
   </data>
   <data name="user-managment" xml:space="preserve">
     <value>بەڕێوەبردنی بەکارهێنەر</value>
@@ -358,7 +351,7 @@
   <data name="close" xml:space="preserve">
     <value>داخستن</value>
   </data>
-  <data name="general-information" xml:space="preserve">
+  <data name="general-informations" xml:space="preserve">
     <value>زانیاری گشتی</value>
   </data>
   <data name="hotel-type" xml:space="preserve">
