@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -119,199 +119,150 @@
   </resheader>
   <data name="hotel" xml:space="preserve">
     <value>الفندق</value>
-    <comment />
   </data>
   <data name="hotels" xml:space="preserve">
     <value>الفنادق</value>
-    <comment />
   </data>
   <data name="hotel-list" xml:space="preserve">
     <value>قائمة الفنادق</value>
-    <comment />
   </data>
   <data name="name" xml:space="preserve">
     <value>اسم</value>
-    <comment />
   </data>
   <data name="star" xml:space="preserve">
     <value>نجمة</value>
-    <comment />
   </data>
   <data name="stars" xml:space="preserve">
     <value>النجوم</value>
-    <comment />
   </data>
   <data name="room" xml:space="preserve">
     <value>مجال</value>
-    <comment />
   </data>
   <data name="rooms" xml:space="preserve">
     <value>غرف</value>
-    <comment />
   </data>
   <data name="location" xml:space="preserve">
     <value>موقعك</value>
-    <comment />
   </data>
   <data name="address" xml:space="preserve">
     <value>تبوك</value>
-    <comment />
   </data>
   <data name="full-address" xml:space="preserve">
     <value>العنوان الكامل</value>
-    <comment />
   </data>
   <data name="area" xml:space="preserve">
     <value>منطقة</value>
-    <comment />
   </data>
   <data name="street" xml:space="preserve">
     <value>شارع</value>
-    <comment />
   </data>
   <data name="number" xml:space="preserve">
     <value>رقم</value>
-    <comment />
   </data>
   <data name="full-name" xml:space="preserve">
     <value>الاسم الكامل</value>
-    <comment />
   </data>
   <data name="username" xml:space="preserve">
     <value>اسم االمستخدم</value>
-    <comment />
   </data>
   <data name="password" xml:space="preserve">
     <value>كلمه السر</value>
-    <comment />
   </data>
   <data name="phone" xml:space="preserve">
     <value>هاتف</value>
-    <comment />
   </data>
   <data name="phone-number" xml:space="preserve">
     <value>رقم الهاتف</value>
-    <comment />
   </data>
   <data name="email" xml:space="preserve">
     <value>البريد الإلكتروني</value>
-    <comment />
   </data>
   <data name="save" xml:space="preserve">
     <value>حفظ</value>
-    <comment />
   </data>
   <data name="cancel" xml:space="preserve">
     <value>إلغاء</value>
-    <comment />
   </data>
   <data name="add" xml:space="preserve">
     <value>يضيف</value>
-    <comment />
   </data>
   <data name="add-hotel" xml:space="preserve">
     <value>فندق إضافي</value>
-    <comment />
   </data>
   <data name="search" xml:space="preserve">
     <value>بحث</value>
-    <comment />
   </data>
   <data name="guest" xml:space="preserve">
     <value>زائر</value>
-    <comment />
   </data>
   <data name="guest-list" xml:space="preserve">
     <value>قائمة الضيوف</value>
-    <comment />
   </data>
   <data name="hotel-name" xml:space="preserve">
     <value>اسم فندق</value>
-    <comment />
   </data>
   <data name="room-number" xml:space="preserve">
     <value>رقم الغرفة</value>
-    <comment />
   </data>
   <data name="check-in" xml:space="preserve">
     <value>تحقق في</value>
-    <comment />
   </data>
   <data name="check-out" xml:space="preserve">
     <value>الدفع</value>
-    <comment />
   </data>
   <data name="rows-per-page" xml:space="preserve">
     <value>عدد الصفوف في الصفحة</value>
-    <comment />
   </data>
   <data name="configrations" xml:space="preserve">
     <value>التكوينات</value>
-    <comment />
   </data>
   <data name="directories" xml:space="preserve">
     <value>الدلائل</value>
-    <comment />
   </data>
   <data name="directory" xml:space="preserve">
     <value>الدليل</value>
-    <comment />
   </data>
   <data name="user" xml:space="preserve">
     <value>المستعمل</value>
-    <comment />
   </data>
   <data name="workplace" xml:space="preserve">
     <value>نوع المستخدم</value>
-    <comment />
   </data>
   <data name="workplaces" xml:space="preserve">
     <value>أماكن العمل</value>
-    <comment />
   </data>
   <data name="admin" xml:space="preserve">
     <value>مشرف</value>
-    <comment />
   </data>
   <data name="admins" xml:space="preserve">
     <value>مدراء</value>
-    <comment />
   </data>
   <data name="type" xml:space="preserve">
     <value>يكتب</value>
-    <comment />
   </data>
   <data name="mobile" xml:space="preserve">
     <value>التليفون المحمول</value>
-    <comment />
   </data>
   <data name="language" xml:space="preserve">
     <value>لغة</value>
-    <comment />
   </data>
   <data name="user-type" xml:space="preserve">
     <value>نوع المستخدم</value>
-    <comment />
   </data>
   <data name="role" xml:space="preserve">
     <value>وظيفة</value>
-    <comment />
   </data>
   <data name="roles" xml:space="preserve">
     <value>الأدوار</value>
-    <comment />
   </data>
   <data name="privilege" xml:space="preserve">
     <value>شرف</value>
-    <comment />
   </data>
   <data name="privileges" xml:space="preserve">
     <value>الامتيازات</value>
-    <comment />
   </data>
   <data name="add-role" xml:space="preserve">
     <value>الوظيفة الإضافية</value>
-    <comment />
   </data>
   <data name="add-admin" xml:space="preserve">
     <value>إضافة مشرف</value>
@@ -348,5 +299,14 @@
   </data>
   <data name="configurations" xml:space="preserve">
     <value>التكوينات</value>
+  </data>
+  <data name="general-info" xml:space="preserve">
+    <value>General Information</value>
+  </data>
+  <data name="hotel-type" xml:space="preserve">
+    <value>نوع</value>
+  </data>
+  <data name="note" xml:space="preserve">
+    <value>ملاحضە</value>
   </data>
 </root>

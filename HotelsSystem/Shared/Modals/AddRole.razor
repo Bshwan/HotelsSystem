@@ -8,7 +8,7 @@
             <div class="row gy-3 gx-2">
                 <MudForm @ref="NameForm">
                     <div class="col-12 d-flex align-items-center">
-                        <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedGroup.group_Name" Label="Name" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedGroup.group_Name" Label="@L["name"]" Variant="Variant.Outlined"></MudTextField>
                     </div>
                 </MudForm>
                 @if (SelectedGroup.group_ID > 0)
@@ -27,7 +27,7 @@
                                      ValueChanged="@((e)=>OnPermissionChanged(e))"
                                      ToStringFunc="@(e=>e==null?"":e.peo_DataRole)"
                                      CoerceText="@true"
-                                     Label="Permission"
+                                     Label=@L["privilege"]
                                      Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                                      AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
 
@@ -35,7 +35,7 @@
                         </div>
                     </MudForm>
                     <div class="col-12">
-                        <MudField Label="Privileges" Margin="@Margin.Dense" Variant="Variant.Outlined">
+                        <MudField Label="@L["privileges"]" Margin="@Margin.Dense" Variant="Variant.Outlined">
                             @*<MudIconButton Class="ms-2 square-btn" Icon="@Icons.Material.Filled.Add" Variant="Variant.Text" Color="Color.Primary"/>*@
                         @foreach (var per in combo.Where(x=>x.HasRole==1))
                         {
