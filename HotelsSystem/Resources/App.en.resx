@@ -267,6 +267,30 @@
    <data name="clear" xml:space="preserve">
     <value>Clear</value>
   </data>
+  <data name="verify-password" xml:space="preserve">
+    <value>Verify Password</value>
+  </data>
+  <data name="change-password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+   <data name="enter_new_password" xml:space="preserve">
+    <value>Enter New Password</value>
+  </data>
+   <data name="new_verify_password_not_same" xml:space="preserve">
+    <value>Could not Verify Passwords</value>
+  </data>
+   <data name="enter_verify_password" xml:space="preserve">
+    <value>Enter Verify Password</value>
+  </data>
+   <data name="new-password" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+   <data name="enter_old_password" xml:space="preserve">
+    <value>Enter Old Password</value>
+  </data>
+   <data name="old-password" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
   <data name="new" xml:space="preserve">
     <value>New</value>
   </data>

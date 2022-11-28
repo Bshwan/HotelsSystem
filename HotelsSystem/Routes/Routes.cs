@@ -9,6 +9,7 @@
         public const string dashboard = "dashboard";
         public const string userlist = "UserList";
         public const string adduser = "adduser";
+        public const string changepassword = "changepassword";
         public const string search = "search";
 
     }

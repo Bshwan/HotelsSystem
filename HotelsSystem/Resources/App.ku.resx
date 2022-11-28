@@ -228,6 +228,30 @@
   <data name="workplace" xml:space="preserve">
     <value>شوێنکار</value>
   </data>
+  <data name="verify-password" xml:space="preserve">
+    <value>دووبارە کردنەوەی ووشەی نهێنی ئێستا</value>
+  </data>
+  <data name="enter_verify_password" xml:space="preserve">
+    <value>دووبارە کردنەوەی ووشەی نهێنی بنووسە</value>
+  </data>
+  <data name="new-password" xml:space="preserve">
+    <value>ووشەی نهێنی ئێستا</value>
+  </data>
+  <data name="enter_new_password" xml:space="preserve">
+    <value>ووشەی نهێنی ئێستا بنووسە</value>
+  </data>
+  <data name="enter_old_password" xml:space="preserve">
+    <value>ووشەی نهێنی کۆن بنووسە</value>
+  </data>
+   <data name="new_verify_password_not_same" xml:space="preserve">
+    <value>ووشەی نهێنی ئێستاو دووبارەی ووشەی نهێنی هەڵەیە</value>
+  </data>
+  <data name="change-password" xml:space="preserve">
+    <value>گۆڕینی ووشەی نهێنی</value>
+  </data>
+   <data name="old-password" xml:space="preserve">
+    <value>ووشەی نهێنی کۆن</value>
+  </data>
   <data name="clear" xml:space="preserve">
     <value>پاشگەزبوونەوە</value>
   </data>

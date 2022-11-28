@@ -265,8 +265,32 @@
   <data name="id-no" xml:space="preserve">
     <value>رقم الهوية</value>
   </data>
+   <data name="new_verify_password_not_same" xml:space="preserve">
+    <value>لا يمكن التحقق من كلمة المرور</value>
+  </data>
   <data name="surname" xml:space="preserve">
     <value>إسم العائلة</value>
+  </data>
+  <data name="verify-password" xml:space="preserve">
+    <value>التحقق من كلمة المرور</value>
+  </data>
+   <data name="enter_verify_password" xml:space="preserve">
+    <value>أدخل التحقق من كلمة المرور</value>
+  </data>
+  <data name="new-password" xml:space="preserve">
+    <value>كلمة مرور جديدة</value>
+  </data>
+  <data name="change-password" xml:space="preserve">
+    <value>تغيير كلمة المرور</value>
+  </data>
+  <data name="old-password" xml:space="preserve">
+    <value>كلمة المرور القديمة</value>
+  </data>
+  <data name="enter_old_password" xml:space="preserve">
+    <value>أدخل كلمة المرور القديمة</value>
+  </data>
+  <data name="enter_new_password" xml:space="preserve">
+    <value>أدخل كلمة مرور جديدة</value>
   </data>
   <data name="clear" xml:space="preserve">
     <value>إلغاء</value>
