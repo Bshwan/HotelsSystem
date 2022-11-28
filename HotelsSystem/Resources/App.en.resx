@@ -264,6 +264,24 @@
   <data name="filter" xml:space="preserve">
     <value>Filter</value>
   </data>
+   <data name="clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="new" xml:space="preserve">
+    <value>New</value>
+  </data>
+   <data name="from-check-in-date" xml:space="preserve">
+    <value>From Check in Date</value>
+  </data>
+  <data name="to-check-in-date" xml:space="preserve">
+    <value>To Check in Date</value>
+  </data>
+   <data name="from-check-out-date" xml:space="preserve">
+    <value>From Check out Date</value>
+  </data>
+   <data name="to-check-out-date" xml:space="preserve">
+    <value>To Check out Date</value>
+  </data>
   <data name="female" xml:space="preserve">
     <value>Female</value>
   </data>

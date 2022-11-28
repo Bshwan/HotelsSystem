@@ -106,3 +106,7 @@ fluent-select fluent-option.selected::before{
 fluent-accordion ::part(button){
     text-align: right !important;
 }
+
+.mud-picker-container .mud-toolbar{
+    direction: rtl !important;
+}

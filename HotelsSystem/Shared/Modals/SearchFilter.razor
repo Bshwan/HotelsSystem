@@ -3,30 +3,105 @@
     <DialogContent>
         <div class="row gy-3 gx-2">
                     <div class="col-12 col-md-6 col-lg-4">
-                        <MudSelect Margin="@Margin.Dense" T="int" Label="Select" Required Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
-                            <MudSelectItem T="int" Value="0">Kurdish</MudSelectItem>
-                            <MudSelectItem T="int" Value="1">Arabic</MudSelectItem>
-                            <MudSelectItem T="int" Value="2">English</MudSelectItem>
-                        </MudSelect>                    </div>
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <MudDatePicker Margin="Margin.Dense" Label="Date" @bind-Date="date" Variant="Variant.Outlined"/>
+                        <MudTextField T="string" Label="@L["full-name"]" @bind-Value="Filter.GD_Fullname" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>          
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
-                        <MudAutocomplete Clearable T="string" Label="Auto Complete" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
+                        <MudTextField T="string" Label="@L["mother-name"]" @bind-Value="Filter.GD_MotherName" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField> 
+              </div>
+                    
+                    <div class="col-12 col-md-6 col-lg-4">
+ <MudTextField T="string" Label="@L["mobile-no"]" @bind-Value="Filter.GD_Mobile" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+<MudSelect ToStringFunc="@(e=>e==null?"":e.gen_Name)" 
+                            Value="@(new GenderInfo{gen_ID=Filter.GenderID,gen_Name=combos.Genders.SelectByID<GenderInfo>(Filter.GenderID,"gen_ID").gen_Name})" 
+                                ValueChanged="OnSelectedGenderChange" Clearable="true"
+                                Margin="@Margin.Dense" T="GenderInfo" Label=@L["gender"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in combos.Genders)
+                            {
+                            <MudSelectItem T="GenderInfo" Value="@item">@item.gen_Name</MudSelectItem>
+                            }
+                        </MudSelect>                  
+                          </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudSelect ToStringFunc="@(e=>e==null?"":e.nat_Name)" 
+                            Value="@(new NationalityInfo{nat_ID=Filter.NationalityID,nat_Name=combos.Nationalities.SelectByID<NationalityInfo>(Filter.NationalityID,"nat_ID").nat_Name})" 
+                                ValueChanged="OnSelectedNationalityChange" Clearable="true"
+                                Margin="@Margin.Dense" T="NationalityInfo" Label=@L["nationality"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+
+                            @foreach (var item in combos.Nationalities)
+                            {
+                            <MudSelectItem T="NationalityInfo" Value="@item">@item.nat_Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudAutocomplete T="DirectorateInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchDirectoaret"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new DirectorateInfo(){peo_DirectorateName=Filter.peo_DirectorateName,peo_DirectorateID=Filter.DirectorateID})"
+                         Text="@Filter.peo_DirectorateName"
+                         ValueChanged="@(async(e)=>await OnDirectoarateChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
+                         CoerceText="@true"
+                         Label=@L["directory"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
-                        <MudNumericField Required Margin="@Margin.Dense" @bind-Value="TextValue" Label="Number Field" Variant="Variant.Outlined"></MudNumericField >
+                         <MudAutocomplete T="WorkingPointInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchWorkpoint"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new WorkingPointInfo(){wp_ID=Filter.WorkplaceID,wp_workpointName=Filter.wp_workpointName})"
+                         Text="@Filter.wp_workpointName"
+                         ValueChanged="@(async(e)=>await OnWorkpointChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
+                         CoerceText="@true"
+                         Label=@L["workplace"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
-                        <MudTextField Margin="@Margin.Dense" @bind-Value="TextValue" Label="Text Field" Variant="Variant.Outlined"></MudTextField>
+                         <MudAutocomplete T="HotelsInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchHotels"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelsInfo(){htl_ID=Filter.HotelID,htl_Name=Filter.htl_Name})"
+                         Text="@Filter.htl_Name"
+                         ValueChanged="@(async(e)=>await OnHotelChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.htl_Name)"
+                         CoerceText="@true"
+                         Label=@L["hotel"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
                     <div class="col-12 col-md-6 col-lg-4">
-                        <MudField Class="dense-true" Label="Radio" Margin="@Margin.Dense" Variant="Variant.Outlined">
-                            <MudRadioGroup Class="px-2" @bind-SelectedOption="Dense_Radio">
-                                <MudRadio Option="true" Color="Color.Primary" Dense="true" Size="Size.Small">Dense</MudRadio>
-                                <MudRadio Option="false" Color="Color.Primary" Dense="true" Size="Size.Small">Dense</MudRadio>
-                            </MudRadioGroup>
-                        </MudField>
+                         <MudAutocomplete T="HotelRoomsInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchRooms"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelRoomsInfo(){htr_ID=Filter.RoomID,htr_Detail=Filter.RoomName})"
+                         Text="@Filter.RoomName"
+                         ValueChanged="@((e)=> OnRoomChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.htr_Detail)"
+                         CoerceText="@true"
+                         Label=@L["room"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.FromCheckInDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["from-check-in-date"]"></MudDatePicker>       
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.ToCheckInDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["to-check-in-date"]"></MudDatePicker>       
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.FromCheckOutDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["from-check-out-date"]"></MudDatePicker>       
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.ToCheckOutDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["to-check-out-date"]"></MudDatePicker>       
                     </div>
                     <div class="col-12">
                         <MudDivider/>
@@ -34,43 +109,7 @@
                 </div>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">@L["cancel"]</MudButton>
-        <MudButton Color="Color.Primary" OnClick="Submit">@L["save"]</MudButton>
+        <MudButton OnClick="Cancel" Color="Color.Default" Variant="Variant.Filled" DisableElevation>@L["cancel"]</MudButton>
+        <MudButton OnClick="Submit" Color="Color.Default" Variant="Variant.Filled" DisableElevation>@L["filter"]</MudButton>
     </DialogActions>
 </MudDialog>
-
-@code{
-    DateTime? date = DateTime.Today;
-    public bool Dense_Radio { get; set; } = true;
-    public string TextValue { get; set; }
-    private string value1;
-    private string[] states = {
-        "Alabama", "Alaska", "American Samoa", "Arizona",
-        "Arkansas", "California", "Colorado", "Connecticut",
-        "Delaware", "District of Columbia", "Federated States of Micronesia",
-        "Florida", "Georgia", "Guam", "Hawaii", "Idaho",
-        "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky",
-        "Louisiana", "Maine", "Marshall Islands", "Maryland",
-        "Massachusetts", "Michigan", "Minnesota", "Mississippi",
-        "Missouri", "Montana", "Nebraska", "Nevada",
-        "New Hampshire", "New Jersey", "New Mexico", "New York",
-        "North Carolina", "North Dakota", "Northern Mariana Islands", "Ohio",
-        "Oklahoma", "Oregon", "Palau", "Pennsylvania", "Puerto Rico",
-        "Rhode Island", "South Carolina", "South Dakota", "Tennessee",
-        "Texas", "Utah", "Vermont", "Virgin Island", "Virginia",
-        "Washington", "West Virginia", "Wisconsin", "Wyoming",
-    };
-    private async Task<IEnumerable<string>> Search1(string value) {
-        // In real life use an asynchronous function for fetching data from an api.
-        await Task.Delay(5);
-
-        // if text is null or empty, show complete list
-        if (string.IsNullOrEmpty(value))
-            return states;
-        return states.Where(x => x.Contains(value, StringComparison.InvariantCultureIgnoreCase));
-    }
-    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
-
-    void Submit() => MudDialog.Close(DialogResult.Ok(true));
-    void Cancel() => MudDialog.Cancel();
-}

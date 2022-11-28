@@ -228,6 +228,25 @@
   <data name="workplace" xml:space="preserve">
     <value>شوێنکار</value>
   </data>
+  <data name="clear" xml:space="preserve">
+    <value>پاشگەزبوونەوە</value>
+  </data>
+  <data name="new" xml:space="preserve">
+    <value>نوێ</value>
+  </data>
+  <data name="from-check-in-date" xml:space="preserve">
+    <value>لە بەرواری هاتن</value>
+  </data>
+  <data name="to-check-in-date" xml:space="preserve">
+    <value>بۆ بەرواری هاتف</value>
+  </data>
+   <data name="from-check-out-date" xml:space="preserve">
+    <value>لە بەرواری دەرچوون</value>
+  </data>
+   <data name="to-check-out-date" xml:space="preserve">
+    <value>بۆ بەرواری دەرچوون</value>
+  </data>
+  
   <data name="workplaces" xml:space="preserve">
     <value>شوێنکارەکان</value>
   </data>
@@ -340,7 +359,7 @@
     <value>نازناو</value>
   </data>
   <data name="filter" xml:space="preserve">
-    <value>فیلتەر</value>
+    <value>جیاکردنەوە</value>
   </data>
   <data name="female" xml:space="preserve">
     <value>مێ</value>

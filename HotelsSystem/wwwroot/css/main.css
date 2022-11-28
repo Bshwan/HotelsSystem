@@ -37,3 +37,8 @@
 .white-text .mud-icon-root.mud-svg-icon.mud-icon-size-medium{
     color: white !important;
 }
+
+.mud-dialog .mud-dialog-content{
+    overflow-y: auto !important;
+    max-height: 65vh !important;
+}
