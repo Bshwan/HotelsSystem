@@ -2,9 +2,6 @@
 {
     public static class BreadCrumbResult
     {
-        public static List<BreadcrumbItem> items = new List<BreadcrumbItem>
-    {
-      
-    };
+        public static List<BreadcrumbItem> items = new List<BreadcrumbItem>();
     }
 }

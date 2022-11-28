@@ -17,12 +17,42 @@ namespace HotelsSystem.Shared.Layouts.MainLayoutItems
         private void LocationChanged(object? sender, LocationChangedEventArgs e)
         {
             BreadCrumbResult.items.Clear();
+            BreadCrumbFun(ParentID: FindPage(), FindPageResult: FindPage(), NotFirstTime: false);
             StateHasChanged();
         }
 
         void IDisposable.Dispose()
         {
             UriHelper.LocationChanged -= LocationChanged;
+        }
+
+
+        public void BreadCrumbFun(int ParentID , int FindPageResult , bool NotFirstTime)
+        {
+
+            if (NotFirstTime)
+            {
+                ParentID = BreadCrumbList.Items.Where(x => x.ID == ParentID).Select(x => x.ParentID).FirstOrDefault();
+
+            }
+            if (ParentID > 0)
+            {
+
+                BreadCrumbFun(ParentID: ParentID, FindPageResult: FindPageResult, NotFirstTime: true);
+            }
+            if (BreadCrumbList.Items.Where(x => x.ID == ParentID).Select(x => x.ID).FirstOrDefault() == FindPageResult)
+            {
+                //The Active Page
+                BreadCrumbResult.items.Add(new BreadcrumbItem(L[BreadCrumbList.Items.Where(x => x.ID == ParentID).Select(x => x.Name.ToEmptyOnNull()).First()], href: null, disabled: true));
+
+            }
+            else
+            {
+                //Parent Pages
+                BreadCrumbResult.items.Add(new BreadcrumbItem(L[BreadCrumbList.Items.Where(x => x.ID == ParentID).Select(x => x.Name.ToEmptyOnNull()).First()], href: @BreadCrumbList.Items.Where(x => x.ID == ParentID).Select(x => x.Path).FirstOrDefault()));
+
+            }
+
         }
 
         public int FindPage()
