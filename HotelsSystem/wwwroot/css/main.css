@@ -42,3 +42,14 @@
     overflow-y: auto !important;
     max-height: 65vh !important;
 }
+
+body{
+    overflow: hidden;
+}
+
+@media (min-width: 992px) {
+    article.content{
+        overflow-y: auto;
+        height: calc(100vh - 11rem);
+    }
+}
