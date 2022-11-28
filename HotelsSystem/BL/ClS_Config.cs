@@ -75,18 +75,17 @@
             return await _db.GetDataTable<T, dynamic>("HTPro_GetAllInfo", new { Select = SelectPro, ID = ValID, EntryBy = SessionValue });
         }
 
-        // public async Task<IncomingOrderComboBox> IncomeOrderCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0, string ValueName = "", int StoreID = 0)
-        // {
-        //     var result = await _db.GetMultiple<AccountNamesInfo, SellFollowUPComboBox>(
-        //         "Pro_GetCMB",
-        //         session.SPResult.CNSTR.ToEmptyOnNull(),
-        //         new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, ValueName = ValueName, StoreID = StoreID, EntryBy = SessionValue });
-        //     return new IncomingOrderComboBox()
-        //     {
-        //         AccountNames = result.Item1,
-        //         SellFollow = result.Item2
-        //     };
-        // }
+        public async Task<SearchCombos> SearchCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
+        {
+            var result = await _db.GetMultiple<DirectorateInfo,GenderInfo,NationalityInfo>(
+                "Pro_GetCMB", new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
+            return new SearchCombos()
+            {
+              Directorates=result.Item1,
+              Genders=result.Item2,
+              Nationalities=result.Item3
+            };
+        }
 
         //public bool HasPermission(int ID, bool ShouldMoreThanOnePermissionsBeAllTrue = false)
         //{

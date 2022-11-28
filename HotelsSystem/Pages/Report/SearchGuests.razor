@@ -22,11 +22,12 @@
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
                         <MudTableSortLabel SortLabel="GD_Fullname" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_Fullname.ToEmptyOnNull())">@L["full-name"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> *@
-                           @* <div class="p-3">
-                                <MudAutocomplete Clearable T="string" Label="@L["name"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                            </div>*@
-                        @* </MudMenu> *@
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> 
+                           <div class="p-3">
+                            <MudTextField DebounceInterval="ClS_Config.debounce" T="string" Label="@L["full-name"]"
+                            OnDebounceIntervalElapsed="@(async(e)=>{Filter.GD_Fullname=e.ToEmptyOnNull();await table!.ReloadServerData();})" @bind-Value="Filter.GD_Fullname" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
+                            </div>
+                         </MudMenu>
                     </div>
                 </MudTh>
                 <MudTh>
@@ -42,49 +43,72 @@
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
                         <MudTableSortLabel SortLabel="GD_MotherName" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_MotherName.ToEmptyOnNull())">@L["mother-name"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> *@
-                            @* <div class="p-3">
-                                <MudAutocomplete Clearable T="string" Label="@L["room-number"]" @bind-Value="value1" SearchFunc="@Search1" Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"/>
-                            </div> *@
-                        @* </MudMenu> *@
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> 
+                           <div class="p-3">
+                            <MudTextField DebounceInterval="ClS_Config.debounce" T="string" Label="@L["mother-name"]"
+                            OnDebounceIntervalElapsed="@(async(e)=>{Filter.GD_MotherName=e.ToEmptyOnNull();await table!.ReloadServerData();})" @bind-Value="Filter.GD_MotherName" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
+                            </div>
+                         </MudMenu>
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
                         <MudTableSortLabel SortLabel="GD_Mobile" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_Mobile.ToEmptyOnNull())">@L["mobile-no"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> *@
-                            @* <div class="p-3">
-                                <MudDatePicker Margin="Margin.Dense" Label="@L["check-in-date"]" @bind-Date="date" Variant="Variant.Outlined"/>
-                            </div> *@
-                        @* </MudMenu> *@
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary"> 
+                           <div class="p-3">
+                            <MudTextField DebounceInterval="ClS_Config.debounce" T="string" Label="@L["mobile-no"]"
+                            OnDebounceIntervalElapsed="@(async(e)=>{Filter.GD_Mobile=e.ToEmptyOnNull();await table!.ReloadServerData();})" @bind-Value="Filter.GD_Mobile" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
+                            </div>
+                         </MudMenu>
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
                         <MudTableSortLabel SortLabel="GD_IdNumber" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_IdNumber.ToEmptyOnNull())">@L["id-no"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                        </MudMenu> *@
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
                         <MudTableSortLabel SortLabel="gen_Name" SortBy="new Func<GuestDetailsInfo, object>(x=>x.gen_Name.ToEmptyOnNull())">@L["gender"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                        </MudMenu> *@
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                    <MudSelect ToStringFunc="@(e=>e==null?"":e.gen_Name)" 
+                            Validation="@(new Func<GenderInfo, string>((e)=>e.ValidateField<GenderInfo>("gen_ID")))"
+                            Value="@(new GenderInfo{gen_ID=Filter.GenderID,gen_Name=combos.Genders.SelectByID<GenderInfo>(Filter.GenderID,"gen_ID").gen_Name})" 
+                                ValueChanged="OnSelectedGenderChange" Clearable="true"
+                                Margin="@Margin.Dense" T="GenderInfo" Label=@L["gender"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in combos.Genders)
+                            {
+                            <MudSelectItem T="GenderInfo" Value="@item">@item.gen_Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                            </div>
+                        </MudMenu>
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
                         <MudTableSortLabel SortLabel="nat_Name" SortBy="new Func<GuestDetailsInfo, object>(x=>x.nat_Name.ToEmptyOnNull())">@L["nationality"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                        </MudMenu> *@
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                    <MudSelect ToStringFunc="@(e=>e==null?"":e.nat_Name)" 
+                            Validation="@(new Func<NationalityInfo, string>((e)=>e.ValidateField<NationalityInfo>("gen_ID")))"
+                            Value="@(new NationalityInfo{nat_ID=Filter.NationalityID,nat_Name=combos.Nationalities.SelectByID<NationalityInfo>(Filter.GenderID,"gen_ID").nat_Name})" 
+                                ValueChanged="OnSelectedNationalityChange" Clearable="true"
+                                Margin="@Margin.Dense" T="NationalityInfo" Label=@L["nationality"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+
+                            @foreach (var item in combos.Nationalities)
+                            {
+                            <MudSelectItem T="NationalityInfo" Value="@item">@item.nat_Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                            </div>
+                        </MudMenu>
                     </div>
                 </MudTh>
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
-                        <MudTableSortLabel SortLabel="GD_DOB" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_DOB.ToyyyyMMddElseEmpty())">@L["birth-date"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                        </MudMenu> *@
+                        <MudTableSortLabel SortLabel="GD_DOB" SortBy="new Func<GuestDetailsInfo, object>(x=>x.GD_DOB.ToyyyyMMddElseEmpty())">@L["birth-date"]</MudTableSortLabel>                        
                     </div>
                 </MudTh>
                 <MudTh>
@@ -132,8 +156,22 @@
                 <MudTh>
                     <div class="d-flex justify-content-between align-items-center">
                         <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<GuestDetailsInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">@L["directory"]</MudTableSortLabel>
-                        @* <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
-                        </MudMenu> *@
+                        <MudMenu TransformOrigin="Origin.TopRight" AnchorOrigin="Origin.BottomRight" Size="Size.Small" Icon="@Icons.Filled.FilterAlt" Variant="Variant.Text" Color="Color.Primary">
+                            <div class="p-3">
+                                <MudAutocomplete T="DirectorateInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchDirectoaret"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new DirectorateInfo(){peo_DirectorateName=Filter.peo_DirectorateName,peo_DirectorateID=Filter.DirectorateID})"
+                         Text="@Filter.peo_DirectorateName"
+                         ValueChanged="@(async(e)=>await OnDirectoarateChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
+                         CoerceText="@true"
+                         Label=@L["directory"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                            </div>
+                        </MudMenu>
                     </div>
                 </MudTh>
                 <MudTh>

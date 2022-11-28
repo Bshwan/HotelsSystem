@@ -110,9 +110,9 @@
         border-bottom: .12rem solid #0078d4 !important;
     }
 
-    .mud-popover.mud-popover-open{
+    /* .mud-popover.mud-popover-open{
         box-shadow: var(--elevation-shadow-flyout) !important
-    }
+    } */
 
     .mud-list-item-gutters{
         padding-left: .5rem !important;
