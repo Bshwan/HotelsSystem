@@ -4,9 +4,9 @@
 <MudRTLProvider RightToLeft="@(!System.Threading.Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName.Equals("en"))">
 
     <Sotsera.Blazor.Toaster.ToastContainer></Sotsera.Blazor.Toaster.ToastContainer>
-    <MudThemeProvider IsDarkMode="!true"/>
-    <MudDialogProvider/>
-    <MudSnackbarProvider/>
+    <MudThemeProvider IsDarkMode="!true" />
+    <MudDialogProvider />
+    <MudSnackbarProvider />
 
     <div class="page">
         <div class="sidebar">
@@ -19,9 +19,12 @@
                 <MudIconButton Class="me-2 ms-0" Href="@Routing.changepassword" DisableElevation Icon="@Icons.Filled.Password" Variant="Variant.Filled" Color="Color.Primary"></MudIconButton>
                 <MudIconButton OnClick="Logout" DisableElevation Icon="@Icons.Filled.Logout" Variant="Variant.Filled" Color="Color.Primary"></MudIconButton>
             </div>
-            @* <MudPaper Outlined="true" Elevation="0" Class="px-2 m-3">
-                <MudBreadcrumbs Items="_items"></MudBreadcrumbs>
-            </MudPaper> *@
+        
+
+            <BreadCrumbItems></BreadCrumbItems>
+
+
+
             <article class="content px-2 pt-2 pb-4">
                 <div class="container-fluid">
                     @Body
@@ -31,8 +34,9 @@
     </div>
 
 </MudRTLProvider>
-@code{
-async Task Logout(){
+
+@code {
+    async Task Logout(){
     await jSRuntime.InvokeVoidAsync("blazorExtensions.delete_cookie",Util.CookieName);
     nav.NavigateTo(Routing.defaultpage);
 }
