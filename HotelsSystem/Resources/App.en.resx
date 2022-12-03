@@ -244,7 +244,7 @@
     <value>Language</value>
   </data>
   <data name="admin-info" xml:space="preserve">
-    <value>Admin Information</value>
+    <value>User Information</value>
   </data>
   <data name="hotel-info" xml:space="preserve">
     <value>Hotel Information</value>

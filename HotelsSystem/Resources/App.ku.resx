@@ -145,7 +145,7 @@
     <value>شوێن</value>
   </data>
   <data name="address" xml:space="preserve">
-    <value>Address</value>
+    <value>ناونیشان</value>
   </data>
   <data name="full-address" xml:space="preserve">
     <value>ناونیشانی تەواو</value>
@@ -226,7 +226,7 @@
     <value>بەکارهێنەر</value>
   </data>
   <data name="workplace" xml:space="preserve">
-    <value>شوێنکار</value>
+    <value>شوێنی کارکردن</value>
   </data>
   <data name="verify-password" xml:space="preserve">
     <value>دووبارە کردنەوەی ووشەی نهێنی ئێستا</value>
@@ -271,10 +271,10 @@
     <value>بەرواری هاتن - بۆ</value>
   </data>
   <data name="from-check-out-date" xml:space="preserve">
-    <value>بەرواری دەرچوون - لە</value>
+    <value>لە بەرواری دەرچوون</value>
   </data>
   <data name="to-check-out-date" xml:space="preserve">
-    <value>بەرواری دەرچوون - بۆ</value>
+    <value>بۆ بەرواری دەرچوون</value>
   </data>
   <data name="workplaces" xml:space="preserve">
     <value>شوێنکارەکان</value>
@@ -316,7 +316,7 @@
     <value>زیادکردنی</value>
   </data>
   <data name="admin-info" xml:space="preserve">
-    <value>زانیاری بەڕێوەبەر</value>
+    <value>زانیاری بەکارهێنەر</value>
   </data>
   <data name="hotel-info" xml:space="preserve">
     <value>زانیاری هۆتێل</value>
@@ -340,7 +340,7 @@
     <value>ناوی بەڕێوەبەرایەتی</value>
   </data>
   <data name="workpoint-name" xml:space="preserve">
-    <value>ناوی شوێنکار</value>
+    <value>ناوی شوێنی کارکردن</value>
   </data>
   <data name="created-date" xml:space="preserve">
     <value>بەرواری داخڵکردن</value>
@@ -412,6 +412,6 @@
     <value>قات</value>
   </data>
   <data name="workpoint" xml:space="preserve">
-    <value>شوێنکار</value>
+    <value>شوێنی کارکردن</value>
   </data>
 </root>
