@@ -19,6 +19,14 @@ window.blazorExtensions = {
 
             return cookie;
         }
+    },getLangCookie: () => {
+        const value = `; ${document.cookie}`;
+        const parts = value.split(`; .AspNetCore.Culture=`);
+        if (parts.length === 2) {
+            const cookie = parts.pop().split(';').shift();
+
+            return cookie;
+        }
     },
     delete_cookie: (name) => {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';

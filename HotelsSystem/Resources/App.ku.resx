@@ -136,7 +136,7 @@
     <value>ئەستێرە</value>
   </data>
   <data name="room" xml:space="preserve">
-    <value>ژوور</value>
+    <value>ژ. ژوور</value>
   </data>
   <data name="rooms" xml:space="preserve">
     <value>ژوور</value>
@@ -145,7 +145,7 @@
     <value>شوێن</value>
   </data>
   <data name="address" xml:space="preserve">
-    <value>ناونیشان </value>
+    <value>Address</value>
   </data>
   <data name="full-address" xml:space="preserve">
     <value>ناونیشانی تەواو</value>
@@ -243,13 +243,13 @@
   <data name="enter_old_password" xml:space="preserve">
     <value>ووشەی نهێنی کۆن بنووسە</value>
   </data>
-   <data name="new_verify_password_not_same" xml:space="preserve">
+  <data name="new_verify_password_not_same" xml:space="preserve">
     <value>ووشەی نهێنی ئێستاو دووبارەی ووشەی نهێنی هەڵەیە</value>
   </data>
   <data name="change-password" xml:space="preserve">
     <value>گۆڕینی ووشەی نهێنی</value>
   </data>
-   <data name="old-password" xml:space="preserve">
+  <data name="old-password" xml:space="preserve">
     <value>ووشەی نهێنی کۆن</value>
   </data>
   <data name="clear" xml:space="preserve">
@@ -259,18 +259,23 @@
     <value>نوێ</value>
   </data>
   <data name="from-check-in-date" xml:space="preserve">
-    <value>لە بەرواری هاتن</value>
+    <value>بەرواری هاتن - لە</value>
+  </data>
+	<data name="from" xml:space="preserve">
+    <value>لە</value>
+  </data>
+	<data name="to" xml:space="preserve">
+    <value>بۆ</value>
   </data>
   <data name="to-check-in-date" xml:space="preserve">
-    <value>بۆ بەرواری هاتف</value>
+    <value>بەرواری هاتن - بۆ</value>
   </data>
-   <data name="from-check-out-date" xml:space="preserve">
-    <value>لە بەرواری دەرچوون</value>
+  <data name="from-check-out-date" xml:space="preserve">
+    <value>بەرواری دەرچوون - لە</value>
   </data>
-   <data name="to-check-out-date" xml:space="preserve">
-    <value>بۆ بەرواری دەرچوون</value>
+  <data name="to-check-out-date" xml:space="preserve">
+    <value>بەرواری دەرچوون - بۆ</value>
   </data>
-  
   <data name="workplaces" xml:space="preserve">
     <value>شوێنکارەکان</value>
   </data>
@@ -388,7 +393,7 @@
   <data name="female" xml:space="preserve">
     <value>مێ</value>
   </data>
-    <data name="male" xml:space="preserve">
+  <data name="male" xml:space="preserve">
     <value>نێر</value>
   </data>
   <data name="mobile-no" xml:space="preserve">
@@ -400,20 +405,8 @@
   <data name="nationality" xml:space="preserve">
     <value>نەتەوە</value>
   </data>
-   <data name="address" xml:space="preserve">
-    <value>Address</value>
-  </data>
   <data name="birth-date" xml:space="preserve">
     <value>بەرواری لە دایکبوون</value>
-  </data>
-  <data name="check-in" xml:space="preserve">
-    <value>تۆماری هاتن</value>
-  </data>
-  <data name="check-out" xml:space="preserve">
-    <value>تۆماری دەرچوون</value>
-  </data>
-<data name="room" xml:space="preserve">
-    <value>ژ. ژوور</value>
   </data>
   <data name="floor" xml:space="preserve">
     <value>قات</value>
