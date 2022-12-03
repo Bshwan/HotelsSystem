@@ -264,7 +264,7 @@
   <data name="id-no" xml:space="preserve">
     <value>رقم الهوية</value>
   </data>
-   <data name="new_verify_password_not_same" xml:space="preserve">
+  <data name="new_verify_password_not_same" xml:space="preserve">
     <value>لا يمكن التحقق من كلمة المرور</value>
   </data>
   <data name="surname" xml:space="preserve">
@@ -273,7 +273,7 @@
   <data name="verify-password" xml:space="preserve">
     <value>التحقق من كلمة المرور</value>
   </data>
-   <data name="enter_verify_password" xml:space="preserve">
+  <data name="enter_verify_password" xml:space="preserve">
     <value>أدخل التحقق من كلمة المرور</value>
   </data>
   <data name="new-password" xml:space="preserve">
@@ -300,10 +300,10 @@
   <data name="to-check-in-date" xml:space="preserve">
     <value>إلى تاريخ الوصول</value>
   </data>
-   <data name="from-check-out-date" xml:space="preserve">
+  <data name="from-check-out-date" xml:space="preserve">
     <value>من تاريخ الخروج</value>
   </data>
-   <data name="to-check-out-date" xml:space="preserve">
+  <data name="to-check-out-date" xml:space="preserve">
     <value>إلى تاريخ الخروج</value>
   </data>
   <data name="new" xml:space="preserve">
@@ -407,5 +407,11 @@
   </data>
   <data name="status" xml:space="preserve">
     <value>الحالة</value>
+  </data>
+  <data name="from" xml:space="preserve">
+    <value>من</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>إلى</value>
   </data>
 </root>

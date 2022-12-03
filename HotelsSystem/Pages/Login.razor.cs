@@ -20,9 +20,21 @@
         ClS_Config config = default!;
         ClS_UserManagement mgmt = default!;
         MyFunctions.myLogin.MyFunctions func = new MyFunctions.myLogin.MyFunctions();
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            mgmt = new ClS_UserManagement(DB, new SPResult { });
+            var lang = await JSRuntime.InvokeAsync<string>("blazorExtensions.getLangCookie");
+            if (lang.IsStringNullOrWhiteSpace())
+            {
+                var uri = new Uri(nav.Uri)
+                .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+
+                var query = $"?culture={Uri.EscapeDataString("ku-Arab")}&" +
+                    $"redirectUri={Uri.EscapeDataString(uri)}";
+
+                nav.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
+
+            }
+                mgmt = new ClS_UserManagement(DB, new SPResult { });
         }
 
         private async Task login()

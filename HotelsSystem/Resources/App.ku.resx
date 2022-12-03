@@ -259,15 +259,21 @@
     <value>نوێ</value>
   </data>
   <data name="from-check-in-date" xml:space="preserve">
-    <value>لە بەرواری هاتن</value>
+    <value>بەرواری هاتن - لە</value>
+  </data>
+	<data name="from" xml:space="preserve">
+    <value>لە</value>
+  </data>
+	<data name="to" xml:space="preserve">
+    <value>بۆ</value>
   </data>
   <data name="to-check-in-date" xml:space="preserve">
-    <value>بۆ بەرواری هاتف</value>
+    <value>بەرواری هاتن - بۆ</value>
   </data>
-  <data name="from-check-out-date" xml:space="preserve">
+   <data name="from-check-out-date" xml:space="preserve">
     <value>لە بەرواری دەرچوون</value>
   </data>
-  <data name="to-check-out-date" xml:space="preserve">
+   <data name="to-check-out-date" xml:space="preserve">
     <value>بۆ بەرواری دەرچوون</value>
   </data>
   <data name="workplaces" xml:space="preserve">
