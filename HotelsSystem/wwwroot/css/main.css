@@ -53,3 +53,16 @@ body{
         height: calc(100vh - 11rem);
     }
 }
+
+@media (max-width: 992px) {
+    body{
+        overflow-y: auto;
+    }
+    .page{
+        min-height: unset;
+    }
+    article.content{
+        overflow-y: unset;
+        height: unset !important;
+    }
+}

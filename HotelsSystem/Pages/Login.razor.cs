@@ -18,7 +18,7 @@
 
         UserLogin Credentials = new UserLogin();
         ClS_Config config = default!;
-        ClS_UserManagement mgmt = default!;
+        ClS_UserManagement? mgmt = null;
         MyFunctions.myLogin.MyFunctions func = new MyFunctions.myLogin.MyFunctions();
         protected override async Task OnInitializedAsync()
         {
@@ -34,7 +34,10 @@
                 nav.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
 
             }
+            else
+            {
                 mgmt = new ClS_UserManagement(DB, new SPResult { });
+            }
         }
 
         private async Task login()
