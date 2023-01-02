@@ -414,4 +414,13 @@
   <data name="to" xml:space="preserve">
     <value>To</value>
   </data>
+  <data name="price" xml:space="preserve">
+  <value>Price</value>
+</data>
+<data name="detail" xml:space="preserve">
+  <value>Detail</value>
+</data>
+<data name="room-type" xml:space="preserve">
+  <value>Room Type</value>
+</data>
 </root>
