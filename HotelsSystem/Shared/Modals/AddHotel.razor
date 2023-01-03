@@ -168,7 +168,7 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </MudItem>
                     <MudItem sm="2" Class="pt-2">
-                        <MudIconButton Disabled="!SelectedItems.Any() || (SelectedHotelRoom.htr_FloorID<=0 && SelectedHotelRoom.htf_FloorName.IsStringNullOrWhiteSpace())
+                        <MudIconButton Disabled="!SelectedItems.Any()
                         || (SelectedHotelRoom.htr_Type<=0 && SelectedHotelRoom.cfg_HTR_Type.IsStringNullOrWhiteSpace())"
                          OnClick="UpdateRooms" Icon="@Icons.Filled.Save" Color="Color.Primary" Variant="Variant.Filled" DisableElevation></MudIconButton>
                     </MudItem>
