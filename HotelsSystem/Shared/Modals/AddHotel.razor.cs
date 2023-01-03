@@ -368,7 +368,7 @@ public partial class AddHotel
             ValID: HotelID,
             HotelTypeID: SelectedHotelRoom.htr_Type,
             StarNumber: SelectedHotelRoom.htr_FloorID,
-            HotelName: SelectedHotelRoom.htr_Detail.ToEmptyOnNull(),
+            HotelName: SelectedItems.Count==1? SelectedHotelRoom.htr_Detail.ToEmptyOnNull():"",
             Note: SelectedHotelRoom.htf_FloorName.ToEmptyOnNull(),
             Price: SelectedHotelRoom.htr_Price,
             HotelAddress: select.ToEmptyOnNull().Replace("[", "").Replace("]", ""));
