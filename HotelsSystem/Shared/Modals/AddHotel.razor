@@ -132,7 +132,7 @@
                 <MudGrid Class="pt-3" Spacing="1">
                     @if(SelectedItems.Count<=1){
                      <MudItem sm="5">
-                        <MudTextField InputType="InputType.Text" Margin="Margin.Dense" @bind-Value="@SelectedHotelRoom.htr_Detail" Label="@L["detail"]" Required Variant="Variant.Outlined"/>
+                        <MudTextField InputType="InputType.Text" Margin="Margin.Dense" @bind-Value="@SelectedHotelRoom.htr_Detail" Label="@L["detail"]" Variant="Variant.Outlined"/>
                     </MudItem>
                     }
                     
@@ -151,7 +151,7 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </MudItem>
                     <MudItem sm="5">
-                        <MudTextField InputType="InputType.Number" Margin="Margin.Dense" @bind-Value="@SelectedHotelRoom.htr_PriceStrNoFormat" Label="@L["price"]" Required Variant="Variant.Outlined"/>
+                        <MudTextField InputType="InputType.Number" Margin="Margin.Dense" @bind-Value="@SelectedHotelRoom.htr_PriceStrNoFormat" Label="@L["price"]" Variant="Variant.Outlined"/>
                     </MudItem>
                     <MudItem sm="5">
                         <MudAutocomplete @ref="FloorAutocomplete" T="HotelFloorInfo" DebounceInterval="ClS_Config.debounce"
