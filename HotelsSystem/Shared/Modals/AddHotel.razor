@@ -1,5 +1,5 @@
 @inject IStringLocalizer<App> L;
-<MudDialog ClassActions="px-5 pb-4">
+<MudDialog ClassActions="px-5 pb-4" >
     
     <DialogContent>
         <MudTabs @bind-ActivePanelIndex="SelectedTab" Elevation="0" Color="Color.Primary" Rounded="true" ApplyEffectsToContainer="true" PanelClass="py-3">
@@ -174,7 +174,7 @@
                     </MudItem>
                 </MudGrid>
                 <MudDivider Class="mt-3"/>
-                <MudTable SelectedItems="SelectedItems" SelectedItemsChanged="@((e)=>{StateHasChanged();})" T="HotelRoomsInfo" @ref="table" ServerData="@(new Func<TableState,Task<TableData<HotelRoomsInfo>>>(GetPaginatedRooms))" MultiSelection="true" Elevation="0" Dense="true" Hover="true"
+                <MudTable SelectedItems="SelectedItems" SelectedItemsChanged="@((e)=>{StateHasChanged();})" T="HotelRoomsInfo" @ref="table" ServerData="@(new Func<TableState,Task<TableData<HotelRoomsInfo>>>(GetPaginatedRooms))" MultiSelection="@(PaginatedRooms.Items.Any())" Elevation="0" Dense="true" Hover="true"
                         CommitEditTooltip="@L["edit"]" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues" CanCancelEdit="true"
                         RowEditCommit="@(async(e)=>await ItemHasBeenCommitted(e))" IsEditRowSwitchingBlocked="false" ApplyButtonPosition="@applyButtonPosition" EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
                     <ToolBarContent>
@@ -183,6 +183,7 @@
                         @* <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField> *@
                     </ToolBarContent>
                     <ColGroup>
+                    @if(PaginatedRooms.Items.Any()){
                         @if (applyButtonPosition.DisplayApplyButtonAtStart() || (editButtonPosition.DisplayEditButtonAtStart() && editTrigger == TableEditTrigger.EditButton))
                         {
                             <col style="width:50px;" />
@@ -196,8 +197,10 @@
                         {
                             <col style="width:50px;" />
                         }
+                    }
                     </ColGroup>
                     <HeaderContent>
+                        @if(PaginatedRooms.Items.Any()){
         
          <MudTh>
             <div class="d-flex justify-content-between align-items-center">
@@ -221,13 +224,22 @@
                 <MudTableSortLabel SortBy="new Func<HotelRoomsInfo, object>(x=>x.htr_Price.ToCurrency())">@L["price"]</MudTableSortLabel>
             </div>
         </MudTh>
+                        }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center no-data-msg">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
 
         </HeaderContent>
                     <RowTemplate>
+                        @if(PaginatedRooms.Items.Any()){
+
         <MudTd>@context.htr_Detail</MudTd>
 <MudTd>@context.htf_FloorName</MudTd>
 <MudTd>@context.cfg_HTR_Type</MudTd>
 <MudTd>@context.htr_PriceStr</MudTd>
+                        }
 
         </RowTemplate>
                     <RowEditingTemplate>
@@ -267,9 +279,12 @@
                         <MudTd Style="width: 25%">
                         <MudTextField Margin="@Margin.Dense" Class="dec pa-0" @bind-Value="@context.htr_PriceStrNoFormat" Placeholder="@L["price"]" Variant="Variant.Outlined"/>
                         </MudTd>
+                        
                     </RowEditingTemplate>
                     <PagerContent>
+                        @if(PaginatedRooms.Items.Any()){
         <MudTablePager/>
+                        }
         </PagerContent>
                     <EditButtonContent Context="button">
                         <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />

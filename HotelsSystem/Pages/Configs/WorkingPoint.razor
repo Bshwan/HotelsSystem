@@ -66,6 +66,7 @@
             AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
             </ToolBarContent>*@
                 <HeaderContent>
+                     @if(PaginatedWorkPoint.Items.Any()){
                     <MudTh>
                         <MudTableSortLabel SortLabel="wp_workpointName" SortBy="new Func<WorkingPointInfo, object>(x=>x.wp_workpointName.ToEmptyOnNull())">
                             @L["workplace"]
@@ -82,10 +83,17 @@
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh></MudTh>
+                     }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
 
                 </HeaderContent>
 
                 <RowTemplate>
+                    @if(PaginatedWorkPoint.Items.Any()){
                     <MudTd DataLabel="">
                         @context.wp_workpointName
                     </MudTd>
@@ -99,6 +107,7 @@
                     <MudTd Class="text-end">
                         <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetWorkPointByID(context.wp_ID))" Color="Color.Primary" />
                     </MudTd>
+                    }
                 </RowTemplate>
 
                 @*    <RowEditingTemplate>
@@ -107,7 +116,9 @@
 
             </RowEditingTemplate>*@
                 <PagerContent>
+                    @if(PaginatedWorkPoint.Items.Any()){
                     <MudTablePager />
+                    }
                 </PagerContent>
                 @*  <EditButtonContent Context="button">
             <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0"

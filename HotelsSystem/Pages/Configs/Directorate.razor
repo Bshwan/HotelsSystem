@@ -39,6 +39,7 @@
                               AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>*@
                 <HeaderContent>
+                  @if(PaginatedDirectorate.Items.Any()){
                     <MudTh>
                         <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<DirectorateInfo, object>(x=>x.peo_DirectorateName.ToEmptyOnNull())">
                             @L["directory"]
@@ -50,10 +51,17 @@
                         </MudTableSortLabel>
                     </MudTh>
                     <MudTh></MudTh>
+                  }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
 
                 </HeaderContent>
 
                 <RowTemplate>
+                     @if(PaginatedDirectorate.Items.Any()){
                     <MudTd DataLabel="">
                         @context.peo_DirectorateName
                     </MudTd>
@@ -61,6 +69,7 @@
                     <MudTd Class="text-end">
                         <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetDirectorateByID(context.peo_DirectorateID))"  Color="Color.Primary" />
                     </MudTd>
+                     }
                 </RowTemplate>
 
             @*    <RowEditingTemplate>
@@ -69,7 +78,9 @@
                   
                 </RowEditingTemplate>*@
                 <PagerContent>
+                     @if(PaginatedDirectorate.Items.Any()){
                     <MudTablePager />
+                     }
                 </PagerContent>
               @*  <EditButtonContent Context="button">
                     <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0"

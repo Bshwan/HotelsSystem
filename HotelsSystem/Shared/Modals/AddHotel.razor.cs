@@ -356,6 +356,7 @@ public partial class AddHotel
                 SortColumn: state.SortLabel.IsStringNullOrWhiteSpace() ? "htr_Detail" : state.SortLabel,
                 SortDirection: Util.ResolveSort(state.SortDirection));
         }
+        StateHasChanged();
 
         return new TableData<HotelRoomsInfo>() { TotalItems = PaginatedRooms.TotalItems, Items = PaginatedRooms.Items };
     }

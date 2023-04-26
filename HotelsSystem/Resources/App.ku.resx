@@ -126,6 +126,9 @@
   <data name="hotel-list" xml:space="preserve">
     <value>لیستی هۆتێلەکان</value>
   </data>
+  <data name="no-data-available" xml:space="preserve">
+    <value>هیچ زانیاریەک بەردەست نییە</value>
+  </data>
   <data name="name" xml:space="preserve">
     <value>ناو</value>
   </data>
