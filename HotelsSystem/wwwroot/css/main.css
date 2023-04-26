@@ -51,11 +51,13 @@ body{
     overflow-y: auto;
 }
 
+.row{ margin: 0;}
+
 @media (min-width: 992px) {
     article.content{
         overflow-y: auto;
         height: 100%;
-        max-height: calc(100vh - 56px - 2rem);
+        max-height: calc(100vh - 56px);
     }
 }
 

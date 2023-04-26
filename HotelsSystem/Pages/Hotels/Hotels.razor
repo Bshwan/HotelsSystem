@@ -14,7 +14,7 @@
         <MudButton OnClick="@(async()=>await OpenDialog(0))" StartIcon="@Icons.Material.Filled.DomainAdd" Variant="Variant.Filled" Color="Color.Primary">@L["add-hotel"]</MudButton>
     </div>
     <div class="col-12">
-        <MudTable @ref="table" ServerData="@(new Func<TableState,Task<TableData<HotelsInfo>>>(GetPaginatedItems))" T="HotelsInfo" 
+        <MudTable @ref="table" Loading="false" ServerData="@(new Func<TableState,Task<TableData<HotelsInfo>>>(GetPaginatedItems))" T="HotelsInfo" 
             Outlined="true" Elevation="0" Dense="true" Hover="true">
             <ToolBarContent>
                 <MudText Typo="Typo.h6">@L["hotel-list"]</MudText>
@@ -27,8 +27,8 @@
             </ToolBarContent>
             <HeaderContent>
                 @if(PaginatedItems.Items.Any()){
-                <MudTh><MudTableSortLabel SortLabel="peo_userFullName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortLabel="usT_userType" SortBy="new Func<HotelsInfo, object>(x=>x.HTT_Type.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="peo_userFullName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Name.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="HTT_Type" SortBy="new Func<HotelsInfo, object>(x=>x.HTT_Type.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_Address" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["address"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_Star" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Star)">@L["stars"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_EntryByName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_EntryByName.ToEmptyOnNull())">@L["entry-by"]</MudTableSortLabel></MudTh>
