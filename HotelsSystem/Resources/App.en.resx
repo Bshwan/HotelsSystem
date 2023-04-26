@@ -207,6 +207,9 @@
   <data name="check-in" xml:space="preserve">
     <value>Check In</value>
   </data>
+  <data name="no-data-available" xml:space="preserve">
+    <value>No Data Available</value>
+  </data>
   <data name="check-out" xml:space="preserve">
     <value>Check Out</value>
   </data>
@@ -394,7 +397,7 @@
     <value>Hotel Type</value>
   </data>
   <data name="note" xml:space="preserve">
-    <value>note</value>
+    <value>Note</value>
   </data>
   <data name="inactive" xml:space="preserve">
     <value>Inactive</value>

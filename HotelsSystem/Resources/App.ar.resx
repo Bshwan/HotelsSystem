@@ -342,6 +342,9 @@
   <data name="admin-info" xml:space="preserve">
     <value>معلومات المستخدم</value>
   </data>
+  <data name="no-data-available" xml:space="preserve">
+    <value>لا تتوافر بيانات</value>
+  </data>
   <data name="hotel-info" xml:space="preserve">
     <value>معلومات الفندق</value>
   </data>

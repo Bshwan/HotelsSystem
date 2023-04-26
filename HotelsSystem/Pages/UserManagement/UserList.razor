@@ -23,6 +23,7 @@
 
             </ToolBarContent>
             <HeaderContent>
+                @if(PaginatedItems.Items.Any()){
                 <MudTh>
                     <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<UserInfo, object>(x=>x.peo_UserName.ToEmptyOnNull())">@L["username"]
                     </MudTableSortLabel>
@@ -58,9 +59,16 @@
                     <MudTableSortLabel SortLabel="peo_UserActive" SortBy="new Func<UserInfo, object>(x=>x.peo_UserActive)">@L["status"]
                     </MudTableSortLabel>
                 </MudTh>
+                }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
             </HeaderContent>
 
             <RowTemplate>
+                @if(PaginatedItems.Items.Any()){
                 <MudTd DataLabel="">
                     <MudLink Underline="Underline.Always" Href="@(Go.To(Routing.adduser,context.peo_UserID))">@context.peo_UserName</MudLink>
                 </MudTd>
@@ -79,6 +87,7 @@
 
                             }
                             </MudTd>
+                }
             </RowTemplate>
 
             @* <RowEditingTemplate>
@@ -92,7 +101,9 @@
                 <MudTd>@context.peo_UserActive</MudTd>
             </RowEditingTemplate> *@
             <PagerContent>
+                @if(PaginatedItems.Items.Any()){
                 <MudTablePager />
+                }
             </PagerContent>
             <EditButtonContent Context="button">
                 <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0"

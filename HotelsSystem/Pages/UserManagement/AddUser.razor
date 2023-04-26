@@ -135,14 +135,23 @@
                     <div class="col-12">
                         <MudTable Dense="true" T="GroupInfo" Elevation="0" Items="@(combos.Groups.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
+                                @if(combos.Groups.Where(x=>x.HasRole==1).Any()){
                                     <MudTh>@L["name"]</MudTh>
                                 <MudTh></MudTh>
+                                }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
                             </HeaderContent>
                             <RowTemplate>
-                                <MudTd DataLabel="Nr">@context.group_Name</MudTd>
+                                @if(combos.Groups.Where(x=>x.HasRole==1).Any()){
+                                <MudTd DataLabel="">@context.group_Name</MudTd>
                                 <MudTd Class="text-end">
                                     <MudIconButton OnClick="@(async()=>await DeleteGroup(context.per_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error"/>
                                 </MudTd>
+                                }
                             </RowTemplate>
                         </MudTable>
                     </div>
@@ -178,14 +187,23 @@
                     <div class="col-12">
                         <MudTable Dense="true" T="DataAccessPermissions" Elevation="0" Items="@(combos.Permissions.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
+                                 @if(combos.Permissions.Where(x=>x.HasRole==1).Any()){
                                     <MudTh>@L["name"]</MudTh>
                                 <MudTh></MudTh>
+                                 }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
                             </HeaderContent>
                             <RowTemplate>
-                                <MudTd DataLabel="Nr">@context.dap_Name</MudTd>
+                                @if(combos.Permissions.Where(x=>x.HasRole==1).Any()){
+                                <MudTd DataLabel="">@context.dap_Name</MudTd>
                                 <MudTd Class="text-end">
                                         <MudIconButton OnClick="@(async()=>await DeletePrivilage(context.per_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />
                                 </MudTd>
+                                }
                             </RowTemplate>
                         </MudTable>
                     </div>
@@ -219,14 +237,23 @@
                     <div class="col-12">
                         <MudTable Dense="true" T="WorkingPointInfo" Elevation="0" Items="@(combos.WorkingPoints.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
+                                 @if(combos.WorkingPoints.Where(x=>x.HasRole==1).Any()){
                                             <MudTh>@L["name"]</MudTh>
                                 <MudTh></MudTh>
+                                 }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
                             </HeaderContent>
                             <RowTemplate>
-                                <MudTd DataLabel="Nr">@context.wp_workpointName</MudTd>
+                                 @if(combos.WorkingPoints.Where(x=>x.HasRole==1).Any()){
+                                <MudTd DataLabel="">@context.wp_workpointName</MudTd>
                                 <MudTd Class="text-end">
-                                        <MudIconButton OnClick="@(async()=>await DeleteUserWorkpoint(context.wp_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />
+                                        <MudIconButton OnClick="@(async()=>await DeleteUserWorkpoint(context.per_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />
                                 </MudTd>
+                                 }
                             </RowTemplate>
                         </MudTable>
                     </div>

@@ -36,6 +36,7 @@
                       TotalItems="PaginatedGroups.TotalItems" Items="@PaginatedGroups.Items" T="GroupInfo" Dense="true">
 
                     <HeaderContent>
+                        @if(PaginatedGroups.Items.Any()){
                        
                         <MudTh>
                             <MudTableSortLabel SortLabel="group_Name" SortBy="new Func<GroupInfo, object>(x=>x.group_Name.ToEmptyOnNull())">
@@ -43,22 +44,28 @@
                             </MudTableSortLabel>
                         </MudTh>
                         <MudTh></MudTh>
+                        }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
 
                     </HeaderContent>
 
                     <RowTemplate>
-                     
+                         @if(PaginatedGroups.Items.Any()){
                         <MudTd DataLabel="">@context.group_Name</MudTd>
                        
                         <MudTd Class="text-end">
                             <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await AddRoleModal(context.group_ID))" Color="Color.Primary" />
                         </MudTd>
-                      
+                         }
                     </RowTemplate>
-
-
                     <PagerContent>
+                         @if(PaginatedGroups.Items.Any()){
                         <MudTablePager />
+                         }
                     </PagerContent>
 
                 </MudTable>

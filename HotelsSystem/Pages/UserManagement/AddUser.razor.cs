@@ -217,8 +217,8 @@ public partial class AddUser
     }
     async Task InsertUpdateUserWorkpoint()
     {
-        await AddGroupForm!.Validate();
-        if (!AddGroupForm.IsValid)
+        await AddWorkpointForm!.Validate();
+        if (!AddWorkpointForm.IsValid)
             return;
 
         SPResult result = await mgmt.InsertDeletePermissions<SPResult>(

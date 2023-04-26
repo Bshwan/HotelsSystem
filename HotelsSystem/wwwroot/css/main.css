@@ -47,10 +47,15 @@ body{
     overflow: hidden;
 }
 
+.sidebar{
+    overflow-y: auto;
+}
+
 @media (min-width: 992px) {
     article.content{
         overflow-y: auto;
-        height: calc(100vh - 11rem);
+        height: 100%;
+        max-height: calc(100vh - 56px - 2rem);
     }
 }
 
@@ -65,4 +70,8 @@ body{
         overflow-y: unset;
         height: unset !important;
     }
+}
+
+.no-data-msg ~ th{
+    display: none;
 }

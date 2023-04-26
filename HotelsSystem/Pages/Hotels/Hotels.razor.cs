@@ -55,7 +55,9 @@ public partial class Hotels
         {
             CloseOnEscapeKey = true,
             CloseButton = true,
-            Position = DialogPosition.TopCenter,MaxWidth=MaxWidth.Medium
+            Position = DialogPosition.TopCenter,
+            MaxWidth=MaxWidth.Medium,
+            FullWidth=true
         };
         
         var parameters = new DialogParameters();
