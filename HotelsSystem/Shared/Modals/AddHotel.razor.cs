@@ -118,12 +118,14 @@ public partial class AddHotel
             SelectedHotel.congltype_Name = string.Empty;
             // SelectedHotel.htl_Star = 0;
             SelectedHotel.HotelHas0Stars = false;
+            SelectedHotel.htl_Star = 0;
             return;
         }
         SelectedHotel.htl_TypeID = e.congltype_ID;
         SelectedHotel.congltype_Name = e.congltype_Name;
         // SelectedHotel.htl_Star = e.congltype_StarNumber;
         SelectedHotel.HotelHas0Stars = e.congltype_StarNumber == 0;
+        SelectedHotel.htl_Star=e.congltype_StarNumber;
     }
     async Task<IEnumerable<DirectorateInfo>> SearchDirectorate(string e)
     {
@@ -239,7 +241,7 @@ public partial class AddHotel
         HotelTypeID: SelectedHotel.htl_TypeID,
         HotelName: SelectedHotel.htl_Name.ToEmptyOnNull(),
         HotelAddress: SelectedHotel.htl_Address.ToEmptyOnNull(),
-        StarNumber: SelectedHotel.HotelHas0Stars ? 0 : SelectedHotel.htl_Star,
+        // StarNumber: SelectedHotel.HotelHas0Stars ? 0 : SelectedHotel.htl_Star,
         NumberOfRooms: SelectedHotel.htl_NumberOfRooms,
         DirectorateID: SelectedHotel.htl_DirectorateID,
         WorkPointID: SelectedHotel.htl_WorkPointID,

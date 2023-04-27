@@ -69,7 +69,7 @@
                     @if(!SelectedHotel.HotelHas0Stars){
                     <div class="col-12">
                             <MudField Label="@L["stars"]" Margin="@Margin.Dense" Variant="Variant.Outlined">
-                            <MudRating @bind-SelectedValue="SelectedHotel.htl_Star" />
+                            <MudRating Disabled @bind-SelectedValue="SelectedHotel.congltype_StarNumber" />
                         </MudField>
                     </div>
                     }
