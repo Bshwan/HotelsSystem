@@ -56,8 +56,6 @@
 
         if (FindPermission!=null && FindPermission.Any())
         {
-            System.Console.WriteLine(JsonConvert.SerializeObject(FindPermission.First().PermissionsID)+" permissionssss");
-            System.Console.WriteLine(JsonConvert.SerializeObject(Roles.Roles)+" rolessss");
             if (!ShouldHaveAllPermissions)
             {
                 HasPermission = FindPermission.First().PermissionsID.Any(x => Roles.Roles.Any(y => y.pergroup_PerID == x));
