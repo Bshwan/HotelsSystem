@@ -33,7 +33,8 @@
             <div class="col-12">
                 <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
                       ServerData="@(new Func<TableState,Task<TableData<GroupInfo>>>(GetPaginatedGroups))"
-                      TotalItems="PaginatedGroups.TotalItems" Items="@PaginatedGroups.Items" T="GroupInfo" Dense="true">
+                      TotalItems="PaginatedGroups.TotalItems" Items="@PaginatedGroups.Items" T="GroupInfo" Dense="true"
+                      OnRowClick="@(async(e)=> await AddRoleModal(e.Item.group_ID))" RowClassFunc="@((e,s)=> "")">
 
                     <HeaderContent>
                         @if(PaginatedGroups.Items.Any()){
