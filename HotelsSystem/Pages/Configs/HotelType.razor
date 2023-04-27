@@ -1,0 +1,101 @@
+﻿@inject IStringLocalizer<App> L;
+<PageTitle>@L["hotel-type"]</PageTitle>
+
+@if (config != null)
+{
+    <div class="row g-3 m-0 w-100">
+        <MudForm @ref="AddForm" Class="row g-3 m-0 w-100 p-0">
+            <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                <MudTextField Margin="@Margin.Dense" @bind-Value="SelectedHotelTYpe.congltype_Name" Label="@L["type"]" Variant="Variant.Outlined"></MudTextField>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+                <MudTextField Margin="@Margin.Dense" @bind-Value="SelectedHotelTYpe.congltype_Price" Label="@L["price"]" Variant="Variant.Outlined"></MudTextField>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
+            
+                <MudField Label="@L["stars"]" Margin="@Margin.Dense" Variant="Variant.Outlined">
+                    <MudRating @bind-SelectedValue="SelectedHotelTYpe.congltype_StarNumber" />
+                </MudField>
+            </div>
+         
+            <div class="col-12 col-md-4 col-lg-3 col-xxl-2 pt-1">
+                <MudIconButton Icon="@Icons.Material.Filled.Add" OnClick="@(async()=>await InsertUpdateHotelType())" Variant="Variant.Filled" Color="Color.Primary" />
+            </div>
+            </MudForm>
+            <div class="col-12">
+
+                <MudTable @ref="@tableReff" Outlined="true" Elevation="0"
+                  ServerData="@(new Func<TableState,Task<TableData<HotelsInfo>>>(GetPaginatedhoteltype))"
+                  TotalItems="PaginatedHotelType.TotalItems" Items="@PaginatedHotelType.Items" T="HotelsInfo" Dense="true"
+                  OnRowClick="@(async(e)=> await GetHotelTypeByID(e.Item.congltype_ID))" RowClassFunc="@((e,s)=> "")">
+                @* <ToolBarContent>
+            <MudText Typo="Typo.h6">Directorate</MudText>
+            <MudSpacer />
+            <MudTextField @bind-Value="Filter.peo_DirectorateName" Placeholder="Search" Adornment="Adornment.Start"
+            AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>*@
+                <HeaderContent>
+                    @if (PaginatedHotelType.Items.Any())
+                    {
+                        <MudTh>
+                            <MudTableSortLabel SortLabel="peo_DirectorateName" SortBy="new Func<HotelsInfo, object>(x=>x.congltype_Name.ToEmptyOnNull())">
+                                @L["hotel-type"]
+                            </MudTableSortLabel>
+                        </MudTh>
+                        <MudTh>
+                            <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<HotelsInfo, object>(x=>x.congltype_StarNumber)">
+                                @L["star-number"]
+                            </MudTableSortLabel>
+                        </MudTh>  
+                        <MudTh>
+                            <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<HotelsInfo, object>(x=>x.congltype_Price)">
+                                @L["price"]
+                            </MudTableSortLabel>
+                        </MudTh>
+                        <MudTh></MudTh>
+                    }
+                    else
+                    {
+                        <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                            <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                            <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                        </div>
+                    }
+
+                </HeaderContent>
+
+                <RowTemplate>
+                    @if (PaginatedHotelType.Items.Any())
+                    {
+                        <MudTd DataLabel="">
+                            @context.congltype_Name
+                        </MudTd>
+                        <MudTd DataLabel="">@context.congltype_StarNumber</MudTd>
+                        <MudTd DataLabel="">@context.congltype_Price</MudTd>
+                        <MudTd Class="text-end">
+                            <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetHotelTypeByID(context.congltype_ID))" Color="Color.Primary" />
+                        </MudTd>
+                    }
+                </RowTemplate>
+
+                @*    <RowEditingTemplate>
+            <MudTd>@context.peo_DirectorateName</MudTd>
+            <MudTd>@context.peo_UserName</MudTd>
+
+            </RowEditingTemplate>*@
+                <PagerContent>
+                    @if (PaginatedHotelType.Items.Any())
+                    {
+                        <MudTablePager />
+                    }
+                </PagerContent>
+                @*  <EditButtonContent Context="button">
+            <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0"
+            OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+            </EditButtonContent>*@
+            </MudTable>
+
+        </div>
+    </div>
+}
+
