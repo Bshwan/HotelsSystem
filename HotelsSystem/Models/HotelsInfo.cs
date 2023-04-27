@@ -16,5 +16,8 @@ public class HotelsInfo
     public string? wp_workpointName { get; set; }
     public DateTime? htl_EntryDate { get; set; }
     public string? htl_EntryByName { get; set; }
+    public string? congltype_Name { get; set; }
+    public int congltype_StarNumber { get; set; }
+    public decimal congltype_Price { get; set; }
 
 }
