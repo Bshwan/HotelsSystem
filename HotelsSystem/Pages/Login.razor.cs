@@ -17,28 +17,66 @@
         //protected IBlazorDownloadFileService Downloader { get; set; }
 
         UserLogin Credentials = new UserLogin();
-        ClS_Config config=default!;
-        ClS_UserManagement mgmt=default!;
+        ClS_Config config = default!;
+        ClS_UserManagement? mgmt = null;
         MyFunctions.myLogin.MyFunctions func = new MyFunctions.myLogin.MyFunctions();
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            mgmt = new ClS_UserManagement(DB, new SPResult { });
+            var lang = await JSRuntime.InvokeAsync<string>("blazorExtensions.getLangCookie");
+            if (lang.IsStringNullOrWhiteSpace())
+            {
+                var uri = new Uri(nav.Uri)
+                .GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+
+                var query = $"?culture={Uri.EscapeDataString("ku-Arab")}&" +
+                    $"redirectUri={Uri.EscapeDataString(uri)}";
+
+                nav.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
+
+            }
+            else
+            {
+                mgmt = new ClS_UserManagement(DB, new SPResult { });
+            }
         }
 
         private async Task login()
         {
-            SPResult result = await mgmt.Login<SPResult>(
+            var result = await mgmt.Login(
                 SelectPro: 1,
                 UserName: Credentials.UserName.ToEmptyOnNull(),
                 UserPass: func.encr_pass(Credentials.Password.ToEmptyOnNull()));
 
             if (result.Result > 0)
             {
+                string Language = "en";
+                if (result.Userlanguage == 1)
+                    Language = "ku";
+                else if (result.Userlanguage == 2)
+                    Language = "en";
+                else if (result.Userlanguage == 3)
+                    Language = "ar";
+
                 await Protection.SetEncryptedSession(result, JSRuntime);
-                nav.NavigateTo(Routing.userlist);
+                RequestCultureChange(Language, Routing.hotels);
+
                 return;
             }
             Toaster.Error(".", result.MSG);
+        }
+        private void RequestCultureChange(string Culture, string RedirectTo = "")
+        {
+            if (string.IsNullOrWhiteSpace(Culture))
+            {
+                return;
+            }
+            System.Console.WriteLine(new Uri(nav.BaseUri + RedirectTo));
+            var uri = new Uri(nav.BaseUri + RedirectTo).GetComponents(UriComponents.PathAndQuery, UriFormat.Unescaped);
+
+            var query = $"?culture={Uri.EscapeDataString(Culture)}&" +
+                $"redirectUri={Uri.EscapeDataString(uri)}";
+
+            nav.NavigateTo("/Culture/SetCulture" + query, forceLoad: true);
         }
     }
 }

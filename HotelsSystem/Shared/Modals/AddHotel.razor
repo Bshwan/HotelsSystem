@@ -1,9 +1,9 @@
 @inject IStringLocalizer<App> L;
-<MudDialog ClassActions="px-5 pb-4">
+<MudDialog ClassActions="px-5 pb-4" >
     
     <DialogContent>
         <MudTabs @bind-ActivePanelIndex="SelectedTab" Elevation="0" Color="Color.Primary" Rounded="true" ApplyEffectsToContainer="true" PanelClass="py-3">
-            <MudTabPanel Text=@L["hotel-information"]>
+            <MudTabPanel Text="@L["hotel-info"]">
                 <MudForm @ref="AddHotelForm">
                 <div class="row gy-3 gx-2">
                     <div class="col-12">
@@ -15,7 +15,7 @@
                              ToStringFunc="@(e=>e==null?"":e.HTT_Type)" 
                             Value="@(new HotelTypesComboBox{HTT_ID=SelectedHotel.htl_TypeID,HTT_Type=combos.HotelTypes.SelectByID<HotelTypesComboBox>(SelectedHotel.htl_TypeID,"HTT_ID").HTT_Type})"
                             ValueChanged="OnHotelTypeChange" 
-                                Margin="@Margin.Dense" T="HotelTypesComboBox" Label=@L["hotel-type"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="HotelTypesComboBox" Label="@L["hotel-type"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.HotelTypes)
                             {
                             <MudSelectItem T="HotelTypesComboBox" Value="@item">@item.HTT_Type</MudSelectItem>
@@ -23,7 +23,8 @@
                         </MudSelect>                    
                     </div>
                     <div class="col-12">
-                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Address" Label="@L["full-address"]" Variant="Variant.Outlined" Lines="4"></MudTextField>
+                        @* OnlyValidateIfDirty="true" Required="true" *@
+                        <MudTextField Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Address" Label="@L["full-address"]" Variant="Variant.Outlined" Lines="4"></MudTextField>
                     </div>
                     
                     <div class="col-12 col-lg-6">
@@ -40,7 +41,7 @@
                          ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                         Label=@L["directories"]
+                         Label=@L["directory"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -58,7 +59,7 @@
                          ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
                          CoerceText="@true"
                          CoerceValue="true"
-                                             Label=@L["workpoint-name"]
+                        Label=@L["workplace"]
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </div>
@@ -66,7 +67,7 @@
                         <MudNumericField Required Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_NumberOfRooms" Label="@L["room-number"]" Variant="Variant.Outlined"></MudNumericField >
                     </div>
                     <div class="col-12">
-                        <MudField Label=@L["stars"] Margin="@Margin.Dense" Variant="Variant.Outlined">
+                            <MudField Label="@L["stars"]" Margin="@Margin.Dense" Variant="Variant.Outlined">
                             <MudRating @bind-SelectedValue="SelectedHotel.htl_Star" />
                         </MudField>
                     </div>
@@ -80,23 +81,23 @@
                 </MudForm>
             </MudTabPanel>
             @if(SelectedHotel.htl_ID>0){
-            <MudTabPanel Text="Admin Informations">
+            <MudTabPanel Text="@L["admin-info"]">
                 <MudForm @ref="AddHotelUserForm" class="row gy-3 gx-2">
                     <div class="col-12">
-                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_FullName" Label="Userame" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Name" Label="@L["username"]" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
-                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Name" Label="Full Name" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_FullName" Label="@L["full-name"]" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
-                        <MudTextField Required="true" autocomplete="new-password" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Password" Label="Password" InputType="InputType.Password" Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField Required="true" autocomplete="new-password" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Password" Label="@L["password"]" InputType="InputType.Password" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
                        <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.htlustype_Name)" 
                             Value="@(new HotelUserTypeComboBox{htlustype_ID=SelectedHotelUser.htlus_TypeID,htlustype_Name=AddUserCombos.HotelUserTypes.SelectByID<HotelUserTypeComboBox>(SelectedHotelUser.htlus_TypeID,"htlustype_ID").htlustype_Name})" 
                                 Validation="@(new Func<HotelUserTypeComboBox, string>((e)=>e.ValidateField<HotelUserTypeComboBox>("htlustype_ID")))"
                                 ValueChanged="OnSelectedHotelTypeChangeChange"
-                                Margin="@Margin.Dense" T="HotelUserTypeComboBox" Label="Hotel User" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="HotelUserTypeComboBox" Label="@L["user-type"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in AddUserCombos.HotelUserTypes)
                             {
                             <MudSelectItem T="HotelUserTypeComboBox" Value="@item">@item.htlustype_Name</MudSelectItem>
@@ -108,7 +109,7 @@
                             Value="@(new LanguageInfo{lang_ID=SelectedHotelUser.htlus_LanguageID,lang_Name=AddUserCombos.Languages.SelectByID<LanguageInfo>(SelectedHotelUser.htlus_LanguageID,"lang_ID").lang_Name})" 
                                 Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
                                 ValueChanged="OnSelectedLanguageChange"
-                                Margin="@Margin.Dense" T="LanguageInfo" Label="Language" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                                Margin="@Margin.Dense" T="LanguageInfo" Label="@L["language"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in AddUserCombos.Languages)
                             {
                             <MudSelectItem T="LanguageInfo" Value="@item">@item.lang_Name</MudSelectItem>
@@ -126,14 +127,180 @@
                 </MudForm>
             </MudTabPanel>
             }
+            @if(SelectedHotel.htl_ID>0){
+            <MudTabPanel Text="@L["rooms"]">
+                <MudGrid Class="pt-3" Spacing="1">
+                    @if(SelectedItems.Count<=1){
+                     <MudItem sm="5">
+                        <MudTextField InputType="InputType.Text" Margin="Margin.Dense" @bind-Value="@SelectedHotelRoom.htr_Detail" Label="@L["detail"]" Variant="Variant.Outlined"/>
+                    </MudItem>
+                    }
+                    
+                    <MudItem sm="5">
+                        <MudAutocomplete @ref="RoomTypeAutocomplete" T="HotelRoomsTypesInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchRoomType"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelRoomsTypesInfo(){cfg_HTR_ID=SelectedHotelRoom.htr_Type,cfg_HTR_Type=SelectedHotelRoom.cfg_HTR_Type,cfg_HTR_Price=SelectedHotelRoom.htr_Price})"
+                         Text="@SelectedHotelRoom.cfg_HTR_Type"
+                         ValueChanged="@(async(e)=>OnSelectedRoomTypeChanged(e))"
+                         ToStringFunc="@(e=>e==null?"":e.cfg_HTR_Type)"
+                         CoerceText="@true"
+                         Label=@L["room-type"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </MudItem>
+                    <MudItem sm="5">
+                        <MudTextField InputType="InputType.Number" Margin="Margin.Dense" @bind-Value="@SelectedHotelRoom.htr_PriceStrNoFormat" Label="@L["price"]" Variant="Variant.Outlined"/>
+                    </MudItem>
+                    <MudItem sm="5">
+                        <MudAutocomplete @ref="FloorAutocomplete" T="HotelFloorInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchFloorType"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelFloorInfo(){htf_FloorID=SelectedHotelRoom.htr_FloorID,htf_FloorName=SelectedHotelRoom.htf_FloorName})"
+                         Text="@SelectedHotelRoom.htf_FloorName"
+                         ValueChanged="@(async(e)=>OnSelectedFloorName(e))"
+                         ToStringFunc="@(e=>e==null?"":e.htf_FloorName)"
+                         CoerceText="@true"
+                         Label=@L["floor"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </MudItem>
+                    <MudItem sm="2" Class="pt-2">
+                        <MudIconButton Disabled="!SelectedItems.Any()
+                        || (SelectedHotelRoom.htr_Type<=0 && SelectedHotelRoom.cfg_HTR_Type.IsStringNullOrWhiteSpace())"
+                         OnClick="UpdateRooms" Icon="@Icons.Filled.Save" Color="Color.Primary" Variant="Variant.Filled" DisableElevation></MudIconButton>
+                    </MudItem>
+                </MudGrid>
+                <MudDivider Class="mt-3"/>
+                <MudTable SelectedItems="SelectedItems" SelectedItemsChanged="@((e)=>{StateHasChanged();})" T="HotelRoomsInfo" @ref="table" ServerData="@(new Func<TableState,Task<TableData<HotelRoomsInfo>>>(GetPaginatedRooms))" MultiSelection="@(PaginatedRooms.Items.Any())" Elevation="0" Dense="true" Hover="true"
+                        CommitEditTooltip="@L["edit"]" RowEditPreview="BackupItem" RowEditCancel="ResetItemToOriginalValues" CanCancelEdit="true"
+                        RowEditCommit="@(async(e)=>await ItemHasBeenCommitted(e))" IsEditRowSwitchingBlocked="false" ApplyButtonPosition="@applyButtonPosition" EditButtonPosition="@editButtonPosition" EditTrigger="@editTrigger">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h6">@L["rooms"]</MudText>
+                        <MudSpacer />
+                        @* <MudTextField @bind-Value="searchString" Placeholder="Search" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField> *@
+                    </ToolBarContent>
+                    <ColGroup>
+                    @if(PaginatedRooms.Items.Any()){
+                        @if (applyButtonPosition.DisplayApplyButtonAtStart() || (editButtonPosition.DisplayEditButtonAtStart() && editTrigger == TableEditTrigger.EditButton))
+                        {
+                            <col style="width:50px;" />
+                        }
+                        <col style="width:50px;" />
+                        <col style="width:50px;" />
+                        <col style="width:50px;" />
+                        <col />
+                        <col />
+                        @if (applyButtonPosition.DisplayApplyButtonAtEnd() || (editButtonPosition.DisplayEditButtonAtEnd() && editTrigger == TableEditTrigger.EditButton))
+                        {
+                            <col style="width:50px;" />
+                        }
+                    }
+                    </ColGroup>
+                    <HeaderContent>
+                        @if(PaginatedRooms.Items.Any()){
+        
+         <MudTh>
+            <div class="d-flex justify-content-between align-items-center">
+                <MudTableSortLabel SortBy="new Func<HotelRoomsInfo, object>(x=>x.htr_Detail.ToEmptyOnNull())">@L["name"]</MudTableSortLabel>
+            </div>
+        </MudTh>
+        <MudTh>
+            <div class="d-flex justify-content-between align-items-center">
+                <MudTableSortLabel SortBy="new Func<HotelRoomsInfo, object>(x=>x.hrf_FloorName.ToEmptyOnNull())">@L["floor"]</MudTableSortLabel>
+            </div>
+        </MudTh>
+
+         <MudTh>
+            <div class="d-flex justify-content-between align-items-center">
+                <MudTableSortLabel SortBy="new Func<HotelRoomsInfo, object>(x=>x.cfg_HTR_Type.ToEmptyOnNull())">@L["type"]</MudTableSortLabel>
+            </div>
+        </MudTh>
+
+         <MudTh>
+            <div class="d-flex justify-content-between align-items-center">
+                <MudTableSortLabel SortBy="new Func<HotelRoomsInfo, object>(x=>x.htr_Price.ToCurrency())">@L["price"]</MudTableSortLabel>
+            </div>
+        </MudTh>
+                        }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center no-data-msg">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
+
+        </HeaderContent>
+                    <RowTemplate>
+                        @if(PaginatedRooms.Items.Any()){
+
+        <MudTd>@context.htr_Detail</MudTd>
+<MudTd>@context.htf_FloorName</MudTd>
+<MudTd>@context.cfg_HTR_Type</MudTd>
+<MudTd>@context.htr_PriceStr</MudTd>
+                        }
+
+        </RowTemplate>
+                    <RowEditingTemplate>
+                        @* <MudTd>@context.htr_Detail</MudTd> *@
+                        <MudTd Style="width: 20%">
+                        <MudTextField Class="dec pa-0" Margin="@Margin.Dense" @bind-Value="@context.htr_Detail" Placeholder="@L["detail"]" Variant="Variant.Outlined"/>
+                        </MudTd>
+                        <MudTd Style="width: 30%">
+                        <MudAutocomplete @ref="InLineFloorAutocomplete" T="HotelFloorInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@(async(e)=>await SearchFloorTypeInLine(e,context))"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelFloorInfo(){htf_FloorID=context.htr_FloorID,htf_FloorName=context.htf_FloorName})"
+                         Text="@context.htf_FloorName"
+                         ValueChanged="@(async(e)=>InLineOnSelectedFloorName(e,context))"
+                         ToStringFunc="@(e=>e==null?"":e.htf_FloorName)"
+                         CoerceText="@true"
+                         Placeholder=@L["floor"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                         </MudTd>
+                       
+                        <MudTd Style="width: 30%">
+                            <MudAutocomplete @ref="InLineRoomTypeAutocomplete" T="HotelRoomsTypesInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchRoomType"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelRoomsTypesInfo(){cfg_HTR_ID=context.htr_Type,cfg_HTR_Type=context.cfg_HTR_Type,cfg_HTR_Price=context.htr_Price})"
+                         Text="@context.cfg_HTR_Type"
+                         ValueChanged="@(async(e)=>InLineOnSelectedRoomTypeChanged(e,context))"
+                         ToStringFunc="@(e=>e==null?"":e.cfg_HTR_Type)"
+                         CoerceText="@true"
+                         Placeholder=@L["room-type"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                        </MudTd>
+                        <MudTd Style="width: 25%">
+                        <MudTextField Margin="@Margin.Dense" Class="dec pa-0" @bind-Value="@context.htr_PriceStrNoFormat" Placeholder="@L["price"]" Variant="Variant.Outlined"/>
+                        </MudTd>
+                        
+                    </RowEditingTemplate>
+                    <PagerContent>
+                        @if(PaginatedRooms.Items.Any()){
+        <MudTablePager/>
+                        }
+        </PagerContent>
+                    <EditButtonContent Context="button">
+                        <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />
+                        
+                    </EditButtonContent>
+                </MudTable>
+            </MudTabPanel>
+            }
         </MudTabs>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="@(()=>MudDialog.Cancel())">@L["cancel"]</MudButton>
+        <MudButton OnClick="@(()=>MudDialog.Cancel())" Color="Color.Error" Variant="Variant.Filled" DisableElevation>@L["cancel"]</MudButton>
         @if(SelectedTab==0){
-        <MudButton Color="Color.Primary" OnClick="@(async()=>await InsertUpdateHotel())">@L["save"]</MudButton>
+        <MudButton OnClick="@(async()=>await InsertUpdateHotel())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
         }else if(SelectedTab==1){
-        <MudButton Color="Color.Primary" OnClick="@(async()=>await InsertUpdateHotelUser())">@L["save"]</MudButton>
+        <MudButton OnClick="@(async()=>await InsertUpdateHotelUser())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
         }
     </DialogActions>
 </MudDialog>

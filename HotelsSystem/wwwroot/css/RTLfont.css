@@ -1,0 +1,112 @@
+:root{
+    --body-font: "info" !important;
+    --mud-typography-h1-family: "info" !important;
+    --mud-typography-h2-family: "info" !important;
+    --mud-typography-h3-family: "info" !important;
+    --mud-typography-h4-family: "info" !important;
+    --mud-typography-h5-family: "info" !important;
+    --mud-typography-h6-family: "info" !important;
+    --mud-typography-subtitle-1: "info" !important;
+} 
+
+@font-face {
+    font-family: 'info';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../font/PFDinTextUniversal-Regular.otf) format('opentype'),
+        url(../font/PFDinTextUniversal-XThin.otf) format('opentype'),
+        url(../font/PFDinTextUniversal-XBlack.otf) format('opentype'),
+        url(../font/PFDinTextUniversal-Light.otf) format('opentype'),
+        url(../font/PFDinTextUniversal-Bold.otf) format('opentype');
+}
+
+body{
+    font-family: "info" !important;
+    zoom: 103% !important;
+}
+
+.row > div h4, .row > * > * > * *, .row > * > * > * > *, .row > * > * > *, .row > * > *, .row > *{
+    font-family: "info" !important;
+}
+
+button{
+    font-family: "info" !important;
+}
+
+fluent-button,
+fluent-text-field,
+fluent-select,
+fluent-select *,
+fluent-switch,
+fluent-option,
+.selected-value {
+    font-family: "info" !important;
+}
+
+.info-font {
+    font-family: "info" !important;
+}
+
+.label.label {
+    font-family: "info" !important;
+}
+
+.toast-title {
+    font-family: "info" !important;
+}
+
+.lock-btn{
+    right: auto;
+    left: -6.5rem;
+}
+
+.lock-btn:hover{
+    left: -2.5rem;
+    right: auto;
+}
+
+.sidebar-toggle-btn{
+    transform: rotate(180deg);
+}
+
+.sidebar-toggle-btn-rotate{
+    transform: rotate(0deg);
+}
+
+.help-btn{
+    left: 0;
+    right: auto;
+    transform: rotate(90deg);
+}
+
+.mud-input>input.mud-input-root, div.mud-input-slot.mud-input-root{
+    padding-inline-start: 7px;
+    padding-inline-end: 0;
+}
+
+fluent-select fluent-option{
+    padding-right: .5rem;
+}
+
+.mud-list-item-gutters p{
+    font-size: 14px !important;
+}
+
+.dropdown-menu li a.dropdown-item.active::before{
+    left: auto;
+    right: 0;
+}
+
+fluent-select fluent-option.selected::before{
+    left: auto !important;
+    right: 0 !important;
+
+}
+
+fluent-accordion ::part(button){
+    text-align: right !important;
+}
+
+.mud-picker-container .mud-toolbar{
+    direction: rtl !important;
+}

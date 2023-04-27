@@ -6,7 +6,8 @@
         public string? MSG { get; set; }
         public string? LastValue { get; set; }
         public string? CNSTR { get; set; }
-        public List<int> Roles = new List<int>();
+        public int Userlanguage { get; set; }
+        public List<CheckRoles> Roles = new List<CheckRoles>();
 
     }
 }

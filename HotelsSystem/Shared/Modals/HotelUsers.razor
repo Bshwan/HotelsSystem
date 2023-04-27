@@ -11,19 +11,30 @@
                      @bind-Value="Search" Variant="Variant.Outlined" Margin="Margin.Dense" Placeholder="@L["search"]" Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
                 </ToolBarContent>
                 <HeaderContent>
+                    @if(PaginatedItems.Items.Any()){
                     <MudTh><MudTableSortLabel InitialDirection="SortDirection.Ascending" SortLabel="htlus_Name" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Name.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
                     <MudTh><MudTableSortLabel SortLabel="htlus_FullName" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_FullName.ToEmptyOnNull())">@L["full-name"]</MudTableSortLabel></MudTh>
                     <MudTh><MudTableSortLabel SortLabel="htlustype_Name" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlustype_Name.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
-                    <MudTh><MudTableSortLabel SortLabel="htlus_Active" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Active)">@L["active"]</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortLabel="htlus_Active" SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Active)">@L["status"]</MudTableSortLabel></MudTh>
+                    }else{
+                                 <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                </div>
+                            }
                 </HeaderContent>
                 <RowTemplate>
+                    @if(PaginatedItems.Items.Any()){
                 <MudTd>@context.htlus_Name</MudTd>
                 <MudTd>@context.htlus_FullName</MudTd>
                 <MudTd>@context.htlustype_Name</MudTd>
                 <MudTd>@context.htlus_Active</MudTd>
+                    }
                 </RowTemplate>
                 <PagerContent>
+                    @if(PaginatedItems.Items.Any()){
                     <MudTablePager />
+                    }
                 </PagerContent>
             </MudTable>
                 </div>
@@ -31,6 +42,6 @@
         </MudContainer>
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="@(()=>MudDialog.Cancel())">@L["cancel"]</MudButton>
+        <MudButton OnClick="@(()=>MudDialog.Cancel())" Color="Color.Error" Variant="Variant.Filled" DisableElevation>@L["cancel"]</MudButton>
     </DialogActions>
 </MudDialog>

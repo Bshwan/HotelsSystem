@@ -54,9 +54,9 @@
             return await _db.GetGridResult<T, dynamic>("Pro_GridPaging", new { Select = SelectPro, ID = ValID, Search = Search, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue }, PageNumber: PageNumber, PageSize: PageSize, MaxNavigationPages: MaxNavigationPage);
         }
 
-        public async Task<T> InsertUpdateConfig<T>(int SelectPro = 0, int ValID = 0, string ValName = "", string ValueName = "", int ValueID = 0, int ValueIDTwo = 0)
+        public async Task<T> InsertUpdateConfig<T>(int SelectPro = 0, int ValID = 0, string ValName = "", string ValueName = "", int ValueID = 0, int ValueIDTwo = 0,decimal Price=0)
         {
-            return await _db.SaveData<T, dynamic>("Pro_InsertUpdateConfig", new { Select = SelectPro, ID = ValID, Name = ValName, ValueName = ValueName, ValueID = ValueID, ValueIDTwo = ValueIDTwo,  EntryBy = 1 });
+            return await _db.SaveData<T, dynamic>("Pro_InsertUpdateConfig", new { Select = SelectPro, ID = ValID, Name = ValName, ValueName = ValueName, ValueID = ValueID, ValueIDTwo = ValueIDTwo, Price= Price,  EntryBy = 1 });
         }
 
 
@@ -75,18 +75,17 @@
             return await _db.GetDataTable<T, dynamic>("HTPro_GetAllInfo", new { Select = SelectPro, ID = ValID, EntryBy = SessionValue });
         }
 
-        // public async Task<IncomingOrderComboBox> IncomeOrderCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0, string ValueName = "", int StoreID = 0)
-        // {
-        //     var result = await _db.GetMultiple<AccountNamesInfo, SellFollowUPComboBox>(
-        //         "Pro_GetCMB",
-        //         session.SPResult.CNSTR.ToEmptyOnNull(),
-        //         new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, ValueName = ValueName, StoreID = StoreID, EntryBy = SessionValue });
-        //     return new IncomingOrderComboBox()
-        //     {
-        //         AccountNames = result.Item1,
-        //         SellFollow = result.Item2
-        //     };
-        // }
+        public async Task<SearchCombos> SearchCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
+        {
+            var result = await _db.GetMultiple<DirectorateInfo,GenderInfo,NationalityInfo>(
+                "Pro_GetCMB", new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
+            return new SearchCombos()
+            {
+              Directorates=result.Item1,
+              Genders=result.Item2,
+              Nationalities=result.Item3
+            };
+        }
 
         //public bool HasPermission(int ID, bool ShouldMoreThanOnePermissionsBeAllTrue = false)
         //{
@@ -176,9 +175,9 @@
         {
             return id > 0 ? "Edit" : "Add";
         }
-        public async Task<IEnumerable<int>> GetAllRoles()
+        public async Task<IEnumerable<CheckRoles>> GetAllRoles()
         {
-            var Roles = await GetAllInfo<int>(SelectPro: 0, ValID: SessionValue);
+            var Roles = await GetAllInfo<CheckRoles>(SelectPro: 10, ValID: SessionValue);
             return Roles;
         }
     }

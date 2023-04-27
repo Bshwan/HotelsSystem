@@ -20,10 +20,11 @@ public partial class UserList
     UserInfo FilterUser = new UserInfo();
     // UserInfo SelectedUser = new UserInfo();
     private MudTable<UserInfo>? table;
+    SPResult? session;
 
     protected override async Task OnInitializedAsync()
     {
-        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB);
         mgmt = new ClS_UserManagement(DB, session);
         config = new ClS_Config(DB, session);
         // await GetPaginatedUsers();

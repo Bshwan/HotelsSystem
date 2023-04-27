@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -26,36 +26,36 @@
         <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -119,195 +119,240 @@
   </resheader>
   <data name="hotel" xml:space="preserve">
     <value>Hotel</value>
-    <comment />
   </data>
   <data name="hotels" xml:space="preserve">
     <value>Hotels</value>
-    <comment />
   </data>
   <data name="hotel-list" xml:space="preserve">
     <value>Hotel List</value>
-    <comment />
   </data>
   <data name="name" xml:space="preserve">
     <value>Name</value>
-    <comment />
   </data>
   <data name="star" xml:space="preserve">
     <value>Star</value>
-    <comment />
   </data>
   <data name="stars" xml:space="preserve">
     <value>Stars</value>
-    <comment />
   </data>
   <data name="room" xml:space="preserve">
     <value>Room</value>
-    <comment />
   </data>
   <data name="rooms" xml:space="preserve">
     <value>Rooms</value>
-    <comment />
   </data>
   <data name="location" xml:space="preserve">
     <value>Location</value>
-    <comment />
   </data>
   <data name="address" xml:space="preserve">
     <value>Address</value>
-    <comment />
   </data>
   <data name="full-address" xml:space="preserve">
     <value>Full Address</value>
-    <comment />
   </data>
   <data name="area" xml:space="preserve">
     <value>Area</value>
-    <comment />
   </data>
   <data name="street" xml:space="preserve">
     <value>Street</value>
-    <comment />
   </data>
   <data name="number" xml:space="preserve">
     <value>Number</value>
-    <comment />
   </data>
   <data name="full-name" xml:space="preserve">
     <value>Full Name</value>
-    <comment />
   </data>
   <data name="username" xml:space="preserve">
     <value>Username</value>
-    <comment />
   </data>
   <data name="password" xml:space="preserve">
     <value>Password</value>
-    <comment />
   </data>
   <data name="phone" xml:space="preserve">
     <value>Phone</value>
-    <comment />
   </data>
   <data name="phone-number" xml:space="preserve">
     <value>Phone Number</value>
-    <comment />
   </data>
   <data name="email" xml:space="preserve">
     <value>Email</value>
-    <comment />
   </data>
   <data name="save" xml:space="preserve">
     <value>Save</value>
-    <comment />
   </data>
   <data name="cancel" xml:space="preserve">
     <value>Cancel</value>
-    <comment />
   </data>
   <data name="add" xml:space="preserve">
     <value>Add</value>
-    <comment />
   </data>
   <data name="add-hotel" xml:space="preserve">
     <value>Add Hotel</value>
-    <comment />
   </data>
   <data name="search" xml:space="preserve">
     <value>Search</value>
-    <comment />
   </data>
   <data name="guest" xml:space="preserve">
     <value>Guest</value>
-    <comment />
   </data>
   <data name="guest-list" xml:space="preserve">
     <value>Guest List</value>
-    <comment />
   </data>
   <data name="hotel-name" xml:space="preserve">
     <value>Hotel Name</value>
-    <comment />
   </data>
   <data name="room-number" xml:space="preserve">
     <value>Room Number</value>
-    <comment />
   </data>
   <data name="check-in" xml:space="preserve">
     <value>Check In</value>
-    <comment />
+  </data>
+  <data name="no-data-available" xml:space="preserve">
+    <value>No Data Available</value>
   </data>
   <data name="check-out" xml:space="preserve">
     <value>Check Out</value>
-    <comment />
   </data>
   <data name="rows-per-page" xml:space="preserve">
     <value>Rows per page</value>
-    <comment />
+  </data>
+  <data name="configrations" xml:space="preserve">
+    <value>Configrations</value>
   </data>
   <data name="directories" xml:space="preserve">
     <value>Directories</value>
-    <comment />
   </data>
   <data name="directory" xml:space="preserve">
     <value>Directory</value>
-    <comment />
   </data>
   <data name="user" xml:space="preserve">
     <value>User</value>
-    <comment />
   </data>
   <data name="workplace" xml:space="preserve">
     <value>Workplace</value>
-    <comment />
   </data>
   <data name="admin" xml:space="preserve">
     <value>Admin</value>
-    <comment />
   </data>
   <data name="admins" xml:space="preserve">
     <value>Admins</value>
-    <comment />
   </data>
   <data name="type" xml:space="preserve">
     <value>Type</value>
-    <comment />
   </data>
   <data name="mobile" xml:space="preserve">
     <value>Mobile</value>
-    <comment />
   </data>
   <data name="language" xml:space="preserve">
     <value>Language</value>
-    <comment />
+  </data>
+  <data name="admin-info" xml:space="preserve">
+    <value>User Information</value>
+  </data>
+  <data name="hotel-info" xml:space="preserve">
+    <value>Hotel Information</value>
+  </data>
+  <data name="user-managment" xml:space="preserve">
+    <value>User Managment</value>
+  </data>
+  <data name="gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="id-no" xml:space="preserve">
+    <value>Identity No.</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>Sur Name</value>
+  </data>
+  <data name="filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="verify-password" xml:space="preserve">
+    <value>Verify Password</value>
+  </data>
+  <data name="change-password" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="enter_new_password" xml:space="preserve">
+    <value>Enter New Password</value>
+  </data>
+  <data name="new_verify_password_not_same" xml:space="preserve">
+    <value>Could not Verify Passwords</value>
+  </data>
+  <data name="enter_verify_password" xml:space="preserve">
+    <value>Enter Verify Password</value>
+  </data>
+  <data name="new-password" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="enter_old_password" xml:space="preserve">
+    <value>Enter Old Password</value>
+  </data>
+  <data name="old-password" xml:space="preserve">
+    <value>Old Password</value>
+  </data>
+  <data name="new" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="from-check-in-date" xml:space="preserve">
+    <value>From Check in Date</value>
+  </data>
+  <data name="to-check-in-date" xml:space="preserve">
+    <value>To Check in Date</value>
+  </data>
+  <data name="from-check-out-date" xml:space="preserve">
+    <value>From Check out Date</value>
+  </data>
+  <data name="to-check-out-date" xml:space="preserve">
+    <value>To Check out Date</value>
+  </data>
+  <data name="female" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="male" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="mobile-no" xml:space="preserve">
+    <value>Mobile No.</value>
+  </data>
+  <data name="mother-name" xml:space="preserve">
+    <value>Mother Name</value>
+  </data>
+  <data name="nationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="birth-date" xml:space="preserve">
+    <value>Birth Date</value>
+  </data>
+  <data name="floor" xml:space="preserve">
+    <value>Floor</value>
+  </data>
+  <data name="workpoint" xml:space="preserve">
+    <value>Workpoint</value>
   </data>
   <data name="user-type" xml:space="preserve">
     <value>User Type</value>
-    <comment />
   </data>
   <data name="role" xml:space="preserve">
-    <value>Group</value>
-    <comment />
+    <value>Role</value>
   </data>
   <data name="roles" xml:space="preserve">
-    <value>Group</value>
-    <comment />
+    <value>Roles</value>
   </data>
   <data name="privilege" xml:space="preserve">
     <value>Privilege</value>
-    <comment />
   </data>
   <data name="privileges" xml:space="preserve">
     <value>Privileges</value>
-    <comment />
   </data>
   <data name="add-role" xml:space="preserve">
     <value>Add Role</value>
-    <comment />
   </data>
   <data name="add-admin" xml:space="preserve">
     <value>Add Admin</value>
-    <comment />
   </data>
   <data name="entry-date" xml:space="preserve">
     <value>Entry Date</value>
@@ -325,10 +370,13 @@
     <value>Directorate Name</value>
   </data>
   <data name="workpoint-name" xml:space="preserve">
-    <value>Work Point </value>
+    <value>Work Point Name</value>
   </data>
   <data name="workplaces" xml:space="preserve">
     <value>Workplaces</value>
+  </data>
+  <data name="created-date" xml:space="preserve">
+    <value>Created Date</value>
   </data>
   <data name="active" xml:space="preserve">
     <value>Active</value>
@@ -342,17 +390,8 @@
   <data name="configurations" xml:space="preserve">
     <value>Configurations</value>
   </data>
-  <data name="user-managment" xml:space="preserve">
-    <value>User Managment</value>
-  </data>
-  <data name="permission" xml:space="preserve">
-    <value>Permission</value>
-  </data>
-  <data name="close" xml:space="preserve">
-    <value>Close</value>
-  </data>
-  <data name="general-informations" xml:space="preserve">
-    <value>General Information</value>
+  <data name="general-info" xml:space="preserve">
+    <value>User Information</value>
   </data>
   <data name="hotel-type" xml:space="preserve">
     <value>Hotel Type</value>
@@ -360,10 +399,31 @@
   <data name="note" xml:space="preserve">
     <value>Note</value>
   </data>
-  <data name="hotel-information" xml:space="preserve">
-    <value>Hotel Information</value>
+  <data name="inactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Login</value>
   </data>
   <data name="required" xml:space="preserve">
     <value>Required</value>
   </data>
+  <data name="status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="from" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="to" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="price" xml:space="preserve">
+  <value>Price</value>
+</data>
+<data name="detail" xml:space="preserve">
+  <value>Detail</value>
+</data>
+<data name="room-type" xml:space="preserve">
+  <value>Room Type</value>
+</data>
 </root>

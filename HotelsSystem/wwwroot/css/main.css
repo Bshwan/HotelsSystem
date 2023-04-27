@@ -5,6 +5,12 @@
     --mud-palette-primary-hover: #63636310 !important;
 }
 
+@media (min-width: 641px){
+    main{
+        width: calc(100% - 250px);
+    }
+}
+    
 .mud-button-label {
     display: flex;
     align-items: center;
@@ -15,4 +21,59 @@
 .square-btn{
     height: 2.5rem;
     width: 2.5rem;
+}
+
+.dense-true .mud-input-root-margin-dense{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.dense-true .mud-icon-button{
+    padding: 10px !important;
+}
+
+.white-text .mud-icon-root.mud-svg-icon.mud-icon-size-medium{
+    color: white !important;
+}
+
+.mud-dialog .mud-dialog-content{
+    overflow-y: auto !important;
+    max-height: 65vh !important;
+}
+
+body{
+    overflow: hidden;
+}
+
+.sidebar{
+    overflow-y: auto;
+}
+
+.row{ margin: 0;}
+
+@media (min-width: 992px) {
+    article.content{
+        overflow-y: auto;
+        height: 100%;
+        max-height: calc(100vh - 56px);
+    }
+}
+
+@media (max-width: 992px) {
+    body{
+        overflow-y: auto;
+    }
+    .page{
+        min-height: unset;
+    }
+    article.content{
+        overflow-y: unset;
+        height: unset !important;
+    }
+}
+
+.no-data-msg ~ th{
+    display: none;
 }

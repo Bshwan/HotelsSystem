@@ -1,0 +1,130 @@
+@inject IStringLocalizer<App> L;
+<MudDialog ClassActions="px-5 pb-4">
+    <DialogContent>
+        <div class="row gy-3 gx-2">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudTextField T="string" Label="@L["full-name"]" @bind-Value="Filter.GD_Fullname" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>          
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudTextField T="string" Label="@L["mother-name"]" @bind-Value="Filter.GD_MotherName" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField> 
+              </div>
+                    
+                    <div class="col-12 col-md-6 col-lg-4">
+ <MudTextField T="string" Label="@L["mobile-no"]" @bind-Value="Filter.GD_Mobile" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+<MudSelect ToStringFunc="@(e=>e==null?"":e.gen_Name)" 
+                            Value="@(new GenderInfo{gen_ID=Filter.GenderID,gen_Name=combos.Genders.SelectByID<GenderInfo>(Filter.GenderID,"gen_ID").gen_Name})" 
+                                ValueChanged="OnSelectedGenderChange" Clearable="true"
+                                Margin="@Margin.Dense" T="GenderInfo" Label=@L["gender"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in combos.Genders)
+                            {
+                            <MudSelectItem T="GenderInfo" Value="@item">@item.gen_Name</MudSelectItem>
+                            }
+                        </MudSelect>                  
+                          </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudSelect ToStringFunc="@(e=>e==null?"":e.nat_Name)" 
+                            Value="@(new NationalityInfo{nat_ID=Filter.NationalityID,nat_Name=combos.Nationalities.SelectByID<NationalityInfo>(Filter.NationalityID,"nat_ID").nat_Name})" 
+                                ValueChanged="OnSelectedNationalityChange" Clearable="true"
+                                Margin="@Margin.Dense" T="NationalityInfo" Label=@L["nationality"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+
+                            @foreach (var item in combos.Nationalities)
+                            {
+                            <MudSelectItem T="NationalityInfo" Value="@item">@item.nat_Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudAutocomplete T="DirectorateInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchDirectoaret"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new DirectorateInfo(){peo_DirectorateName=Filter.peo_DirectorateName,peo_DirectorateID=Filter.DirectorateID})"
+                         Text="@Filter.peo_DirectorateName"
+                         ValueChanged="@(async(e)=>await OnDirectoarateChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.peo_DirectorateName)"
+                         CoerceText="@true"
+                         Label=@L["directory"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                         <MudAutocomplete T="WorkingPointInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchWorkpoint"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new WorkingPointInfo(){wp_ID=Filter.WorkplaceID,wp_workpointName=Filter.wp_workpointName})"
+                         Text="@Filter.wp_workpointName"
+                         ValueChanged="@(async(e)=>await OnWorkpointChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.wp_workpointName)"
+                         CoerceText="@true"
+                         Label=@L["workplace"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                         <MudAutocomplete T="HotelsInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchHotels"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelsInfo(){htl_ID=Filter.HotelID,htl_Name=Filter.htl_Name})"
+                         Text="@Filter.htl_Name"
+                         ValueChanged="@(async(e)=>await OnHotelChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.htl_Name)"
+                         CoerceText="@true"
+                         Label=@L["hotel"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                         <MudAutocomplete T="HotelRoomsInfo" DebounceInterval="ClS_Config.debounce"
+                         SearchFunc="@SearchRooms"
+                         Clearable="true"
+                         ResetValueOnEmptyText="true"
+                         Value="@(new HotelRoomsInfo(){htr_ID=Filter.RoomID,htr_Detail=Filter.RoomName})"
+                         Text="@Filter.RoomName"
+                         ValueChanged="@((e)=> OnRoomChange(e))"
+                         ToStringFunc="@(e=>e==null?"":e.htr_Detail)"
+                         CoerceText="@true"
+                         Label=@L["room"]
+                         Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
+                         AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
+                    </div>
+            <div class="col-12 m-0"></div>
+            <div class="col-12 col-lg-2">
+                <MudText Typo="Typo.body1" Class="pt-3">@L["check-in"]:</MudText>
+            </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.FromCheckInDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["from"]"></MudDatePicker>       
+                    </div>
+            @*<div class="col-12 col-lg-1">
+                <MudText Typo="Typo.body1" Class="pt-3">@L["to-check-in-date"]:</MudText>
+            </div>*@
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.ToCheckInDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["to"]"></MudDatePicker>       
+                    </div>
+            <div class="col-12 m-0"></div>
+            <div class="col-12 col-lg-2">
+                <MudText Typo="Typo.body1" Class="pt-3">@L["check-out"]:</MudText>
+            </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.FromCheckOutDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["from"]"></MudDatePicker>       
+                    </div>
+            @*<div class="col-12 col-lg-1">
+                <MudText Typo="Typo.body1" Class="pt-3">@L["to-check-out-date"]:</MudText>
+            </div>*@
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.ToCheckOutDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["to"]"></MudDatePicker>       
+                    </div>
+            <div class="col-12 m-0"></div>
+                    <div class="col-12">
+                        <MudDivider/>
+                    </div>
+                </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel" Color="Color.Error" Variant="Variant.Filled" DisableElevation>@L["cancel"]</MudButton>
+        <MudButton OnClick="Submit" Color="Color.Default" Variant="Variant.Filled" DisableElevation>@L["filter"]</MudButton>
+    </DialogActions>
+</MudDialog>

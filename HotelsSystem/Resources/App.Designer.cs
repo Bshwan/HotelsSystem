@@ -100,5 +100,45 @@ namespace HotelsSystem.Resources
                 return ResourceManager.GetString("re-password", resourceCulture);
             }
         }
+        /// <summary>
+        ///   Looks up a localized string similar to Enter New Password.
+        /// </summary>
+        public static string enter_new_password
+        {
+            get
+            {
+                return ResourceManager.GetString("enter_new_password", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Old Password.
+        /// </summary>
+        public static string enter_old_password
+        {
+            get
+            {
+                return ResourceManager.GetString("enter_old_password", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Verify Password.
+        /// </summary>
+        public static string enter_verify_password
+        {
+            get
+            {
+                return ResourceManager.GetString("enter_verify_password", resourceCulture);
+            }
+        }
+        /// <summary>
+        ///   Looks up a localized string similar to Could not Verify Passwords. 
+        /// </summary>
+        public static string new_verify_password_not_same
+        {
+            get
+            {
+                return ResourceManager.GetString("new_verify_password_not_same", resourceCulture);
+            }
+        }
     }
 }
