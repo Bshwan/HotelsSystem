@@ -58,7 +58,8 @@
 
             <MudTable @ref="@tableRef" Outlined="true" Elevation="0"
                   ServerData="@(new Func<TableState,Task<TableData<WorkingPointInfo>>>(GetPaginatedItems))"
-                  TotalItems="@PaginatedWorkPoint.TotalItems" Items="@PaginatedWorkPoint.Items" T="WorkingPointInfo" Dense="true">
+                  TotalItems="@PaginatedWorkPoint.TotalItems" Items="@PaginatedWorkPoint.Items" T="WorkingPointInfo" Dense="true"
+                  OnRowClick="@(async(e)=> await GetWorkPointByID(e.Item.wp_ID))" RowClassFunc="@((e,s)=> "")">
                 @* <ToolBarContent>
             <MudText Typo="Typo.h6">Directorate</MudText>
             <MudSpacer />

@@ -14,7 +14,8 @@
     </div>
     <div class="col-12">
         <MudTable @ref="table" Outlined="true" Elevation="0"
-            ServerData="@(new Func<TableState,Task<TableData<UserInfo>>>(GetPaginatedItems))" T="UserInfo" Dense="true" Hover="true">
+            ServerData="@(new Func<TableState,Task<TableData<UserInfo>>>(GetPaginatedItems))" T="UserInfo" Dense="true" Hover="true"
+                OnRowClick="@((e)=>nav.NavigateTo(Go.To(Routing.adduser,e.Item.peo_UserID)))" RowClassFunc="@((e,s)=> "")">
             <ToolBarContent>
                 <MudText Typo="Typo.h6">@L["users"]</MudText>
                 <MudSpacer />
@@ -70,7 +71,7 @@
             <RowTemplate>
                 @if(PaginatedItems.Items.Any()){
                 <MudTd DataLabel="">
-                    <MudLink Underline="Underline.Always" Href="@(Go.To(Routing.adduser,context.peo_UserID))">@context.peo_UserName</MudLink>
+                    <MudLink Underline="Underline.Always">@context.peo_UserName</MudLink>
                 </MudTd>
                 <MudTd>@context.peo_userFullName</MudTd>
                 <MudTd>@context.peo_UserMobile</MudTd>

@@ -58,7 +58,7 @@
 
     </DialogContent>
     <DialogActions>
-        <MudButton OnClick="Cancel">Close</MudButton>
-        <MudButton Color="Color.Primary" OnClick="@(async()=>await InsertUpdateGroup())">Save</MudButton>
+        <MudButton OnClick="Cancel" Color="Color.Error" Variant="Variant.Filled" DisableElevation>@L["cancel"]</MudButton>
+        <MudButton OnClick="@(async()=>await InsertUpdateGroup())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
     </DialogActions>
 </MudDialog>
