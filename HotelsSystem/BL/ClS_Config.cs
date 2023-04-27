@@ -22,10 +22,12 @@
         // public ICookieService CookieService { get; set; }
 
         private int SessionValue = 0;
+        private SPResult session;
 
         public ClS_Config(ISqlDataAccess db, SPResult session)
         {
             SessionValue = session.Result;
+            this.session=session;
             _db = db;
         }
 
@@ -107,10 +109,10 @@
         //        return permission.All(x => x.confg_Value.TryParseTo0() == 1);
         //}
 
-        //public bool HasPermissionRole(int ID)
-        //{
-        //    return session.Roles.Any(x => x == ID || x == 1 || x == 81);
-        //}
+        public bool HasPermissionRole(int ID)
+        {
+           return session.Roles.Any(x => x.pergroup_PerID == ID || x.pergroup_PerID == 1);
+        }
 
         //public bool HasPermissionSystemOptions(int ID)
         //{

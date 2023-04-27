@@ -1,9 +1,9 @@
 @page "/Y29uZmlnTAVBS"
 @inject IStringLocalizer<App> L;
-@if(session!=null){
+@if(session!=null && config!=null){
     <PageTitle>@L["configurations"]</PageTitle>
 
-<AuthView Roles="session" PermissionName="@Routing.config">
+<AuthView Roles="session" PermissionName="admin">
 
 <div class="row gy-3 gx-2">
     <div class="col-12">
@@ -12,12 +12,14 @@
     <MudDivider />
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
+        @* @if(config.HasPermissionRole(1)){ *@
                     <MudTabPanel Text="@L["directory"]">
                <Directorate DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></Directorate>
             </MudTabPanel>
                     <MudTabPanel Text="@L["workplaces"]">
                 <WorkingPoint DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></WorkingPoint>
-            </MudTabPanel>    
+            </MudTabPanel>   
+        @* }  *@
             <MudTabPanel Text="@L["hotel-type"]">
                 <HotelType DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></HotelType>
             </MudTabPanel>
