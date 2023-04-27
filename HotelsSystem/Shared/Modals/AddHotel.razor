@@ -11,14 +11,14 @@
                     </div>
                     <div class="col-12">
                         <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]"
-                        Validation="@(new Func<HotelTypesComboBox, string>((e)=>e.ValidateField<HotelTypesComboBox>("HTT_ID")))"
-                             ToStringFunc="@(e=>e==null?"":e.HTT_Type)" 
-                            Value="@(new HotelTypesComboBox{HTT_ID=SelectedHotel.htl_TypeID,HTT_Type=combos.HotelTypes.SelectByID<HotelTypesComboBox>(SelectedHotel.htl_TypeID,"HTT_ID").HTT_Type})"
+                        Validation="@(new Func<HotelTypesComboBox, string>((e)=>e.ValidateField<HotelTypesComboBox>("congltype_ID")))"
+                             ToStringFunc="@(e=>e==null?"":e.congltype_Name)" 
+                            Value="@(new HotelTypesComboBox{congltype_ID=SelectedHotel.htl_TypeID,congltype_Name=combos.HotelTypes.SelectByID<HotelTypesComboBox>(SelectedHotel.htl_TypeID,"congltype_ID").congltype_Name})"
                             ValueChanged="OnHotelTypeChange" 
                                 Margin="@Margin.Dense" T="HotelTypesComboBox" Label="@L["hotel-type"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in combos.HotelTypes)
                             {
-                            <MudSelectItem T="HotelTypesComboBox" Value="@item">@item.HTT_Type</MudSelectItem>
+                            <MudSelectItem T="HotelTypesComboBox" Value="@item">@item.congltype_Name (@item.congltype_StarNumber)</MudSelectItem>
                             }
                         </MudSelect>                    
                     </div>
@@ -66,11 +66,13 @@
                     <div class="col-12 col-lg-6">
                         <MudNumericField Required Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_NumberOfRooms" Label="@L["room-number"]" Variant="Variant.Outlined"></MudNumericField >
                     </div>
+                    @if(!SelectedHotel.HotelHas0Stars){
                     <div class="col-12">
                             <MudField Label="@L["stars"]" Margin="@Margin.Dense" Variant="Variant.Outlined">
                             <MudRating @bind-SelectedValue="SelectedHotel.htl_Star" />
                         </MudField>
                     </div>
+                    }
                     <div class="col-12">
                         <MudTextField Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_Note" Label="@L["note"]" Variant="Variant.Outlined" Lines="4"></MudTextField>
                     </div>
@@ -150,9 +152,9 @@
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                     </MudItem>
-                    <MudItem sm="5">
+                    @* <MudItem sm="5">
                         <MudTextField InputType="InputType.Number" Margin="Margin.Dense" @bind-Value="@SelectedHotelRoom.htr_PriceStrNoFormat" Label="@L["price"]" Variant="Variant.Outlined"/>
-                    </MudItem>
+                    </MudItem> *@
                     <MudItem sm="5">
                         <MudAutocomplete @ref="FloorAutocomplete" T="HotelFloorInfo" DebounceInterval="ClS_Config.debounce"
                          SearchFunc="@SearchFloorType"
@@ -277,7 +279,8 @@
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                         </MudTd>
                         <MudTd Style="width: 25%">
-                        <MudTextField Margin="@Margin.Dense" Class="dec pa-0" @bind-Value="@context.htr_PriceStrNoFormat" Placeholder="@L["price"]" Variant="Variant.Outlined"/>
+                            @context.htr_PriceStr
+                        @* <MudTextField Margin="@Margin.Dense" Class="dec pa-0" @bind-Value="@context.htr_PriceStrNoFormat" Placeholder="@L["price"]" Variant="Variant.Outlined"/> *@
                         </MudTd>
                         
                     </RowEditingTemplate>

@@ -8,7 +8,7 @@ public class GuestMasterInfo
     public int GM_Room { get; set; }
     public string? htr_Detail { get; set; }
     public int htl_TypeID { get; set; }
-    public string? HTT_Type { get; set; } 
+    public string? congltype_Name { get; set; } 
     public int htr_FloorID { get; set; }
     public string? htf_FloorName { get; set; }
     public DateTime? GM_CheckIn { get; set; }

@@ -4,7 +4,9 @@ public class HotelsInfo
 {
     public int htl_ID { get; set; }
     public int htl_TypeID { get; set; }
-    public string? HTT_Type { get; set; }
+    // public string? congltype_Name { get; set; }
+    public bool HotelHas0Stars { get; set; }
+
     public string? htl_Name { get; set; }
     public string? htl_Note { get; set; }
     public string? htl_Address { get; set; }

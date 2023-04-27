@@ -75,6 +75,7 @@ public partial class AddHotel
     async Task GetHotelByID()
     {
         SelectedHotel = await config.GetOneInfo<HotelsInfo>(SelectPro: 5, ValID: HotelID);
+        SelectedHotel.HotelHas0Stars = SelectedHotel.congltype_StarNumber == 0;
     }
     async Task OnDirectorateChange(DirectorateInfo e)
     {
@@ -114,11 +115,15 @@ public partial class AddHotel
         if (e == null)
         {
             SelectedHotel.htl_TypeID = 0;
-            SelectedHotel.HTT_Type = string.Empty;
+            SelectedHotel.congltype_Name = string.Empty;
+            // SelectedHotel.htl_Star = 0;
+            SelectedHotel.HotelHas0Stars = false;
             return;
         }
-        SelectedHotel.htl_TypeID = e.HTT_ID;
-        SelectedHotel.HTT_Type = e.HTT_Type;
+        SelectedHotel.htl_TypeID = e.congltype_ID;
+        SelectedHotel.congltype_Name = e.congltype_Name;
+        // SelectedHotel.htl_Star = e.congltype_StarNumber;
+        SelectedHotel.HotelHas0Stars = e.congltype_StarNumber == 0;
     }
     async Task<IEnumerable<DirectorateInfo>> SearchDirectorate(string e)
     {
@@ -234,7 +239,7 @@ public partial class AddHotel
         HotelTypeID: SelectedHotel.htl_TypeID,
         HotelName: SelectedHotel.htl_Name.ToEmptyOnNull(),
         HotelAddress: SelectedHotel.htl_Address.ToEmptyOnNull(),
-        StarNumber: SelectedHotel.htl_Star,
+        StarNumber: SelectedHotel.HotelHas0Stars ? 0 : SelectedHotel.htl_Star,
         NumberOfRooms: SelectedHotel.htl_NumberOfRooms,
         DirectorateID: SelectedHotel.htl_DirectorateID,
         WorkPointID: SelectedHotel.htl_WorkPointID,
@@ -309,31 +314,32 @@ public partial class AddHotel
         // System.Console.WriteLine("reseting");
         // if (element is HotelRoomsInfo room)
         // {
-            // System.Console.WriteLine("backup:"+BackupUpitem.htr_Detail);
-            ((HotelRoomsInfo)element).htr_Detail=BackupUpitem.htr_Detail;
-            ((HotelRoomsInfo)element).htr_FloorID=BackupUpitem.htr_FloorID;
-            ((HotelRoomsInfo)element).htr_Type=BackupUpitem.htr_Type;
-            // ((HotelRoomsInfo)element).htr_Type=BackupUpitem.htr_Type;
-            ((HotelRoomsInfo)element).cfg_HTR_Type=BackupUpitem.cfg_HTR_Type;
-            ((HotelRoomsInfo)element).htf_FloorName=BackupUpitem.htf_FloorName;
-            ((HotelRoomsInfo)element).htr_Price=BackupUpitem.htr_Price;
-            // System.Console.WriteLine("reseting"+JsonConvert.SerializeObject(BackupUpitem));
-            // element = BackupUpitem;
+        // System.Console.WriteLine("backup:"+BackupUpitem.htr_Detail);
+        ((HotelRoomsInfo)element).htr_Detail = BackupUpitem.htr_Detail;
+        ((HotelRoomsInfo)element).htr_FloorID = BackupUpitem.htr_FloorID;
+        ((HotelRoomsInfo)element).htr_Type = BackupUpitem.htr_Type;
+        // ((HotelRoomsInfo)element).htr_Type=BackupUpitem.htr_Type;
+        ((HotelRoomsInfo)element).cfg_HTR_Type = BackupUpitem.cfg_HTR_Type;
+        ((HotelRoomsInfo)element).htf_FloorName = BackupUpitem.htf_FloorName;
+        ((HotelRoomsInfo)element).htr_Price = BackupUpitem.htr_Price;
+        // System.Console.WriteLine("reseting"+JsonConvert.SerializeObject(BackupUpitem));
+        // element = BackupUpitem;
         // }
     }
     HotelRoomsInfo BackupUpitem = new HotelRoomsInfo();
     private void BackupItem(object element)
     {
-       BackupUpitem=new(){
-        htr_Detail=((HotelRoomsInfo)element).htr_Detail,
-        htr_Type=((HotelRoomsInfo)element).htr_Type,
-        cfg_HTR_Type=((HotelRoomsInfo)element).cfg_HTR_Type,
-        htf_FloorName=((HotelRoomsInfo)element).htf_FloorName,
-        htr_FloorID=((HotelRoomsInfo)element).htr_FloorID,
-        htr_Price=((HotelRoomsInfo)element).htr_Price,
-        // htr_Type=((HotelRoomsInfo)element).htr_Type
+        BackupUpitem = new()
+        {
+            htr_Detail = ((HotelRoomsInfo)element).htr_Detail,
+            htr_Type = ((HotelRoomsInfo)element).htr_Type,
+            cfg_HTR_Type = ((HotelRoomsInfo)element).cfg_HTR_Type,
+            htf_FloorName = ((HotelRoomsInfo)element).htf_FloorName,
+            htr_FloorID = ((HotelRoomsInfo)element).htr_FloorID,
+            htr_Price = ((HotelRoomsInfo)element).htr_Price,
+            // htr_Type=((HotelRoomsInfo)element).htr_Type
 
-       };
+        };
     }
     private async Task ItemHasBeenCommitted(object element)
     {
@@ -369,7 +375,7 @@ public partial class AddHotel
             ValID: HotelID,
             HotelTypeID: SelectedHotelRoom.htr_Type,
             StarNumber: SelectedHotelRoom.htr_FloorID,
-            HotelName: SelectedItems.Count==1? SelectedHotelRoom.htr_Detail.ToEmptyOnNull():"",
+            HotelName: SelectedItems.Count == 1 ? SelectedHotelRoom.htr_Detail.ToEmptyOnNull() : "",
             Note: SelectedHotelRoom.htf_FloorName.ToEmptyOnNull(),
             Price: SelectedHotelRoom.htr_Price,
             HotelAddress: select.ToEmptyOnNull().Replace("[", "").Replace("]", ""));

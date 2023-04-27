@@ -6,7 +6,7 @@ public class HotelRoomsInfo
     public string? htr_Detail { get; set; }
     public int htr_HotelID { get; set; }
     public int htl_TypeID { get; set; }
-    public string? HTT_Type { get; set; }
+    public string? congltype_Name { get; set; }
     public int htr_FloorID { get; set; }
     public string? hrf_FloorName { get; set; }
     public string? htf_FloorName { get; set; }

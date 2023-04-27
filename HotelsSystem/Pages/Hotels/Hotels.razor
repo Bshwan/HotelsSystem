@@ -29,7 +29,7 @@
             <HeaderContent>
                 @if(PaginatedItems.Items.Any()){
                 <MudTh><MudTableSortLabel SortLabel="peo_userFullName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Name.ToEmptyOnNull())">@L["name"]</MudTableSortLabel></MudTh>
-                <MudTh><MudTableSortLabel SortLabel="HTT_Type" SortBy="new Func<HotelsInfo, object>(x=>x.HTT_Type.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
+                <MudTh><MudTableSortLabel SortLabel="congltype_Name" SortBy="new Func<HotelsInfo, object>(x=>x.congltype_Name.ToEmptyOnNull())">@L["type"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_Address" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Address.ToEmptyOnNull())">@L["address"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_Star" SortBy="new Func<HotelsInfo, object>(x=>x.htl_Star)">@L["stars"]</MudTableSortLabel></MudTh>
                 <MudTh><MudTableSortLabel SortLabel="htl_EntryByName" SortBy="new Func<HotelsInfo, object>(x=>x.htl_EntryByName.ToEmptyOnNull())">@L["entry-by"]</MudTableSortLabel></MudTh>
@@ -45,7 +45,7 @@
             <RowTemplate>
                  @if(PaginatedItems.Items.Any()){
                 <MudTd><MudLink Underline="Underline.Hover" Color="Color.Info">@context.htl_Name</MudLink></MudTd>
-                <MudTd>@context.HTT_Type</MudTd>
+                <MudTd>@context.congltype_Name</MudTd>
                 <MudTd>@context.htl_Address</MudTd>
                 <MudTd DataLabel=""><MudRating ReadOnly="true" SelectedValue="@context.htl_Star" /></MudTd>
                 <MudTd>@context.htl_EntryByName</MudTd>
