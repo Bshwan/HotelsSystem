@@ -119,6 +119,7 @@ public partial class AddHotel
             // SelectedHotel.htl_Star = 0;
             SelectedHotel.HotelHas0Stars = false;
             SelectedHotel.htl_Star = 0;
+            SelectedHotel.congltype_StarNumber=0;
             return;
         }
         SelectedHotel.htl_TypeID = e.congltype_ID;
@@ -126,6 +127,7 @@ public partial class AddHotel
         // SelectedHotel.htl_Star = e.congltype_StarNumber;
         SelectedHotel.HotelHas0Stars = e.congltype_StarNumber == 0;
         SelectedHotel.htl_Star=e.congltype_StarNumber;
+        SelectedHotel.congltype_StarNumber=e.congltype_StarNumber;
     }
     async Task<IEnumerable<DirectorateInfo>> SearchDirectorate(string e)
     {
@@ -180,12 +182,12 @@ public partial class AddHotel
         {
             SelectedHotelRoom.htr_Type = 0;
             SelectedHotelRoom.cfg_HTR_Type = "";
-            SelectedHotelRoom.htr_Price = 0;
+            // SelectedHotelRoom.htr_Price = 0;
             return;
         }
         SelectedHotelRoom.htr_Type = e.cfg_HTR_ID;
         SelectedHotelRoom.cfg_HTR_Type = e.cfg_HTR_Type;
-        SelectedHotelRoom.htr_Price = e.cfg_HTR_Price;
+        // SelectedHotelRoom.htr_Price = e.cfg_HTR_Price;
     }
     void InLineOnSelectedRoomTypeChanged(HotelRoomsTypesInfo e, HotelRoomsInfo context)
     {
@@ -193,12 +195,12 @@ public partial class AddHotel
         {
             context.htr_Type = 0;
             context.cfg_HTR_Type = "";
-            context.htr_Price = 0;
+            // context.htr_Price = 0;
             return;
         }
         context.htr_Type = e.cfg_HTR_ID;
         context.cfg_HTR_Type = e.cfg_HTR_Type;
-        context.htr_Price = e.cfg_HTR_Price;
+        // context.htr_Price = e.cfg_HTR_Price;
     }
     void OnSelectedFloorName(HotelFloorInfo e)
     {
