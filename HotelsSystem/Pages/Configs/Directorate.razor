@@ -5,7 +5,7 @@
     <div class="row g-3 m-0 w-100">
         <MudForm @ref="AddForm" Class="row g-3 m-0 w-100 p-0">
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                <MudTextField Required="true" Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label=@L["directory"] Variant="Variant.Outlined"></MudTextField>
+                <MudTextField Required="true" OnlyValidateIfDirty AutoFocus Margin="@Margin.Dense" ErrorText="@L["required"]" Dense="true" @bind-Value="SelectedDirectorate.peo_DirectorateName" Label=@L["directory"] Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                          @* Validation="@(new Func<UserInfo, string>((e)=>e.ValidateField<UserInfo>("peo_UserID")))" *@

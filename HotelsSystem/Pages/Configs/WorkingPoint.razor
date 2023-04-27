@@ -7,7 +7,7 @@
     <div class="row g-3 m-0 w-100">
         <MudForm @ref="AddForm" Class="row g-3 m-0 w-100 p-0">
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                <MudTextField Required="true" RequiredError="@L["required"]" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_workpointName" Label=@L["workpoint-name"] Variant="Variant.Outlined"></MudTextField>
+                <MudTextField Required="true" OnlyValidateIfDirty AutoFocus RequiredError="@L["required"]" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedWorkPoint.wp_workpointName" Label=@L["workpoint-name"] Variant="Variant.Outlined"></MudTextField>
         </div>
         <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                          @* Required="true" *@

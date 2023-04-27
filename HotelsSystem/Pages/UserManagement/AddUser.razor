@@ -14,7 +14,7 @@
                 <MudForm @ref="AddUserForm">
                 <div class="row gy-3 gx-3 m-0 w-100">
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                        <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label=@L["name"] Variant="Variant.Outlined"></MudTextField>
+                        <MudTextField OnlyValidateIfDirty="true" Required="true" AutoFocus Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_UserName" Label=@L["name"] Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
                         <MudTextField OnlyValidateIfDirty="true" Required="true" Margin="@Margin.Dense" Dense="true" @bind-Value="SelectedUser.peo_userFullName" Label=@L["full-name"] Variant="Variant.Outlined"></MudTextField>
