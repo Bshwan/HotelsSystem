@@ -1,7 +1,7 @@
-@* @page "/dXNlciBsaXN0AJHXB" *@
+@page "/dXNlciBsaXN0AJHXB"
 @inject IStringLocalizer<App> L;
     @if(config!=null){
-    <AuthView Roles="session" PermissionName="@Routing.userlist">
+    <AuthView Roles="session" PermissionName="admin">
         <PageTitle>@L["user-list"]</PageTitle>
 <div class="row gx-2 gy-3">
     <div class="col-12">

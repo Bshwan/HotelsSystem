@@ -1,9 +1,9 @@
-@* @page "/YWRkIHVzZXIIUHSG/{HashID}" *@
+@page "/YWRkIHVzZXIIUHSG/{HashID}"
 @inject IStringLocalizer<App> L;
 <PageTitle>@L["add-user"]</PageTitle>
 
 @if(session!=null){
-    <AuthView Roles="session" PermissionName="@Routing.adduser">
+    <AuthView Roles="session" PermissionName="admin">
 <div class="row gy-3 gx-2">
     <div class="col-12">
         <h4>@(SelectedUser.peo_UserID>0?SelectedUser.peo_UserName:L["add-user"])</h4>

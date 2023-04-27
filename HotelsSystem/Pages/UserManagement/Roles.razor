@@ -1,10 +1,10 @@
 @inject IStringLocalizer<App> L;
-@* @page "/cm9sZXMYGBJD" *@
+@page "/cm9sZXMYGBJD"
 <PageTitle>@L["roles"]</PageTitle>
 
 @if (config != null)
 {
-    <AuthView Roles="session" PermissionName="@Routing.roles">
+    <AuthView Roles="session" PermissionName="admin">
 
     <div class="row gy-3 gx-2">
         <div class="col-12">
