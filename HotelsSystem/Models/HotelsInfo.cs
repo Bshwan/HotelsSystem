@@ -20,6 +20,9 @@ public class HotelsInfo
     public string? htl_EntryByName { get; set; }
     public string? congltype_Name { get; set; }
     public int congltype_StarNumber { get; set; }
+    public int congltype_ID { get; set; }
     public decimal congltype_Price { get; set; }
+    public string congltype_EntryBy { get; set; }
+    public string congltype_EntryByName { get; set; }
 
 }
