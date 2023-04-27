@@ -9,7 +9,7 @@
                 <MudTextField Margin="@Margin.Dense" @bind-Value="SelectedHotelTYpe.congltype_Name" Label="@L["type"]" Variant="Variant.Outlined"></MudTextField>
             </div>
             <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
-                <MudTextField Margin="@Margin.Dense" @bind-Value="SelectedHotelTYpe.congltype_Price" Label="@L["price"]" Variant="Variant.Outlined"></MudTextField>
+                <MudTextField InputType="InputType.Number" Margin="Margin.Dense" @bind-Value="@SelectedHotelTYpe.congltype_Price" Label="@L["price"]" Variant="Variant.Outlined" />
             </div>
             <div class="col-12 col-md-4 col-lg-3 col-xxl-2">
             
@@ -44,7 +44,7 @@
                         </MudTh>
                         <MudTh>
                             <MudTableSortLabel SortLabel="peo_UserName" SortBy="new Func<HotelsInfo, object>(x=>x.congltype_StarNumber)">
-                                @L["star-number"]
+                                @L["stars"]
                             </MudTableSortLabel>
                         </MudTh>  
                         <MudTh>
@@ -71,7 +71,7 @@
                             @context.congltype_Name
                         </MudTd>
                         <MudTd DataLabel="">@context.congltype_StarNumber</MudTd>
-                        <MudTd DataLabel="">@context.congltype_Price</MudTd>
+                        <MudTd DataLabel="">@context.congltype_Price.ToCurrency()</MudTd>
                         <MudTd Class="text-end">
                             <MudIconButton Icon="@Icons.Material.Filled.Edit" Variant="Variant.Text" OnClick="@(async()=> await GetHotelTypeByID(context.congltype_ID))" Color="Color.Primary" />
                         </MudTd>
