@@ -13,12 +13,12 @@
     <div class="col-12">
         <MudTabs Elevation="2" PanelClass="px-3 pb-4 bg-white" Rounded="true" Color="@Color.Primary">
         @* @if(config.HasPermissionRole(1)){ *@
-                    <MudTabPanel Text="@L["directory"]">
+                    @* <MudTabPanel Text="@L["directory"]">
                <Directorate DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></Directorate>
             </MudTabPanel>
                     <MudTabPanel Text="@L["workplaces"]">
                 <WorkingPoint DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></WorkingPoint>
-            </MudTabPanel>   
+            </MudTabPanel>    *@
         @* }  *@
             <MudTabPanel Text="@L["hotel-type"]">
                 <HotelType DB="DB" JSRuntime="jSRuntime" nav="nav" Toaster="Toaster"></HotelType>
