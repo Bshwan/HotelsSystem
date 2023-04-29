@@ -1,5 +1,3 @@
-
-using HotelsSystem.Services;
 using Microsoft.AspNetCore.SignalR;
 using MudBlazor.Services;
 
@@ -77,7 +75,7 @@ app.UseStaticFiles();
 app.UseRequestLocalization(GetLocalizationOptions());
 app.UseRouting();
 
-app.UseMiddleware<CookieMiddleware>();
+// app.UseMiddleware<CookieMiddleware>();
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllers();

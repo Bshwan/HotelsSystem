@@ -36,8 +36,22 @@
 </MudRTLProvider>
 
 @code {
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
+        [Inject]
+    public ISqlDataAccess DB { get; set; } = default!;
+
+         protected override async Task OnInitializedAsync()
+    {
+        var session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
+
+
+        @* mgmt = new ClS_UserManagement(DB, session); *@
+
+    }
     async Task Logout(){
-    await jSRuntime.InvokeVoidAsync("blazorExtensions.delete_cookie",Util.CookieName);
+    @* await jSRuntime.InvokeVoidAsync("blazorExtensions.delete_cookie",Util.CookieName); *@
+    await storage.RemoveItemAsync(Util.CookieName);
     nav.NavigateTo(Routing.defaultpage);
 }
 }
