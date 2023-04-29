@@ -224,7 +224,6 @@ public partial class AddHotel
 
         context.htr_FloorID = e.htf_FloorID;
         context.htf_FloorName = e.htf_FloorName;
-        System.Console.WriteLine(context.htr_FloorID);
     }
     async Task<IEnumerable<WorkingPointInfo>> SearchWorkpoint(string e)
     {
@@ -349,7 +348,6 @@ public partial class AddHotel
     {
         if (element is HotelRoomsInfo room)
         {
-            System.Console.WriteLine(JsonConvert.SerializeObject(room));
             await InLineUpdateRooms(room);
         }
     }
@@ -372,7 +370,6 @@ public partial class AddHotel
     }
     async Task UpdateRooms()
     {
-        System.Console.WriteLine(SelectedItems.Any());
         var select = JsonConvert.SerializeObject(SelectedItems.Select(x => x.htr_ID));
         SPResult result = await hotel.InsertUpdateHotels<SPResult>(
             SelectPro: 3,
@@ -395,7 +392,6 @@ public partial class AddHotel
     }
     async Task InLineUpdateRooms(HotelRoomsInfo room)
     {
-        System.Console.WriteLine(JsonConvert.SerializeObject(room));
         SPResult result = await hotel.InsertUpdateHotels<SPResult>(
             SelectPro: 3,
             ValID: HotelID,

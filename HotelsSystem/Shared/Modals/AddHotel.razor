@@ -221,11 +221,11 @@
             </div>
         </MudTh>
 
-         <MudTh>
+         @* <MudTh>
             <div class="d-flex justify-content-between align-items-center">
                 <MudTableSortLabel SortBy="new Func<HotelRoomsInfo, object>(x=>x.htr_Price.ToCurrency())">@L["price"]</MudTableSortLabel>
             </div>
-        </MudTh>
+        </MudTh> *@
                         }else{
                                  <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center no-data-msg">
                     <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
@@ -240,7 +240,7 @@
         <MudTd>@context.htr_Detail</MudTd>
 <MudTd>@context.htf_FloorName</MudTd>
 <MudTd>@context.cfg_HTR_Type</MudTd>
-<MudTd>@context.htr_PriceStr</MudTd>
+@* <MudTd>@context.htr_PriceStr</MudTd> *@
                         }
 
         </RowTemplate>
@@ -278,10 +278,9 @@
                          Margin="@Margin.Dense" Dense="true" Variant="Variant.Outlined"
                          AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Small" />
                         </MudTd>
-                        <MudTd Style="width: 25%">
+                        @* <MudTd Style="width: 25%">
                             @context.htr_PriceStr
-                        @* <MudTextField Margin="@Margin.Dense" Class="dec pa-0" @bind-Value="@context.htr_PriceStrNoFormat" Placeholder="@L["price"]" Variant="Variant.Outlined"/> *@
-                        </MudTd>
+                        </MudTd> *@
                         
                     </RowEditingTemplate>
                     <PagerContent>
