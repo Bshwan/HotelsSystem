@@ -32,6 +32,26 @@ window.blazorExtensions = {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
 }
+function initializeInactivityTimer(dotnetHelper) {
+    var timer; 
+    console.log('load');
+    //the timer will be reset whenever the user clicks the mouse or presses the keyboard
+    // document.onload = resetTimer;
+    resetTimer();
+
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+
+    function resetTimer() {
+        clearTimeout(timer);
+        timer = setTimeout(logout, 7200000); //600,000 milliseconds = 10 minuts
+    }
+
+    function logout() {
+        dotnetHelper.invokeMethodAsync("LogoutJS");
+    }
+
+}
 
 $(document).off('input', '.dec')
 

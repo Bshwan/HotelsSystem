@@ -44,6 +44,8 @@
          protected override async Task OnInitializedAsync()
     {
         var session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
+        await jSRuntime.InvokeVoidAsync("initializeInactivityTimer",DotNetObjectReference.Create(this));
+
 
 
         @* mgmt = new ClS_UserManagement(DB, session); *@
@@ -54,4 +56,11 @@
     await storage.RemoveItemAsync(Util.CookieName);
     nav.NavigateTo(Routing.defaultpage);
 }
+[JSInvokable]
+    public async Task LogoutJS()
+    {
+        // await jSRuntime.InvokeVoidAsync("blazorExtensions.delete_cookie", Util.CookieName);
+        await storage.RemoveItemAsync(Util.CookieName);
+        nav.NavigateTo(Routing.defaultpage);
+    }
 }
