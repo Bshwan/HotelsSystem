@@ -12,6 +12,8 @@ public partial class UserList
     protected NavigationManager nav { get; set; } = default!;
     [Inject]
     protected IDialogService DialogService { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
 
     PagedResult<UserInfo> PaginatedItems = PagedResult<UserInfo>.EmptyPagedResult();
     // SortDirection sort = SortDirection.Descending;
@@ -24,7 +26,7 @@ public partial class UserList
 
     protected override async Task OnInitializedAsync()
     {
-        session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
         mgmt = new ClS_UserManagement(DB, session);
         config = new ClS_Config(DB, session);
         // await GetPaginatedUsers();

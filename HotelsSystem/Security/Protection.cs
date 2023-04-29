@@ -33,11 +33,12 @@
 
             return Encoded;
         }
-        public static async Task<SPResult> GetDecryptedSession(IJSRuntime JSRuntime, ISqlDataAccess db)
+        public static async Task<SPResult> GetDecryptedSession(IJSRuntime JSRuntime, ISqlDataAccess db,ISessionStorageService storage)
         {
             try
             {
-                string Cookie = await JSRuntime.InvokeAsync<string>("blazorExtensions.getCookie",Util.CookieName);
+                string Cookie = await storage.GetItemAsync<string>(Util.CookieName);
+                // string Cookie = await JSRuntime.InvokeAsync<string>("blazorExtensions.getCookie",Util.CookieName);
 
                 var session = Decrypt<SPResult>(Cookie);
 
@@ -58,10 +59,11 @@
             }
         }
 
-        public static async Task SetEncryptedSession(SPResult obj, IJSRuntime jSRuntime)
+        public static async Task SetEncryptedSession(SPResult obj, IJSRuntime jSRuntime,ISessionStorageService storage)
         {
             var session = Encrypt(obj);
-            await jSRuntime.InvokeVoidAsync("blazorExtensions.WriteCookie", session,Util.CookieName);
+            // await jSRuntime.InvokeVoidAsync("blazorExtensions.WriteCookie", session,Util.CookieName);
+            await storage.SetItemAsync<string>(Util.CookieName,session);
         }
     }
 }

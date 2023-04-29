@@ -16,6 +16,8 @@ public partial class SearchGuests
     protected IStringLocalizer<App> L { get; set; } = default!;
     [Inject]
     protected IDialogService DialogService { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
 
     PagedResult<GuestDetailsInfo> PaginatedItems = PagedResult<GuestDetailsInfo>.EmptyPagedResult();
     private MudTable<GuestDetailsInfo>? table;
@@ -29,7 +31,7 @@ public partial class SearchGuests
 
     protected override async Task OnInitializedAsync()
     {
-        session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
         report = new ClS_Reports(DB, session);
         config = new ClS_Config(DB, session);
         await GetCombos();

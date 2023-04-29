@@ -11,6 +11,8 @@ public partial class AddUser
     protected NavigationManager nav { get; set; } = default!;
     [Inject]
     protected IDialogService DialogService { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
     [Parameter]
     public string? HashID { get; set; }
 
@@ -32,7 +34,7 @@ public partial class AddUser
     protected override async Task OnParametersSetAsync()
     {
         UserID = Hasher.UnHash(HashID.ToEmptyOnNull());
-         session = await Protection.GetDecryptedSession(jSRuntime, DB);
+         session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
         mgmt = new ClS_UserManagement(DB, session);
         config = new ClS_Config(DB, session);
 

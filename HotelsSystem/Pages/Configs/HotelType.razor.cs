@@ -16,6 +16,8 @@
 
         [Inject]
         protected IDialogService DialogService { get; set; } = default!;
+        [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
 
 
         private PagedResult<HotelsInfo> PaginatedHotelType = PagedResult<HotelsInfo>.EmptyPagedResult();
@@ -33,7 +35,7 @@
 
         protected override async Task OnInitializedAsync()
         {
-            var session = await Protection.GetDecryptedSession(JSRuntime, DB);
+            var session = await Protection.GetDecryptedSession(JSRuntime, DB,storage);
             config = new ClS_Config(DB, session);
 
             

@@ -9,6 +9,8 @@
 
         [Inject]
         public IJSRuntime JSRuntime { get; set; } = default!;
+        [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
 
         [Inject]
         protected IToaster Toaster { get; set; } = default!;
@@ -57,7 +59,7 @@
                 else if (result.Userlanguage == 3)
                     Language = "ar";
 
-                await Protection.SetEncryptedSession(result, JSRuntime);
+                await Protection.SetEncryptedSession(result, JSRuntime,storage);
                 RequestCultureChange(Language, Routing.hotels);
 
                 return;

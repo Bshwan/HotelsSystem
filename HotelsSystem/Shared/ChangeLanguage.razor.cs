@@ -9,11 +9,13 @@ public partial class ChangeLanguage
     protected ISqlDataAccess DB { get; set; } = default!;
     [Inject]
     protected IJSRuntime jSRuntime { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
     ClS_UserManagement mgmt = default!;
 
     protected override async Task OnInitializedAsync()
     {
-        var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        var session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
         mgmt = new ClS_UserManagement(DB, session);
     }
 

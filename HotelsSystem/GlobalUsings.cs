@@ -24,3 +24,4 @@ global using System.Text;
 global using HotelsSystem.BL;
 global using MudBlazor;
 global using HotelsSystem.Shared.Modals;
+global using Blazored.SessionStorage;

@@ -13,6 +13,8 @@ public partial class ChangePassword
 
     [Inject]
     public IToaster Toaster { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
 
 
 
@@ -23,7 +25,7 @@ public partial class ChangePassword
 
     protected override async Task OnInitializedAsync()
     {
-        var session = await Protection.GetDecryptedSession(JSRuntime, DB);
+        var session = await Protection.GetDecryptedSession(JSRuntime, DB,storage);
 
 
         mgmt = new ClS_UserManagement(DB, session);

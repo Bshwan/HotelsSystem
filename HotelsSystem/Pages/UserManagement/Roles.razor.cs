@@ -12,6 +12,8 @@ public partial class Roles
     protected NavigationManager nav { get; set; } = default!;
     [Inject]
     protected IDialogService DialogService { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
     ClS_UserManagement mgmt = default!;
 
 
@@ -30,7 +32,7 @@ public partial class Roles
 
     protected override async Task OnInitializedAsync()
     {
-        session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
         config = new ClS_Config(DB, session);
         mgmt = new ClS_UserManagement(DB, session);
 

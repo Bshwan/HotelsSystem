@@ -12,6 +12,8 @@ public partial class Hotels
     protected NavigationManager nav { get; set; } = default!;
     [Inject]
     protected IDialogService DialogService { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
 
     PagedResult<HotelsInfo> PaginatedItems = PagedResult<HotelsInfo>.EmptyPagedResult();
 
@@ -23,7 +25,7 @@ public partial class Hotels
 
     protected override async Task OnInitializedAsync()
     {
-        session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
         hotel = new ClS_Hotels(DB, session);
         config = new ClS_Config(DB, session);
     }

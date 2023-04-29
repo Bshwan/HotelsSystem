@@ -16,6 +16,8 @@
         protected IToaster Toaster { get; set; } = default!;
         [Inject]
         protected NavigationManager nav { get; set; } = default!;
+        [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
 
         private ClS_Config config = default!;
         ClS_UserManagement mgmt = default!;
@@ -31,7 +33,7 @@
 
         protected override async Task OnInitializedAsync()
         {
-            var session = await Protection.GetDecryptedSession(jSRuntime, DB);
+            var session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
             config = new ClS_Config(DB, session);
             mgmt = new ClS_UserManagement(DB, session);
             await GetGroupByID(ID);

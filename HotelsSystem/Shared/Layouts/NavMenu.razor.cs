@@ -5,6 +5,8 @@ public partial class NavMenu
     protected IJSRuntime jSRuntime { get; set; } = default!;
     [Inject]
     protected ISqlDataAccess DB { get; set; } = default!;
+    [Inject]
+        public ISessionStorageService storage { get; set; } = default!;
     bool _isNavExpanded = true;
     private bool collapseNavMenu = true;
 
@@ -19,7 +21,7 @@ public partial class NavMenu
     IEnumerable<NavInfo> Nav = Enumerable.Empty<NavInfo>();
     protected override async Task OnInitializedAsync()
     {
-        session = await Protection.GetDecryptedSession(jSRuntime, DB);
+        session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
         config = new ClS_Config(DB, session);
         await GetNav();
     }

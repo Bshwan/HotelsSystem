@@ -1,3 +1,4 @@
+
 using HotelsSystem.Services;
 using Microsoft.AspNetCore.SignalR;
 using MudBlazor.Services;
@@ -18,6 +19,7 @@ builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
 builder.Services.AddBlazorDownloadFile();
 builder.Services.AddBlazoredModal();
 builder.Services.AddMudServices();
+builder.Services.AddBlazoredSessionStorage();
 
 
 builder.Services.AddToaster(config =>
