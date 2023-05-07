@@ -56,10 +56,11 @@ public partial class Hotels
         var options = new DialogOptions
         {
             CloseOnEscapeKey = true,
+            DisableBackdropClick=true,
             CloseButton = true,
             Position = DialogPosition.TopCenter,
             MaxWidth=MaxWidth.Medium,
-            FullWidth=true
+            FullWidth=true,
         };
         
         var parameters = new DialogParameters();
