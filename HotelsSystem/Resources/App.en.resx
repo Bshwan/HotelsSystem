@@ -420,10 +420,13 @@
   <data name="price" xml:space="preserve">
   <value>Price</value>
 </data>
-<data name="detail" xml:space="preserve">
+  <data name="detail" xml:space="preserve">
   <value>Detail</value>
 </data>
-<data name="room-type" xml:space="preserve">
+  <data name="room-type" xml:space="preserve">
   <value>Room Type</value>
 </data>
+  <data name="files" xml:space="preserve">
+    <value>Files</value>
+  </data>
 </root>

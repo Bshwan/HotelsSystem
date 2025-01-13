@@ -429,4 +429,7 @@
   <data name="star-number" xml:space="preserve">
     <value></value>
   </data>
+  <data name="files" xml:space="preserve">
+    <value>ملفات</value>
+  </data>
 </root>

@@ -76,6 +76,10 @@
         {
             return await _db.GetDataTable<T, dynamic>("HTPro_GetAllInfo", new { Select = SelectPro, ID = ValID, EntryBy = SessionValue });
         }
+        public async Task<T> HotelGetOneInfo<T>(int SelectPro = 0, int ValID = 0)
+        {
+            return await _db.GetOneInfo<T, dynamic>("HTPro_GetAllInfo", new { Select = SelectPro, ID = ValID, EntryBy = SessionValue });
+        }
 
         public async Task<SearchCombos> SearchCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
         {

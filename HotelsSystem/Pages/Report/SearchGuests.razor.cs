@@ -1,5 +1,7 @@
 
+using HotelsSystem.Pages.Hotels;
 using Microsoft.Extensions.Localization;
+using System.Reflection;
 
 namespace HotelsSystem.Pages.Report;
 public partial class SearchGuests
@@ -90,6 +92,22 @@ public partial class SearchGuests
             ToCheckOutDate: Filter.ToCheckOutDate.ToyyyyMMddElseEmpty());
 
         return new TableData<GuestDetailsInfo>() { TotalItems = PaginatedItems.TotalItems, Items = PaginatedItems.Items };
+    }
+    void ShowGuestDocumentsModal(GuestDetailsInfo guest)
+    {
+        var options = new DialogOptions
+        {
+            CloseOnEscapeKey = true,
+            CloseButton = true,
+            Position = DialogPosition.TopCenter,
+            MaxWidth = MaxWidth.Large,
+        };
+        var parameters = new DialogParameters();
+        parameters.Add("config", config);
+        parameters.Add("GuestID", guest.GD_ID);
+        var modal = DialogService.Show<GuestDocumentsModal>(L["files"], parameters, options);
+        //var res = await modal.Result;
+        // StateHasChanged();
     }
     private async Task OpenFilterModal()
     {

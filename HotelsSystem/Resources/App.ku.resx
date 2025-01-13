@@ -264,19 +264,19 @@
   <data name="from-check-in-date" xml:space="preserve">
     <value>بەرواری هاتن - لە</value>
   </data>
-	<data name="from" xml:space="preserve">
+  <data name="from" xml:space="preserve">
     <value>لە</value>
   </data>
-	<data name="to" xml:space="preserve">
+  <data name="to" xml:space="preserve">
     <value>بۆ</value>
   </data>
   <data name="to-check-in-date" xml:space="preserve">
     <value>بەرواری هاتن - بۆ</value>
   </data>
-   <data name="from-check-out-date" xml:space="preserve">
+  <data name="from-check-out-date" xml:space="preserve">
     <value>لە بەرواری دەرچوون</value>
   </data>
-   <data name="to-check-out-date" xml:space="preserve">
+  <data name="to-check-out-date" xml:space="preserve">
     <value>بۆ بەرواری دەرچوون</value>
   </data>
   <data name="workplaces" xml:space="preserve">
@@ -423,7 +423,10 @@
   <data name="detail" xml:space="preserve">
   <value>ووردەکاری</value>
 </data>
-<data name="room-type" xml:space="preserve">
+  <data name="room-type" xml:space="preserve">
   <value>جۆری ژوور</value>
 </data>
+  <data name="files" xml:space="preserve">
+    <value>فایلەکان</value>
+  </data>
 </root>

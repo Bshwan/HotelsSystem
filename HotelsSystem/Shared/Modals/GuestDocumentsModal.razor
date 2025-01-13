@@ -1,0 +1,21 @@
+@inject IStringLocalizer<App> L
+
+<MudDialog>
+    <DialogContent>
+        <div class="row m-0 g-2 w-100">
+            <div class="col-12">
+                <div class="item-image-preview-wrapper d-flex flex-wrap">
+                    @foreach (var item in Attachments)
+                    {
+                        <div class="position-relative me-2 mb-2">
+                            <img @onclick="@(()=>ShowDocumentPreviewModal(item.att_ID))" src="@(nav.BaseUri+$"main/GetAttachment?id="+item.att_ID)" alt="">
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">@L["cancel"]</MudButton>
+    </DialogActions>
+</MudDialog>

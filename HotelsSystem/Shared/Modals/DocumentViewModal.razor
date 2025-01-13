@@ -1,0 +1,15 @@
+@inject IStringLocalizer<App> L
+
+    <style>
+    .mud-dialog .mud-dialog-content.image-modal {
+        max-height: unset !important;
+        }
+    </style>
+    <MudDialog ClassContent="image-modal">
+    
+        <DialogContent>
+            <MudItem Class="d-flex justify-content-center">
+                <MudImage Style="max-height: 80vh;" Src="@URL" />
+            </MudItem>
+        </DialogContent>
+    </MudDialog>

@@ -48,7 +48,8 @@
             </MudItem>
             
         </MudGrid>
-        <MudTable Outlined="false" Elevation="0" T="GuestDetailsInfo" Dense="true" Hover="true" @ref="table" ServerData="@(new Func<TableState,Task<TableData<GuestDetailsInfo>>>(GetPaginatedItems))" T="HotelsInfo" >
+        <MudTable Outlined="false" Elevation="0" T="GuestDetailsInfo" Dense="true" Hover="true" @ref="table" ServerData="@(new Func<TableState,Task<TableData<GuestDetailsInfo>>>(GetPaginatedItems))"
+            OnRowClick="@((e)=>ShowGuestDocumentsModal(e.Item))">
             <HeaderContent>
                 @if(PaginatedItems.Items.Any()){
                 <MudTh>
@@ -264,7 +265,7 @@
             </HeaderContent>
             <RowTemplate>
                  @if(PaginatedItems.Items.Any()){
-                <MudTd>@context.GD_Fullname</MudTd>
+                        <MudTd><MudLink Underline="Underline.Hover" Color="Color.Info">@context.GD_Fullname</MudLink></MudTd>
                 <MudTd>@context.GD_Surname</MudTd>
                 <MudTd>@context.GD_MotherName</MudTd>
                 <MudTd>@context.GD_Mobile</MudTd>
