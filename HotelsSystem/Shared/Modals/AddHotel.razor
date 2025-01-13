@@ -92,7 +92,7 @@
                         <MudTextField Required="true" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_FullName" Label="@L["full-name"]" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
-                        <MudTextField Required="true" autocomplete="new-password" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Password" Label="@L["password"]" InputType="InputType.Password" Variant="Variant.Outlined"></MudTextField>
+                            <MudTextField Required="true" autocomplete="new-password" Margin="@Margin.Dense" @bind-Value="SelectedHotelUser.htlus_Password" Label="@L["password"]" InputType="InputType.Password" Variant="Variant.Outlined"></MudTextField>
                     </div>
                     <div class="col-12">
                        <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.htlustype_Name)" 
@@ -107,9 +107,9 @@
                         </MudSelect>
                     </div>
                     <div class="col-12">
-                       <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.lang_Name)" 
-                            Value="@(new LanguageInfo{lang_ID=SelectedHotelUser.htlus_LanguageID,lang_Name=AddUserCombos.Languages.SelectByID<LanguageInfo>(SelectedHotelUser.htlus_LanguageID,"lang_ID").lang_Name})" 
-                                Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
+                       <MudSelect OnlyValidateIfDirty="true" Required="true" RequiredError="@L["required"]" ToStringFunc="@(e=>e==null?"":e.lang_Name)"
+                                       Value="@(new LanguageInfo{lang_ID=SelectedHotelUser.htlus_LanguageID,lang_Name=AddUserCombos.Languages.SelectByID<LanguageInfo>(SelectedHotelUser.htlus_LanguageID,"lang_ID").lang_Name})"
+                                       Validation="@(new Func<LanguageInfo, string>((e)=>e.ValidateField<LanguageInfo>("lang_ID")))"
                                 ValueChanged="OnSelectedLanguageChange"
                                 Margin="@Margin.Dense" T="LanguageInfo" Label="@L["language"]" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
                             @foreach (var item in AddUserCombos.Languages)
@@ -127,7 +127,8 @@
                         <MudDivider/>
                     </div>
                 </MudForm>
-                    <MudTable T="HotelUsersInfo" @ref="UsersTable" ServerData="@(new Func<TableState,Task<TableData<HotelUsersInfo>>>(GetPaginatedUser))" Elevation="0" Dense="true" Hover="true">
+                    <MudTable T="HotelUsersInfo" @ref="UsersTable" ServerData="@(new Func<TableState,Task<TableData<HotelUsersInfo>>>(GetPaginatedUser))" Elevation="0" Dense="true" Hover="true"
+                              OnRowClick="@(async(e)=>await GetHotelUserByUserID(e.Item.htlus_ID))" RowClassFunc="@((e,s)=> "")">
                         <ToolBarContent>
                             <MudText Typo="Typo.h6">@L["users"]</MudText>
                             <MudSpacer />
@@ -170,7 +171,7 @@
                         <RowTemplate>
                             @if (PaginatedHotelUsers.Items.Any())
                             {
-                                <MudTd>@context.htlus_Name</MudTd>
+                                <MudTd><MudLink Underline="Underline.Always" Color="Color.Info">@context.htlus_Name</MudLink></MudTd>
                                 <MudTd>@context.htlus_FullName</MudTd>
                                 <MudTd>@context.htlustype_Name</MudTd>
                                 <MudTd>
@@ -366,7 +367,7 @@
         @if(SelectedTab==0){
         <MudButton OnClick="@(async()=>await InsertUpdateHotel())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
         }else if(SelectedTab==1){
-        <MudButton OnClick="@(async()=>await InsertUpdateHotelUser())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
+        <MudButton Disabled="SelectedHotelUser.htlus_ID<=0" OnClick="@(async()=>await InsertUpdateHotelUser())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
         }
     </DialogActions>
 </MudDialog>

@@ -42,7 +42,7 @@ public partial class AddHotel
 
         if (SelectedHotel.htl_ID > 0)
         {
-            await GetHotelUser();
+            //await GetHotelUser();
             await AddUserGetCombos();
         }
         await GetCombos();
@@ -264,9 +264,16 @@ public partial class AddHotel
         }
         Toaster.Error(".", result.MSG);
     }
-    async Task GetHotelUser()
+    //async Task GetHotelUser()
+    //{
+    //    SelectedHotelUser = await config.GetOneInfo<HotelUsersInfo>(SelectPro: 8, ValID: SelectedHotel.htl_ID);
+
+    //    if (!SelectedHotelUser.htlus_Password.IsStringNullOrWhiteSpace())
+    //        SelectedHotelUser.htlus_Password = func.decr_pass(SelectedHotelUser.htlus_Password);
+    //}
+    async Task GetHotelUserByUserID(int id)
     {
-        SelectedHotelUser = await config.GetOneInfo<HotelUsersInfo>(SelectPro: 8, ValID: SelectedHotel.htl_ID);
+        SelectedHotelUser = await config.GetOneInfo<HotelUsersInfo>(SelectPro: 8, ValID: id);
 
         if (!SelectedHotelUser.htlus_Password.IsStringNullOrWhiteSpace())
             SelectedHotelUser.htlus_Password = func.decr_pass(SelectedHotelUser.htlus_Password);
@@ -307,7 +314,9 @@ public partial class AddHotel
 
         if (result.Result == 1)
         {
-            await GetHotelUser();
+            //await GetHotelUserByUserID(SelectedHotelUser.htlus_ID);
+            SelectedHotelUser = new HotelUsersInfo();
+            await UsersTable.ReloadServerData();
             Toaster.Success(".", result.MSG);
             return;
         }
