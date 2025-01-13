@@ -28,8 +28,18 @@
                 <MudTd>@context.htlus_Name</MudTd>
                 <MudTd>@context.htlus_FullName</MudTd>
                 <MudTd>@context.htlustype_Name</MudTd>
-                <MudTd>@context.htlus_Active</MudTd>
-                    }
+                                <MudTd>
+                                    @if (context.htlus_Active)
+                                    {
+                                        <MudChip Color="Color.Success">@L["active"]</MudChip>
+                                    }
+                                    else
+                                    {
+                                        <MudChip Color="Color.Error">@L["inactive"]</MudChip>
+
+                                    }
+                                </MudTd>
+                            }
                 </RowTemplate>
                 <PagerContent>
                     @if(PaginatedItems.Items.Any()){

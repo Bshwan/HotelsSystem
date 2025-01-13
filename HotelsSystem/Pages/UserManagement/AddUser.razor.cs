@@ -43,6 +43,10 @@ public partial class AddUser
             await GetUserByID();
         }
         await GetCombos();
+        if (SelectedUser.peo_DirectorateID > 0)
+        {
+            combos.WorkingPoints = await config.GetCMB<WorkingPointInfo>(SelectPro: 5, ValID: SelectedUser.peo_DirectorateID);
+        }
 
     }
     async Task GetUserByID()
@@ -64,7 +68,7 @@ public partial class AddUser
     }
     async Task GetWorkpoints()
     {
-        combos.WorkingPoints = await config.GetCMB<WorkingPointInfo>(SelectPro: 10, ValID: SelectedUser.peo_UserID);
+        combos.WorkingPointsPerUser = await config.GetCMB<WorkingPointInfo>(SelectPro: 10, ValID: SelectedUser.peo_UserID);
     }
     async Task GetPrivilages()
     {
@@ -88,7 +92,7 @@ public partial class AddUser
     }
     async Task<IEnumerable<WorkingPointInfo>> SearchWorkpointPerUser(string e)
     {
-        return await Task.FromResult(combos.WorkingPointsPerUser.SearchAll<WorkingPointInfo>(e, "wp_workpointName"));
+        return await Task.FromResult(combos.WorkingPointsPerUser.Where(x=>x.wp_workpointName.ContainsIgnoreCase(e) && x.HasRole==0));
     }
     void OnSelectedLanguageChange(LanguageInfo e)
     {

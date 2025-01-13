@@ -28,6 +28,7 @@ public partial class AddHotel
     private TableEditButtonPosition editButtonPosition = TableEditButtonPosition.End;
     private TableEditTrigger editTrigger = TableEditTrigger.RowClick;
     PagedResult<HotelRoomsInfo> PaginatedRooms = PagedResult<HotelRoomsInfo>.EmptyPagedResult();
+    PagedResult<HotelUsersInfo> PaginatedHotelUsers = PagedResult<HotelUsersInfo>.EmptyPagedResult();
     HashSet<HotelRoomsInfo> SelectedItems = new HashSet<HotelRoomsInfo>();
     MudAutocomplete<HotelFloorInfo>? FloorAutocomplete;
     MudAutocomplete<HotelRoomsTypesInfo>? RoomTypeAutocomplete;
@@ -351,6 +352,24 @@ public partial class AddHotel
             await InLineUpdateRooms(room);
         }
     }
+    MudTable<HotelUsersInfo>? UsersTable;
+    private async Task<TableData<HotelUsersInfo>> GetPaginatedUser(TableState state)
+    {
+        if (HotelID > 0)
+        {
+            PaginatedHotelUsers = await config!.GetGridPaging<HotelUsersInfo>(
+                SelectPro: 4,
+                ValID: HotelID,
+                PageNumber: state.Page + 1,
+                PageSize: state.PageSize,
+                SortColumn: state.SortLabel.IsStringNullOrWhiteSpace() ? "htlus_ID" : state.SortLabel,
+                SortDirection: Util.ResolveSort(state.SortDirection));
+        }
+        //StateHasChanged();
+
+        return new TableData<HotelUsersInfo>() { TotalItems = PaginatedHotelUsers.TotalItems, Items = PaginatedHotelUsers.Items };
+    }
+
     MudTable<HotelRoomsInfo>? table;
     private async Task<TableData<HotelRoomsInfo>> GetPaginatedRooms(TableState state)
     {

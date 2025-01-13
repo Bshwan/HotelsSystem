@@ -127,6 +127,70 @@
                         <MudDivider/>
                     </div>
                 </MudForm>
+                    <MudTable T="HotelUsersInfo" @ref="UsersTable" ServerData="@(new Func<TableState,Task<TableData<HotelUsersInfo>>>(GetPaginatedUser))" Elevation="0" Dense="true" Hover="true">
+                        <ToolBarContent>
+                            <MudText Typo="Typo.h6">@L["users"]</MudText>
+                            <MudSpacer />
+                        </ToolBarContent>
+                        <HeaderContent>
+                            @if (PaginatedHotelUsers.Items.Any())
+                            {
+
+                                <MudTh>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <MudTableSortLabel SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Name.ToEmptyOnNull())">@L["name"]</MudTableSortLabel>
+                                    </div>
+                                </MudTh>
+                                <MudTh>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <MudTableSortLabel SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_FullName.ToEmptyOnNull())">@L["full-name"]</MudTableSortLabel>
+                                    </div>
+                                </MudTh>
+
+                                <MudTh>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <MudTableSortLabel SortBy="new Func<HotelUsersInfo, object>(x=>x.htlustype_Name.ToEmptyOnNull())">@L["type"]</MudTableSortLabel>
+                                    </div>
+                                </MudTh>
+                                <MudTh>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <MudTableSortLabel SortBy="new Func<HotelUsersInfo, object>(x=>x.htlus_Active)">@L["status"]</MudTableSortLabel>
+                                    </div>
+                                </MudTh>
+                            }
+                            else
+                            {
+                                <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center no-data-msg">
+                                    <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                                    <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                                </div>
+                            }
+
+                        </HeaderContent>
+                        <RowTemplate>
+                            @if (PaginatedHotelUsers.Items.Any())
+                            {
+                                <MudTd>@context.htlus_Name</MudTd>
+                                <MudTd>@context.htlus_FullName</MudTd>
+                                <MudTd>@context.htlustype_Name</MudTd>
+                                <MudTd>
+                                    @if (context.htlus_Active)
+                                    {
+                                        <MudChip Color="Color.Success">@L["active"]</MudChip>
+                                    }
+                                    else
+                                    {
+                                        <MudChip Color="Color.Error">@L["inactive"]</MudChip>
+
+                                    }
+                                </MudTd>
+                            }
+
+                        </RowTemplate>
+                        <PagerContent>
+                                <MudTablePager />
+                        </PagerContent>
+                    </MudTable>
             </MudTabPanel>
             }
             @if(SelectedHotel.htl_ID>0){
@@ -284,9 +348,9 @@
                         
                     </RowEditingTemplate>
                     <PagerContent>
-                        @if(PaginatedRooms.Items.Any()){
+                        @* @if(PaginatedRooms.Items.Any()){ *@
         <MudTablePager/>
-                        }
+                        @* } *@
         </PagerContent>
                     <EditButtonContent Context="button">
                         <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />

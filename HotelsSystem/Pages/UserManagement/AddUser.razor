@@ -235,9 +235,9 @@
                     </div>
                     </MudForm>
                     <div class="col-12">
-                        <MudTable Dense="true" T="WorkingPointInfo" Elevation="0" Items="@(combos.WorkingPoints.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
+                                    <MudTable Dense="true" T="WorkingPointInfo" Elevation="0" Items="@(combos.WorkingPointsPerUser.Where(x=>x.HasRole==1))" Hover="true" Breakpoint="Breakpoint.Sm">
                             <HeaderContent>
-                                 @if(combos.WorkingPoints.Where(x=>x.HasRole==1).Any()){
+                                 @if(combos.WorkingPointsPerUser.Where(x=>x.HasRole==1).Any()){
                                             <MudTh>@L["name"]</MudTh>
                                 <MudTh></MudTh>
                                  }else{
@@ -248,7 +248,7 @@
                             }
                             </HeaderContent>
                             <RowTemplate>
-                                 @if(combos.WorkingPoints.Where(x=>x.HasRole==1).Any()){
+                                 @if(combos.WorkingPointsPerUser.Where(x=>x.HasRole==1).Any()){
                                 <MudTd DataLabel="">@context.wp_workpointName</MudTd>
                                 <MudTd Class="text-end">
                                         <MudIconButton OnClick="@(async()=>await DeleteUserWorkpoint(context.per_ID))" Icon="@Icons.Material.Filled.Delete" Variant="Variant.Text" Color="Color.Error" />

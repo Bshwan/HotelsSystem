@@ -200,6 +200,8 @@ namespace HotelsSystem.Data
 
             object parameters)
         {
+            Console.WriteLine(sql + " " + parameters);
+
             using (IDbConnection db = new SqlConnection(_config.GetConnectionString("connection")))
             {
                 using var gridReader = await db.QueryMultipleAsync(sql, parameters, commandType: CommandType.StoredProcedure);
