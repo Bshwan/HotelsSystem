@@ -40,13 +40,33 @@ public partial class SearchGuests
     {
         combos = await config.SearchCombos(SelectPro: 11);
     }
-
+    async Task<IEnumerable<GuestDetailsInfo>> SearchGuestsCombo(string? e)
+    {
+        return await Task.FromResult(await config.GetCMB<GuestDetailsInfo>(SelectPro: 16, ValueName: e.ToEmptyOnNull()));
+    }
+    async Task OnGuestSelected(GuestDetailsInfo e)
+    {
+        if (e == null)
+        {
+            Filter.GD_ID = 0;
+            Filter.GD_Fullname = "";
+        }
+        else
+        {
+            Filter.GD_ID = e.GD_ID;
+            Filter.GD_Fullname = e.GD_Fullname;
+        }
+        await table.ReloadServerData();
+    }
     private async Task<TableData<GuestDetailsInfo>> GetPaginatedItems(TableState state)
     {
-        if(Filter.GD_Fullname.IsStringNullOrWhiteSpace() && Filter.DirectorateID<=0 && Filter.GD_Mobile.IsStringNullOrWhiteSpace() && Filter.GD_MotherName.IsStringNullOrWhiteSpace() 
-        && Filter.WorkplaceID<=0 && Filter.HotelID<=0 && Filter.RoomID<=0 && Filter.GenderID<=0 && Filter.NationalityID<=0 && !Filter.FromCheckInDate.HasValue
+        if (Filter.GD_Fullname.IsStringNullOrWhiteSpace() && Filter.DirectorateID <= 0 && Filter.GD_Mobile.IsStringNullOrWhiteSpace() && Filter.GD_MotherName.IsStringNullOrWhiteSpace()
+        && Filter.WorkplaceID <= 0 && Filter.HotelID <= 0 && Filter.RoomID <= 0 && Filter.GenderID <= 0 && Filter.NationalityID <= 0 && !Filter.FromCheckInDate.HasValue && Filter.GD_ID <= 0
         && !Filter.FromCheckOutDate.HasValue && !Filter.ToCheckInDate.HasValue && !Filter.ToCheckOutDate.HasValue)
-        return new TableData<GuestDetailsInfo>() { TotalItems = 0, Items = Enumerable.Empty<GuestDetailsInfo>() };
+        {
+            PaginatedItems = PagedResult<GuestDetailsInfo>.EmptyPagedResult();
+            return new TableData<GuestDetailsInfo>() { TotalItems = 0, Items = Enumerable.Empty<GuestDetailsInfo>() };
+        }
         
         PaginatedItems = await report!.SearchList<GuestDetailsInfo>(
             SelectPro: 1,
@@ -56,6 +76,7 @@ public partial class SearchGuests
             SortDirection: Util.ResolveSort(state.SortDirection),
             FullName: Filter.GD_Fullname.ToEmptyOnNull(),
             DirectorateID: Filter.DirectorateID,
+            GuestID:Filter.GD_ID,
             Mobile: Filter.GD_Mobile.ToEmptyOnNull(),
             MotherName: Filter.GD_MotherName.ToEmptyOnNull(),
             WorkPlaceID: Filter.WorkplaceID,

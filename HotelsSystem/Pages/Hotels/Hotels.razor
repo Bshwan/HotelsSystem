@@ -54,9 +54,9 @@
                  }
             </RowTemplate>
             <PagerContent>
-                @if(PaginatedItems.Items.Any()){
+                @* @if(PaginatedItems.Items.Any()){ *@
                 <MudTablePager />
-                }
+                @* } *@
             </PagerContent>
             <EditButtonContent Context="button">
                 <MudIconButton Size="@Size.Small" Icon="@Icons.Outlined.Edit" Class="pa-0" OnClick="@button.ButtonAction" Disabled="@button.ButtonDisabled" />

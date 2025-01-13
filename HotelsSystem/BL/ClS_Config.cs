@@ -31,9 +31,9 @@
             _db = db;
         }
 
-        public async Task<IEnumerable<T>> GetCMB<T>(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
+        public async Task<IEnumerable<T>> GetCMB<T>(int SelectPro = 0, int ValID = 0, int IDTwo = 0,string ValueName="")
         {
-            return await _db.GetDataTable<T, dynamic>("Pro_GetCMB", new { Select = SelectPro, ID = ValID, IDTwo = IDTwo, EntryBy = SessionValue });
+            return await _db.GetDataTable<T, dynamic>("Pro_GetCMB", new { Select = SelectPro, ID = ValID, ValueName= ValueName, IDTwo = IDTwo, EntryBy = SessionValue });
         }
 
         public async Task<IEnumerable<T>> GetAllInfo<T>(int SelectPro = 0, int ValID = 0)

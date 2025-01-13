@@ -11,8 +11,40 @@
             @* <MudItem sm="3">
                 <MudText Typo="Typo.h6">@L["search"]</MudText>
             </MudItem> *@
-             <MudItem sm="12" Class="d-flex align-items-center justify-content-end">
-                <MudButton OnClick="OpenFilterModal" StartIcon="@Icons.Filled.FilterAlt" Variant="Variant.Filled" Color="Color.Primary" DisableElevation>@L["filter"]</MudButton>
+             <MudItem sm="12" Class="d-flex align-items-center justify-content-end gap-2">
+                    <MudText Typo="Typo.h5">@L["guest"]:</MudText>
+                    <MudItem>
+                        <style>
+                            .guest-autocomplete .mud-input.mud-input-outlined.mud-input-adorned-end{
+                                background-color: #c9ad7c50;
+                            }
+
+                            .popover-guest-autocomplete .mud-typography.mud-typography-body2,
+                            .guest-autocomplete .mud-input-root {
+                                font-size: 18px !important;
+                            }
+
+                            .guest-autocomplete .mud-input.mud-input-outlined:focus-within .mud-input-outlined-border {
+                                border: 2px solid #c9ad7c;
+                            }
+                        </style>
+                        <MudAutocomplete T="GuestDetailsInfo" DebounceInterval="ClS_Config.debounce"
+                        Class="m-0 guest-autocomplete"
+                        PopoverClass="popover-guest-autocomplete"
+                        SearchFunc="@SearchGuestsCombo"
+                        Style="width: 100%; max-width:30rem !important"
+                        Clearable="true"
+                        ResetValueOnEmptyText="true"
+                        Value="@(new GuestDetailsInfo(){GD_ID=Filter.GD_ID,GD_Fullname=Filter.GD_Fullname})"
+                        Text="@Filter.GD_Fullname"
+                        ValueChanged="@(async(e)=>await OnGuestSelected(e))"
+                        OnClearButtonClick="@(async()=>await OnGuestSelected(null!))"
+                        ToStringFunc="@(e=>e==null?"":e.GD_Fullname.ToEmptyOnNull())"
+                        CoerceText="@true"
+                        Margin="@Margin.Normal" Dense="true" Variant="Variant.Outlined"
+                        AdornmentIcon="@Icons.Material.Rounded.KeyboardArrowDown" IconSize="Size.Large" />
+                    </MudItem>
+                <MudButton OnClick="OpenFilterModal" StartIcon="@Icons.Filled.FilterAlt" Size="Size.Large" Class="h-100" Variant="Variant.Filled" Color="Color.Primary" DisableElevation>@L["filter"]</MudButton>
             </MudItem>
             
         </MudGrid>
@@ -251,9 +283,9 @@
                  }
             </RowTemplate>
             <PagerContent>
-                 @if(PaginatedItems.Items.Any()){
+                 @* @if(PaginatedItems.Items.Any()){ *@
                 <MudTablePager />
-                 }
+                 @* } *@
             </PagerContent>
         </MudTable>
     </MudPaper>
