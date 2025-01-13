@@ -109,6 +109,7 @@ public partial class SearchGuests
         //var res = await modal.Result;
         // StateHasChanged();
     }
+
     private async Task OpenFilterModal()
     {
         var options = new DialogOptions
