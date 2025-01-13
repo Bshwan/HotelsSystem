@@ -367,7 +367,7 @@
         @if(SelectedTab==0){
         <MudButton OnClick="@(async()=>await InsertUpdateHotel())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
         }else if(SelectedTab==1){
-        <MudButton Disabled="SelectedHotelUser.htlus_ID<=0" OnClick="@(async()=>await InsertUpdateHotelUser())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
+        <MudButton OnClick="@(async()=>await InsertUpdateHotelUser())" Color="Color.Success" Variant="Variant.Filled" DisableElevation>@L["save"]</MudButton>
         }
     </DialogActions>
 </MudDialog>
