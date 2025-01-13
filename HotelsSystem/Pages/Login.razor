@@ -10,6 +10,7 @@
             <div class="col-12 col-lg-4 offset-lg-4 my-lg-5">
                 <MudPaper>
                     <EditForm class="d-flex flex-column p-3 my-lg-5 py-5" Model="Credentials" OnValidSubmit=@(async()=>await login())>
+                        <MudImage Class="my-3" Src="img/kri_trip.svg"/>
                         <MudText Typo="Typo.body1">
                             @L["login"]
                         </MudText>
