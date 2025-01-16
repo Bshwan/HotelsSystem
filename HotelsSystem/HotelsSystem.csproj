@@ -37,10 +37,6 @@
       <HintPath>..\..\CRM_System\MyFunctions.dll</HintPath>
     </Reference>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\css\" />
-  </ItemGroup>
 	<ItemGroup>
   
     <EmbeddedResource Update="Resources\App.ar.resx">
