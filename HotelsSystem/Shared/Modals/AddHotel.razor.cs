@@ -85,14 +85,16 @@ public partial class AddHotel
     async Task InsertLog()
     {
         var changes = Util.GetChangedProperties(SelectedHotel,SelectedHotelBeforeChange);
-
+        changes.Remove("htl_TypeID");
+        changes.Remove("htl_DirectorateID");
+        changes.Remove("htl_WorkPointID");
         string keys = string.Join(",", changes.Keys);
         string NewVlaues = string.Join(",", changes.Values.Select(v => v.NewValue?.ToString() ?? "null"));
         string OldValues = string.Join(",", changes.Values.Select(v => v.OldValue?.ToString() ?? "null"));
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-            FieldName: keys, Value: NewVlaues,OldValue:OldValues,TableName:"hotel");
+            FieldName: keys, Value: NewVlaues,OldValue:OldValues,TableName:"hotel admin");
     }
     async Task InsertLogSingleRoom(HotelRoomsInfo e)
     {
@@ -105,27 +107,36 @@ public partial class AddHotel
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel");
+            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel admin");
     }
     async Task InsertLogUser()
     {
-        var changes = Util.GetChangedProperties(SelectedHotelUser, SelectedHotelUserBeforeChange);
-        var HasKey = changes.TryGetValue("peo_UserPassword", out var findPassword);
-        if (HasKey && findPassword.OldValue != null && findPassword.NewValue != null)
+        try
         {
-            if (!string.IsNullOrWhiteSpace(findPassword.OldValue.ToString()))
-                findPassword.OldValue = func.encr_pass(findPassword.OldValue.ToString());
-            if (!string.IsNullOrWhiteSpace(findPassword.NewValue.ToString()))
-                findPassword.NewValue = func.encr_pass(findPassword.NewValue.ToString());
-        changes["htlus_Password"] = findPassword;
-        }
-        string keys = string.Join(",", changes.Keys);
-        string NewVlaues = string.Join(",", changes.Values.Select(v => v.NewValue?.ToString() ?? "null"));
-        string OldValues = string.Join(",", changes.Values.Select(v => v.OldValue?.ToString() ?? "null"));
+            var changes = Util.GetChangedProperties(SelectedHotelUser, SelectedHotelUserBeforeChange);
+            changes.Remove("htlus_TypeID");
+            changes.Remove("htlus_LanguageID");
+            var HasKey = changes.TryGetValue("peo_UserPassword", out var findPassword);
+            if (HasKey && findPassword.OldValue != null && findPassword.NewValue != null)
+            {
+                if (!string.IsNullOrWhiteSpace(findPassword.OldValue.ToString()))
+                    findPassword.OldValue = func.encr_pass(findPassword.OldValue.ToString());
+                if (!string.IsNullOrWhiteSpace(findPassword.NewValue.ToString()))
+                    findPassword.NewValue = func.encr_pass(findPassword.NewValue.ToString());
+                changes["htlus_Password"] = findPassword;
+            }
+            string keys = string.Join(",", changes.Keys);
+            string NewVlaues = string.Join(",", changes.Values.Select(v => v.NewValue?.ToString() ?? "null"));
+            string OldValues = string.Join(",", changes.Values.Select(v => v.OldValue?.ToString() ?? "null"));
 
-        if(keys.Any())
-        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user");
+            if (keys.Any())
+                await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
+                    FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user admin");
+        }
+        catch(Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.ToString());
+        }
     }
     async Task InsertLogUpdateRoomsBulk()
     {
@@ -142,8 +153,8 @@ public partial class AddHotel
                 if(find.htr_Price != SelectedHotelRoom.htr_Price)
                 changes.Add("htr_Price", (OldValue: find.htr_Price, NewValue: SelectedHotelRoom.htr_Price));
 
-                if (find.htr_FloorID != SelectedHotelRoom.htr_FloorID)
-                    changes.Add("htr_FloorID", (OldValue: find.htr_FloorID, NewValue: SelectedHotelRoom.htr_FloorID));
+                //if (find.htr_FloorID != SelectedHotelRoom.htr_FloorID)
+                //    changes.Add("htr_FloorID", (OldValue: find.htr_FloorID, NewValue: SelectedHotelRoom.htr_FloorID));
 
                 if (find.htr_Type != SelectedHotelRoom.htr_Type)
                     changes.Add("htr_Type", (OldValue: find.htr_Type, NewValue: SelectedHotelRoom.htr_Type));
@@ -159,7 +170,7 @@ public partial class AddHotel
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, UserID: config.session.Result, ProfileID: HotelID, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotelrooms");
+                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotelrooms admin");
     }
     async Task OnDirectorateChange(DirectorateInfo e)
     {
@@ -377,18 +388,22 @@ public partial class AddHotel
         if (e == null)
         {
             SelectedHotelUser.htlus_LanguageID = 0;
+            SelectedHotelUser.lang_Name = "";
             return;
         }
         SelectedHotelUser.htlus_LanguageID = e.lang_ID;
+        SelectedHotelUser.lang_Name = e.lang_Name;
     }
     void OnSelectedHotelTypeChangeChange(HotelUserTypeComboBox e)
     {
         if (e == null)
         {
             SelectedHotelUser.htlus_TypeID = 0;
+            SelectedHotelUser.htlustype_Name = "";
             return;
         }
         SelectedHotelUser.htlus_TypeID = e.htlustype_ID;
+        SelectedHotelUser.htlustype_Name = e.htlustype_Name;
     }
     async Task InsertUpdateHotelUser()
     {

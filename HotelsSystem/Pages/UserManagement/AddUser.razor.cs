@@ -103,9 +103,11 @@ public partial class AddUser
         if (e == null)
         {
             SelectedUser.peo_Language = 0;
+            SelectedUser.lang_Name = "";
             return;
         }
         SelectedUser.peo_Language = e.lang_ID;
+        SelectedUser.lang_Name = e.lang_Name;
     }
     void OnSelectedUserTypeChange(UserTypesInfo e)
     {
@@ -177,10 +179,10 @@ public partial class AddUser
         try
         {
             var changes = Util.GetChangedProperties(SelectedUser, SelectedUserBeforeChange);
-            changes.Remove("usT_userType");
-            changes.Remove("lang_Name");
-            changes.Remove("peo_DirectorateName");
-            changes.Remove("wp_workpointName");
+            changes.Remove("peo_UserTypeID");
+            changes.Remove("peo_Language");
+            changes.Remove("peo_DirectorateID");
+            changes.Remove("peo_UserWorkPoint");
             var HasKey = changes.TryGetValue("peo_UserPassword",out var findPassword);
             if (HasKey && findPassword.OldValue != null && findPassword.NewValue != null)
             {
@@ -196,7 +198,7 @@ public partial class AddUser
 
             if (keys.Any())
                 await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user");
+                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user admin");
         }
         catch(Exception ex)
         {

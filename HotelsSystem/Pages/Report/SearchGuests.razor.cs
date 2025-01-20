@@ -72,7 +72,7 @@ public partial class SearchGuests
 
         if (Filter.DirectorateID > 0)
         {
-            filterFields.Add("DirectorateID", Filter.DirectorateID);
+            filterFields.Add("peo_DirectorateName", Filter.peo_DirectorateName.ToEmptyOnNull());
         }
 
         if (!Filter.GD_Mobile.IsStringNullOrWhiteSpace())
@@ -87,62 +87,57 @@ public partial class SearchGuests
 
         if (Filter.WorkplaceID > 0)
         {
-            filterFields.Add("WorkplaceID", Filter.WorkplaceID);
+            filterFields.Add("wp_workpointName", Filter.wp_workpointName.ToEmptyOnNull());
         }
 
         if (Filter.HotelID > 0)
         {
-            filterFields.Add("HotelID", Filter.HotelID);
+            filterFields.Add("htl_Name", Filter.htl_Name.ToEmptyOnNull());
         }
 
         if (Filter.RoomID > 0)
         {
-            filterFields.Add("RoomID", Filter.RoomID);
+            filterFields.Add("GM_Room", Filter.RoomName.ToEmptyOnNull());
         }
 
         if (Filter.GenderID > 0)
         {
-            filterFields.Add("GenderID", Filter.GenderID);
+            filterFields.Add("gen_Name", Filter.gen_Name.ToEmptyOnNull());
         }
 
         if (Filter.NationalityID > 0)
         {
-            filterFields.Add("NationalityID", Filter.NationalityID);
+            filterFields.Add("nat_Name", Filter.nat_Name.ToEmptyOnNull());
         }
 
         if (Filter.FromCheckInDate.HasValue)
         {
-            filterFields.Add("FromCheckInDate", Filter.FromCheckInDate);
-        }
-
-        if (Filter.GD_ID > 0)
-        {
-            filterFields.Add("GD_ID", Filter.GD_ID);
+            filterFields.Add("FromGD_CheckIn", Filter.FromCheckInDate);
         }
 
         if (Filter.FromCheckOutDate.HasValue)
         {
-            filterFields.Add("FromCheckOutDate", Filter.FromCheckOutDate);
+            filterFields.Add("FromGD_ChechOut", Filter.FromCheckOutDate);
         }
 
         if (Filter.ToCheckInDate.HasValue)
         {
-            filterFields.Add("ToCheckInDate", Filter.ToCheckInDate);
+            filterFields.Add("ToGD_CheckIn", Filter.ToCheckInDate);
         }
 
         if (Filter.ToCheckOutDate.HasValue)
         {
-            filterFields.Add("ToCheckOutDate", Filter.ToCheckOutDate);
+            filterFields.Add("ToGD_ChechOut", Filter.ToCheckOutDate);
         }
         if (Filter.GuestAutocompleteID>0)
         {
-            filterFields.Add("GD_ID", Filter.GuestAutocompleteID);
+            filterFields.Add("GD_Fullname", Filter.GuestAutocompleteName.ToEmptyOnNull());
         }
         string keys = string.Join(",", filterFields.Keys);
         string values = string.Join(",", filterFields.Values.Select(v => v?.ToString() ?? "null"));
 
         if(keys.Any())
-        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 3, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),TableName:"Search",
+        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 3, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),TableName:"search admin",
             FieldName: keys,Value: values,OldValue:string.Join(",", filterFields.Keys.Select(x => "")));
     }
     private async Task<TableData<GuestDetailsInfo>> GetPaginatedItems(TableState state)
