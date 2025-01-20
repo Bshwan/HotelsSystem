@@ -1,3 +1,5 @@
+using HotelsSystem.Pages.Hotels;
+
 namespace HotelsSystem.Pages.UserManagement;
 public partial class AddUser
 {
@@ -18,6 +20,7 @@ public partial class AddUser
 
     int UserID;
     UserInfo SelectedUser = new UserInfo();
+    UserInfo SelectedUserBeforeChange = new UserInfo();
     GroupInfo SelectedGroup = new GroupInfo();
     DataAccessPermissions SelectedPrivilage = new DataAccessPermissions();
     ClS_UserManagement mgmt = default!;
@@ -57,6 +60,7 @@ public partial class AddUser
         {
             SelectedUser.peo_UserPassword = func.decr_pass(SelectedUser.peo_UserPassword);
         }
+        SelectedUserBeforeChange = Util.Clone(SelectedUser);
     }
     async Task GetCombos()
     {
@@ -168,12 +172,47 @@ public partial class AddUser
         else
             SelectedPrivilage = e;
     }
+    async Task InsertLog()
+    {
+        try
+        {
+            var changes = Util.GetChangedProperties(SelectedUser, SelectedUserBeforeChange);
+            changes.Remove("usT_userType");
+            changes.Remove("lang_Name");
+            changes.Remove("peo_DirectorateName");
+            changes.Remove("wp_workpointName");
+            var HasKey = changes.TryGetValue("peo_UserPassword",out var findPassword);
+            if (HasKey && findPassword.OldValue != null && findPassword.NewValue != null)
+            {
+                if (!string.IsNullOrWhiteSpace(findPassword.OldValue.ToString()))
+                    findPassword.OldValue = func.encr_pass(findPassword.OldValue.ToString());
+                if (!string.IsNullOrWhiteSpace(findPassword.NewValue.ToString()))
+                    findPassword.NewValue = func.encr_pass(findPassword.NewValue.ToString());
+                changes["peo_UserPassword"] = findPassword;
+            }
+            string keys = string.Join(",", changes.Keys);
+            string NewVlaues = string.Join(",", changes.Values.Select(v => v.NewValue?.ToString() ?? "null"));
+            string OldValues = string.Join(",", changes.Values.Select(v => v.OldValue?.ToString() ?? "null"));
+
+            if (keys.Any())
+                await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
+                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user");
+        }
+        catch(Exception ex)
+        {
+            await Console.Out.WriteLineAsync(ex.ToString());
+        }
+    }
     async Task InsertUpdateUser()
     {
         await AddUserForm!.Validate();
         if (!AddUserForm.IsValid)
             return;
 
+        if (SelectedUser.peo_UserID > 0)
+        {
+            _ = Task.Run(async () => await InsertLog());
+        }
         SPResult result = await mgmt.InsertUpdateUser<SPResult>(
             SelectPro: 1,
             ValID: SelectedUser.peo_UserID,

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components.Web;
+using System.Reflection;
 
 namespace HotelsSystem.Data
 {
@@ -14,6 +15,40 @@ namespace HotelsSystem.Data
         public const string CookieName = "htlcookie";
         public const string SecurityGuid = "ad5be26a-01ec-4bb7-b4a6-be575d4818e5";
 
+        public static T Clone<T>(T source)
+        {
+            var serialized = JsonConvert.SerializeObject(source);
+            return JsonConvert.DeserializeObject<T>(serialized);
+        }
+        public static Dictionary<string, (object? OldValue, object? NewValue)> GetChangedProperties<T>(T currentModel, T previousModel) where T : class
+        {
+            var changes = new Dictionary<string, (object? OldValue, object? NewValue)>();
+
+            if (currentModel == null || previousModel == null)
+                throw new ArgumentNullException("Both currentModel and previousModel must be non-null.");
+
+            var properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+            foreach (var property in properties)
+            {
+                // Skip if property is not readable or writable
+                if (!property.CanRead || !property.CanWrite)
+                    continue;
+
+                var oldValue = property.GetValue(previousModel);
+                var newValue = property.GetValue(currentModel);
+
+                // Check for differences (null-safe)
+                if ((oldValue == null && newValue != null) ||
+                    (oldValue != null && newValue == null) ||
+                    (oldValue != null && !oldValue.Equals(newValue)))
+                {
+                    changes[property.Name] = (OldValue: oldValue, NewValue: newValue);
+                }
+            }
+
+            return changes;
+        }
         public static bool IsEnterPressed(KeyboardEventArgs e)
         {
             if (e.Code == "Enter" || e.Code == "NumpadEnter")
