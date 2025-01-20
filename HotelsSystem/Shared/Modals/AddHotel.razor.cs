@@ -130,7 +130,7 @@ public partial class AddHotel
             string OldValues = string.Join(",", changes.Values.Select(v => v.OldValue?.ToString() ?? "null"));
 
             if (keys.Any())
-                await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
+                await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: SelectedHotelUser.htlus_ID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
                     FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user admin");
         }
         catch(Exception ex)

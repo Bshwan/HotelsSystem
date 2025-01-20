@@ -1,6 +1,7 @@
 
 using HotelsSystem.Pages.Hotels;
 using Microsoft.Extensions.Localization;
+using Newtonsoft.Json.Linq;
 using System.Reflection;
 
 namespace HotelsSystem.Pages.Report;
@@ -140,9 +141,13 @@ public partial class SearchGuests
         await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 3, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),TableName:"search admin",
             FieldName: keys,Value: values,OldValue:string.Join(",", filterFields.Keys.Select(x => "")));
     }
+    async Task InsertLogOpenDocument(GuestDetailsInfo guest)
+    {
+        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 5, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),ProfileID:guest.GD_ID);
+    }
     private async Task<TableData<GuestDetailsInfo>> GetPaginatedItems(TableState state)
     {
-        if (Filter.GD_Fullname.IsStringNullOrWhiteSpace() && Filter.DirectorateID <= 0 && Filter.GD_Mobile.IsStringNullOrWhiteSpace() && Filter.GD_MotherName.IsStringNullOrWhiteSpace()
+        if (Filter.GD_Fullname.IsStringNullOrWhiteSpace() && Filter.DirectorateID <= 0 && Filter.GuestAutocompleteID <= 0 && Filter.GD_Mobile.IsStringNullOrWhiteSpace() && Filter.GD_MotherName.IsStringNullOrWhiteSpace()
         && Filter.WorkplaceID <= 0 && Filter.HotelID <= 0 && Filter.RoomID <= 0 && Filter.GenderID <= 0 && Filter.NationalityID <= 0 && !Filter.FromCheckInDate.HasValue && Filter.GD_ID <= 0
         && !Filter.FromCheckOutDate.HasValue && !Filter.ToCheckInDate.HasValue && !Filter.ToCheckOutDate.HasValue)
         {
@@ -158,7 +163,7 @@ public partial class SearchGuests
             SortDirection: Util.ResolveSort(state.SortDirection),
             FullName: Filter.GD_Fullname.ToEmptyOnNull(),
             DirectorateID: Filter.DirectorateID,
-            GuestID:Filter.GD_ID,
+            GuestID:Filter.GuestAutocompleteID,
             Mobile: Filter.GD_Mobile.ToEmptyOnNull(),
             MotherName: Filter.GD_MotherName.ToEmptyOnNull(),
             WorkPlaceID: Filter.WorkplaceID,
@@ -186,9 +191,12 @@ public partial class SearchGuests
         parameters.Add("config", config);
         parameters.Add("GuestID", guest.GD_ID);
         var modal = DialogService.Show<GuestDocumentsModal>(L["files"], parameters, options);
+        _ = Task.Run(async () => await InsertLogOpenDocument(guest));
+
         //var res = await modal.Result;
         // StateHasChanged();
     }
+
 
     private async Task OpenFilterModal()
     {
