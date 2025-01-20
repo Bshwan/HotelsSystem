@@ -107,7 +107,7 @@ public partial class AddHotel
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel admin");
+            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel room admin");
     }
     async Task InsertLogUser()
     {
@@ -131,7 +131,7 @@ public partial class AddHotel
 
             if (keys.Any())
                 await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: SelectedHotelUser.htlus_ID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-                    FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user admin");
+                    FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel user admin");
         }
         catch(Exception ex)
         {
@@ -170,7 +170,7 @@ public partial class AddHotel
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, UserID: config.session.Result, ProfileID: HotelID, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotelrooms admin");
+                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel rooms admin");
     }
     async Task OnDirectorateChange(DirectorateInfo e)
     {
