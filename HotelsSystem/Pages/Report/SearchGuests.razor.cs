@@ -136,13 +136,14 @@ public partial class SearchGuests
         }
         if (Filter.GuestAutocompleteID>0)
         {
-            filterFields.Add("GuestAutocompleteID", Filter.GuestAutocompleteID);
+            filterFields.Add("GD_ID", Filter.GuestAutocompleteID);
         }
         string keys = string.Join(",", filterFields.Keys);
         string values = string.Join(",", filterFields.Values.Select(v => v?.ToString() ?? "null"));
 
-        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 3, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-            FieldName: keys,Value: values);
+        if(keys.Any())
+        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 3, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),TableName:"Search",
+            FieldName: keys,Value: values,OldValue:string.Join(",", filterFields.Keys.Select(x => "")));
     }
     private async Task<TableData<GuestDetailsInfo>> GetPaginatedItems(TableState state)
     {
