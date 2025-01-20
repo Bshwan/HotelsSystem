@@ -83,7 +83,7 @@
         public async Task<T> Pro_InsertActionLog<T>(int SelectPro = 0, int UserID = 0, string? UserName = "", string UserType = "", int ActionType = 0, int HotelID = 0,int ProfileID=0, string? TableName = "", string? FieldName = "", string? Value = "", string? OldValue = "")
         {
 
-            var objParameters = new { select = SelectPro, UserID = UserID, UserName = UserName, UserType = UserType, ActionType = ActionType, HotelID = HotelID, ProfileID= ProfileID, TableName = TableName, FieldName = FieldName, Value = Value, OldValue = OldValue };
+            var objParameters = new { select = SelectPro, UserID = UserID, UserName = UserName, UserType = 1, ActionType = ActionType, HotelID = HotelID, ProfileID= ProfileID, TableName = TableName, FieldName = FieldName, Value = Value, OldValue = OldValue };
             return await _db.SaveData<T, dynamic>("Pro_InsertActionLog", objParameters);
         }
 
