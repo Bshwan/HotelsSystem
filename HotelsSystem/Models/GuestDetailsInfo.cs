@@ -5,6 +5,9 @@ public class GuestDetailsInfo
     public int GD_ID { get; set; }
     public int GD_GM { get; set; }
     public string? GD_Fullname { get; set; }
+    public string? GuestAutocompleteName { get; set; }
+    public int GuestAutocompleteID { get; set; }
+
     public string? GD_Surname { get; set; }
     public string? GD_MotherName { get; set; }
     public string? GD_Mobile { get; set; }

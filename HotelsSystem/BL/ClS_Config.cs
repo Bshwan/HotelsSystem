@@ -22,7 +22,7 @@
         // public ICookieService CookieService { get; set; }
 
         private int SessionValue = 0;
-        private SPResult session;
+        public SPResult session;
 
         public ClS_Config(ISqlDataAccess db, SPResult session)
         {
@@ -79,6 +79,12 @@
         public async Task<T> HotelGetOneInfo<T>(int SelectPro = 0, int ValID = 0)
         {
             return await _db.GetOneInfo<T, dynamic>("HTPro_GetAllInfo", new { Select = SelectPro, ID = ValID, EntryBy = SessionValue });
+        }
+        public async Task<T> Pro_InsertActionLog<T>(int SelectPro = 0, int UserID = 0, string? UserName = "", string UserType = "", int ActionType = 0, int HotelID = 0, string? TableName = "", string? FieldName = "", string? Value = "", string? OldValue = "")
+        {
+
+            var objParameters = new { select = SelectPro, UserID = UserID, UserName = UserName, UserType = UserType, ActionType = ActionType, HotelID = HotelID, TableName = TableName, FieldName = FieldName, Value = Value, OldValue = OldValue };
+            return await _db.SaveData<T, dynamic>("Pro_InsertActionLog", objParameters);
         }
 
         public async Task<SearchCombos> SearchCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)

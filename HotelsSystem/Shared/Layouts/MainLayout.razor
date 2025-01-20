@@ -37,13 +37,15 @@
 
 @code {
     [Inject]
-        public ISessionStorageService storage { get; set; } = default!;
-        [Inject]
+    public ISessionStorageService storage { get; set; } = default!;
+    [Inject]
     public ISqlDataAccess DB { get; set; } = default!;
+    ClS_Config config = default!;
 
-         protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         var session = await Protection.GetDecryptedSession(jSRuntime, DB,storage);
+        config = new ClS_Config(DB, session);
         await jSRuntime.InvokeVoidAsync("initializeInactivityTimer",DotNetObjectReference.Create(this));
 
 
@@ -52,10 +54,11 @@
 
     }
     async Task Logout(){
-    @* await jSRuntime.InvokeVoidAsync("blazorExtensions.delete_cookie",Util.CookieName); *@
-    await storage.RemoveItemAsync(Util.CookieName);
-    nav.NavigateTo(Routing.defaultpage);
-}
+        @* await jSRuntime.InvokeVoidAsync("blazorExtensions.delete_cookie",Util.CookieName); *@
+        await storage.RemoveItemAsync(Util.CookieName);
+        nav.NavigateTo(Routing.defaultpage);
+        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 2, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull());
+    }
 [JSInvokable]
     public async Task LogoutJS()
     {

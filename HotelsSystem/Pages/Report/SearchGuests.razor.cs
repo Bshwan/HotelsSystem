@@ -50,15 +50,99 @@ public partial class SearchGuests
     {
         if (e == null)
         {
-            Filter.GD_ID = 0;
-            Filter.GD_Fullname = "";
+            Filter.GuestAutocompleteID = 0;
+            Filter.GuestAutocompleteName = "";
         }
         else
         {
-            Filter.GD_ID = e.GD_ID;
-            Filter.GD_Fullname = e.GD_Fullname;
+            Filter.GuestAutocompleteID = e.GD_ID;
+            Filter.GuestAutocompleteName = e.GD_Fullname;
         }
-        await table.ReloadServerData();
+        //await table.ReloadServerData();
+        Parallel.Invoke(async () => await InsertLog(), async () => await InvokeAsync(async () => await table!.ReloadServerData()));
+    }
+    async Task InsertLog()
+    {
+        var filterFields = new Dictionary<string, object>();
+
+        if (!Filter.GD_Fullname.IsStringNullOrWhiteSpace())
+        {
+            filterFields.Add("GD_Fullname", Filter.GD_Fullname.ToEmptyOnNull());
+        }
+
+        if (Filter.DirectorateID > 0)
+        {
+            filterFields.Add("DirectorateID", Filter.DirectorateID);
+        }
+
+        if (!Filter.GD_Mobile.IsStringNullOrWhiteSpace())
+        {
+            filterFields.Add("GD_Mobile", Filter.GD_Mobile.ToEmptyOnNull());
+        }
+
+        if (!Filter.GD_MotherName.IsStringNullOrWhiteSpace())
+        {
+            filterFields.Add("GD_MotherName", Filter.GD_MotherName.ToEmptyOnNull());
+        }
+
+        if (Filter.WorkplaceID > 0)
+        {
+            filterFields.Add("WorkplaceID", Filter.WorkplaceID);
+        }
+
+        if (Filter.HotelID > 0)
+        {
+            filterFields.Add("HotelID", Filter.HotelID);
+        }
+
+        if (Filter.RoomID > 0)
+        {
+            filterFields.Add("RoomID", Filter.RoomID);
+        }
+
+        if (Filter.GenderID > 0)
+        {
+            filterFields.Add("GenderID", Filter.GenderID);
+        }
+
+        if (Filter.NationalityID > 0)
+        {
+            filterFields.Add("NationalityID", Filter.NationalityID);
+        }
+
+        if (Filter.FromCheckInDate.HasValue)
+        {
+            filterFields.Add("FromCheckInDate", Filter.FromCheckInDate);
+        }
+
+        if (Filter.GD_ID > 0)
+        {
+            filterFields.Add("GD_ID", Filter.GD_ID);
+        }
+
+        if (Filter.FromCheckOutDate.HasValue)
+        {
+            filterFields.Add("FromCheckOutDate", Filter.FromCheckOutDate);
+        }
+
+        if (Filter.ToCheckInDate.HasValue)
+        {
+            filterFields.Add("ToCheckInDate", Filter.ToCheckInDate);
+        }
+
+        if (Filter.ToCheckOutDate.HasValue)
+        {
+            filterFields.Add("ToCheckOutDate", Filter.ToCheckOutDate);
+        }
+        if (Filter.GuestAutocompleteID>0)
+        {
+            filterFields.Add("GuestAutocompleteID", Filter.GuestAutocompleteID);
+        }
+        string keys = string.Join(",", filterFields.Keys);
+        string values = string.Join(",", filterFields.Values.Select(v => v?.ToString() ?? "null"));
+
+        await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 3, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
+            FieldName: keys,Value: values);
     }
     private async Task<TableData<GuestDetailsInfo>> GetPaginatedItems(TableState state)
     {
@@ -131,7 +215,14 @@ public partial class SearchGuests
         if (res.Data is GuestDetailsInfo filter)
         {
             Filter = filter;
-            await table!.ReloadServerData();
+            Parallel.Invoke(async() => await InsertLog(), async() =>await InvokeAsync(async()=> await table!.ReloadServerData()));
+
+            //_=Task.Run(async () =>
+            //{
+            //    await InsertLog();
+            //    await Task.Delay(1000);
+            //});
+            //await table!.ReloadServerData();
         }
     }
     async Task OnSearch(string e)
