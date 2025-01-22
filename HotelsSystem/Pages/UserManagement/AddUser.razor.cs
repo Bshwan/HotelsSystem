@@ -198,7 +198,7 @@ public partial class AddUser
 
             if (keys.Any())
                 await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-              ProfileID:SelectedUser.peo_UserID, FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "user admin");
+              ProfileID:SelectedUser.peo_UserID, FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: Util.TableNames[1]);
         }
         catch(Exception ex)
         {

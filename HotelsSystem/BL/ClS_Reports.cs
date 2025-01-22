@@ -17,6 +17,28 @@ public class ClS_Reports
     {
         return await _db.GetGridResult<T, dynamic>("Pro_SearchList", new { Select = SelectPro, FullName= FullName, Mobile= Mobile, MotherName= MotherName, DirectorateID = DirectorateID , GuestID= GuestID, WorkPlaceID = WorkPlaceID, HotelID= HotelID, RoomID = RoomID, GenderID = GenderID, NationalityID = NationalityID, FromCheckInDate = FromCheckInDate, ToCheckInDate = ToCheckInDate, FromCheckOutDate= FromCheckOutDate, ToCheckOutDate= ToCheckOutDate, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue }, PageNumber: PageNumber, PageSize: PageSize);
     }
+    public async Task<PagedResult<T>> Pro_ReportActionLog<T>(int SelectPro = 0, int UserType = 0, string? UserID = "", int ActionType = 0, string? TableName = "", string? FieldValue = "", string FromDate = "", string ToDate = "", int PageNumber = 1, int PageSize = 10, string? SortColumn = "", string? SortDirection = "", int ExportToExcel = 0)
+    {
+
+        var objParameters = new { Select = SelectPro, UserType = ClS_Config.ReturnEmptyOnZero(UserType), UserID = UserID, ActionType = ClS_Config.ReturnEmptyOnZero(ActionType), TableName = TableName, FieldValue = FieldValue, FromDate = FromDate, ToDate = ToDate, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue };
+        if (ExportToExcel == 0)
+        {
+            return await _db.GetGridResult<T, dynamic>("Pro_ReportActionLog", objParameters, PageNumber: PageNumber, PageSize: PageSize);
+        }
+        PageSize = Util.DefaultExportSize;
+        objParameters = new { Select = SelectPro, UserType = ClS_Config.ReturnEmptyOnZero(UserType), UserID = UserID, ActionType = ClS_Config.ReturnEmptyOnZero(ActionType), TableName = TableName, FieldValue = FieldValue, FromDate = FromDate, ToDate = ToDate, PageNumber = PageNumber, PageSize = PageSize, SortColumn = SortColumn, SortDirection = SortDirection, EntryBy = SessionValue };
+        PagedResult<T> Result = await _db.GetGridResult<T, dynamic>("Pro_ReportActionLog", objParameters, PageNumber: PageNumber, PageSize: PageSize);
+        int totalPages = Result.TotalItems / PageSize;
+        if (Result.TotalItems % PageSize > 0)
+        {
+            totalPages++;
+        }
+        for (int i = 2; i <= totalPages; i++)
+        {
+            PageNumber = PageNumber + 1; Result.Items = Result.Items.Concat((await _db.GetGridResult<T, dynamic>("Pro_ReportActionLog", objParameters, PageNumber: PageNumber, PageSize: PageSize)).Items);
+        }
+        return Result;
+    }
 
 
 }

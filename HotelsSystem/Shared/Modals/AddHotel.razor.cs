@@ -94,7 +94,7 @@ public partial class AddHotel
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-            FieldName: keys, Value: NewVlaues,OldValue:OldValues,TableName:"hotel admin");
+            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: Util.TableNames[2]);
     }
     async Task InsertLogSingleRoom(HotelRoomsInfo e)
     {
@@ -107,7 +107,7 @@ public partial class AddHotel
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: HotelID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel room admin");
+            FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: Util.TableNames[3]);
     }
     async Task InsertLogUser()
     {
@@ -131,7 +131,7 @@ public partial class AddHotel
 
             if (keys.Any())
                 await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, ProfileID: SelectedHotelUser.htlus_ID, UserID: config.session.Result, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-                    FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel user admin");
+                    FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: Util.TableNames[4]);
         }
         catch(Exception ex)
         {
@@ -170,7 +170,7 @@ public partial class AddHotel
 
         if (keys.Any())
             await config.Pro_InsertActionLog<SPResult>(SelectPro: 1, ActionType: 6, UserID: config.session.Result, ProfileID: HotelID, UserName: config.session.LastValue, UserType: config.session.MSG.ToEmptyOnNull(),
-                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: "hotel rooms admin");
+                FieldName: keys, Value: NewVlaues, OldValue: OldValues, TableName: Util.TableNames[5]);
     }
     async Task OnDirectorateChange(DirectorateInfo e)
     {

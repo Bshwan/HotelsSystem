@@ -429,4 +429,7 @@
   <data name="files" xml:space="preserve">
     <value>Files</value>
   </data>
+  <data name="action-log-report" xml:space="preserve">
+    <value>Report Action Log</value>
+  </data>
 </root>

@@ -86,6 +86,11 @@
             var objParameters = new { select = SelectPro, UserID = UserID, UserName = UserName, UserType = 1, ActionType = ActionType, HotelID = HotelID, ProfileID= ProfileID, TableName = TableName, FieldName = FieldName, Value = Value, OldValue = OldValue };
             return await _db.SaveData<T, dynamic>("Pro_InsertActionLog", objParameters);
         }
+        public static string ReturnEmptyOnZero(int val)
+        {
+            return val <= 0 ? "" : val.ToString();
+        }
+        
 
         public async Task<SearchCombos> SearchCombos(int SelectPro = 0, int ValID = 0, int IDTwo = 0)
         {

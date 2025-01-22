@@ -1,0 +1,141 @@
+ @page "/c2ThEmUFSHZNWJgs"
+@if (report != null && session != null)
+{
+    <AuthView Roles="session" PermissionName="@Routing.search"></AuthView>
+    <div class="row gx-2 gy-3">
+        <div class="col-12">
+            <h4>@L["action-log-report"]</h4>
+        </div>
+        <MudDivider />
+        <MudPaper Outlined="true">
+            <MudGrid Spacing="1" Class="w-100 m-0 p-2">
+                <MudItem sm="12" Class="row g-2">
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <MudSelect ToStringFunc="@(e=>e==null?"":e.usT_userType)"
+                                   Value="@(new UserTypesInfo{usT_ID=Filter.UserTypeID,usT_userType=Filter.UserTypeName})"
+                                   ValueChanged="OnSelectedUserTypeChanged" Clearable="true"
+                                   Margin="@Margin.Dense" T="UserTypesInfo" Label=@L["user-type"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in UserTypes)
+                            {
+                                <MudSelectItem T="UserTypesInfo" Value="@item">@item.usT_userType</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <MudSelect ToStringFunc="@(e=>e==null?"":e.peo_UserName)"
+                                   Value="@(new UserInfo{peo_UserID=Filter.UserID,peo_UserName=Filter.UserTypeName})"
+                                   ValueChanged="OnSelectedUserChanged" Clearable="true"
+                                   Margin="@Margin.Dense" T="UserInfo" Label=@L["user"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in Users)
+                            {
+                                <MudSelectItem T="UserInfo" Value="@item">@item.peo_UserName</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div> 
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <MudSelect ToStringFunc="@(e=>e==null?"":e.actionlogtype_Name)"
+                                   Value="@(new ActionTypeInfo{actionlogtype_ID=Filter.actionlog_ActionType,actionlogtype_Name=Filter.actionlogtype_Name})"
+                                   ValueChanged="OnSelectedActionTypeChanged" Clearable="true"
+                                   Margin="@Margin.Dense" T="ActionTypeInfo" Label=@L["action-type"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in ActionTypes)
+                            {
+                                <MudSelectItem T="ActionTypeInfo" Value="@item">@item.actionlogtype_Name</MudSelectItem>
+                            }
+                        </MudSelect>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <MudTextField T="string" Label="@L["table-name"]" @bind-Value="Filter.actionlog_TableName" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <MudTextField T="string" Label="@L["field-value"]" @bind-Value="Filter.actionlog_FieldName" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.actionlog_EntryDate" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["from"]"></MudDatePicker>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2">
+                        <MudDatePicker Clearable="true" @bind-Date="Filter.actionlog_EntryDate2" Margin="@Margin.Dense" Variant="Variant.Outlined" Label="@L["to"]"></MudDatePicker>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-6 d-flex align-items-center">
+                        <MudButton OnClick="ClearFilter" Color="Color.Error" Variant="Variant.Filled" DisableElevation>@L["cancel"]</MudButton>
+                        <MudButton OnClick="@(async()=>await table.ReloadServerData())" Color="Color.Default" Variant="Variant.Filled" DisableElevation>@L["filter"]</MudButton>
+                        <MudButton OnClick="@(async()=>await ExportToPdf())" Color="Color.Warning" Variant="Variant.Filled" DisableElevation>PDF</MudButton>
+                        </div>
+                    </MudItem>
+
+
+            </MudGrid>
+            <MudTable Outlined="false" Elevation="0" T="ActionlogInfo" Dense="true" Hover="true" @ref="table" ServerData="@(new Func<TableState,Task<TableData<ActionlogInfo>>>(GetPaginatedItems))">
+                <HeaderContent>
+                    @if (PaginatedItems.Items.Any())
+                    {
+                        <MudTh>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <MudTableSortLabel SortLabel="actionlog_UserName" SortBy="new Func<ActionlogInfo, object>(x=>x.actionlog_UserName.ToEmptyOnNull())">@L["username"]</MudTableSortLabel>
+
+                            </div>
+                        </MudTh>
+                        <MudTh>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <MudTableSortLabel SortLabel="actionlogtype_Name" SortBy="new Func<ActionlogInfo, object>(x=>x.actionlogtype_Name.ToEmptyOnNull())">@L["action-type"]</MudTableSortLabel>
+
+                            </div>
+                        </MudTh>
+                        <MudTh>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <MudTableSortLabel SortLabel="actionlog_TableName" SortBy="new Func<ActionlogInfo, object>(x=>x.actionlog_TableName.ToEmptyOnNull())">@L["table-name"]</MudTableSortLabel>
+
+                            </div>
+                        </MudTh>
+                        <MudTh>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <MudTableSortLabel SortLabel="actionlog_FieldName" SortBy="new Func<ActionlogInfo, object>(x=>x.actionlog_FieldName.ToEmptyOnNull())">@L["field-name"]</MudTableSortLabel>
+
+                            </div>
+                        </MudTh>
+                        <MudTh>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <MudTableSortLabel SortLabel="actionlog_Value" SortBy="new Func<ActionlogInfo, object>(x=>x.actionlog_Value.ToEmptyOnNull())">@L["field-value"]</MudTableSortLabel>
+                            </div>
+                        </MudTh>
+                        <MudTh>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <MudTableSortLabel SortLabel="actionlog_OldValue" SortBy="new Func<ActionlogInfo, object>(x=>x.actionlog_OldValue.ToEmptyOnNull())">@L["old-value"]</MudTableSortLabel>
+
+                            </div>
+                        </MudTh>
+                        <MudTh>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <MudTableSortLabel SortLabel="actionlog_EntryDate" SortBy="new Func<ActionlogInfo, object>(x=>x.actionlog_EntryDate.ToyyyyMMddElseEmpty())">@L["entry-date"]</MudTableSortLabel>
+
+                            </div>
+                        </MudTh>
+
+                    }
+                    else
+                    {
+                        <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
+                            <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
+                            <MudText Typo="Typo.body1">@L["no-data-available"]</MudText>
+                        </div>
+                    }
+                </HeaderContent>
+                <RowTemplate>
+                    @if (PaginatedItems.Items.Any())
+                    {
+                        <MudTd>@context.actionlog_UserName</MudTd>
+                        <MudTd>@context.actionlogtype_Name</MudTd>
+                        <MudTd>@context.actionlog_TableName</MudTd>
+                        <MudTd>@context.actionlog_FieldName</MudTd>
+                        <MudTd>@context.actionlog_Value</MudTd>
+                        <MudTd>@context.actionlog_OldValue</MudTd>
+                        <MudTd>@context.actionlog_EntryDate.ToddMMyyyyhhmmsstt()</MudTd>
+
+                    }
+                </RowTemplate>
+                <PagerContent>
+                    <MudTablePager />
+                </PagerContent>
+            </MudTable>
+        </MudPaper>
+    </div>
+}
