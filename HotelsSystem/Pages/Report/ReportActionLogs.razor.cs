@@ -44,6 +44,7 @@ public partial class ReportActionLogs
         report = new ClS_Reports(DB, session);
         config = new ClS_Config(DB, session);
         pdf = new PdfExport(Toaster, L, config, nav, isRTL: !Util.CurrentLang());
+        await GetActionTypes();
     }
     async Task GetUsersByType()
     {
@@ -73,12 +74,12 @@ public partial class ReportActionLogs
         if (e != null)
         {
             Filter.UserID = e.peo_UserID;
-            Filter.UserTypeName = e.peo_UserName;
+            Filter.actionlog_UserName = e.peo_UserName;
         }
         else
         {
             Filter.UserID = 0;
-            Filter.UserTypeName = "";
+            Filter.actionlog_UserName = "";
         }
     } void OnSelectedActionTypeChanged(ActionTypeInfo e)
     {
@@ -128,18 +129,19 @@ public partial class ReportActionLogs
     private async Task ExportToPdf()
     {
         var Columns = new string[] {
-             L["username"],
-    L["action-type"],
-    L["table-name"],
-    L["field-name"],
-    L["field-value"],
-    L["old-value"],
-    L["entry-date"]
+             L["Username"],
+    L["Action Type"],
+    L["Table Name"],
+    L["Field Name"],
+    L["Field Value"],
+    L["Old Value"],
+    L["Entry Date"]
         };
         string FileName = L["action-log-report"];
 
         var items = await report!.Pro_ReportActionLog<ActionlogInfo>(
             SelectPro: 1,
+            ExportToExcel:1,
             SortColumn: SelectedColumnToSort,
             UserType: Filter.UserTypeID,
             UserID: Filter.UserID.ToString(),

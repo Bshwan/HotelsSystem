@@ -36,6 +36,7 @@ public partial class NavMenu
         {"People",Icons.Filled.People},
         {"Security",Icons.Filled.Security},
         {"search",Icons.Filled.Search},
+        {"list",Icons.Filled.List},
     };
     string GetIconByText(string text)
     {

@@ -21,7 +21,7 @@ namespace HotelsSystem.Data
 
         public static bool CurrentLang()
         {
-            return Thread.CurrentThread.CurrentCulture.Name.Equals("en-US", StringComparison.OrdinalIgnoreCase);
+            return Thread.CurrentThread.CurrentCulture.Name.Equals("en", StringComparison.OrdinalIgnoreCase);
 
         }
         public static T Clone<T>(T source)

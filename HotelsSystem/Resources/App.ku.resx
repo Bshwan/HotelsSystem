@@ -432,4 +432,7 @@
   <data name="action-log-report" xml:space="preserve">
     <value>Report Action Log</value>
   </data>
+  <data name="action-type" xml:space="preserve">
+    <value>جۆری کردار</value>
+  </data>
 </root>
