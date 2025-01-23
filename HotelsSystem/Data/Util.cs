@@ -14,7 +14,7 @@ namespace HotelsSystem.Data
         public const string JSShowModal = "ShowModal";
         public const string CookieName = "htlcookie";
         public const string SecurityGuid = "ad5be26a-01ec-4bb7-b4a6-be575d4818e5";
-        public static readonly Dictionary<int, string> TableNames = new Dictionary<int, string> { { 1, "user admin" },{ 2, "hotel admin" },{3, "hotel room admin" },{ 4, "hotel user admin" },{ 5, "hotel rooms admin" } };
+        public static readonly Dictionary<int, string> TableNames = new Dictionary<int, string> { { 1, "user admin" },{ 2, "hotel admin" },{3, "hotel room admin" },{ 4, "hotel user admin" },{ 5, "hotel rooms admin" }, { 6, "search admin" } };
         public const int DefaultExportSize = 500;
         public const string ExcelContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         public const string PdfContentType = "application/pdf";

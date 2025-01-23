@@ -37,7 +37,7 @@ public partial class ReportActionLogs
     IEnumerable<UserInfo> Users = Enumerable.Empty<UserInfo>();
     IEnumerable<ActionTypeInfo> ActionTypes = Enumerable.Empty<ActionTypeInfo>();
     List<UserTypesInfo> UserTypes = new List<UserTypesInfo> { new UserTypesInfo { usT_ID = 1, usT_userType = "Admin" }, new UserTypesInfo { usT_ID = 2, usT_userType = "Reciption" } };
-
+    MyFunctions.myLogin.MyFunctions func = new MyFunctions.myLogin.MyFunctions();
     protected override async Task OnInitializedAsync()
     {
         session = await Protection.GetDecryptedSession(jSRuntime, DB, storage);
@@ -81,7 +81,12 @@ public partial class ReportActionLogs
             Filter.UserID = 0;
             Filter.actionlog_UserName = "";
         }
-    } void OnSelectedActionTypeChanged(ActionTypeInfo e)
+    }
+        void OnSelectedTableNameChange(string e)
+        {
+            Filter.actionlog_TableName = e.ToEmptyOnNull();
+        } 
+        void OnSelectedActionTypeChanged(ActionTypeInfo e)
     {
         if (e != null)
         {
@@ -118,11 +123,24 @@ public partial class ReportActionLogs
             UserType: Filter.UserTypeID,
             UserID: Filter.UserID.ToString(),
             ActionType: Filter.actionlog_ActionType,
-            TableName: Filter.actionlogtype_Name.ToEmptyOnNull(),
+            TableName: Filter.actionlog_TableName.ToEmptyOnNull(),
             FieldValue: Filter.actionlog_Value.ToEmptyOnNull(),
             FromDate: Filter.actionlog_EntryDate.ToyyyyMMddElseEmpty(),
             ToDate: Filter.actionlog_EntryDate2.ToyyyyMMddElseEmpty(),
             SortDirection: Util.ResolveSort(sort));
+
+        try
+        {
+            foreach (var item in PaginatedItems.Items.Where(x => x.actionlog_FieldName.ToEmptyOnNull().Equals("htlus_Password") || x.actionlog_FieldName.ToEmptyOnNull().Equals("peo_UserPassword")))
+            {
+                item.actionlog_OldValue = func.decr_pass(item.actionlog_OldValue);
+                item.actionlog_Value = func.decr_pass(item.actionlog_Value);
+            }
+        }
+        catch
+        {
+
+        }
 
         return new TableData<ActionlogInfo>() { TotalItems = PaginatedItems.TotalItems, Items = PaginatedItems.Items };
     }
@@ -146,11 +164,25 @@ public partial class ReportActionLogs
             UserType: Filter.UserTypeID,
             UserID: Filter.UserID.ToString(),
             ActionType: Filter.actionlog_ActionType,
-            TableName: Filter.actionlogtype_Name.ToEmptyOnNull(),
+            TableName: Filter.actionlog_TableName.ToEmptyOnNull(),
             FieldValue: Filter.actionlog_Value.ToEmptyOnNull(),
             FromDate: Filter.actionlog_EntryDate.ToyyyyMMddElseEmpty(),
             ToDate: Filter.actionlog_EntryDate2.ToyyyyMMddElseEmpty(),
             SortDirection: Util.ResolveSort(sort));
+
+
+        try
+        {
+            foreach (var item in items.Items.Where(x => x.actionlog_FieldName.ToEmptyOnNull().Equals("htlus_Password") || x.actionlog_FieldName.ToEmptyOnNull().Equals("peo_UserPassword")))
+            {
+                item.actionlog_OldValue = func.decr_pass(item.actionlog_OldValue);
+                item.actionlog_Value = func.decr_pass(item.actionlog_Value);
+            }
+        }
+        catch
+        {
+
+        }
 
         if (!items.Items.Any())
         {

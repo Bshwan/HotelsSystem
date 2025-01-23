@@ -44,8 +44,19 @@
                         </MudSelect>
                     </div>
                     <div class="col-12 col-md-4 col-lg-2">
-                        <MudTextField T="string" Label="@L["Table Name"]" @bind-Value="Filter.actionlog_TableName" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
+                        <MudSelect ToStringFunc="@(e=>e==null?"":e.ToEmptyOnNull())"
+                                   Value="@Filter.actionlog_TableName"
+                                   ValueChanged="OnSelectedTableNameChange" Clearable="true"
+                                   Margin="@Margin.Dense" T="string" Label=@L["Table Name"] Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in Util.TableNames)
+                            {
+                                <MudSelectItem T="string" Value="@item.Value">@item.Value</MudSelectItem>
+                            }
+                        </MudSelect>
                     </div>
+                    @* <div class="col-12 col-md-4 col-lg-2">
+                        <MudTextField T="string" Label="@L["Table Name"]" @bind-Value="Filter.actionlog_TableName" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
+                    </div> *@
                     <div class="col-12 col-md-4 col-lg-2">
                         <MudTextField T="string" Label="@L["Field Value"]" @bind-Value="Filter.actionlog_Value" Margin="@Margin.Dense" Variant="Variant.Outlined"></MudTextField>
                     </div>
