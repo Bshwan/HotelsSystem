@@ -28,7 +28,7 @@ public class PDFGuestDetail
         {
             string fontPath = Path.Combine(webHost.WebRootPath, "font/PFDinTextUniversal-Regular.otf");
             string fontPath2 = Path.Combine(webHost.WebRootPath, "font/PFDinTextUniversal-Bold.otf");
-            string logo = Path.Combine(webHost.WebRootPath, "img/KRI_TRIP.svg");
+            string logo = Path.Combine(webHost.WebRootPath, "img/KRI_TRIP.png");
 
             FontManager.RegisterFont(File.OpenRead(fontPath));
             FontManager.RegisterFont(File.OpenRead(fontPath2));
@@ -71,11 +71,18 @@ public class PDFGuestDetail
                             col.Cell().Ltext(L, "full-name", SelectedGuest.GD_Fullname);
                         }
 
+                        if (!string.IsNullOrWhiteSpace(SelectedGuest.GD_Surname))
+                        {
+                            col.Cell().Ltext(L, "sur-name", SelectedGuest.GD_Surname);
+                        }
                         if (!string.IsNullOrWhiteSpace(SelectedGuest.GD_MotherName))
                         {
                             col.Cell().Ltext(L, "mother-name", SelectedGuest.GD_MotherName);
                         }
-
+                        if (!string.IsNullOrWhiteSpace(SelectedGuest.GD_Mobile))
+                        {
+                            col.Cell().Ltext(L, "mobile-no", SelectedGuest.GD_Mobile);
+                        }
                         if (SelectedGuest.GD_DOB.HasValue)
                         {
                             col.Cell().Ltext(L, "birth-date", SelectedGuest.GD_DOB.ToddMMyyyy());
@@ -91,10 +98,7 @@ public class PDFGuestDetail
                             col.Cell().Ltext(L, "gender", SelectedGuest.gen_Name);
                         }
 
-                        if (!string.IsNullOrWhiteSpace(SelectedGuest.GD_Mobile))
-                        {
-                            col.Cell().Ltext(L, "mobile-no", SelectedGuest.GD_Mobile);
-                        }
+                        
 
                         if (!string.IsNullOrWhiteSpace(SelectedGuest.GD_Email))
                         {
@@ -121,7 +125,7 @@ public class PDFGuestDetail
                             {
                                 foreach (var item in ItemsImages)
                                 {
-                                    e.Cell().AlignCenter().Padding(10).MaxHeight(100).MaxWidth(PageSizes.A4.Width/2-(PaperMargin*2)).Image(item);
+                                    e.Cell().AlignCenter().Padding(10).MaxHeight(100).MaxWidth(PageSizes.A4.Width/2-(PaperMargin*2)).Image(item).FitArea();
                                 }
                             });
                         });
