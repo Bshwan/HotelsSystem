@@ -3,7 +3,7 @@
 <PageTitle>@L["hotel-list"]</PageTitle>
 
 @if(config!=null && session!=null){
-    <AuthView Roles="session" PermissionName="@Routing.hotels">
+    <AuthView Roles="session" PermissionName="@Routing.hotels" AdditionalPermissions="@(new List<bool>(){session.MSG=="1"||session.MSG=="2"})" PermissionPriority="AuthView.PermissionPriorities.Either">
 
 <div class="row gx-2 gy-3">
     <div class="col-12">

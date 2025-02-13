@@ -12,6 +12,7 @@ public class HotelsInfo
     public string? htl_Address { get; set; }
     public int htl_Star { get; set; }
     public int htl_NumberOfRooms { get; set; }
+    public int htl_NumberOfRoomStartFrom { get; set; }
     public int htl_DirectorateID { get; set; }
     public string? peo_DirectorateName { get; set; } 
     public int htl_WorkPointID { get; set; }
