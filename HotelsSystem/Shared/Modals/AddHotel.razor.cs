@@ -344,6 +344,7 @@ public partial class AddHotel
         HotelAddress: SelectedHotel.htl_Address.ToEmptyOnNull(),
         // StarNumber: SelectedHotel.HotelHas0Stars ? 0 : SelectedHotel.htl_Star,
         NumberOfRooms: SelectedHotel.htl_NumberOfRooms,
+        NumberOfRoomStartFrom: SelectedHotel.htl_NumberOfRoomStartFrom,
         DirectorateID: SelectedHotel.htl_DirectorateID,
         WorkPointID: SelectedHotel.htl_WorkPointID,
         Note: SelectedHotel.htl_Note.ToEmptyOnNull());

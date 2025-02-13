@@ -66,6 +66,9 @@
                     <div class="col-12 col-lg-6">
                         <MudNumericField Required Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_NumberOfRooms" Label="@L["room-number"]" Variant="Variant.Outlined"></MudNumericField >
                     </div>
+                        <div class="col-12 col-lg-6">
+                            <MudTextField Required Margin="@Margin.Dense" @bind-Value="SelectedHotel.htl_NumberOfRoomStartFrom" Label="@L["room-number"]" Variant="Variant.Outlined" ></MudTextField>
+                        </div>
                     @if(!SelectedHotel.HotelHas0Stars){
                     <div class="col-12">
                             <MudField Label="@L["stars"]" Margin="@Margin.Dense" Variant="Variant.Outlined">
