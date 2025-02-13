@@ -9,6 +9,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddLocalization(option => option.ResourcesPath = "Resources");
 builder.Services.AddRazorPages();
 builder.Services.AddSession();
+builder.Services.AddHttpClient();
+
 builder.Services.AddServerSideBlazor(options =>
 {
     options.JSInteropDefaultCallTimeout = TimeSpan.FromHours(1);

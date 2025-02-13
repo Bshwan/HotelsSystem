@@ -1,7 +1,9 @@
 
 using HotelsSystem.Pages.Hotels;
+using HotelsSystemClient.Data;
 using Microsoft.Extensions.Localization;
 using Newtonsoft.Json.Linq;
+using System.Net.Mail;
 using System.Reflection;
 
 namespace HotelsSystem.Pages.Report;
@@ -21,6 +23,12 @@ public partial class SearchGuests
     protected IDialogService DialogService { get; set; } = default!;
     [Inject]
         public ISessionStorageService storage { get; set; } = default!;
+    [Inject]
+    protected IWebHostEnvironment webHost { get; set; } = default!;
+    [Inject]
+    protected HttpClient httpClient { get; set; } = default!;
+    [Inject]
+    public IBlazorDownloadFileService Downloader { get; set; }
 
     PagedResult<GuestDetailsInfo> PaginatedItems = PagedResult<GuestDetailsInfo>.EmptyPagedResult();
     private MudTable<GuestDetailsInfo>? table;
@@ -196,7 +204,13 @@ public partial class SearchGuests
         //var res = await modal.Result;
         // StateHasChanged();
     }
-
+    async Task DownloadGuestPDF(GuestDetailsInfo guest)
+    {
+        var Attachments = await config.HotelGetAllInfo<AttachmentInfo>(SelectPro: 4, ValID: guest.GD_ID);
+        var stream = await PDFGuestDetail.GenerateGuestDetailPDF(guest, Attachments, L, nav, httpClient, webHost);
+        //Stream stream = new MemoryStream(pdf);
+        await Downloader.DownloadFile("GuestInfo", stream, contentType: Util.PdfContentType);
+    }
 
     private async Task OpenFilterModal()
     {

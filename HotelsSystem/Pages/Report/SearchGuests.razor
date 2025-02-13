@@ -48,8 +48,7 @@
             </MudItem>
             
         </MudGrid>
-        <MudTable Outlined="false" Elevation="0" T="GuestDetailsInfo" Dense="true" Hover="true" @ref="table" ServerData="@(new Func<TableState,Task<TableData<GuestDetailsInfo>>>(GetPaginatedItems))"
-            OnRowClick="@((e)=>ShowGuestDocumentsModal(e.Item))">
+        <MudTable Outlined="false" Elevation="0" T="GuestDetailsInfo" Dense="true" Hover="true" @ref="table" ServerData="@(new Func<TableState,Task<TableData<GuestDetailsInfo>>>(GetPaginatedItems))">
             <HeaderContent>
                 @if(PaginatedItems.Items.Any()){
                 <MudTh>
@@ -256,6 +255,8 @@
                         </MudMenu> *@
                     </div>
                 </MudTh>
+                <MudTh></MudTh>
+                <MudTh></MudTh>
                 }else{
                                  <div class="mx-3 mb-3 bg-light rounded pa-3 d-flex flex-column justify-center align-center">
                     <MudIcon Size="Size.Large" Color="Color.Warning" Icon="@Icons.Material.Filled.Warning"></MudIcon>
@@ -281,6 +282,12 @@
                 <MudTd>@context.GD_ChechOut.ToddMMyyyyhhmmsstt()</MudTd>
                 <MudTd>@context.peo_DirectorateName</MudTd>
                 <MudTd>@context.wp_workpointName</MudTd>
+                        <MudTd Class="text-end">
+                            <MudIconButton Icon="@Icons.Material.Filled.AttachFile" Variant="Variant.Text" OnClick="@((e)=>ShowGuestDocumentsModal(context))" Color="Color.Primary" />
+                        </MudTd>
+                        <MudTd Class="text-end">
+                            <MudIconButton Icon="@Icons.Material.Filled.PictureAsPdf" Variant="Variant.Text" OnClick="@((e)=>DownloadGuestPDF(context))" Color="Color.Primary" />
+                        </MudTd>
                  }
             </RowTemplate>
             <PagerContent>

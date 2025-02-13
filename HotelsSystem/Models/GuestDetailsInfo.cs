@@ -11,6 +11,7 @@ public class GuestDetailsInfo
     public string? GD_Surname { get; set; }
     public string? GD_MotherName { get; set; }
     public string? GD_Mobile { get; set; }
+    public string? GD_Email { get; set; }
     public string? GD_IdNumber { get; set; }
     public int GD_Gender { get; set; }
     public string? gen_Name { get; set; }
