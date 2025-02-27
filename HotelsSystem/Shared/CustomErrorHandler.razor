@@ -15,6 +15,7 @@
     protected override Task OnErrorAsync(Exception exception)
     {
         Console.WriteLine(exception.Message);
+        Log.Error(exception.Message);
         nav.NavigateTo(Routing.defaultpage,true);
         return base.OnErrorAsync(exception);
     }
